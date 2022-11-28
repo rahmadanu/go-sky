@@ -176,8 +176,10 @@
                     android:hint="Departure Date">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_departure_date"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:focusable="false"
                         android:drawableStart="@drawable/ic_date_range"
                         android:drawablePadding="16dp"
                         android:text="24 Nov, 2022"
@@ -200,10 +202,12 @@
                     android:hint="Return Date">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_return_date"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:drawableStart="@drawable/ic_date_range"
                         android:drawablePadding="16dp"
+                        android:focusable="false"
                         android:text="01 Des, 2022"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
