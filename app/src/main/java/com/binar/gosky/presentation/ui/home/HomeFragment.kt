@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.binar.gosky.R
 import com.binar.gosky.databinding.FragmentHomeBinding
 import java.util.*
@@ -35,6 +36,14 @@ class HomeFragment : Fragment() {
         binding.etReturnDate.setOnClickListener {
             Log.d("id", "return: ${it.id}")
             showDatePickerDialog(it.id)
+        }
+        binding.swRoundTrip.setOnCheckedChangeListener { compoundButton, isChecked ->
+            binding.tilReturnDate.isVisible = isChecked
+        }
+        binding.ivSwap.setOnClickListener {
+            val temp = binding.etFrom.text
+            binding.etFrom.text = binding.etTo.text
+            binding.etTo.text = temp
         }
     }
 

@@ -78,6 +78,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
                 android:padding="20dp">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -104,12 +105,13 @@
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/iv_swap"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginTop="5dp"
+                    android:backgroundTint="@color/white"
                     android:src="@drawable/ic_swap_vertical_circle"
                     app:layout_constraintTop_toTopOf="@id/til_from"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -199,7 +201,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_departure_date"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:hint="Return Date">
+                    android:visibility="gone"
+                    android:hint="Return Date"
+                    tools:visibility="visible">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_return_date"
