@@ -1,5 +1,6 @@
 package com.binar.gosky.data.network.service
 
+import com.binar.gosky.data.network.model.search.Tickets
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,7 +13,7 @@ interface TicketsApiService {
         @Query("to") to: String = TO,
         @Query("departureTime") departureTime: String = DEPARTURE_TIME,
         @Query("returnTime") returnTime: String = RETURN_TIME,
-    )
+    ): Tickets
 
     companion object {
         private const val CATEGORY = "ONE_WAY"
