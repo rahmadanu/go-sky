@@ -3,7 +3,7 @@ package com.binar.gosky.data.network.model.search
 
 import com.google.gson.annotations.SerializedName
 
-data class SearchResultItem(
+data class TicketsItem(
     @SerializedName("category")
     val category: String? = null,
     @SerializedName("createdAt")

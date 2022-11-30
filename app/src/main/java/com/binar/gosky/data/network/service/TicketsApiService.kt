@@ -3,10 +3,10 @@ package com.binar.gosky.data.network.service
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface SearchTicketApiService {
+interface TicketsApiService {
 
-    @GET(ApiEndPoints.SEARCH_TICKET_ENDPOINT)
-    suspend fun getTicketList(
+    @GET(ApiEndPoints.GET_TICKETS_ENDPOINT)
+    suspend fun getTickets(
         @Query("category") category: String = CATEGORY,
         @Query("from") from: String = FROM,
         @Query("to") to: String = TO,

@@ -3,9 +3,9 @@ package com.binar.gosky.data.network.model.search
 
 import com.google.gson.annotations.SerializedName
 
-data class SearchResult(
+data class Tickets(
     @SerializedName("data")
-    val `data`: List<SearchResultItem?>? = null,
+    val `data`: List<TicketsItem?>? = null,
     @SerializedName("message")
     val message: String? = null,
     @SerializedName("meta")
