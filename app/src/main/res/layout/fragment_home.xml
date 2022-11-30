@@ -80,7 +80,6 @@
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
                 android:padding="20dp">
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_from"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
