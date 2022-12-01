@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.gosky.databinding.FragmentSearchResultBinding
+import com.binar.gosky.presentation.ui.search.adapter.SearchResultAdapter
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,6 +22,10 @@ class SearchResultFragment : Fragment() {
 
     private val viewModel: SearchResultViewModel by viewModels()
     private val args: SearchResultFragmentArgs by navArgs()
+
+    private val adapter: SearchResultAdapter by lazy {
+        SearchResultAdapter {}
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,13 +49,24 @@ class SearchResultFragment : Fragment() {
             )
         }
         Log.d("args", args.searchTickets.toString())
+
+        initList()
         observeData()
+    }
+
+    private fun initList() {
+        binding.rcvTrip.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = this@SearchResultFragment.adapter
+        }
     }
 
     private fun observeData() {
         viewModel.ticketsResult.observe(viewLifecycleOwner) {
             when (it) {
-                is Resource.Success -> {}
+                is Resource.Success -> {
+                    adapter.submitList(it.payload)
+                }
                 is Resource.Loading -> {}
                 is Resource.Error -> {}
                 is Resource.Empty -> TODO()

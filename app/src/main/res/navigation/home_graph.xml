@@ -21,8 +21,6 @@
         tools:layout="@layout/fragment_search_result" >
         <argument
             android:name="SearchTickets"
-            app:argType="com.binar.gosky.data.network.model.tickets.SearchTickets"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:argType="com.binar.gosky.data.network.model.tickets.SearchTickets" />
     </fragment>
 </navigation>

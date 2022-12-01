@@ -21,8 +21,13 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    @Inject
-    lateinit var args: SearchTickets
+    //private lateinit var args: SearchTickets
+    private var category = ""
+    private var from = ""
+    private var to = ""
+    private var departureTime = ""
+    private var returnTime = ""
+    private var roundTrip = false
 
     private val formattedMonth = listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Des")
 
@@ -62,15 +67,15 @@ class HomeFragment : Fragment() {
         }
         binding.swRoundTrip.setOnCheckedChangeListener { compoundButton, isChecked ->
             binding.tilReturnDate.isVisible = isChecked
-            args.roundTrip = isChecked
-            args.category = if (isChecked) ROUND_TRIP else ONE_WAY
+            roundTrip = isChecked
+            category = if (isChecked) ROUND_TRIP else ONE_WAY
         }
         binding.ivSwap.setOnClickListener {
             val temp = binding.etFrom.text
             binding.etFrom.text = binding.etTo.text
             binding.etTo.text = temp
-            args.from = binding.etFrom.text.toString().trim()
-            args.to = binding.etTo.text.toString().trim()
+            from = binding.etFrom.text.toString().trim()
+            to = binding.etTo.text.toString().trim()
         }
         binding.btnSearch.setOnClickListener {
             navigateToSearchResult()
@@ -86,11 +91,11 @@ class HomeFragment : Fragment() {
                 when (id) {
                     binding.etDepartureDate.id -> {
                         binding.etDepartureDate.setText("$dayOfMonth ${formattedMonth.get(monthOfYear)}, $year")
-                        args.departureTime = getTimeStamp(year, monthOfYear, dayOfMonth)
+                        departureTime = getTimeStamp(year, monthOfYear, dayOfMonth)
                     }
                     binding.etReturnDate.id -> {
                         binding.etReturnDate.setText("$dayOfMonth ${formattedMonth.get(monthOfYear)}, $year")
-                        args.returnTime = getTimeStamp(year, monthOfYear, dayOfMonth)
+                        returnTime = getTimeStamp(year, monthOfYear, dayOfMonth)
                     }
                 }
             },
@@ -112,10 +117,20 @@ class HomeFragment : Fragment() {
         return timestamp.toString()
     }
 
+    private fun parseFormIntoEntity(): SearchTickets {
+        return SearchTickets(
+            category,
+            from,
+            to,
+            departureTime,
+            returnTime,
+            roundTrip,
+        )
+    }
+
     private fun navigateToSearchResult() {
-        val action = HomeFragmentDirections.actionHomeFragmentToSearchResultFragment()
-        action.searchTickets = args
-        Log.d("args", args.toString())
+        val action = HomeFragmentDirections.actionHomeFragmentToSearchResultFragment(parseFormIntoEntity())
+        Log.d("args", parseFormIntoEntity().toString())
 
         findNavController().navigate(action)
     }

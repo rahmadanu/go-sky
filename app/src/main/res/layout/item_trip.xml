@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingHorizontal="20dp"
@@ -43,10 +43,10 @@
                 android:id="@+id/tv_ticket_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="IDR 1.478.580"
                 app:layout_constraintEnd_toStartOf="@id/tv_pax"
                 app:layout_constraintTop_toTopOf="@id/airline_name"
-                app:layout_constraintBottom_toBottomOf="@id/airline_name" />
+                app:layout_constraintBottom_toBottomOf="@id/airline_name"
+                tools:text="IDR 1.478.580"/>
 
             <TextView
                 android:id="@+id/tv_pax"
@@ -78,16 +78,19 @@
                 android:id="@+id/tv_from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="JAKARTA (CGK)"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="JAKARTA (CGK)"
+                />
 
             <TextView
+                android:id="@+id/tv_to"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BATAM (BTH)"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="BATAM (BTH)"
+                />
 
             <ImageView
                 android:layout_width="wrap_content"
