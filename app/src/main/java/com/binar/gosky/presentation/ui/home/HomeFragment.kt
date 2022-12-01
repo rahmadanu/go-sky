@@ -8,14 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import com.binar.gosky.R
 import com.binar.gosky.databinding.FragmentHomeBinding
+import com.binar.gosky.presentation.ui.search.SearchResultViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: SearchResultViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +50,11 @@ class HomeFragment : Fragment() {
             val temp = binding.etFrom.text
             binding.etFrom.text = binding.etTo.text
             binding.etTo.text = temp
+        }
+        binding.btnSearch.setOnClickListener {
+            viewModel.ticketsResult.observe(viewLifecycleOwner) {
+                Log.d("testing", it.payload.toString())
+            }
         }
     }
 
