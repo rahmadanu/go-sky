@@ -2,7 +2,11 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
+
 
 android {
     namespace 'com.binar.gosky'
@@ -16,6 +20,12 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        def keyPropertiesFile = rootProject.file("key.properties")
+        def keyProperties = new Properties()
+        keyProperties.load(new FileInputStream(keyPropertiesFile))
+
+        buildConfigField("String", "BASE_URL", "\"${keyProperties.getProperty("BASE_URL")}\"")
     }
 
     buildTypes {
@@ -37,6 +47,24 @@ android {
 }
 
 dependencies {
+    // Ktx lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+
+    // Dagger hilt
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+
+    // Chucker interceptor
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
+
+    // Retrofit & okhttp
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
@@ -51,18 +79,9 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4" //TestCoroutineDispatcher
     testImplementation("org.assertj:assertj-core:3.23.1")
 
-    // Dagger hilt
-    implementation "com.google.dagger:hilt-android:2.44"
-    kapt "com.google.dagger:hilt-compiler:2.44"
-
     // DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation "androidx.activity:activity-ktx:1.5.0"
-
-    // Retrofit & okhttp
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
 
     // Room and Lifecycle dependencies
     implementation "androidx.room:room-runtime:$room_version"
@@ -81,21 +100,12 @@ dependencies {
     implementation "net.zetetic:android-database-sqlcipher:4.4.0"
     implementation "androidx.sqlite:sqlite-ktx:2.2.0"
 
-    // Ktx lifecycle
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
-
     // Glide image loader
     implementation 'com.github.bumptech.glide:glide:4.14.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.0'
 
     // Coil image loader
-    implementation 'io.coil-kt:coil:2.2.1'
-
-    // Chucker interceptor
-    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
-    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"*/
+    implementation 'io.coil-kt:coil:2.2.1'*/
 
     // Default dependencies
     implementation 'androidx.core:core-ktx:1.7.0'
