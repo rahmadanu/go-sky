@@ -1,6 +1,6 @@
 package com.binar.gosky.data.network.datasource
 
-import com.binar.gosky.data.network.model.search.Tickets
+import com.binar.gosky.data.network.model.tickets.Tickets
 import com.binar.gosky.data.network.service.TicketsApiService
 import javax.inject.Inject
 

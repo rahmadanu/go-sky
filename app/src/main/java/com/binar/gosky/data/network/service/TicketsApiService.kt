@@ -1,6 +1,6 @@
 package com.binar.gosky.data.network.service
 
-import com.binar.gosky.data.network.model.search.Tickets
+import com.binar.gosky.data.network.model.tickets.Tickets
 import retrofit2.http.GET
 import retrofit2.http.Query
 

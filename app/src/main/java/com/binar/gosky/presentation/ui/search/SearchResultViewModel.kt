@@ -5,8 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.binar.gosky.data.network.model.search.Tickets
-import com.binar.gosky.data.network.model.search.TicketsItem
+import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.data.repository.TicketsRepository
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

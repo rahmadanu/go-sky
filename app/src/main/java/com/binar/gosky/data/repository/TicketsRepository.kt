@@ -1,7 +1,7 @@
 package com.binar.gosky.data.repository
 
 import com.binar.gosky.data.network.datasource.TicketsRemoteDataSource
-import com.binar.gosky.data.network.model.search.Tickets
+import com.binar.gosky.data.network.model.tickets.Tickets
 import com.binar.gosky.wrapper.Resource
 import javax.inject.Inject
 
