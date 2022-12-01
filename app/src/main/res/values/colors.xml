@@ -11,5 +11,6 @@
     <color name="teal_blue">#0084b4</color>
     <color name="cerulean_blue">#00aced</color>
     <color name="bright_sky_blue">#1dcaff</color>
+    <color name="blue_background">#B3C0DEED</color>
     <color name="tropical_blue">#33C0DEED</color>
 </resources>

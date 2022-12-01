@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.binar.gosky.R
 
 
-class SearchFragment : Fragment() {
+class SearchResultFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
