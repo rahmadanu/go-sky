@@ -6,14 +6,21 @@ import com.binar.gosky.wrapper.Resource
 import javax.inject.Inject
 
 interface TicketsRepository {
-    suspend fun getTickets(): Resource<Tickets>
+    suspend fun getTickets(category: String, from: String, to: String, departureTime: String, returnTime: String): Resource<Tickets>
 }
 
 class TicketsRepositoryImpl @Inject constructor(private val dataSource: TicketsRemoteDataSource) :
     TicketsRepository {
-    override suspend fun getTickets(): Resource<Tickets> {
+
+    override suspend fun getTickets(
+        category: String,
+        from: String,
+        to: String,
+        departureTime: String,
+        returnTime: String
+    ): Resource<Tickets> {
         return proceed {
-            dataSource.getTickets()
+            dataSource.getTickets(category, from, to, departureTime, returnTime)
         }
     }
 

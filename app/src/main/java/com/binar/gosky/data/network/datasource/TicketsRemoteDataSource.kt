@@ -5,12 +5,18 @@ import com.binar.gosky.data.network.service.TicketsApiService
 import javax.inject.Inject
 
 interface TicketsRemoteDataSource {
-    suspend fun getTickets(): Tickets
+    suspend fun getTickets(category: String, from: String, to: String, departureTime: String, returnTime: String): Tickets
 }
 
 class TicketsRemoteDataSourceImpl @Inject constructor(private val apiService: TicketsApiService): TicketsRemoteDataSource {
-    override suspend fun getTickets(): Tickets {
-        return apiService.getTickets()
+    override suspend fun getTickets(
+        category: String,
+        from: String,
+        to: String,
+        departureTime: String,
+        returnTime: String
+    ): Tickets {
+        return apiService.getTickets(category, from, to, departureTime, returnTime)
     }
 
 }

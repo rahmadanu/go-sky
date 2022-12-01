@@ -14,21 +14,40 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchResultViewModel @Inject constructor(private val ticketsRepository: TicketsRepository): ViewModel() {
+class SearchResultViewModel @Inject constructor(private val ticketsRepository: TicketsRepository) :
+    ViewModel() {
 
-    private val _ticketsResult = MutableLiveData< Resource<List<TicketsItem>>>()
+    private val _ticketsResult = MutableLiveData<Resource<List<TicketsItem>>>()
     val ticketsResult: LiveData<Resource<List<TicketsItem>>> get() = _ticketsResult
 
-    init {
-        getTickets()
-    }
-
-    private fun getTickets() {
+    fun getTickets(
+        category: String,
+        from: String,
+        to: String,
+        departureTime: String,
+        returnTime: String
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
             _ticketsResult.postValue(Resource.Loading())
 
-            val ticketsItem = ticketsRepository.getTickets().payload?.data
-            Log.d("testing", ticketsRepository.getTickets().payload?.status.toString())
+            val ticketsItem = ticketsRepository.getTickets(
+                category,
+                from,
+                to,
+                departureTime,
+                returnTime
+            ).payload?.data
+
+            Log.d(
+                "testing",
+                ticketsRepository.getTickets(
+                    category,
+                    from,
+                    to,
+                    departureTime,
+                    returnTime
+                ).payload?.data.toString()
+            )
             viewModelScope.launch(Dispatchers.Main) {
                 _ticketsResult.postValue(Resource.Success(ticketsItem))
             }

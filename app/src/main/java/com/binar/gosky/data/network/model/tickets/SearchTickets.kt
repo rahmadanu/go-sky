@@ -5,9 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class SearchTickets (
-    var from: String,
-    var to: String,
-    var departureTime: String,
-    var returnDate: String,
-    var roundTrip: Boolean
+    var category: String = "",
+    var from: String = "",
+    var to: String = "",
+    var departureTime: String = "",
+    var returnTime: String = "",
+    var roundTrip: Boolean = false
 ): Parcelable

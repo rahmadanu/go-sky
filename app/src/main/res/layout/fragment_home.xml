@@ -99,10 +99,11 @@
                         android:id="@+id/et_from"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="JAKARTA"
                         android:drawableStart="@drawable/ic_flight_takeoff"
                         android:drawablePadding="16dp"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        tools:text="JAKARTA"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageButton
@@ -139,8 +140,9 @@
                         android:layout_height="match_parent"
                         android:drawableStart="@drawable/ic_flight_land"
                         android:drawablePadding="16dp"
-                        android:text="SURABAYA"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        tools:text="SURABAYA"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.divider.MaterialDivider
@@ -184,8 +186,8 @@
                         android:focusable="false"
                         android:drawableStart="@drawable/ic_date_range"
                         android:drawablePadding="16dp"
-                        android:text="24 Nov, 2022"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        tools:text="24 Nov, 2022" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -212,8 +214,8 @@
                         android:drawableStart="@drawable/ic_date_range"
                         android:drawablePadding="16dp"
                         android:focusable="false"
-                        android:text="01 Des, 2022"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        tools:text="01 Des, 2022"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
