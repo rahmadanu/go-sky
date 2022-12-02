@@ -23,9 +23,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SearchResultViewModel by viewModels()
-
-    //private lateinit var args: SearchTickets
     var category: String = ONE_WAY
     var from: String = ""
     var to: String = ""
