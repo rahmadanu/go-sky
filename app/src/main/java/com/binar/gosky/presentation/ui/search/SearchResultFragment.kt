@@ -39,7 +39,7 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        args.searchTickets?.let {
+        args.searchTickets.let {
             viewModel.getTickets(
                 it.category,
                 it.from,

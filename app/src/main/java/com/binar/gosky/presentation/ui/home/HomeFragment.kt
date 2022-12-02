@@ -8,12 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.binar.gosky.data.network.model.tickets.SearchTickets
 import com.binar.gosky.databinding.FragmentHomeBinding
+import com.binar.gosky.presentation.ui.search.SearchResultViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -21,13 +22,15 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private val viewModel: SearchResultViewModel by viewModels()
+
     //private lateinit var args: SearchTickets
-    private var category = ""
-    private var from = ""
-    private var to = ""
-    private var departureTime = ""
-    private var returnTime = ""
-    private var roundTrip = false
+    var category: String = ONE_WAY
+    var from: String = ""
+    var to: String = ""
+    lateinit var departureTime: String
+    lateinit var returnTime: String
+    var roundTrip: Boolean = false
 
     private val formattedMonth = listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Des")
 
@@ -49,11 +52,17 @@ class HomeFragment : Fragment() {
 
     private fun initView() {
         binding.apply {
-            etFrom.setText("JAKARTA")
-            etTo.setText("SURABAYA")
             etDepartureDate.setText("$day ${formattedMonth.get(month)}, $year")
             etReturnDate.setText("$day ${formattedMonth.get(month)}, $year")
         }
+        from = binding.etFrom.text.toString().trim()
+        Log.d("from", binding.etFrom.text.toString())
+        to = binding.etTo.text.toString().trim()
+
+        binding.etFrom.setText(from)
+        binding.etTo.setText(to)
+        departureTime = getTimeStamp(year, month, day)
+        returnTime = getTimeStamp(year, month, day)
     }
 
     private fun setOnClickListener() {
@@ -78,7 +87,9 @@ class HomeFragment : Fragment() {
             to = binding.etTo.text.toString().trim()
         }
         binding.btnSearch.setOnClickListener {
-            navigateToSearchResult()
+            initView()
+            val searchTickets = parseFormIntoEntity(category, from, to, departureTime, returnTime, roundTrip)
+            navigateToSearchResult(searchTickets)
         }
     }
 
@@ -117,7 +128,7 @@ class HomeFragment : Fragment() {
         return timestamp.toString()
     }
 
-    private fun parseFormIntoEntity(): SearchTickets {
+    private fun parseFormIntoEntity(category: String, from: String, to: String, departureTime: String, returnTime: String, roundTrip: Boolean): SearchTickets {
         return SearchTickets(
             category,
             from,
@@ -128,9 +139,9 @@ class HomeFragment : Fragment() {
         )
     }
 
-    private fun navigateToSearchResult() {
-        val action = HomeFragmentDirections.actionHomeFragmentToSearchResultFragment(parseFormIntoEntity())
-        Log.d("args", parseFormIntoEntity().toString())
+    private fun navigateToSearchResult(searchTickets: SearchTickets) {
+        val action = HomeFragmentDirections.actionHomeFragmentToSearchResultFragment(searchTickets)
+        Log.d("args", searchTickets.toString())
 
         findNavController().navigate(action)
     }

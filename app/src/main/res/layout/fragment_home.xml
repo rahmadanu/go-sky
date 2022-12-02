@@ -102,7 +102,7 @@
                         android:drawableStart="@drawable/ic_flight_takeoff"
                         android:drawablePadding="16dp"
                         android:inputType="text"
-                        tools:text="JAKARTA"
+                        android:text="JAKARTA"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,7 +141,7 @@
                         android:drawableStart="@drawable/ic_flight_land"
                         android:drawablePadding="16dp"
                         android:inputType="text"
-                        tools:text="SURABAYA"
+                        android:text="SURABAYA"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
