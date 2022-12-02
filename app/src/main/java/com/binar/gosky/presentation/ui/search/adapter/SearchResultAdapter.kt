@@ -1,5 +1,6 @@
 package com.binar.gosky.presentation.ui.search.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -9,6 +10,10 @@ import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.databinding.ItemTripBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import java.text.NumberFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {
     private val diffCallback = object : DiffUtil.ItemCallback<TicketsItem>() {
@@ -49,7 +54,8 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : Recycl
                         .into(ivAirlineLogo)
                     tvFrom.text = from
                     tvTo.text = to
-                    tvTicketPrice.text = price.toString()
+                    tvTicketPrice.text = convertRupiah(price)
+                    tvDepartureTime.text = convertISOtoDate(departureTime)
 
                     itemView.setOnClickListener {
                         itemClick(this)
@@ -57,5 +63,27 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : Recycl
                 }
             }
         }
+    }
+
+    fun convertRupiah(intPrice: Int?): String {
+        val localId = Locale("in", "ID")
+        val formatter = NumberFormat.getCurrencyInstance(localId)
+        return formatter.format(intPrice)
+    }
+
+    fun convertISOtoDate(isoString: String?): String {
+        val localeID = Locale("in", "ID")
+        var formattedDate = ""
+        val cal = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", localeID)
+        try {
+            cal.time = dateFormat.parse(isoString)
+            val c = cal.time
+            val dformat = SimpleDateFormat("dd MMM yyyy\nHH:mm", localeID)
+            formattedDate = dformat.format(c)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return formattedDate
     }
 }

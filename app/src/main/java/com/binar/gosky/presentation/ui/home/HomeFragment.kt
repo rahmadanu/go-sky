@@ -14,6 +14,7 @@ import com.binar.gosky.data.network.model.tickets.SearchTickets
 import com.binar.gosky.databinding.FragmentHomeBinding
 import com.binar.gosky.presentation.ui.search.SearchResultViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -118,14 +119,20 @@ class HomeFragment : Fragment() {
     }
 
     private fun getTimeStamp(year: Int, monthOfYear: Int, dayOfMonth: Int): String {
-        val calendar = Calendar.getInstance()
-        calendar[Calendar.YEAR] = year
-        calendar[Calendar.MONTH] = monthOfYear
-        calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
-        val timestamp: Long = calendar.timeInMillis
-        Log.d("timestamp", timestamp.toString())
+        val date = Calendar.getInstance().apply {
+            set(Calendar.YEAR, year)
+            set(Calendar.MONTH, monthOfYear)
+            set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }.time
+        val localeID = Locale("in", "ID")
+        val formattedDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", localeID).format(date)
+        Log.d("timestamp", formattedDate.toString())
 
-        return timestamp.toString()
+        return formattedDate
     }
 
     private fun parseFormIntoEntity(category: String, from: String, to: String, departureTime: String, returnTime: String, roundTrip: Boolean): SearchTickets {

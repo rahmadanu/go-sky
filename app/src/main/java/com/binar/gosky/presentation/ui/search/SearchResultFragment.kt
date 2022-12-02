@@ -2,17 +2,20 @@ package com.binar.gosky.presentation.ui.search
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.binar.gosky.R
 import com.binar.gosky.databinding.FragmentSearchResultBinding
 import com.binar.gosky.presentation.ui.search.adapter.SearchResultAdapter
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class SearchResultFragment : Fragment() {
@@ -40,6 +43,9 @@ class SearchResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         args.searchTickets.let {
+            binding.apply {
+                txtFlight.text = getString(R.string.from_to_to, it.from, it.to)
+            }
             viewModel.getTickets(
                 it.category,
                 it.from,

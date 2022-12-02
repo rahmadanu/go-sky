@@ -61,8 +61,8 @@
                 android:id="@+id/tv_departure_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="14:50"
+                android:layout_marginTop="15dp"
+                tools:text="14:50"
                 app:layout_constraintTop_toBottomOf="@id/airline_name"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -70,7 +70,7 @@
                 android:id="@+id/tv_arrival_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="14:50"
+                tools:text="14:50"
                 app:layout_constraintTop_toTopOf="@id/tv_departure_time"
                 app:layout_constraintEnd_toEndOf="parent" />
 
