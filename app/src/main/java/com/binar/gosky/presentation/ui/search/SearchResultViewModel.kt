@@ -49,7 +49,8 @@ class SearchResultViewModel @Inject constructor(private val ticketsRepository: T
                 ).payload?.data.toString()
             )
             viewModelScope.launch(Dispatchers.Main) {
-                _ticketsResult.postValue(Resource.Success(ticketsItem))
+                val data = if (ticketsItem.isNullOrEmpty()) Resource.Empty() else Resource.Success(ticketsItem)
+                _ticketsResult.postValue(data)
             }
         }
     }

@@ -72,10 +72,18 @@ class SearchResultFragment : Fragment() {
             when (it) {
                 is Resource.Success -> {
                     adapter.submitList(it.payload)
+                    binding.pbLoading.visibility = View.GONE
+                    binding.tvNoFlights.visibility = View.GONE
                 }
-                is Resource.Loading -> {}
+                is Resource.Loading -> {
+                    binding.pbLoading.visibility = View.VISIBLE
+                    binding.tvNoFlights.visibility = View.GONE
+                }
                 is Resource.Error -> {}
-                is Resource.Empty -> TODO()
+                is Resource.Empty -> {
+                    binding.pbLoading.visibility = View.GONE
+                    binding.tvNoFlights.visibility = View.VISIBLE
+                }
             }
         }
     }
