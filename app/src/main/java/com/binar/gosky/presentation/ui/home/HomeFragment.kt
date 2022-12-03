@@ -2,6 +2,7 @@ package com.binar.gosky.presentation.ui.home
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -58,9 +59,9 @@ class HomeFragment : Fragment() {
             etDepartureDate.setText("$day ${formattedMonth.get(month)}, $year")
             etReturnDate.setText("$day ${formattedMonth.get(month)}, $year")
         }
-        /*from = binding.etFrom.text.toString().trim()
+        from = binding.etFrom.text.toString().trim().uppercase()
         Log.d("from", binding.etFrom.text.toString())
-        to = binding.etTo.text.toString().trim()*/
+        to = binding.etTo.text.toString().trim().uppercase()
 
         binding.etFrom.setAdapter(arrayAdapter)
         binding.etTo.setAdapter(arrayAdapter)
@@ -86,8 +87,8 @@ class HomeFragment : Fragment() {
             val temp = binding.etFrom.text
             binding.etFrom.text = binding.etTo.text
             binding.etTo.text = temp
-            from = binding.etFrom.text.toString().trim()
-            to = binding.etTo.text.toString().trim()
+            from = binding.etFrom.text.toString().trim().uppercase()
+            to = binding.etTo.text.toString().trim().uppercase()
         }
         binding.btnSearch.setOnClickListener {
             initView()

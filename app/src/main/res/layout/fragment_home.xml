@@ -103,7 +103,6 @@
                         android:drawableStart="@drawable/ic_flight_takeoff"
                         android:drawablePadding="16dp"
                         android:imeOptions="actionNext"
-                        android:inputType="text"
                         android:text="JAKARTA" />
                 </com.google.android.material.textfield.TextInputLayout>
 
