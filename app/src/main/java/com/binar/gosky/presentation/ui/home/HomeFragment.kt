@@ -6,10 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.binar.gosky.R
 import com.binar.gosky.data.network.model.tickets.SearchTickets
 import com.binar.gosky.databinding.FragmentHomeBinding
 import com.binar.gosky.presentation.ui.search.SearchResultViewModel
@@ -49,16 +51,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
+        val province = resources.getStringArray(R.array.province)
+        val arrayAdapter =
+            activity?.let { ArrayAdapter<String>(it, android.R.layout.simple_list_item_1, province) }
         binding.apply {
             etDepartureDate.setText("$day ${formattedMonth.get(month)}, $year")
             etReturnDate.setText("$day ${formattedMonth.get(month)}, $year")
         }
-        from = binding.etFrom.text.toString().trim()
+        /*from = binding.etFrom.text.toString().trim()
         Log.d("from", binding.etFrom.text.toString())
-        to = binding.etTo.text.toString().trim()
+        to = binding.etTo.text.toString().trim()*/
 
-        binding.etFrom.setText(from)
-        binding.etTo.setText(to)
+        binding.etFrom.setAdapter(arrayAdapter)
+        binding.etTo.setAdapter(arrayAdapter)
         departureTime = getTimeStamp(year, month, day)
         returnTime = getTimeStamp(year, month, day)
     }
