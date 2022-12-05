@@ -170,6 +170,8 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password" />
 
     <com.google.android.material.divider.MaterialDivider

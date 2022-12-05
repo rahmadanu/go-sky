@@ -119,9 +119,11 @@
         android:backgroundTint="@color/cerulean_blue"
         android:text="Log In"
         android:textAllCaps="false"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:cornerRadius="12dp"
-        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_forgot" />
 
     <com.google.android.material.divider.MaterialDivider
