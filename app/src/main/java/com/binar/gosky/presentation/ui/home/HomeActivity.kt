@@ -10,7 +10,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.binar.gosky.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
@@ -39,8 +41,7 @@ class HomeActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-/*                R.id.detailFragment -> hideBottomNav(true)
-                R.id.updateProfileFragment -> hideBottomNav(true)*/
+                R.id.searchResultFragment -> hideBottomNav(true)
                 else -> hideBottomNav(false)
             }
         }
