@@ -3,11 +3,12 @@
 
     <string name="title_home">Home</string>
     <string name="title_wishlist">Wishlist</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_account">Account</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="from_to_to">%1$s to %2$s</string>
+    <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
 
     <string-array name="province">
         <item>JAKARTA</item>

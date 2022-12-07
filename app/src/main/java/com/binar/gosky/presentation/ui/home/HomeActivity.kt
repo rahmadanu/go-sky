@@ -32,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.homeFragment,
             R.id.wishlistFragment,
-            R.id.profileFragment
+            R.id.accountFragment
         ).build()
 
         setupActionBarWithNavController(navController, appBarConfiguration)
