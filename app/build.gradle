@@ -47,6 +47,10 @@ android {
 }
 
 dependencies {
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation "androidx.activity:activity-ktx:1.5.0"
+
     // Testing
     testImplementation "io.mockk:mockk:1.13.2"
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
@@ -85,9 +89,6 @@ dependencies {
 
 /*
 
-    // DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
-    implementation "androidx.activity:activity-ktx:1.5.0"
 
     // Room and Lifecycle dependencies
     implementation "androidx.room:room-runtime:$room_version"
