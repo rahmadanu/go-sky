@@ -1,6 +1,7 @@
 package com.binar.gosky.presentation.ui.home
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
@@ -8,28 +9,78 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import com.binar.gosky.R
-import com.binar.gosky.databinding.FragmentBottomSheetBinding
+import com.binar.gosky.databinding.FragmentValidateEmailBottomSheetBinding
+import com.binar.gosky.presentation.ui.auth.register.RegisterViewModel
+import com.binar.gosky.wrapper.Resource
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class ValidateEmailBottomSheet : BottomSheetDialogFragment() {
+@HiltViewModel
+class ValidateEmailBottomSheet(private val email: String) : BottomSheetDialogFragment() {
 
-    private var _binding: FragmentBottomSheetBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentValidateEmailBottomSheetBinding
+
+    private val registerViewModel: RegisterViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentBottomSheetBinding.inflate(inflater, container,false)
+        binding = FragmentValidateEmailBottomSheetBinding.inflate(inflater, container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initView()
         setUpEditTextOtp()
+        setOnClickListener()
+        observeData()
+    }
+
+    private fun observeData() {
+        registerViewModel.otpResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun setOnClickListener() {
+        binding.tvResendCode.setOnClickListener {
+            registerViewModel.getOtp(email)
+        }
+    }
+
+    private fun initView() {
+        binding.tvEmail.text = email
+        registerViewModel.getOtp(email)
+        setUpTimer()
+    }
+
+    private fun setUpTimer() {
+        val timer = object : CountDownTimer(60000, 1000) {
+            override fun onTick(millis: Long) {
+                binding.tvTimer.text = "(${(millis / 1000)})"
+                binding.tvResendCode.isVisible = false
+                binding.tvTimer.isVisible = true
+            }
+
+            override fun onFinish() {
+                binding.tvResendCode.isVisible = true
+                binding.tvTimer.isVisible = false
+            }
+
+        }
+        timer.start()
     }
 
     private fun setUpEditTextOtp() {
@@ -52,11 +103,6 @@ class ValidateEmailBottomSheet : BottomSheetDialogFragment() {
             etOtp5.setOnKeyListener(GenericKeyEvent(etOtp5, etOtp4))
             etOtp6.setOnKeyListener(GenericKeyEvent(etOtp6, etOtp5))
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
 

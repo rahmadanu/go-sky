@@ -43,8 +43,8 @@ class RegisterFragment : Fragment() {
 
     private fun registerUser() {
         if (validateInput()) {
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
 
             //viewModel.getOtp(email)
             showValidateEmailDialog()
@@ -57,7 +57,8 @@ class RegisterFragment : Fragment() {
     ) {
         val currentDialog = parentFragmentManager.findFragmentByTag(ValidateEmailBottomSheet::class.java.simpleName)
         if (currentDialog == null) {
-            ValidateEmailBottomSheet().apply {
+            val email = binding.etEmail.text.toString().trim()
+            ValidateEmailBottomSheet(email).apply {
 
                 this.isCancelable = isCancelable
             }.show(parentFragmentManager, ValidateEmailBottomSheet::class.java.simpleName)
@@ -66,9 +67,9 @@ class RegisterFragment : Fragment() {
 
     private fun validateInput(): Boolean {
         var isValid = true
-        val username = binding.etUsername.text.toString()
-        val email = binding.etEmail.text.toString()
-        val password = binding.etPassword.text.toString()
+        val username = binding.etUsername.text.toString().trim()
+        val email = binding.etEmail.text.toString().trim()
+        val password = binding.etPassword.text.toString().trim()
 
         if (username.isEmpty()) {
             isValid = false
