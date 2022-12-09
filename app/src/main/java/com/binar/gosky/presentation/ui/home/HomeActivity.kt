@@ -42,6 +42,8 @@ class HomeActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.searchResultFragment -> hideBottomNav(true)
+                R.id.loginFragment -> hideBottomNav(true)
+                R.id.registerFragment -> hideBottomNav(true)
                 else -> hideBottomNav(false)
             }
         }

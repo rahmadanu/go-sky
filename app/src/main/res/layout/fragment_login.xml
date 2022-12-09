@@ -66,7 +66,7 @@
             android:drawablePadding="16dp"
             android:focusable="true"
             android:inputType="text"
-            android:text="JohnDoe@gmail.com" />
+            tools:text="JohnDoe@gmail.com" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -217,7 +217,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Buat Akun Yuk!"
