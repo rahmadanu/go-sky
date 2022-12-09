@@ -12,7 +12,7 @@ interface UserLocalDataSource {
 
 class UserLocalDataSourceImpl @Inject constructor(
     private val userDataStore: UserDataStoreManager
-): UserLocalDataSource {
+) : UserLocalDataSource {
 
     override suspend fun setUserLogin(isLogin: Boolean) {
         userDataStore.setUserLogin(isLogin)

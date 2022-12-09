@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.binar.gosky.presentation.ui.auth.LoginFragment"
+        android:name="com.binar.gosky.presentation.ui.auth.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.binar.gosky.presentation.ui.auth.RegisterFragment"
+        android:name="com.binar.gosky.presentation.ui.auth.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action

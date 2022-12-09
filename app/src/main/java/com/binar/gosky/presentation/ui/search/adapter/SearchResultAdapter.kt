@@ -1,6 +1,5 @@
 package com.binar.gosky.presentation.ui.search.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -15,7 +14,8 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {
+class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
+    RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {
     private val diffCallback = object : DiffUtil.ItemCallback<TicketsItem>() {
         override fun areItemsTheSame(oldItem: TicketsItem, newItem: TicketsItem): Boolean {
             return oldItem.id == newItem.id
@@ -43,7 +43,10 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : Recycl
 
     override fun getItemCount(): Int = differ.currentList.size
 
-    inner class SearchResultViewHolder(private val binding: ItemTripBinding, private val itemClick: (TicketsItem) -> Unit) :
+    inner class SearchResultViewHolder(
+        private val binding: ItemTripBinding,
+        private val itemClick: (TicketsItem) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: TicketsItem) {
             with(binding) {

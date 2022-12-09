@@ -14,8 +14,6 @@ import com.binar.gosky.databinding.FragmentSearchResultBinding
 import com.binar.gosky.presentation.ui.search.adapter.SearchResultAdapter
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class SearchResultFragment : Fragment() {

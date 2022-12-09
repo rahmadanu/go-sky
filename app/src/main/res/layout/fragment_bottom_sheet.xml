@@ -66,10 +66,10 @@
         app:layout_constraintTop_toBottomOf="@id/txt_email">
 
         <EditText
-            android:id="@+id/edt_otp_1"
+            android:id="@+id/et_otp_1"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/round_back"
@@ -80,10 +80,10 @@
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/edt_otp_2"
+            android:id="@+id/et_otp_2"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/round_back"
@@ -94,10 +94,10 @@
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/edt_otp_3"
+            android:id="@+id/et_otp_3"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/round_back"
@@ -108,10 +108,10 @@
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/edt_otp_4"
+            android:id="@+id/et_otp_4"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/round_back"
@@ -122,10 +122,10 @@
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/edt_otp_5"
+            android:id="@+id/et_otp_5"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/round_back"
@@ -136,10 +136,10 @@
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/edt_otp_6"
+            android:id="@+id/et_otp_6"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_weight="1"
             android:background="@drawable/round_back"
             android:inputType="number"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.auth.RegisterFragment">
+    tools:context=".presentation.ui.auth.register.RegisterFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -69,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@id/app_bar">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_username"
+            android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawablePadding="16dp"
@@ -96,7 +96,7 @@
         app:layout_constraintTop_toBottomOf="@id/username">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_email"
+            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawablePadding="16dp"
@@ -122,7 +122,7 @@
         app:layout_constraintTop_toBottomOf="@id/email">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_no_telp"
+            android:id="@+id/et_phone_number"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawablePadding="16dp"
@@ -149,7 +149,7 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_password"
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawablePadding="16dp"

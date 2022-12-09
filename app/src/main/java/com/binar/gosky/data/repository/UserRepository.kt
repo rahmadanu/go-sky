@@ -12,7 +12,7 @@ interface UserRepository {
 
 class UserRepositoryImpl @Inject constructor(
     private val userLocalDataSource: UserLocalDataSource
-): UserRepository {
+) : UserRepository {
     override suspend fun setUserLogin(isLogin: Boolean) {
         return userLocalDataSource.setUserLogin(isLogin)
     }
