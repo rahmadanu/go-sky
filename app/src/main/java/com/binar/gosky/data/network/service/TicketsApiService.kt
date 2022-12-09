@@ -1,6 +1,7 @@
 package com.binar.gosky.data.network.service
 
 import android.provider.MediaStore.Video.VideoColumns.CATEGORY
+import com.binar.gosky.data.network.model.auth.otp.OtpResponse
 import com.binar.gosky.data.network.model.tickets.Tickets
 import retrofit2.http.GET
 import retrofit2.http.Query
