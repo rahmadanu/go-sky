@@ -1,4 +1,4 @@
-package com.binar.gosky.presentation.ui.home
+package com.binar.gosky.presentation.ui.auth
 
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -21,7 +21,6 @@ import com.binar.gosky.presentation.ui.auth.register.RegisterViewModel
 import com.binar.gosky.wrapper.Resource
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @AndroidEntryPoint
 class ValidateEmailBottomSheet(private val name: String = "", private val password: String = "", private val email: String = "") : BottomSheetDialogFragment() {

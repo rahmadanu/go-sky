@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.binar.gosky.R
 import com.binar.gosky.databinding.FragmentRegisterBinding
-import com.binar.gosky.presentation.ui.home.ValidateEmailBottomSheet
+import com.binar.gosky.presentation.ui.auth.ValidateEmailBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,14 +41,13 @@ class RegisterFragment : Fragment() {
         binding.btnRegister.setOnClickListener {
             registerUser()
         }
+        binding.ivBack.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
     }
 
     private fun registerUser() {
         if (validateInput()) {
-            val email = binding.etEmail.text.toString().trim()
-            val password = binding.etPassword.text.toString().trim()
-
-            //viewModel.getOtp(email)
             showValidateEmailDialog()
         }
     }
@@ -57,10 +58,10 @@ class RegisterFragment : Fragment() {
     ) {
         val currentDialog = parentFragmentManager.findFragmentByTag(ValidateEmailBottomSheet::class.java.simpleName)
         if (currentDialog == null) {
-            val username = binding.etUsername.text.toString()
+            val name = binding.etName.text.toString()
             val password = binding.etPassword.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
-            ValidateEmailBottomSheet(username, password, email).apply {
+            ValidateEmailBottomSheet(name, password, email).apply {
 
                 this.isCancelable = isCancelable
             }.show(parentFragmentManager, ValidateEmailBottomSheet::class.java.simpleName)
@@ -69,13 +70,13 @@ class RegisterFragment : Fragment() {
 
     private fun validateInput(): Boolean {
         var isValid = true
-        val username = binding.etUsername.text.toString().trim()
+        val name = binding.etName.text.toString().trim()
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
 
-        if (username.isEmpty()) {
+        if (name.isEmpty()) {
             isValid = false
-            binding.etUsername.error = "Username or password must not be empty"
+            binding.etName.error = "Username or password must not be empty"
         }
         if (email.isEmpty()) {
             isValid = false

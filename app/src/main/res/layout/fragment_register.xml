@@ -26,7 +26,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/ic_back"
+                    android:id="@+id/iv_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_back"
@@ -44,7 +44,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ic_back"
+                    app:layout_constraintStart_toEndOf="@id/iv_back"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -59,7 +59,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
-        android:hint="Username"
+        android:hint="Name"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -69,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@id/app_bar">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_username"
+            android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawablePadding="16dp"
@@ -103,7 +103,7 @@
             android:focusable="true"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
-
+<!--
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/no_telp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -128,7 +128,7 @@
             android:drawablePadding="16dp"
             android:focusable="true"
             android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password"
@@ -145,7 +145,7 @@
         app:boxCornerRadiusTopStart="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/no_telp"
+        app:layout_constraintTop_toBottomOf="@id/email"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText

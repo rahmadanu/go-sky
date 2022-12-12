@@ -2,6 +2,7 @@ package com.binar.gosky.data.repository
 
 import com.binar.gosky.data.network.datasource.AuthRemoteDataSource
 import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestResponse
+import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.data.network.model.auth.otp.OtpResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.wrapper.Resource
@@ -11,6 +12,7 @@ import javax.inject.Inject
 interface AuthRepository {
     suspend fun getOtp(email: String): Resource<OtpResponse>
     suspend fun postRegisterUser(registerRequestBody: RegisterRequestBody): Resource<LoginRegisterRequestResponse>
+    suspend fun postLoginUser(loginRequestBody: LoginRequestBody): Resource<LoginRegisterRequestResponse>
 }
 
 class AuthRepositoryImpl @Inject constructor(private val dataSource: AuthRemoteDataSource) :
@@ -24,6 +26,12 @@ class AuthRepositoryImpl @Inject constructor(private val dataSource: AuthRemoteD
     override suspend fun postRegisterUser(registerRequestBody: RegisterRequestBody): Resource<LoginRegisterRequestResponse> {
         return proceed {
             dataSource.postRegisterUser(registerRequestBody)
+        }
+    }
+
+    override suspend fun postLoginUser(loginRequestBody: LoginRequestBody): Resource<LoginRegisterRequestResponse> {
+        return proceed {
+            dataSource.postLoginUser(loginRequestBody)
         }
     }
 
