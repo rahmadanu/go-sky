@@ -4,12 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestResponse
 import com.binar.gosky.data.network.model.auth.otp.OtpResponse
+import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.data.repository.AuthRepository
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
+import retrofit2.http.Body
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,10 +22,24 @@ class RegisterViewModel @Inject constructor(private val repository: AuthReposito
     private var _otpResponse = MutableLiveData<Resource<OtpResponse>>()
     val otpResponse: LiveData<Resource<OtpResponse>> get() = _otpResponse
 
+    private var _postRegisterUserResponse = MutableLiveData<Resource<LoginRegisterRequestResponse>>()
+    val postRegisterUserResponse: LiveData<Resource<LoginRegisterRequestResponse>> get() = _postRegisterUserResponse
+
     fun getOtp(email: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _otpResponse.postValue(repository.getOtp(email))
+            val otp = repository.getOtp(email)
+            viewModelScope.launch(Dispatchers.Main) {
+                _otpResponse.postValue(otp)
+            }
         }
     }
 
+    fun postRegisterUser(registerRequestBody: RegisterRequestBody) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val registerResponse = repository.postRegisterUser(registerRequestBody)
+            viewModelScope.launch(Dispatchers.Main) {
+                _postRegisterUserResponse.postValue(registerResponse)
+            }
+        }
+    }
 }

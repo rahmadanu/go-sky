@@ -4,26 +4,34 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
+import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.databinding.FragmentValidateEmailBottomSheetBinding
 import com.binar.gosky.presentation.ui.auth.register.RegisterViewModel
 import com.binar.gosky.wrapper.Resource
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 
-@HiltViewModel
-class ValidateEmailBottomSheet(private val email: String) : BottomSheetDialogFragment() {
+@AndroidEntryPoint
+class ValidateEmailBottomSheet(private val name: String = "", private val password: String = "", private val email: String = "") : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentValidateEmailBottomSheetBinding
 
     private val registerViewModel: RegisterViewModel by viewModels()
+
+    private var otp = ""
+    private var otpToken = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,24 +47,65 @@ class ValidateEmailBottomSheet(private val email: String) : BottomSheetDialogFra
 
         initView()
         setUpEditTextOtp()
-        setOnClickListener()
         observeData()
+        setOnClickListener()
     }
 
     private fun observeData() {
         registerViewModel.otpResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
-
+                    Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
+                    it.data?.data?.otpToken?.let { token -> otpToken = token }
+                }
+/*          fc      is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }*/
+                else -> {}
+            }
+        }
+        registerViewModel.postRegisterUserResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    if (it.data?.status.equals("success")) {
+                        dismiss()
+                        Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
+                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                    } else if (it.data?.status.equals("error")) {
+                        Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
+                    }
+                    Log.d("registerresponse", it.data?.message.toString())
                 }
                 else -> {}
             }
         }
     }
 
+    private fun registerUser(name: String, otp: String, otpToken: String, password: String) {
+        registerViewModel.postRegisterUser(RegisterRequestBody(name, otp, otpToken, password))
+        Log.d("register", RegisterRequestBody(name, otp, otpToken, password).toString())
+    }
+
     private fun setOnClickListener() {
+        binding.ivClose.setOnClickListener {
+            dismiss()
+        }
         binding.tvResendCode.setOnClickListener {
             registerViewModel.getOtp(email)
+        }
+        binding.btnVerify.setOnClickListener {
+            binding.apply {
+                val otp1 = etOtp1.text.toString().trim()
+                val otp2 = etOtp2.text.toString().trim()
+                val otp3 = etOtp3.text.toString().trim()
+                val otp4 = etOtp4.text.toString().trim()
+                val otp5 = etOtp5.text.toString().trim()
+                val otp6 = etOtp6.text.toString().trim()
+
+                otp = "$otp1$otp2$otp3$otp4$otp5$otp6"
+                Log.d("otp", otp)
+                registerUser(name, otp, otpToken, password)
+            }
         }
     }
 
@@ -130,7 +179,7 @@ class GenericTextWatcher internal constructor(private val currentView: View, pri
             R.id.et_otp_3 -> if (text.length == 1) nextView!!.requestFocus()
             R.id.et_otp_4 -> if (text.length == 1) nextView!!.requestFocus()
             R.id.et_otp_5 -> if (text.length == 1) nextView!!.requestFocus()
-            R.id.et_otp_6 -> if (text.length == 1) nextView!!.requestFocus()
+            //R.id.et_otp_6 -> if (text.length == 1)
             //You can use EditText4 same as above to hide the keyboard
         }
     }

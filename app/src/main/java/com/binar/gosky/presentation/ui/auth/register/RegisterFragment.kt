@@ -57,8 +57,10 @@ class RegisterFragment : Fragment() {
     ) {
         val currentDialog = parentFragmentManager.findFragmentByTag(ValidateEmailBottomSheet::class.java.simpleName)
         if (currentDialog == null) {
+            val username = binding.etUsername.text.toString()
+            val password = binding.etPassword.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
-            ValidateEmailBottomSheet(email).apply {
+            ValidateEmailBottomSheet(username, password, email).apply {
 
                 this.isCancelable = isCancelable
             }.show(parentFragmentManager, ValidateEmailBottomSheet::class.java.simpleName)
