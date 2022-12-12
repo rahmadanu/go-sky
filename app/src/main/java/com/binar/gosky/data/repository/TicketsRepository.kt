@@ -34,7 +34,7 @@ class TicketsRepositoryImpl @Inject constructor(private val dataSource: TicketsR
         return try {
             Resource.Success(coroutines.invoke())
         } catch (e: Exception) {
-            Resource.Error(e)
+            Resource.Error(e, e.message)
         }
     }
 }

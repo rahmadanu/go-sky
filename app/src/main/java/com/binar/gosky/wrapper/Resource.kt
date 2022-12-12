@@ -7,8 +7,8 @@ sealed class Resource<T>(
 ) {
     class Success<T>(val data: T?) : Resource<T>(data)
     class Empty<T>(data: T? = null) : Resource<T>(data)
-    class Error<T>(exception: Exception?, data: T? = null) :
-        Resource<T>(data, exception = exception)
+    class Error<T>(exception: Exception?, message: String?) :
+        Resource<T>(message = message, exception = exception)
 
     class Loading<T>(data: T? = null) : Resource<T>(data)
 }

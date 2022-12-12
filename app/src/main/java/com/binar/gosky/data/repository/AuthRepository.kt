@@ -6,7 +6,7 @@ import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.data.network.model.auth.otp.OtpResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.wrapper.Resource
-import retrofit2.http.Body
+import retrofit2.HttpException
 import javax.inject.Inject
 
 interface AuthRepository {
@@ -35,11 +35,14 @@ class AuthRepositoryImpl @Inject constructor(private val dataSource: AuthRemoteD
         }
     }
 
-    private suspend fun <T> proceed(coroutines: suspend () -> T): com.binar.gosky.wrapper.Resource<T> {
+    private suspend fun <T> proceed(coroutines: suspend () -> T): Resource<T> {
         return try {
             Resource.Success(coroutines.invoke())
         } catch (e: Exception) {
-            Resource.Error(e)
-        }
+            Resource.Error(e, e.message)
+        }/* catch (httpE: HttpException) {
+            val response = httpE.response()?.errorBody()?.string()
+            Resource.Error(httpE, httpE.response()?.message())
+        }*/
     }
 }
