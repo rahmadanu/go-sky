@@ -7,7 +7,7 @@ import javax.inject.Inject
 interface UserLocalDataSource {
     suspend fun setUserLogin(isLogin: Boolean)
 
-    fun getUserLogin(): Flow<Boolean>
+    fun getUserLoginStatus(): Flow<Boolean>
 }
 
 class UserLocalDataSourceImpl @Inject constructor(
@@ -18,7 +18,7 @@ class UserLocalDataSourceImpl @Inject constructor(
         userDataStore.setUserLogin(isLogin)
     }
 
-    override fun getUserLogin(): Flow<Boolean> {
-        return userDataStore.getUserLogin()
+    override fun getUserLoginStatus(): Flow<Boolean> {
+        return userDataStore.getUserLoginStatus()
     }
 }

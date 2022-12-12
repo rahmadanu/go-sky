@@ -19,7 +19,7 @@ class UserDataStoreManager @Inject constructor(@ApplicationContext private val c
         }
     }
 
-    fun getUserLogin(): Flow<Boolean> {
+    fun getUserLoginStatus(): Flow<Boolean> {
         return context.userDataStore.data.map { preferences ->
             preferences[LOGIN_STATUS_KEY] ?: false
         }

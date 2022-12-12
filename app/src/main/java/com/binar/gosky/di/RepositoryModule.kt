@@ -1,9 +1,6 @@
 package com.binar.gosky.di
 
-import com.binar.gosky.data.repository.AuthRepository
-import com.binar.gosky.data.repository.AuthRepositoryImpl
-import com.binar.gosky.data.repository.TicketsRepository
-import com.binar.gosky.data.repository.TicketsRepositoryImpl
+import com.binar.gosky.data.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -18,4 +15,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideAuthRepository(authRepositoryImpl: AuthRepositoryImpl): AuthRepository
+
+    @Binds
+    abstract fun provideUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
 }
