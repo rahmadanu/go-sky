@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
@@ -59,9 +58,16 @@ class LoginFragment : Fragment() {
                 else -> {}
             }
         }
+        viewModel.getUserLoginStatus().observe(viewLifecycleOwner) {
+            Log.d("getlogin", it.toString())
+            if (it) {
+                navigateToHome()
+            }
+        }
     }
 
     private fun navigateToHome() {
+        viewModel.setUserLogin(true)
         findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
     }
 

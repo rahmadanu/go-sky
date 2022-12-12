@@ -27,7 +27,7 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
         }
     }
 
-    suspend fun setUserLogin(isLogin: Boolean) {
+    fun setUserLogin(isLogin: Boolean) {
         viewModelScope.launch {
             userRepository.setUserLogin(isLogin)
         }
