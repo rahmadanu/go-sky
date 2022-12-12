@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.databinding.FragmentValidateEmailBottomSheetBinding
+import com.binar.gosky.presentation.ui.auth.login.LoginViewModel
 import com.binar.gosky.presentation.ui.auth.register.RegisterViewModel
 import com.binar.gosky.wrapper.Resource
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -28,6 +29,7 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
     private lateinit var binding: FragmentValidateEmailBottomSheetBinding
 
     private val registerViewModel: RegisterViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
 
     private var otp = ""
     private var otpToken = ""
@@ -70,6 +72,7 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
                         dismiss()
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                         findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+                        loginViewModel.setUserLogin(true)
                     }/* else if (it.data?.status.equals("error")) {
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                     }*/
