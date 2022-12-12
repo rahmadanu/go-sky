@@ -69,10 +69,10 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
                     if (it.data?.status.equals("success")) {
                         dismiss()
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
-                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-                    } else if (it.data?.status.equals("error")) {
+                        findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+                    }/* else if (it.data?.status.equals("error")) {
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
-                    }
+                    }*/
                     Log.d("registerresponse", it.data?.message.toString())
                 }
                 else -> {}
