@@ -2,7 +2,6 @@ package com.binar.gosky.presentation.ui.home
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.text.InputFilter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.tickets.SearchTickets
 import com.binar.gosky.databinding.FragmentHomeBinding
-import com.binar.gosky.presentation.ui.search.SearchResultViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -33,7 +30,8 @@ class HomeFragment : Fragment() {
     lateinit var returnTime: String
     var roundTrip: Boolean = false
 
-    private val formattedMonth = listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Des")
+    private val formattedMonth =
+        listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Des")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +52,13 @@ class HomeFragment : Fragment() {
     private fun initView() {
         val province = resources.getStringArray(R.array.province)
         val arrayAdapter =
-            activity?.let { ArrayAdapter<String>(it, android.R.layout.simple_list_item_1, province) }
+            activity?.let {
+                ArrayAdapter<String>(
+                    it,
+                    android.R.layout.simple_list_item_1,
+                    province
+                )
+            }
         binding.apply {
             etDepartureDate.setText("$day ${formattedMonth.get(month)}, $year")
             etReturnDate.setText("$day ${formattedMonth.get(month)}, $year")
@@ -92,7 +96,8 @@ class HomeFragment : Fragment() {
         }
         binding.btnSearch.setOnClickListener {
             initView()
-            val searchTickets = parseFormIntoEntity(category, from, to, departureTime, returnTime, roundTrip)
+            val searchTickets =
+                parseFormIntoEntity(category, from, to, departureTime, returnTime, roundTrip)
             navigateToSearchResult(searchTickets)
         }
     }
@@ -105,7 +110,13 @@ class HomeFragment : Fragment() {
                 day = dayOfMonth
                 when (id) {
                     binding.etDepartureDate.id -> {
-                        binding.etDepartureDate.setText("$dayOfMonth ${formattedMonth.get(monthOfYear)}, $year")
+                        binding.etDepartureDate.setText(
+                            "$dayOfMonth ${
+                                formattedMonth.get(
+                                    monthOfYear
+                                )
+                            }, $year"
+                        )
                         departureTime = getTimeStamp(year, monthOfYear, dayOfMonth)
                     }
                     binding.etReturnDate.id -> {
@@ -138,7 +149,14 @@ class HomeFragment : Fragment() {
         return formattedDate
     }
 
-    private fun parseFormIntoEntity(category: String, from: String, to: String, departureTime: String, returnTime: String, roundTrip: Boolean): SearchTickets {
+    private fun parseFormIntoEntity(
+        category: String,
+        from: String,
+        to: String,
+        departureTime: String,
+        returnTime: String,
+        roundTrip: Boolean
+    ): SearchTickets {
         return SearchTickets(
             category,
             from,

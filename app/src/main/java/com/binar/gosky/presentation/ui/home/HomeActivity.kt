@@ -1,8 +1,8 @@
 package com.binar.gosky.presentation.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -42,6 +42,8 @@ class HomeActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.searchResultFragment -> hideBottomNav(true)
+                R.id.loginFragment -> hideBottomNav(true)
+                R.id.registerFragment -> hideBottomNav(true)
                 else -> hideBottomNav(false)
             }
         }
