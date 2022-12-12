@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_background"
+    tools:context=".presentation.ui.auth.EmailConfirmationFragment">
+
+
+    <ImageView
+        android:id="@+id/img_logo_notification"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/go_sky_logo"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_confirmation_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Konfirmasi Email"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/img_logo_notification"
+        app:layout_constraintStart_toStartOf="@+id/img_logo_notification"
+        app:layout_constraintTop_toBottomOf="@+id/img_logo_notification" />
+
+    <TextView
+        android:id="@+id/txt_confirmation_notification_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Kami telah mengirimkan email konfirmasi ke:"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/txt_confirmation_notification"
+        app:layout_constraintStart_toStartOf="@+id/txt_confirmation_notification"
+        app:layout_constraintTop_toBottomOf="@+id/txt_confirmation_notification" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="mail@gmail.com"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/txt_confirmation_notification_2"
+        app:layout_constraintStart_toStartOf="@+id/txt_confirmation_notification_2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_confirmation_notification_2" />
+
+    <TextView
+        android:id="@+id/txt_count_resend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="58"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--divider email confirmation layout and email confirmation start-->
+
+    <TextView
+        android:id="@+id/txt_resend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="Kirim Ulang"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_check_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Silahkan check email untuk melanjutkan"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/email"
+        app:layout_constraintStart_toStartOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/email" />
+
+    <TextView
+        android:id="@+id/txt_confirmation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Yeay Email kamu sudah diverifikasi"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/img_logo_start"
+        app:layout_constraintStart_toStartOf="@+id/img_logo_start"
+        app:layout_constraintTop_toBottomOf="@+id/img_logo_start" />
+
+    <ImageView
+        android:id="@+id/img_logo_start"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="220dp"
+        android:src="@drawable/go_sky_logo"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        android:text="Mulai"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,11 +4,11 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class SearchTickets (
+data class SearchTickets(
     var category: String = "",
     var from: String = "",
     var to: String = "",
     var departureTime: String = "",
     var returnTime: String = "",
     var roundTrip: Boolean = false
-): Parcelable
+) : Parcelable

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_background_bottomsheet">
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_exit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"
+        android:text="Verifikasi Emailmu"
+        android:textColor="@color/bright_sky_blue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_close" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Isi dengan kode OTP yang dikirimkan ke:"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:text="muhammadfarroos12@gmail.com" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_otp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_email">
+
+        <EditText
+            android:id="@+id/et_otp_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_back"
+            android:inputType="number"
+            android:maxLength="1"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/et_otp_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_back"
+            android:inputType="number"
+            android:maxLength="1"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/et_otp_3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_back"
+            android:inputType="number"
+            android:maxLength="1"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/et_otp_4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_back"
+            android:inputType="number"
+            android:maxLength="1"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/et_otp_5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_back"
+            android:inputType="number"
+            android:maxLength="1"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/et_otp_6"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/round_back"
+            android:inputType="number"
+            android:maxLength="1"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_resend_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_verify">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kirimkan Kode OTP Baru "
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(48d)"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:visibility="visible"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_resend_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kirimkan Ulang"
+            android:textColor="#F44336"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_verify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/cerulean_blue"
+        android:text="Verify"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_otp"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
