@@ -36,4 +36,10 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
     fun getUserLoginStatus(): LiveData<Boolean> {
         return userRepository.getUserLoginStatus().asLiveData()
     }
+
+    fun setUserAccessToken(accessToken: String) {
+        viewModelScope.launch {
+            userRepository.setUserAccessToken(accessToken)
+        }
+    }
 }

@@ -51,6 +51,7 @@ class LoginFragment : Fragment() {
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), "${it.data?.status}: ${it.data?.message}", Toast.LENGTH_LONG).show()
                     Log.d("loginResponse", it.data.toString())
+                    it.data?.data?.accessToken?.let { accessToken -> viewModel.setUserAccessToken(accessToken) }
                     navigateToHome()
                 }
                 is Resource.Error -> {
@@ -67,7 +68,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToHome() {
-        viewModel.setUserLogin(true)
         findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
     }
 

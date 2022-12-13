@@ -1,4 +1,4 @@
-package com.binar.gosky.presentation.ui.home
+package com.binar.gosky.presentation.ui.account
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

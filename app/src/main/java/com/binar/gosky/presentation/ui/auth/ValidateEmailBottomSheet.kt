@@ -71,8 +71,11 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
                     if (it.data?.status.equals("success")) {
                         dismiss()
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
-                        findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
                         loginViewModel.setUserLogin(true)
+                        it.data?.data?.accessToken?.let { accessToken ->
+                            registerViewModel.setUserAccessToken(accessToken)
+                        }
+                        findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
                     }/* else if (it.data?.status.equals("error")) {
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                     }*/

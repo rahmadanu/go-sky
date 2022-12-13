@@ -8,16 +8,15 @@ import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestRespons
 import com.binar.gosky.data.network.model.auth.otp.OtpResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.data.repository.AuthRepository
+import com.binar.gosky.data.repository.UserRepository
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
-import retrofit2.http.Body
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(private val repository: AuthRepository) : ViewModel() {
+class RegisterViewModel @Inject constructor(private val authRepository: AuthRepository, private val userRepository: UserRepository) : ViewModel() {
 
     private var _otpResponse = MutableLiveData<Resource<OtpResponse>>()
     val otpResponse: LiveData<Resource<OtpResponse>> get() = _otpResponse
@@ -27,7 +26,7 @@ class RegisterViewModel @Inject constructor(private val repository: AuthReposito
 
     fun getOtp(email: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val otp = repository.getOtp(email)
+            val otp = authRepository.getOtp(email)
             viewModelScope.launch(Dispatchers.Main) {
                 _otpResponse.postValue(otp)
             }
@@ -36,10 +35,16 @@ class RegisterViewModel @Inject constructor(private val repository: AuthReposito
 
     fun postRegisterUser(registerRequestBody: RegisterRequestBody) {
         viewModelScope.launch(Dispatchers.IO) {
-            val registerResponse = repository.postRegisterUser(registerRequestBody)
+            val registerResponse = authRepository.postRegisterUser(registerRequestBody)
             viewModelScope.launch(Dispatchers.Main) {
                 _postRegisterUserResponse.postValue(registerResponse)
             }
+        }
+    }
+
+    fun setUserAccessToken(accessToken: String) {
+        viewModelScope.launch {
+            userRepository.setUserAccessToken(accessToken)
         }
     }
 }

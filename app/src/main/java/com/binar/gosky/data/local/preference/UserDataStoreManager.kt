@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -25,9 +26,22 @@ class UserDataStoreManager @Inject constructor(@ApplicationContext private val c
         }
     }
 
+    suspend fun setUserAccessToken(accessToken: String) {
+        context.userDataStore.edit { preferences ->
+            preferences[USER_ACCESS_TOKEN_KEY] = accessToken
+        }
+    }
+
+    fun getUserAccessToken(): Flow<String> {
+        return context.userDataStore.data.map { preferences ->
+            preferences[USER_ACCESS_TOKEN_KEY] ?: "null"
+        }
+    }
+
     companion object {
         private const val DATA_STORE_NAME = "user_preferences"
         private val LOGIN_STATUS_KEY = booleanPreferencesKey("login_status_key")
+        private val USER_ACCESS_TOKEN_KEY = stringPreferencesKey("user_access_token_key")
 
         val Context.userDataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
     }
