@@ -69,6 +69,11 @@
         <action
             android:id="@+id/action_accountFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/editProfileFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"

@@ -29,4 +29,16 @@ class AccountViewModel @Inject constructor(private val authRepository: AuthRepos
     fun getUserAccessToken(): LiveData<String> {
         return userRepository.getUserAccessToken().asLiveData()
     }
+
+    fun setUserAccessToken(accessToken: String) {
+        viewModelScope.launch {
+            userRepository.setUserAccessToken(accessToken)
+        }
+    }
+
+    fun setUserLogin(isLogin: Boolean) {
+        viewModelScope.launch {
+            userRepository.setUserLogin(isLogin)
+        }
+    }
 }

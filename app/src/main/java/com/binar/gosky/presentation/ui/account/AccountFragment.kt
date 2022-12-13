@@ -43,6 +43,11 @@ class AccountFragment : Fragment() {
             tvEditProfile.setOnClickListener {
                 findNavController().navigate(R.id.action_accountFragment_to_editProfileFragment)
             }
+            tvLogOut.setOnClickListener {
+                viewModel.setUserLogin(false)
+                viewModel.setUserAccessToken("null")
+                //findNavController().navigate(R.id.action_accountFragment_to_loginFragment)
+            }
         }
     }
 
