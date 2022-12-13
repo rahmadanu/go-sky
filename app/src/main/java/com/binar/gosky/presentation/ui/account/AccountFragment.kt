@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.user.CurrentUserData
 import com.binar.gosky.databinding.FragmentAccountBinding
@@ -34,6 +35,15 @@ class AccountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observeData()
+        setOnClickListener()
+    }
+
+    private fun setOnClickListener() {
+        binding.apply {
+            tvEditProfile.setOnClickListener {
+                findNavController().navigate(R.id.action_accountFragment_to_editProfileFragment)
+            }
+        }
     }
 
     private fun observeData() {

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.gosky.R
@@ -40,6 +41,19 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getArgumentsFromHome()
+        initList()
+        observeData()
+        setOnClickListener()
+    }
+
+    private fun setOnClickListener() {
+        binding.apply {
+            ivBack.setOnClickListener { findNavController().navigateUp() }
+        }
+    }
+
+    private fun getArgumentsFromHome() {
         args.searchTickets.let {
             binding.apply {
                 txtFlight.text = getString(R.string.from_to_to, it.from, it.to)
@@ -53,9 +67,6 @@ class SearchResultFragment : Fragment() {
             )
         }
         Log.d("args", args.searchTickets.toString())
-
-        initList()
-        observeData()
     }
 
     private fun initList() {
