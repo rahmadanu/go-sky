@@ -8,9 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
@@ -19,6 +22,8 @@ import com.binar.gosky.presentation.ui.account.AccountViewModel
 import com.binar.gosky.presentation.ui.home.HomeActivity
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -55,8 +60,8 @@ class LoginFragment : Fragment() {
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), "${it.data?.status}: ${it.data?.message}", Toast.LENGTH_LONG).show()
                     Log.d("loginResponse", it.data.toString())
-                    //it.data?.data?.accessToken?.let { accessToken -> loginViewModel.setUserAccessToken(accessToken) }
-                    it.data?.data?.accessToken?.let { accessToken -> accountViewModel.getCurrentUser("Bearer $accessToken") }
+                    it.data?.data?.accessToken?.let { accessToken -> loginViewModel.setUserAccessToken(accessToken) }
+                    //it.data?.data?.accessToken?.let { accessToken -> accountViewModel.getCurrentUser("Bearer $accessToken") }
                     navigateToHome()
                 }
                 is Resource.Error -> {
@@ -64,8 +69,7 @@ class LoginFragment : Fragment() {
                 else -> {}
             }
         }
-        loginViewModel.getUserLoginStatus().observe(viewLifecycleOwner) {
-            Log.d("getlogin", it.toString())
+        loginViewModel.loginStatus.observe(viewLifecycleOwner) {
             if (it) {
                 navigateToHome()
             }
@@ -73,7 +77,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToHome() {
-        val intent = Intent(requireContext(), HomeActivity::class.java)
+        loginViewModel.setUserLogin(true)
+
+        val intent = Intent(requireContext(), HomeActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        }
         startActivity(intent)
         activity?.finish()
     }

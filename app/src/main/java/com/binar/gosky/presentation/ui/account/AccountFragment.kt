@@ -47,7 +47,7 @@ class AccountFragment : Fragment() {
             }
             tvLogOut.setOnClickListener {
                 viewModel.setUserLogin(false)
-                viewModel.setUserAccessToken("")
+                //viewModel.setUserAccessToken("")
                 navigateToLogin()
             }
         }
@@ -60,10 +60,10 @@ class AccountFragment : Fragment() {
     }
 
     private fun observeData() {
-        /*viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+        viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
             viewModel.getCurrentUser("Bearer $it")
             Log.d("accessToken", it)
-        }*/
+        }
         viewModel.currentUserResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {

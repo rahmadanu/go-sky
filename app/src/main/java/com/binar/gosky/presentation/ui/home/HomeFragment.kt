@@ -76,7 +76,6 @@ class HomeFragment : Fragment() {
         departureTime = getTimeStamp(year, month, day)
         returnTime = getTimeStamp(year, month, day)
 
-        viewModel.setUserLogin(true)
     }
 
     private fun setOnClickListener() {

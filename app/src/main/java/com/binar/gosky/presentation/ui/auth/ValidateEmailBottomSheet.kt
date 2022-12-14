@@ -80,8 +80,8 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
                     }/* else if (it.data?.status.equals("error")) {
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                     }*/
-                    //it.data?.data?.accessToken?.let { accessToken -> loginViewModel.setUserAccessToken(accessToken) }
-                    it.data?.data?.accessToken?.let { accessToken -> accountViewModel.getCurrentUser("Bearer $accessToken") }
+                    it.data?.data?.accessToken?.let { accessToken -> loginViewModel.setUserAccessToken(accessToken) }
+                    //it.data?.data?.accessToken?.let { accessToken -> accountViewModel.getCurrentUser("Bearer $accessToken") }
                     Log.d("registerresponse", it.data?.data?.accessToken.toString())
                 }
                 else -> {}
