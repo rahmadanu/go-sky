@@ -352,6 +352,11 @@
                     app:cardUseCompatPadding="true"
                     app:contentPadding="16dp">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
                     <Switch
                         android:id="@+id/round_up_switch"
                         android:layout_width="match_parent"
@@ -361,12 +366,17 @@
                         android:textColor="#8a8a8a"
                         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="#e8e8e8" />
+
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:weightSum="100"
-                        android:paddingTop="26dp">
+                        android:weightSum="100">
 
 
                         <LinearLayout
@@ -386,7 +396,10 @@
                                 android:textColor="#000000"
                                 android:textStyle="bold" />
 
+
                         </LinearLayout>
+
+
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -402,6 +415,8 @@
                                 android:src="@drawable/ic_keyboard_arrow_right" />
 
                         </LinearLayout>
+                    </LinearLayout>
+
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -501,29 +516,27 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="90dp"
                 android:background="#fff"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/totalMoney_id"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_weight="1"
-                    android:text="$0.0"
-                    android:textColor="#fd6737"
-                    android:textSize="25sp" />
+
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_weight="1"
+                        android:text="IDR 1.610.580"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -534,15 +547,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:src="@drawable/ic_notifications" />
+                        android:src="@drawable/ic_keyboard_arrow_right" />
 
-                    <Button
-                        android:id="@+id/pay_btn_id"
-                        android:layout_width="100dp"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="10dp"
-                        android:text="Pesan" />
+
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/pay_btn_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Lanjutkan" />
+
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
