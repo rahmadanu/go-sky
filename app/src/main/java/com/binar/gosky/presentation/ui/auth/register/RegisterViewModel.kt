@@ -41,10 +41,4 @@ class RegisterViewModel @Inject constructor(private val authRepository: AuthRepo
             }
         }
     }
-
-    fun setUserAccessToken(accessToken: String) {
-        viewModelScope.launch {
-            userRepository.setUserAccessToken(accessToken)
-        }
-    }
 }

@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.databinding.FragmentValidateEmailBottomSheetBinding
+import com.binar.gosky.presentation.ui.account.AccountViewModel
 import com.binar.gosky.presentation.ui.auth.login.LoginViewModel
 import com.binar.gosky.presentation.ui.auth.register.RegisterViewModel
 import com.binar.gosky.wrapper.Resource
@@ -30,6 +31,7 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
 
     private val registerViewModel: RegisterViewModel by viewModels()
     private val loginViewModel: LoginViewModel by viewModels()
+    private val accountViewModel: AccountViewModel by viewModels()
 
     private var otp = ""
     private var otpToken = ""
@@ -72,14 +74,13 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
                         dismiss()
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                         loginViewModel.setUserLogin(true)
-                        it.data?.data?.accessToken?.let { accessToken ->
-                            registerViewModel.setUserAccessToken(accessToken)
-                        }
                         findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
                     }/* else if (it.data?.status.equals("error")) {
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                     }*/
-                    Log.d("registerresponse", it.data?.message.toString())
+                    //it.data?.data?.accessToken?.let { accessToken -> loginViewModel.setUserAccessToken(accessToken) }
+                    it.data?.data?.accessToken?.let { accessToken -> accountViewModel.getCurrentUser("Bearer $accessToken") }
+                    Log.d("registerresponse", it.data?.data?.accessToken.toString())
                 }
                 else -> {}
             }

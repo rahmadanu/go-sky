@@ -45,21 +45,23 @@ class AccountFragment : Fragment() {
             }
             tvLogOut.setOnClickListener {
                 viewModel.setUserLogin(false)
-                viewModel.setUserAccessToken("null")
-                //findNavController().navigate(R.id.action_accountFragment_to_loginFragment)
+                viewModel.setUserAccessToken("")
+                findNavController().navigate(R.id.action_accountFragment_to_loginFragment)
             }
         }
     }
 
     private fun observeData() {
-        viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+        /*viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
             viewModel.getCurrentUser("Bearer $it")
             Log.d("accessToken", it)
-        }
+        }*/
         viewModel.currentUserResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
-                    it.payload?.data?.let { currentUserData -> bindDataIntoForm(currentUserData) }
+                    it.payload?.data?.let { currentUserData -> bindDataIntoForm(currentUserData)
+                        Log.d("currentUserData", currentUserData.toString())
+                    }
                 }
                 else -> {}
             }
