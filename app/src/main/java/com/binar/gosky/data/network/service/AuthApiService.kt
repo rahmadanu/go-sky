@@ -37,14 +37,4 @@ interface AuthApiService {
         @Body loginRequestBody: LoginRequestBody
     ): LoginRegisterRequestResponse
 
-    @PUT(ApiEndPoints.PUT_USER_DATA)
-    suspend fun putUserData(
-        @Header("Authorization: Bearer ") accessToken: String,
-        @Body userRequestBody: UserRequestBody
-    )
-
-    @PUT(ApiEndPoints.PUT_USER_EMAIL)
-    suspend fun putUserEmail(
-        @Header("Authorization: Bearer ") accessToken: String,
-    )
 }

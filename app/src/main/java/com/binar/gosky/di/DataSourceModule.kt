@@ -2,10 +2,7 @@ package com.binar.gosky.di
 
 import com.binar.gosky.data.local.datasource.UserLocalDataSource
 import com.binar.gosky.data.local.datasource.UserLocalDataSourceImpl
-import com.binar.gosky.data.network.datasource.AuthRemoteDataSource
-import com.binar.gosky.data.network.datasource.AuthRemoteDataSourceImpl
-import com.binar.gosky.data.network.datasource.TicketsRemoteDataSource
-import com.binar.gosky.data.network.datasource.TicketsRemoteDataSourceImpl
+import com.binar.gosky.data.network.datasource.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -23,4 +20,7 @@ abstract class DataSourceModule {
 
     @Binds
     abstract fun provideUserLocalDataSource(userLocalDataSourceImpl: UserLocalDataSourceImpl): UserLocalDataSource
+
+    @Binds
+    abstract fun provideUserRemoteDataSource(userRemoteDataSourceImpl: UserRemoteDataSourceImpl): UserRemoteDataSource
 }

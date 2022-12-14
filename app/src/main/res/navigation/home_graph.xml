@@ -48,5 +48,13 @@
         <argument
             android:name="userData"
             app:argType="com.binar.gosky.data.network.model.users.UserRequestBody" />
+        <argument
+            android:name="accessToken"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/editProfileFragment"/>
     </fragment>
 </navigation>

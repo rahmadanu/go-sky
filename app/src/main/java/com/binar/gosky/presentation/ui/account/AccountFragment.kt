@@ -26,6 +26,7 @@ class AccountFragment : Fragment() {
     private val viewModel: AccountViewModel by viewModels()
 
     lateinit var userData: UserRequestBody
+    lateinit var accessToken: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +47,7 @@ class AccountFragment : Fragment() {
     private fun setOnClickListener() {
         binding.apply {
             tvEditProfile.setOnClickListener {
-                val action = AccountFragmentDirections.actionAccountFragmentToEditProfileFragment(userData)
+                val action = AccountFragmentDirections.actionAccountFragmentToEditProfileFragment(userData, accessToken)
                 findNavController().navigate(action)
             }
             tvLogOut.setOnClickListener {
@@ -66,6 +67,7 @@ class AccountFragment : Fragment() {
     private fun observeData() {
         viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
             viewModel.getCurrentUser("Bearer $it")
+            accessToken = it
             Log.d("accessToken", it)
         }
         viewModel.currentUserResponse.observe(viewLifecycleOwner) {

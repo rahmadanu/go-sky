@@ -2,6 +2,7 @@ package com.binar.gosky.presentation.ui.account
 
 import androidx.lifecycle.*
 import com.binar.gosky.data.network.model.auth.user.CurrentUserResponse
+import com.binar.gosky.data.network.model.users.UserRequestBody
 import com.binar.gosky.data.repository.AuthRepository
 import com.binar.gosky.data.repository.UserRepository
 import com.binar.gosky.wrapper.Resource
@@ -41,4 +42,11 @@ class AccountViewModel @Inject constructor(private val authRepository: AuthRepos
             userRepository.setUserLogin(isLogin)
         }
     }
+
+    fun putUserData(accessToken: String, userRequestBody: UserRequestBody) {
+        viewModelScope.launch {
+            userRepository.putUserData(accessToken, userRequestBody)
+        }
+    }
+
 }
