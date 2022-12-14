@@ -1,5 +1,6 @@
 package com.binar.gosky.presentation.ui.auth.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -15,6 +16,7 @@ import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.databinding.FragmentLoginBinding
 import com.binar.gosky.presentation.ui.account.AccountViewModel
+import com.binar.gosky.presentation.ui.home.HomeActivity
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -71,7 +73,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToHome() {
-        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        val intent = Intent(requireContext(), HomeActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
     }
 
 

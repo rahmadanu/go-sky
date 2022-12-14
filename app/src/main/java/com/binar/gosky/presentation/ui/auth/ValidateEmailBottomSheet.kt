@@ -1,5 +1,6 @@
 package com.binar.gosky.presentation.ui.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
@@ -20,6 +21,7 @@ import com.binar.gosky.databinding.FragmentValidateEmailBottomSheetBinding
 import com.binar.gosky.presentation.ui.account.AccountViewModel
 import com.binar.gosky.presentation.ui.auth.login.LoginViewModel
 import com.binar.gosky.presentation.ui.auth.register.RegisterViewModel
+import com.binar.gosky.presentation.ui.home.HomeActivity
 import com.binar.gosky.wrapper.Resource
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,7 +76,7 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
                         dismiss()
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                         loginViewModel.setUserLogin(true)
-                        findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+                        navigateToHome()
                     }/* else if (it.data?.status.equals("error")) {
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                     }*/
@@ -119,6 +121,12 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
         binding.tvEmail.text = email
         registerViewModel.getOtp(email)
         setUpTimer()
+    }
+
+    private fun navigateToHome() {
+        val intent = Intent(requireContext(), HomeActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
     }
 
     private fun setUpTimer() {

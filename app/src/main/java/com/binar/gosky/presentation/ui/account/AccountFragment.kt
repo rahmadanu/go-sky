@@ -1,5 +1,6 @@
 package com.binar.gosky.presentation.ui.account
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.user.CurrentUserData
 import com.binar.gosky.databinding.FragmentAccountBinding
+import com.binar.gosky.presentation.ui.auth.login.LoginActivity
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,9 +48,15 @@ class AccountFragment : Fragment() {
             tvLogOut.setOnClickListener {
                 viewModel.setUserLogin(false)
                 viewModel.setUserAccessToken("")
-                findNavController().navigate(R.id.action_accountFragment_to_loginFragment)
+                navigateToLogin()
             }
         }
+    }
+
+    private fun navigateToLogin() {
+        val intent = Intent(requireContext(), LoginActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
     }
 
     private fun observeData() {
