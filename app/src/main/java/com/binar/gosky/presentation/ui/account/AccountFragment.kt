@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.user.CurrentUserData
+import com.binar.gosky.data.network.model.users.UserRequestBody
 import com.binar.gosky.databinding.FragmentAccountBinding
 import com.binar.gosky.presentation.ui.auth.login.LoginActivity
 import com.binar.gosky.wrapper.Resource
@@ -23,6 +24,8 @@ class AccountFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: AccountViewModel by viewModels()
+
+    lateinit var userData: UserRequestBody
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +46,8 @@ class AccountFragment : Fragment() {
     private fun setOnClickListener() {
         binding.apply {
             tvEditProfile.setOnClickListener {
-                findNavController().navigate(R.id.action_accountFragment_to_editProfileFragment)
+                val action = AccountFragmentDirections.actionAccountFragmentToEditProfileFragment(userData)
+                findNavController().navigate(action)
             }
             tvLogOut.setOnClickListener {
                 viewModel.setUserLogin(false)
@@ -69,6 +73,13 @@ class AccountFragment : Fragment() {
                 is Resource.Success -> {
                     it.payload?.data?.let { currentUserData -> bindDataIntoForm(currentUserData)
                         Log.d("currentUserData", currentUserData.toString())
+                        userData = UserRequestBody(
+                            address = currentUserData.address,
+                            imageId = currentUserData.imageId,
+                            imageUrl = currentUserData.imageUrl,
+                            name = currentUserData.name,
+                            phone = currentUserData.phone
+                        )
                     }
                 }
                 else -> {}

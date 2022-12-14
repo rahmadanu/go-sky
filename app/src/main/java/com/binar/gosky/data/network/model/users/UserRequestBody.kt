@@ -1,8 +1,11 @@
 package com.binar.gosky.data.network.model.users
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class UserRequestBody(
     @SerializedName("address")
     val address: String? = null,
@@ -14,4 +17,4 @@ data class UserRequestBody(
     val name: String? = null,
     @SerializedName("phone")
     val phone: String? = null
-)
+): Parcelable

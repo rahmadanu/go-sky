@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_background"
+    android:background="@color/tropical_blue"
     tools:context=".presentation.ui.account.EditProfileFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -48,7 +48,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/iv_back"
                     app:layout_constraintStart_toEndOf="@id/iv_back"
                     app:layout_constraintTop_toTopOf="@id/iv_back"
-                    tools:text="Detail Akun" />
+                    android:text="Detail Akun" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.MaterialToolbar>
@@ -92,7 +92,7 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/username"
+                        android:id="@+id/til_name"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="40dp"
-                        android:hint="Username"
+                        android:hint="Name"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -110,7 +110,7 @@
                         app:layout_constraintTop_toBottomOf="@id/img_place_holder">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_username"
+                            android:id="@+id/et_name"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawablePadding="16dp"
@@ -135,10 +135,10 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/username">
+                        app:layout_constraintTop_toBottomOf="@id/til_name">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_address"
+                            android:id="@+id/et_address"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawablePadding="16dp"
@@ -202,7 +202,7 @@
                         app:layout_constraintTop_toBottomOf="@id/txt_email_info">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_email"
+                            android:id="@+id/et_email"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawablePadding="16dp"
@@ -230,7 +230,7 @@
                         app:layout_constraintTop_toBottomOf="@id/email">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_phone_no"
+                            android:id="@+id/et_phone_no"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawablePadding="16dp"

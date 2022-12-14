@@ -44,5 +44,9 @@
         android:id="@+id/editProfileFragment"
         android:name="com.binar.gosky.presentation.ui.account.EditProfileFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="userData"
+            app:argType="com.binar.gosky.data.network.model.users.UserRequestBody" />
+    </fragment>
 </navigation>
