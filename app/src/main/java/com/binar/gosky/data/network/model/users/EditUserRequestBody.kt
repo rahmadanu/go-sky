@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UserRequestBody(
+data class EditUserRequestBody(
     @SerializedName("address")
     val address: String? = null,
     @SerializedName("imageId")

@@ -17,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
+import com.binar.gosky.data.network.model.users.EditEmailUserRequestBody
 import com.binar.gosky.databinding.FragmentValidateEmailBottomSheetBinding
 import com.binar.gosky.presentation.ui.account.AccountViewModel
 import com.binar.gosky.presentation.ui.auth.login.LoginViewModel
@@ -27,7 +28,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ValidateEmailBottomSheet(private val name: String = "", private val password: String = "", private val email: String = "") : BottomSheetDialogFragment() {
+class ValidateEmailBottomSheet(
+    private val name: String = "",
+    private val password: String = "",
+    private val email: String = "",
+    private val isRegistered: Boolean = false,
+    private val accessToken: String = ""
+) : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentValidateEmailBottomSheetBinding
 
@@ -43,7 +50,7 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentValidateEmailBottomSheetBinding.inflate(inflater, container,false)
+        binding = FragmentValidateEmailBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -80,18 +87,31 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
                     }/* else if (it.data?.status.equals("error")) {
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                     }*/
-                    it.data?.data?.accessToken?.let { accessToken -> loginViewModel.setUserAccessToken(accessToken) }
+                    it.data?.data?.accessToken?.let { accessToken ->
+                        loginViewModel.setUserAccessToken(
+                            accessToken
+                        )
+                    }
                     //it.data?.data?.accessToken?.let { accessToken -> accountViewModel.getCurrentUser("Bearer $accessToken") }
                     Log.d("registerresponse", it.data?.data?.accessToken.toString())
                 }
                 else -> {}
             }
         }
+        accountViewModel.editEmailUserResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    dismiss()
+                    navigateToAccount()
+                    Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
+                }
+                else -> {}
+            }
+        }
     }
 
-    private fun registerUser(name: String, otp: String, otpToken: String, password: String) {
-        registerViewModel.postRegisterUser(RegisterRequestBody(name, otp, otpToken, password))
-        Log.d("register", RegisterRequestBody(name, otp, otpToken, password).toString())
+    private fun navigateToAccount() {
+        findNavController().navigate(R.id.action_editProfileFragment_to_accountFragment)
     }
 
     private fun setOnClickListener() {
@@ -112,9 +132,24 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
 
                 otp = "$otp1$otp2$otp3$otp4$otp5$otp6"
                 Log.d("otp", otp)
-                registerUser(name, otp, otpToken, password)
+
+                if (isRegistered) {
+                    updateEmailUser("Bearer $accessToken", otp, otpToken)
+                } else {
+                    registerUser(name, otp, otpToken, password)
+                }
             }
         }
+    }
+
+    private fun registerUser(name: String, otp: String, otpToken: String, password: String) {
+        registerViewModel.postRegisterUser(RegisterRequestBody(name, otp, otpToken, password))
+        Log.d("register", RegisterRequestBody(name, otp, otpToken, password).toString())
+    }
+
+    private fun updateEmailUser(accessToken: String, otp: String, otpToken: String) {
+        accountViewModel.putUserEmail(accessToken, EditEmailUserRequestBody(otp, otpToken))
+        Log.d("updateEmail", EditEmailUserRequestBody(otp, otpToken).toString())
     }
 
     private fun initView() {
@@ -169,9 +204,12 @@ class ValidateEmailBottomSheet(private val name: String = "", private val passwo
     }
 }
 
-class GenericKeyEvent internal constructor(private val currentView: EditText, private val previousView: EditText?) : View.OnKeyListener{
+class GenericKeyEvent internal constructor(
+    private val currentView: EditText,
+    private val previousView: EditText?
+) : View.OnKeyListener {
     override fun onKey(p0: View?, keyCode: Int, event: KeyEvent?): Boolean {
-        if(event!!.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL && currentView.id != R.id.et_otp_1 && currentView.text.isEmpty()) {
+        if (event!!.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL && currentView.id != R.id.et_otp_1 && currentView.text.isEmpty()) {
             //If current is empty then previous EditText's number will also be deleted
             previousView!!.text = null
             previousView.requestFocus()
@@ -183,7 +221,10 @@ class GenericKeyEvent internal constructor(private val currentView: EditText, pr
 
 }
 
-class GenericTextWatcher internal constructor(private val currentView: View, private val nextView: View?) :
+class GenericTextWatcher internal constructor(
+    private val currentView: View,
+    private val nextView: View?
+) :
     TextWatcher {
     override fun afterTextChanged(editable: Editable) { // TODO Auto-generated method stub
         val text = editable.toString()

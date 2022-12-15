@@ -9,9 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.user.CurrentUserData
-import com.binar.gosky.data.network.model.users.UserRequestBody
+import com.binar.gosky.data.network.model.users.EditUserRequestBody
 import com.binar.gosky.databinding.FragmentAccountBinding
 import com.binar.gosky.presentation.ui.auth.login.LoginActivity
 import com.binar.gosky.wrapper.Resource
@@ -25,8 +24,9 @@ class AccountFragment : Fragment() {
 
     private val viewModel: AccountViewModel by viewModels()
 
-    lateinit var userData: UserRequestBody
+    lateinit var userData: EditUserRequestBody
     lateinit var accessToken: String
+    lateinit var email: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,8 +47,7 @@ class AccountFragment : Fragment() {
     private fun setOnClickListener() {
         binding.apply {
             tvEditProfile.setOnClickListener {
-                val action = AccountFragmentDirections.actionAccountFragmentToEditProfileFragment(userData, accessToken)
-                findNavController().navigate(action)
+                navigateToEditProfile()
             }
             tvLogOut.setOnClickListener {
                 viewModel.setUserLogin(false)
@@ -56,6 +55,11 @@ class AccountFragment : Fragment() {
                 navigateToLogin()
             }
         }
+    }
+
+    private fun navigateToEditProfile() {
+        val action = AccountFragmentDirections.actionAccountFragmentToEditProfileFragment(userData, accessToken, email)
+        findNavController().navigate(action)
     }
 
     private fun navigateToLogin() {
@@ -75,13 +79,14 @@ class AccountFragment : Fragment() {
                 is Resource.Success -> {
                     it.payload?.data?.let { currentUserData -> bindDataIntoForm(currentUserData)
                         Log.d("currentUserData", currentUserData.toString())
-                        userData = UserRequestBody(
+                        userData = EditUserRequestBody(
                             address = currentUserData.address,
                             imageId = currentUserData.imageId,
                             imageUrl = currentUserData.imageUrl,
                             name = currentUserData.name,
                             phone = currentUserData.phone
                         )
+                        email = currentUserData.email.toString()
                     }
                 }
                 else -> {}

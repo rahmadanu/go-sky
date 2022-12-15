@@ -47,7 +47,7 @@
         tools:layout="@layout/fragment_edit_profile" >
         <argument
             android:name="userData"
-            app:argType="com.binar.gosky.data.network.model.users.UserRequestBody" />
+            app:argType="com.binar.gosky.data.network.model.users.EditUserRequestBody" />
         <argument
             android:name="accessToken"
             app:argType="string" />
@@ -56,5 +56,8 @@
             app:destination="@id/accountFragment"
             app:popUpToInclusive="true"
             app:popUpTo="@id/editProfileFragment"/>
+        <argument
+            android:name="email"
+            app:argType="string" />
     </fragment>
 </navigation>
