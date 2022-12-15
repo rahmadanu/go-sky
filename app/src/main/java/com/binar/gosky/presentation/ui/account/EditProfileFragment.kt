@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.binar.gosky.R
 import com.binar.gosky.data.network.model.users.EditUserRequestBody
 import com.binar.gosky.databinding.FragmentEditProfileBinding
 import com.binar.gosky.presentation.ui.auth.ValidateEmailBottomSheet
@@ -65,10 +66,11 @@ class EditProfileFragment : Fragment() {
         binding.btnSave.setOnClickListener {
             if (emailChanged()) {
                 showValidateEmailDialog()
+                viewModel.putUserData("Bearer ${editProfileArgs.accessToken}", parseFormIntoEntity())
+            } else {
+                viewModel.putUserData("Bearer ${editProfileArgs.accessToken}", parseFormIntoEntity())
+                findNavController().navigate(R.id.action_editProfileFragment_to_accountFragment)
             }
-            viewModel.putUserData("Bearer ${editProfileArgs.accessToken}", parseFormIntoEntity())
-            //findNavController().navigate(R.id.action_editProfileFragment_to_accountFragment)
-            //navigate from validate email bottom sheet
         }
     }
 
