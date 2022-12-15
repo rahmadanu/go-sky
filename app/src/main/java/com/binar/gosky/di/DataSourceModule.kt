@@ -3,6 +3,7 @@ package com.binar.gosky.di
 import com.binar.gosky.data.network.datasource.TicketsRemoteDataSource
 import com.binar.gosky.data.network.datasource.TicketsRemoteDataSourceImpl
 import com.binar.gosky.data.network.datasource.TransactionsRemoteDataSource
+import com.binar.gosky.data.network.datasource.TransactionsRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,5 +17,5 @@ abstract class DataSourceModule {
     abstract fun provideTicketsRemoteDataSource(ticketsRemoteDataSourceImpl: TicketsRemoteDataSourceImpl): TicketsRemoteDataSource
 
     @Binds
-    abstract fun provideTransactionsRemoteDataSource(transactionsRemoteDataSourceImpl: TicketsRemoteDataSourceImpl): TransactionsRemoteDataSource
+    abstract fun provideTransactionsRemoteDataSource(transactionsRemoteDataSourceImpl: TransactionsRemoteDataSourceImpl): TransactionsRemoteDataSource
 }

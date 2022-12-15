@@ -18,7 +18,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="16dp">
 
             <ImageView
@@ -80,7 +80,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
-                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_depart"
                 tools:text="14:50" />
@@ -90,7 +89,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_departure_time"
                 tools:text="14:50" />
@@ -108,12 +106,12 @@
                 android:id="@+id/tv_to"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_arrival_time"
+                app:layout_constraintTop_toTopOf="@+id/tv_from"
                 tools:text="BATAM (BTH)" />
 
             <ImageView
+                android:id="@+id/iv_arrow_departure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_keyboard_arrow_right"
@@ -121,6 +119,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_departure_time" />
 
+            <TextView
+                android:id="@+id/tv_duration_departure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/iv_arrow_departure"
+                app:layout_constraintStart_toStartOf="@id/iv_arrow_departure"
+                app:layout_constraintEnd_toEndOf="@id/iv_arrow_departure"
+                tools:text="1j 12m" />
             <!--return section-->
 
             <TextView
@@ -136,12 +142,11 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_from" />
 
             <TextView
-                android:id="@+id/tv_departure_time_return"
+                android:id="@+id/tv_return_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
-                android:textSize="20sp"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_return"
@@ -152,10 +157,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="20sp"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_departure_time_return"
+                app:layout_constraintTop_toTopOf="@id/tv_return_time"
                 tools:text="14:50" />
 
             <TextView
@@ -165,27 +169,37 @@
                 android:layout_marginTop="4dp"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_departure_time_return"
+                app:layout_constraintTop_toBottomOf="@+id/tv_return_time"
                 tools:text="BATAM (BTH)" />
 
             <TextView
                 android:id="@+id/tv_to_return"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_arrival_time_return"
+                app:layout_constraintTop_toTopOf="@+id/tv_from_return"
                 tools:text="JAKARTA (CGK)" />
 
             <ImageView
+                android:id="@+id/iv_arrow_return"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_keyboard_arrow_right"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_departure_time_return" />
+                app:layout_constraintTop_toTopOf="@id/tv_return_time" />
+
+            <TextView
+                android:id="@+id/tv_duration_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/iv_arrow_return"
+                app:layout_constraintStart_toStartOf="@id/iv_arrow_return"
+                app:layout_constraintEnd_toEndOf="@id/iv_arrow_return"
+                tools:text="1j 12m" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

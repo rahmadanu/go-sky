@@ -37,5 +37,7 @@ data class TicketsItem(
     @SerializedName("updatedBy")
     val updatedBy: Int? = null,
     @SerializedName("wishlisted")
-    val wishlisted: Boolean? = null
+    val wishlisted: Boolean? = null,
+    @SerializedName("duration")
+    val duration: Long? = null
 )

@@ -1,8 +1,11 @@
 package com.binar.gosky.presentation.ui.search.adapter
 
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +16,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import java.text.NumberFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.Duration
 import java.util.*
 
 class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {
@@ -37,6 +41,7 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : Recycl
         return SearchResultViewHolder(binding, itemClick)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
         holder.bind(differ.currentList[position])
     }
@@ -45,6 +50,7 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : Recycl
 
     inner class SearchResultViewHolder(private val binding: ItemTripBinding, private val itemClick: (TicketsItem) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(item: TicketsItem) {
             with(binding) {
                 with(item) {
@@ -56,6 +62,20 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : Recycl
                     tvTo.text = to
                     tvTicketPrice.text = convertRupiah(price)
                     tvDepartureTime.text = convertISOtoDate(departureTime)
+                    tvDurationDeparture.text = duration?.let { convertMinutesToHourAndMinutes(it) }
+                    tvDurationReturn.text = duration?.let { convertMinutesToHourAndMinutes(it) }
+                    Log.d("duration", duration.toString())
+                    if (returnTime.isNullOrEmpty()) {
+                        txtReturn.isVisible = false
+                        tvReturnTime.isVisible = false
+                        ivArrowReturn.isVisible = false
+                        tvArrivalTimeReturn.isVisible = false
+                        tvDurationReturn.isVisible = false
+                    } else {
+                        tvReturnTime.text = convertISOtoDate(returnTime)
+                        tvFromReturn.text = to
+                        tvToReturn.text = from
+                    }
 
                     itemView.setOnClickListener {
                         itemClick(this)
@@ -63,6 +83,15 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : Recycl
                 }
             }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun convertMinutesToHourAndMinutes(duration: Long): String {
+        val durationTime = Duration.ofMinutes(duration)
+        val hours = durationTime.toHours()
+        val minutes = durationTime.minusHours(hours).toMinutes()
+
+        return "${hours}h ${minutes}m"
     }
 
     fun convertRupiah(intPrice: Int?): String {
