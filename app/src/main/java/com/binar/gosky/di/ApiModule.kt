@@ -3,6 +3,7 @@ package com.binar.gosky.di
 import android.content.Context
 import com.binar.gosky.BuildConfig
 import com.binar.gosky.data.network.service.TicketsApiService
+import com.binar.gosky.data.network.service.TransactionsApiService
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
 import dagger.Provides
@@ -49,7 +50,13 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): TicketsApiService {
+    fun provideTicketsApiService(retrofit: Retrofit): TicketsApiService {
         return retrofit.create(TicketsApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTransactionsApiService(retrofit: Retrofit): TransactionsApiService {
+        return retrofit.create(TransactionsApiService::class.java)
     }
 }
