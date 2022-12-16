@@ -58,6 +58,16 @@
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/pb_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/app_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -106,8 +116,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Detail"
-                                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                    android:textSize="18sp" />
+                                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
 
                                 <View
@@ -557,7 +566,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Description"
                                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                    android:textSize="18sp" />
+                                    />
 
 
                                 <View
@@ -608,8 +617,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Amount"
-                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                android:textSize="16dp" />
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
 
                             <View

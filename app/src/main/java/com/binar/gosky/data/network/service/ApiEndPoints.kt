@@ -19,4 +19,5 @@ object ApiEndPoints {
     // Users
     const val PUT_USER_DATA = "users"
     const val PUT_USER_EMAIL = "users/email"
+    const val GET_USER_BY_ID = "users/{id}"
 }

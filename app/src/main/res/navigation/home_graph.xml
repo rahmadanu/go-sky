@@ -50,7 +50,7 @@
         tools:layout="@layout/fragment_edit_profile" >
         <argument
             android:name="userData"
-            app:argType="com.binar.gosky.data.network.model.users.EditUserRequestBody" />
+            app:argType="com.binar.gosky.data.network.model.users.edit.EditUserRequestBody" />
         <argument
             android:name="accessToken"
             app:argType="string" />
@@ -79,5 +79,21 @@
         android:id="@+id/detailTicketFragment"
         android:name="com.binar.gosky.presentation.ui.booking.DetailTicketFragment"
         android:label="fragment_detail_ticket"
-        tools:layout="@layout/fragment_detail_ticket" />
+        tools:layout="@layout/fragment_detail_ticket" >
+        <argument
+            android:name="ticketDetail"
+            app:argType="com.binar.gosky.data.network.model.tickets.TicketsItem" />
+        <argument
+            android:name="newTransactionData"
+            app:argType="com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionData" />
+        <action
+            android:id="@+id/action_detailTicketFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="totalPrice"
+            app:argType="integer" />
+        <argument
+            android:name="userByIdData"
+            app:argType="com.binar.gosky.data.network.model.users.data.UserByIdData" />
+    </fragment>
 </navigation>

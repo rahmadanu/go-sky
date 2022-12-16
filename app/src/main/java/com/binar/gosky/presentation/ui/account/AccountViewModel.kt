@@ -2,9 +2,9 @@ package com.binar.gosky.presentation.ui.account
 
 import androidx.lifecycle.*
 import com.binar.gosky.data.network.model.auth.user.CurrentUserResponse
-import com.binar.gosky.data.network.model.users.EditEmailUserRequestBody
-import com.binar.gosky.data.network.model.users.EditEmailUserResponse
-import com.binar.gosky.data.network.model.users.EditUserRequestBody
+import com.binar.gosky.data.network.model.users.edit.EditEmailUserRequestBody
+import com.binar.gosky.data.network.model.users.edit.EditEmailUserResponse
+import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
 import com.binar.gosky.data.repository.AuthRepository
 import com.binar.gosky.data.repository.UserRepository
 import com.binar.gosky.wrapper.Resource

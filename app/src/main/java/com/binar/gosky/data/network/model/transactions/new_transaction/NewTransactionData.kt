@@ -1,8 +1,11 @@
 package com.binar.gosky.data.network.model.transactions.new_transaction
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class NewTransactionData(
     @SerializedName("amount")
     val amount: Int? = null,
@@ -20,4 +23,4 @@ data class NewTransactionData(
     val updatedAt: String? = null,
     @SerializedName("userId")
     val userId: Int? = null
-)
+): Parcelable

@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.binar.gosky.R
-import com.binar.gosky.data.network.model.users.EditUserRequestBody
+import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
 import com.binar.gosky.databinding.FragmentEditProfileBinding
 import com.binar.gosky.presentation.ui.auth.ValidateEmailBottomSheet
 import dagger.hilt.android.AndroidEntryPoint

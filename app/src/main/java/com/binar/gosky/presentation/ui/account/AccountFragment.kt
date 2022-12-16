@@ -3,14 +3,14 @@ package com.binar.gosky.presentation.ui.account
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.binar.gosky.data.network.model.auth.user.CurrentUserData
-import com.binar.gosky.data.network.model.users.EditUserRequestBody
+import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
 import com.binar.gosky.databinding.FragmentAccountBinding
 import com.binar.gosky.presentation.ui.auth.login.LoginActivity
 import com.binar.gosky.wrapper.Resource

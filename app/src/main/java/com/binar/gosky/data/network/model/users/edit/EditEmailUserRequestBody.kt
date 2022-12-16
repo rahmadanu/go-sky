@@ -1,4 +1,4 @@
-package com.binar.gosky.data.network.model.users
+package com.binar.gosky.data.network.model.users.edit
 
 
 import com.google.gson.annotations.SerializedName
