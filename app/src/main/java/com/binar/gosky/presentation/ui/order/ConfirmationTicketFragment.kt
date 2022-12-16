@@ -55,6 +55,9 @@ class ConfirmationTicketFragment : Fragment() {
             ivBack.setOnClickListener { findNavController().navigateUp() }
             ibMinus.setOnClickListener { minAmount() }
             ibPlus.setOnClickListener { plusAmount() }
+            btnOrder.setOnClickListener {
+                findNavController().navigate(R.id.action_confirmationTicketFragment_to_detailTicketFragment)
+            }
         }
     }
 

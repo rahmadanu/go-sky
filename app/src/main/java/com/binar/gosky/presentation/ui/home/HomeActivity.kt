@@ -42,7 +42,8 @@ class HomeActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.searchResultFragment -> hideBottomNav(true)
-                R.id.konfirmasiTiketFragment -> hideBottomNav(true)
+                R.id.confirmationTicketFragment -> hideBottomNav(true)
+                R.id.detailTicketFragment -> hideBottomNav(true)
                 else -> hideBottomNav(false)
             }
         }

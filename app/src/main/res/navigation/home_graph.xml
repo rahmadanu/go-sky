@@ -28,15 +28,23 @@
             app:argType="com.binar.gosky.data.network.model.tickets.SearchTickets" />
         <action
             android:id="@+id/action_searchResultFragment_to_konfirmasiTiketFragment"
-            app:destination="@id/konfirmasiTiketFragment" />
+            app:destination="@id/confirmationTicketFragment" />
     </fragment>
     <fragment
-        android:id="@+id/konfirmasiTiketFragment"
+        android:id="@+id/confirmationTicketFragment"
         android:name="com.binar.gosky.presentation.ui.order.ConfirmationTicketFragment"
-        android:label="fragment_konfirmasi_tiket"
+        android:label="fragment_confirmation_ticket"
         tools:layout="@layout/fragment_confirmation_ticket" >
         <argument
             android:name="ticketsItem"
             app:argType="com.binar.gosky.data.network.model.tickets.TicketsItem" />
+        <action
+            android:id="@+id/action_confirmationTicketFragment_to_detailTicketFragment"
+            app:destination="@id/detailTicketFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/detailTicketFragment"
+        android:name="com.binar.gosky.presentation.ui.order.DetailTicketFragment"
+        android:label="fragment_detail_ticket"
+        tools:layout="@layout/fragment_detail_ticket" />
 </navigation>

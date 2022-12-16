@@ -689,7 +689,7 @@
                 android:textSize="16sp" />
 
             <Button
-                android:id="@+id/pay_btn_id"
+                android:id="@+id/btn_order"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
