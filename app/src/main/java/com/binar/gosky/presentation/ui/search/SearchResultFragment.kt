@@ -85,10 +85,12 @@ class SearchResultFragment : Fragment() {
                     adapter.submitList(it.payload)
                     binding.pbLoading.visibility = View.GONE
                     binding.tvNoFlights.visibility = View.GONE
+                    binding.rcvTrip.visibility = View.VISIBLE
                 }
                 is Resource.Loading -> {
                     binding.pbLoading.visibility = View.VISIBLE
                     binding.tvNoFlights.visibility = View.GONE
+                    binding.rcvTrip.visibility = View.GONE
                 }
                 is Resource.Error -> {}
                 is Resource.Empty -> {
