@@ -4,4 +4,5 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-open class GoSkyApp: Application()
+open class GoSkyApp: Application() {
+}

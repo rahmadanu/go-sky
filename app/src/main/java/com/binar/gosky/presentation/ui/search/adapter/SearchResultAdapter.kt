@@ -23,7 +23,8 @@ import java.text.SimpleDateFormat
 import java.time.Duration
 import java.util.*
 
-class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {
+class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
+    RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {
     private val diffCallback = object : DiffUtil.ItemCallback<TicketsItem>() {
         override fun areItemsTheSame(oldItem: TicketsItem, newItem: TicketsItem): Boolean {
             return oldItem.id == newItem.id
@@ -52,7 +53,10 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : Recycl
 
     override fun getItemCount(): Int = differ.currentList.size
 
-    inner class SearchResultViewHolder(private val binding: ItemTripBinding, private val itemClick: (TicketsItem) -> Unit) :
+    inner class SearchResultViewHolder(
+        private val binding: ItemTripBinding,
+        private val itemClick: (TicketsItem) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(item: TicketsItem) {

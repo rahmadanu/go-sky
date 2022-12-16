@@ -2,8 +2,6 @@ package com.binar.gosky.data.network.datasource
 
 import com.binar.gosky.data.network.model.tickets.Tickets
 import com.binar.gosky.data.network.service.TicketsApiService
-import retrofit2.http.Header
-import retrofit2.http.Path
 import javax.inject.Inject
 
 interface TicketsRemoteDataSource {
@@ -11,7 +9,8 @@ interface TicketsRemoteDataSource {
     suspend fun getTicketById(accessToken: String, id: Int): Tickets
 }
 
-class TicketsRemoteDataSourceImpl @Inject constructor(private val apiService: TicketsApiService): TicketsRemoteDataSource {
+class TicketsRemoteDataSourceImpl @Inject constructor(private val apiService: TicketsApiService) :
+    TicketsRemoteDataSource {
     override suspend fun getTickets(
         category: String,
         from: String,

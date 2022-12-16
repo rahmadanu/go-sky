@@ -15,8 +15,6 @@ import com.binar.gosky.databinding.FragmentSearchResultBinding
 import com.binar.gosky.presentation.ui.search.adapter.SearchResultAdapter
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class SearchResultFragment : Fragment() {
@@ -46,6 +44,19 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getArgumentsFromHome()
+        initList()
+        observeData()
+        setOnClickListener()
+    }
+
+    private fun setOnClickListener() {
+        binding.apply {
+            ivBack.setOnClickListener { findNavController().navigateUp() }
+        }
+    }
+
+    private fun getArgumentsFromHome() {
         args.searchTickets.let {
             binding.apply {
                 txtFlight.text = getString(R.string.from_to_to, it.from, it.to)
