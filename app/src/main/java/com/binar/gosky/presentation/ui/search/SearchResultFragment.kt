@@ -50,12 +50,6 @@ class SearchResultFragment : Fragment() {
         setOnClickListener()
     }
 
-    private fun setOnClickListener() {
-        binding.apply {
-            ivBack.setOnClickListener { findNavController().navigateUp() }
-        }
-    }
-
     private fun getArgumentsFromHome() {
         args.searchTickets.let {
             binding.apply {
@@ -70,10 +64,6 @@ class SearchResultFragment : Fragment() {
             )
         }
         Log.d("args", args.searchTickets.toString())
-
-        initList()
-        observeData()
-        setOnClickListener()
     }
 
     private fun setOnClickListener() {

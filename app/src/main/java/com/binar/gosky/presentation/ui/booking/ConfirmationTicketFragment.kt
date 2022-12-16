@@ -1,4 +1,4 @@
-package com.binar.gosky.presentation.ui.order
+package com.binar.gosky.presentation.ui.booking
 
 import android.os.Build
 import android.os.Bundle
@@ -28,7 +28,7 @@ class ConfirmationTicketFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: BookingViewModel by viewModels()
-    private val confirmationTicketArgs: ConfirmationTicketFragmentArgs by navArgs()
+    private val confirmationTicketArgs: com.binar.gosky.presentation.ui.order.ConfirmationTicketFragmentArgs by navArgs()
 
     private var sumPrice = 0
     private var ticketPrice = 0

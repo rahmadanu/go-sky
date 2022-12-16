@@ -25,7 +25,7 @@ class TransactionsRepositoryImpl @Inject constructor(private val dataSource: Tra
         return try {
             Resource.Success(coroutines.invoke())
         } catch (e: Exception) {
-            Resource.Error(e)
+            Resource.Error(e, e.message)
         }
     }
 

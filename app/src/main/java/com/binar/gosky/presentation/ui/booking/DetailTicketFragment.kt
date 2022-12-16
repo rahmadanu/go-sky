@@ -1,4 +1,4 @@
-package com.binar.gosky.presentation.ui.order
+package com.binar.gosky.presentation.ui.booking
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

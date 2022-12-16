@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/tropical_blue"
-    tools:context=".presentation.ui.order.HistoryTiketFragment">
+    tools:context=".presentation.ui.booking.HistoryTiketFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

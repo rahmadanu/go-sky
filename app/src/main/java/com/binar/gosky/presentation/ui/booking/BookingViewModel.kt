@@ -1,4 +1,4 @@
-package com.binar.gosky.presentation.ui.order
+package com.binar.gosky.presentation.ui.booking
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -41,9 +41,7 @@
         tools:layout="@layout/fragment_account" >
         <action
             android:id="@+id/action_accountFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment"
-            app:popUpTo="@id/accountFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -67,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/confirmationTicketFragment"
-        android:name="com.binar.gosky.presentation.ui.order.ConfirmationTicketFragment"
+        android:name="com.binar.gosky.presentation.ui.booking.ConfirmationTicketFragment"
         android:label="fragment_confirmation_ticket"
         tools:layout="@layout/fragment_confirmation_ticket" >
         <argument
@@ -79,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailTicketFragment"
-        android:name="com.binar.gosky.presentation.ui.order.DetailTicketFragment"
+        android:name="com.binar.gosky.presentation.ui.booking.DetailTicketFragment"
         android:label="fragment_detail_ticket"
         tools:layout="@layout/fragment_detail_ticket" />
 </navigation>
