@@ -11,6 +11,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.databinding.ItemTripBinding
+import com.binar.gosky.util.ConvertUtil
+import com.binar.gosky.util.ConvertUtil.convertISOtoDate
+import com.binar.gosky.util.ConvertUtil.convertMinutesToHourAndMinutes
+import com.binar.gosky.util.ConvertUtil.convertRupiah
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import java.text.NumberFormat
@@ -83,36 +87,5 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) : Recycl
                 }
             }
         }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun convertMinutesToHourAndMinutes(duration: Long): String {
-        val durationTime = Duration.ofMinutes(duration)
-        val hours = durationTime.toHours()
-        val minutes = durationTime.minusHours(hours).toMinutes()
-
-        return "${hours}h ${minutes}m"
-    }
-
-    fun convertRupiah(intPrice: Int?): String {
-        val localId = Locale("in", "ID")
-        val formatter = NumberFormat.getCurrencyInstance(localId)
-        return formatter.format(intPrice)
-    }
-
-    fun convertISOtoDate(isoString: String?): String {
-        val localeID = Locale("in", "ID")
-        var formattedDate = ""
-        val cal = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", localeID)
-        try {
-            cal.time = dateFormat.parse(isoString)
-            val c = cal.time
-            val dformat = SimpleDateFormat("dd MMM yyyy\nHH:mm", localeID)
-            formattedDate = dformat.format(c)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }
-        return formattedDate
     }
 }

@@ -7,6 +7,7 @@ import javax.inject.Inject
 
 interface TicketsRepository {
     suspend fun getTickets(category: String, from: String, to: String, departureTime: String, returnTime: String): Resource<Tickets>
+    suspend fun getTicketById(accessToken: String, id: Int): Resource<Tickets>
 }
 
 class TicketsRepositoryImpl @Inject constructor(private val dataSource: TicketsRemoteDataSource) :
@@ -21,6 +22,12 @@ class TicketsRepositoryImpl @Inject constructor(private val dataSource: TicketsR
     ): Resource<Tickets> {
         return proceed {
             dataSource.getTickets(category, from, to, departureTime, returnTime)
+        }
+    }
+
+    override suspend fun getTicketById(accessToken: String, id: Int): Resource<Tickets> {
+        return proceed {
+            dataSource.getTicketById(accessToken, id)
         }
     }
 

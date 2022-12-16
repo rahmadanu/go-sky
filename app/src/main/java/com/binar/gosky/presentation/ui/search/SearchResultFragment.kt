@@ -28,7 +28,10 @@ class SearchResultFragment : Fragment() {
     private val args: SearchResultFragmentArgs by navArgs()
 
     private val adapter: SearchResultAdapter by lazy {
-        SearchResultAdapter {}
+        SearchResultAdapter {
+            val action = SearchResultFragmentDirections.actionSearchResultFragmentToKonfirmasiTiketFragment(it)
+            findNavController().navigate(action)
+        }
     }
 
     override fun onCreateView(

@@ -1,8 +1,11 @@
 package com.binar.gosky.data.network.model.tickets
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class TicketsItem(
     @SerializedName("category")
     val category: String? = null,
@@ -27,7 +30,7 @@ data class TicketsItem(
     @SerializedName("imageUrl")
     val imageUrl: String? = null,
     @SerializedName("price")
-    val price: Int? = null,
+    var price: Int? = null,
     @SerializedName("returnTime")
     val returnTime: String? = null,
     @SerializedName("to")
@@ -40,4 +43,4 @@ data class TicketsItem(
     val wishlisted: Boolean? = null,
     @SerializedName("duration")
     val duration: Long? = null
-)
+): Parcelable

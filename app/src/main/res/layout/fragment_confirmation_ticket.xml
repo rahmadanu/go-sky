@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/tropical_blue"
-    tools:context=".presentation.ui.order.KonfirmasiTiketFragment">
+    tools:context=".presentation.ui.order.ConfirmationTicketFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                         app:layout_constraintBottom_toBottomOf="@id/iv_back"
                         app:layout_constraintStart_toEndOf="@id/iv_back"
                         app:layout_constraintTop_toTopOf="@id/iv_back"
-                        tools:text="Penerbangan Pilihanmu" />
+                        android:text="Your Flight Choice" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -97,7 +97,6 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal">
 
@@ -108,7 +107,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Detail"
                                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                    android:textSize="20dp" />
+                                    android:textSize="18sp" />
 
 
                                 <View
@@ -134,16 +133,16 @@
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/textview_corner"
                                     android:backgroundTint="#00ff00"
-                                    android:text="Pergi"
+                                    android:text="Departure"
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
 
                                 <TextView
-                                    android:id="@+id/beginTime_oid"
+                                    android:id="@+id/tv_departure_time_departure_date_day"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
-                                    android:text="sen, 6 maret 2022"
+                                    tools:text="Mon, 6 Mar 2022"
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
 
@@ -162,11 +161,12 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/tv_from_departure"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Jakarta"
                                     android:textColor="@color/black"
-                                    android:textSize="18sp" />
+                                    android:textSize="16sp" />
 
                                 <View
                                     android:layout_width="0dp"
@@ -180,6 +180,7 @@
 
 
                                     <ImageView
+                                        android:id="@+id/iv_image_departure"
                                         android:layout_width="32dp"
                                         android:layout_height="32dp"
                                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
@@ -198,7 +199,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_marginStart="10dp"
-                                            android:text="dioperasikan oleh:"
+                                            android:text="operated by:"
                                             android:textColor="@color/black"
                                             android:textSize="12sp" />
 
@@ -217,11 +218,11 @@
                                                 android:textSize="12sp" />
 
                                             <TextView
-
+                                                android:id="@+id/tv_flight_number_departure"
                                                 android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
+                                                android:layout_height="match_parent"
                                                 android:layout_marginStart="5dp"
-                                                android:text="JT-531"
+                                                tools:text="JT-531"
                                                 android:textColor="@color/black"
                                                 android:textSize="12sp" />
                                         </LinearLayout>
@@ -235,11 +236,12 @@
                                     android:layout_weight="1" />
 
                                 <TextView
+                                    android:id="@+id/tv_to_departure"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Batam"
                                     android:textColor="@color/black"
-                                    android:textSize="18sp" />
+                                    android:textSize="16sp" />
 
                             </LinearLayout>
 
@@ -256,18 +258,12 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/tv_departure_time_departure"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="14:10"
+                                        tools:text="14:10"
                                         android:textColor="@color/black"
                                         android:textSize="12sp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="06 Mar"
-                                        android:textColor="@color/black"
-                                        android:textSize="8sp" />
 
                                 </LinearLayout>
 
@@ -289,12 +285,12 @@
 
 
                                     <TextView
-
+                                        android:id="@+id/tv_duration_departure"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="70dp"
                                         android:layout_marginEnd="70dp"
-                                        android:text="47 menit"
+                                        tools:text="47 menit"
                                         android:textColor="@color/black"
                                         android:textSize="12sp" />
 
@@ -312,18 +308,12 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/tv_arrival_time_departure"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="15:50"
+                                        tools:text="15:50"
                                         android:textColor="@color/black"
                                         android:textSize="12sp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="06 Mar"
-                                        android:textColor="@color/black"
-                                        android:textSize="8sp" />
 
                                 </LinearLayout>
 
@@ -337,19 +327,21 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/tv_return_label"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/textview_corner"
                                     android:backgroundTint="#00ff00"
-                                    android:text="Pulang"
+                                    android:text="Return"
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
 
                                 <TextView
+                                    android:id="@+id/tv_return_time_return_date_day"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
-                                    android:text="sen, 6 maret 2022"
+                                    android:text="Mon, 6 Mar 2022"
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
 
@@ -368,11 +360,12 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/tv_from_return"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Jakarta"
+                                    tools:text="Jakarta"
                                     android:textColor="@color/black"
-                                    android:textSize="18sp" />
+                                    android:textSize="16sp" />
 
                                 <View
                                     android:layout_width="0dp"
@@ -386,6 +379,7 @@
 
 
                                     <ImageView
+                                        android:id="@+id/iv_image_return"
                                         android:layout_width="32dp"
                                         android:layout_height="32dp"
                                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
@@ -400,11 +394,11 @@
                                         android:orientation="vertical">
 
                                         <TextView
-
+                                            android:id="@+id/tv_operated_by_return"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_marginStart="10dp"
-                                            android:text="dioperasikan oleh:"
+                                            android:text="operated by:"
                                             android:textColor="@color/black"
                                             android:textSize="12sp" />
 
@@ -414,7 +408,7 @@
                                             android:orientation="horizontal">
 
                                             <TextView
-
+                                                android:id="@+id/tv_airline_return"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginStart="10dp"
@@ -423,11 +417,11 @@
                                                 android:textSize="12sp" />
 
                                             <TextView
-
+                                                android:id="@+id/tv_flight_number_return"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginStart="5dp"
-                                                android:text="JT-531"
+                                                tools:text="JT-531"
                                                 android:textColor="@color/black"
                                                 android:textSize="12sp" />
                                         </LinearLayout>
@@ -441,11 +435,12 @@
                                     android:layout_weight="1" />
 
                                 <TextView
+                                    android:id="@+id/tv_to_return"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Batam"
+                                    tools:text="Batam"
                                     android:textColor="@color/black"
-                                    android:textSize="18sp" />
+                                    android:textSize="16sp" />
 
                             </LinearLayout>
 
@@ -462,18 +457,12 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/tv_departure_time_return"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="14:10"
+                                        tools:text="14:10"
                                         android:textColor="@color/black"
                                         android:textSize="12sp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="06 Mar"
-                                        android:textColor="@color/black"
-                                        android:textSize="8sp" />
 
                                 </LinearLayout>
 
@@ -489,18 +478,19 @@
                                     android:orientation="vertical">
 
                                     <View
+                                        android:id="@+id/v_line"
                                         android:layout_width="match_parent"
                                         android:layout_height="3dp"
                                         android:background="#e8e8e8" />
 
 
                                     <TextView
-
+                                        android:id="@+id/tv_duration_return"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="70dp"
                                         android:layout_marginEnd="70dp"
-                                        android:text="47 menit"
+                                        tools:text="47 menit"
                                         android:textColor="@color/black"
                                         android:textSize="12sp" />
 
@@ -518,18 +508,12 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/tv_arrival_time_return"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="15:50"
+                                        tools:text="15:50"
                                         android:textColor="@color/black"
                                         android:textSize="12sp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="06 Mar"
-                                        android:textColor="@color/black"
-                                        android:textSize="8sp" />
 
                                 </LinearLayout>
 
@@ -564,7 +548,6 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal">
 
@@ -574,7 +557,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Description"
                                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                    android:textSize="20dp" />
+                                    android:textSize="18sp" />
 
 
                                 <View
@@ -586,12 +569,12 @@
 
 
                             <TextView
+                                android:id="@+id/tv_description"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
-                                android:text="Luar biasanya, maskapai ini mematok harga yang relatif lebih murah daripada penerbangan maskapai lainnya."
-                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                android:textSize="14dp" />
+                                tools:text="Luar biasanya, maskapai ini mematok harga yang relatif lebih murah daripada penerbangan maskapai lainnya."
+                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
 
 
                         </LinearLayout>
@@ -605,6 +588,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="15dp"
+                        android:layout_marginBottom="15dp"
                         app:cardCornerRadius="12dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -639,32 +623,30 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="5dp"
-                                    android:background="@drawable/textview_corner_black"
-                                    android:text="+"
-                                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                    android:textColor="@color/white" />
-
+                                <ImageButton
+                                    android:id="@+id/ib_minus"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginRight="10dp"
+                                    android:src="@drawable/ic_remove"
+                                    android:background="@drawable/textview_corner_black" />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="0"
-                                    android:background="@drawable/textview_corner"
-                                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                    android:textSize="14dp" />
+                                    android:id="@+id/tv_amount"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:gravity="center"
+                                    android:text="1"
+                                    android:textStyle="bold"
+                                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                    android:layout_marginLeft="5dp"
-                                    android:background="@drawable/textview_corner_black"
-                                    android:text="-"
-                                    android:textColor="@color/white" />
+                                <ImageButton
+                                    android:id="@+id/ib_plus"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:src="@drawable/ic_add"
+                                    android:background="@drawable/textview_corner_black" />
 
                             </LinearLayout>
 
@@ -686,24 +668,24 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="600dp"
-        android:gravity="bottom">
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:background="@color/white"
+            android:paddingBottom="10dp"
             android:orientation="vertical">
 
 
             <TextView
+                android:id="@+id/tv_total_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="10dp"
-                android:text="Total: IDR 1.610.580"
+                tools:text="Total: IDR 1.610.580"
                 android:textSize="16sp" />
 
             <Button
@@ -713,7 +695,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:text="Pesan" />
+                android:text="Order" />
 
 
         </LinearLayout>
