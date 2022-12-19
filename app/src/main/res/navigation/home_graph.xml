@@ -21,6 +21,9 @@
             android:id="@+id/action_homeFragment_to_accountFragment"
             app:destination="@id/accountFragment"
             app:launchSingleTop="true"/>
+        <action
+            android:id="@+id/action_homeFragment_to_historyTicketFragment"
+            app:destination="@id/historyTicketFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
@@ -96,4 +99,9 @@
             android:name="userByIdData"
             app:argType="com.binar.gosky.data.network.model.users.data.UserByIdData" />
     </fragment>
+    <fragment
+        android:id="@+id/historyTicketFragment"
+        android:name="com.binar.gosky.presentation.ui.history.HistoryTicketFragment"
+        android:label="fragment_history_ticket"
+        tools:layout="@layout/fragment_history_ticket" />
 </navigation>

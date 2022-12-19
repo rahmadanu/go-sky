@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/tropical_blue"
     android:paddingHorizontal="15dp"
-    android:paddingVertical="10dp">
+    android:paddingVertical="5dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -32,6 +32,7 @@
 
 
                 <ImageView
+                    android:id="@+id/iv_image"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
@@ -51,11 +52,11 @@
                         android:orientation="horizontal">
 
                         <TextView
-
+                            android:id="@+id/tv_from"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="$Jakarta"
+                            tools:text="$Jakarta"
                             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
@@ -68,12 +69,12 @@
                             android:src="@drawable/hb_arrows_single" />
 
                         <TextView
-
+                            android:id="@+id/tv_to"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                             android:layout_marginStart="10dp"
-                            android:text="$Batam"
+                            tools:text="$Batam"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
@@ -85,15 +86,21 @@
                         android:orientation="horizontal">
 
                         <TextView
-
+                            android:id="@+id/tv_category"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="Round Trip"
+                            tools:text="Round Trip"
                             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                             android:textColor="#ff6666"
                             android:textSize="12sp" />
 
+                        <TextView
+                            android:id="@+id/tv_duration_departure"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            tools:text="1j 12m" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -116,11 +123,11 @@
                     android:textSize="12sp" />
 
                 <TextView
-
+                    android:id="@+id/tv_flight_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="JT-531"
+                    tools:text="JT-531"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -154,9 +161,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_departure_time_departure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="14:10"
+                        tools:text="14:10"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
@@ -194,10 +202,11 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_arrival_time_departure"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                        android:text="15:50"
+                        tools:text="15:50"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
@@ -243,9 +252,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_departure_time_return"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="14:10"
+                        tools:text="14:10"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
@@ -283,9 +293,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_arrival_time_return"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="15:50"
+                        tools:text="15:50"
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
@@ -322,11 +333,12 @@
                 android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/tv_ticket_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                    android:text="IDR 1.200.000"/>
+                    tools:text="Rp1.200.000"/>
 
             </LinearLayout>
 

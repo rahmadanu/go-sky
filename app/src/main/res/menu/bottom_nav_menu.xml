@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_wishlist"
         android:title="@string/title_wishlist" />
     <item
+        android:id="@+id/historyTicketFragment"
+        android:icon="@drawable/ic_history_event_note"
+        android:title="@string/title_history" />
+    <item
         android:id="@+id/accountFragment"
         android:icon="@drawable/ic_profile"
         android:title="@string/title_account" />

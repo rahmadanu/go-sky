@@ -32,6 +32,7 @@ class HomeActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.homeFragment,
             R.id.wishlistFragment,
+            R.id.historyTicketFragment,
             R.id.accountFragment
         ).build()
 

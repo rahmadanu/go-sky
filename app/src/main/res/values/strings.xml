@@ -12,6 +12,7 @@
     <string name="total_amount">Total: %1$s</string>
 
     <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="title_history">History</string>
 
     <string-array name="province">
         <item>JAKARTA</item>

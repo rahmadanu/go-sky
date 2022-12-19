@@ -11,17 +11,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.databinding.ItemTripBinding
-import com.binar.gosky.util.ConvertUtil
 import com.binar.gosky.util.ConvertUtil.convertISOtoDate
 import com.binar.gosky.util.ConvertUtil.convertMinutesToHourAndMinutes
 import com.binar.gosky.util.ConvertUtil.convertRupiah
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import java.text.NumberFormat
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.time.Duration
-import java.util.*
 
 class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
     RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {
@@ -37,8 +31,8 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    fun submitList(movie: List<TicketsItem>?) {
-        differ.submitList(movie)
+    fun submitList(list: List<TicketsItem>?) {
+        differ.submitList(list)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder {
