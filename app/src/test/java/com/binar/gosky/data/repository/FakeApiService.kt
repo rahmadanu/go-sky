@@ -14,4 +14,8 @@ class FakeApiService: TicketsApiService {
     ): Tickets {
         return DummyData.getDummyTickets()
     }
+
+    override suspend fun getTicketById(accessToken: String, id: Int): Tickets {
+        TODO("Not yet implemented")
+    }
 }

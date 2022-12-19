@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/tropical_blue"
     android:paddingHorizontal="20dp"
-    android:paddingVertical="10dp"
-    android:background="@color/tropical_blue">
+    android:paddingVertical="10dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardCornerRadius="12dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="16dp">
 
             <ImageView
@@ -35,71 +35,171 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Lion Air"
-                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                app:layout_constraintTop_toBottomOf="@id/iv_airline_logo"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_airline_logo" />
 
             <TextView
                 android:id="@+id/tv_ticket_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@id/tv_pax"
-                app:layout_constraintTop_toTopOf="@id/airline_name"
+                android:textColor="#FF0000"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/airline_name"
-                tools:text="IDR 1.478.580"/>
+                app:layout_constraintEnd_toStartOf="@id/tv_pax"
+                app:layout_constraintTop_toTopOf="@id/iv_airline_logo"
+                tools:text="IDR 1.478.580" />
 
             <TextView
                 android:id="@+id/tv_pax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/pax"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_ticket_price"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_ticket_price"
-                app:layout_constraintBottom_toBottomOf="@id/tv_ticket_price" />
+                app:layout_constraintTop_toTopOf="@id/tv_ticket_price" />
+
+            <TextView
+                android:id="@+id/txt_depart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Departure"
+                android:textColor="@color/bright_sky_blue"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/airline_name" />
 
             <TextView
                 android:id="@+id/tv_departure_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                tools:text="14:50"
-                app:layout_constraintTop_toBottomOf="@id/airline_name"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_depart"
+                tools:text="14:50" />
 
             <TextView
                 android:id="@+id/tv_arrival_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="14:50"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_departure_time"
-                app:layout_constraintEnd_toEndOf="parent" />
+                tools:text="14:50" />
 
             <TextView
                 android:id="@+id/tv_from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:text="JAKARTA (CGK)"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/tv_departure_time"
+                tools:text="JAKARTA (CGK)" />
 
             <TextView
                 android:id="@+id/tv_to"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:text="BATAM (BTH)"
-                />
+                app:layout_constraintTop_toTopOf="@+id/tv_from"
+                tools:text="BATAM (BTH)" />
 
             <ImageView
+                android:id="@+id/iv_arrow_departure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_keyboard_arrow_right"
-                app:layout_constraintTop_toTopOf="@id/tv_departure_time"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="@id/tv_departure_time" />
+
+            <TextView
+                android:id="@+id/tv_duration_departure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/iv_arrow_departure"
+                app:layout_constraintStart_toStartOf="@id/iv_arrow_departure"
+                app:layout_constraintEnd_toEndOf="@id/iv_arrow_departure"
+                tools:text="1j 12m" />
+            <!--return section-->
+
+            <TextView
+                android:id="@+id/txt_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Return"
+                android:textColor="#F44336"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_from" />
+
+            <TextView
+                android:id="@+id/tv_return_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_return"
+                tools:text="14:50" />
+
+            <TextView
+                android:id="@+id/tv_arrival_time_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_return_time"
+                tools:text="14:50" />
+
+            <TextView
+                android:id="@+id/tv_from_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_return_time"
+                tools:text="BATAM (BTH)" />
+
+            <TextView
+                android:id="@+id/tv_to_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_from_return"
+                tools:text="JAKARTA (CGK)" />
+
+            <ImageView
+                android:id="@+id/iv_arrow_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_keyboard_arrow_right"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_return_time" />
+
+            <TextView
+                android:id="@+id/tv_duration_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/iv_arrow_return"
+                app:layout_constraintStart_toStartOf="@id/iv_arrow_return"
+                app:layout_constraintEnd_toEndOf="@id/iv_arrow_return"
+                tools:text="1j 12m" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

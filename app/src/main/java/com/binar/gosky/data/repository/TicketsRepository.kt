@@ -7,6 +7,7 @@ import javax.inject.Inject
 
 interface TicketsRepository {
     suspend fun getTickets(category: String, from: String, to: String, departureTime: String, returnTime: String): Resource<Tickets>
+    suspend fun getTicketById(accessToken: String, id: Int): Resource<Tickets>
 }
 
 class TicketsRepositoryImpl @Inject constructor(private val dataSource: TicketsRemoteDataSource) :
@@ -24,11 +25,17 @@ class TicketsRepositoryImpl @Inject constructor(private val dataSource: TicketsR
         }
     }
 
+    override suspend fun getTicketById(accessToken: String, id: Int): Resource<Tickets> {
+        return proceed {
+            dataSource.getTicketById(accessToken, id)
+        }
+    }
+
     private suspend fun <T> proceed(coroutines: suspend () -> T): Resource<T> {
         return try {
             Resource.Success(coroutines.invoke())
         } catch (e: Exception) {
-            Resource.Error(e)
+            Resource.Error(e, e.message)
         }
     }
 }

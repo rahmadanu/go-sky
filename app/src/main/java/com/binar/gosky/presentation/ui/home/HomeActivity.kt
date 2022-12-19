@@ -1,8 +1,8 @@
 package com.binar.gosky.presentation.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -32,7 +32,8 @@ class HomeActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.homeFragment,
             R.id.wishlistFragment,
-            R.id.profileFragment
+            R.id.historyTicketFragment,
+            R.id.accountFragment
         ).build()
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -42,6 +43,11 @@ class HomeActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.searchResultFragment -> hideBottomNav(true)
+                R.id.loginFragment -> hideBottomNav(true)
+                R.id.registerFragment -> hideBottomNav(true)
+                R.id.editProfileFragment -> hideBottomNav(true)
+                R.id.confirmationTicketFragment -> hideBottomNav(true)
+                R.id.detailTicketFragment -> hideBottomNav(true)
                 else -> hideBottomNav(false)
             }
         }

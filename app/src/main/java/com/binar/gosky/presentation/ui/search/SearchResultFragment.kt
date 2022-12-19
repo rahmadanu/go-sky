@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.gosky.R
@@ -14,8 +15,6 @@ import com.binar.gosky.databinding.FragmentSearchResultBinding
 import com.binar.gosky.presentation.ui.search.adapter.SearchResultAdapter
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class SearchResultFragment : Fragment() {
@@ -27,7 +26,10 @@ class SearchResultFragment : Fragment() {
     private val args: SearchResultFragmentArgs by navArgs()
 
     private val adapter: SearchResultAdapter by lazy {
-        SearchResultAdapter {}
+        SearchResultAdapter {
+            val action = SearchResultFragmentDirections.actionSearchResultFragmentToKonfirmasiTiketFragment(it)
+            findNavController().navigate(action)
+        }
     }
 
     override fun onCreateView(
@@ -42,6 +44,13 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getArgumentsFromHome()
+        initList()
+        observeData()
+        setOnClickListener()
+    }
+
+    private fun getArgumentsFromHome() {
         args.searchTickets.let {
             binding.apply {
                 txtFlight.text = getString(R.string.from_to_to, it.from, it.to)
@@ -55,9 +64,12 @@ class SearchResultFragment : Fragment() {
             )
         }
         Log.d("args", args.searchTickets.toString())
+    }
 
-        initList()
-        observeData()
+    private fun setOnClickListener() {
+        binding.apply {
+            ivBack.setOnClickListener { findNavController().navigateUp() }
+        }
     }
 
     private fun initList() {
@@ -74,10 +86,12 @@ class SearchResultFragment : Fragment() {
                     adapter.submitList(it.payload)
                     binding.pbLoading.visibility = View.GONE
                     binding.tvNoFlights.visibility = View.GONE
+                    binding.rcvTrip.visibility = View.VISIBLE
                 }
                 is Resource.Loading -> {
                     binding.pbLoading.visibility = View.VISIBLE
                     binding.tvNoFlights.visibility = View.GONE
+                    binding.rcvTrip.visibility = View.GONE
                 }
                 is Resource.Error -> {}
                 is Resource.Empty -> {
