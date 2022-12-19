@@ -4,6 +4,7 @@ import com.binar.gosky.data.network.datasource.TransactionsRemoteDataSource
 import com.binar.gosky.data.network.model.transactions.list.TransactionListResponse
 import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionRequestBody
 import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionResponse
+import com.binar.gosky.util.proceed
 import com.binar.gosky.wrapper.Resource
 import javax.inject.Inject
 
@@ -28,13 +29,4 @@ class TransactionsRepositoryImpl @Inject constructor(private val dataSource: Tra
             dataSource.getTransactionList(accessToken)
         }
     }
-
-    private suspend fun <T> proceed(coroutines: suspend () -> T): Resource<T> {
-        return try {
-            Resource.Success(coroutines.invoke())
-        } catch (e: Exception) {
-            Resource.Error(e, e.message)
-        }
-    }
-
 }

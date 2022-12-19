@@ -2,6 +2,7 @@ package com.binar.gosky.data.repository
 
 import com.binar.gosky.data.network.datasource.TicketsRemoteDataSource
 import com.binar.gosky.data.network.model.tickets.Tickets
+import com.binar.gosky.util.proceed
 import com.binar.gosky.wrapper.Resource
 import javax.inject.Inject
 
@@ -31,11 +32,4 @@ class TicketsRepositoryImpl @Inject constructor(private val dataSource: TicketsR
         }
     }
 
-    private suspend fun <T> proceed(coroutines: suspend () -> T): Resource<T> {
-        return try {
-            Resource.Success(coroutines.invoke())
-        } catch (e: Exception) {
-            Resource.Error(e, e.message)
-        }
-    }
 }
