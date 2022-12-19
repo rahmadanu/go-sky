@@ -4,6 +4,8 @@ import android.content.Context
 import com.binar.gosky.BuildConfig
 import com.binar.gosky.data.network.service.AuthApiService
 import com.binar.gosky.data.network.service.TicketsApiService
+import com.binar.gosky.data.network.service.UserApiService
+import com.binar.gosky.data.network.service.TransactionsApiService
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
 import dagger.Provides
@@ -56,7 +58,19 @@ object ApiModule {
 
     @Provides
     @Singleton
+    fun provideTransactionsApiService(retrofit: Retrofit): TransactionsApiService {
+        return retrofit.create(TransactionsApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideAuthApiService(retrofit: Retrofit): AuthApiService {
         return retrofit.create(AuthApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserApiService(retrofit: Retrofit): UserApiService {
+        return retrofit.create(UserApiService::class.java)
     }
 }

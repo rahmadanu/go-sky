@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -17,6 +17,13 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
+            app:launchSingleTop="true"/>
+        <action
+            android:id="@+id/action_homeFragment_to_historyTicketFragment"
+            app:destination="@id/historyTicketFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
@@ -26,35 +33,75 @@
         <argument
             android:name="SearchTickets"
             app:argType="com.binar.gosky.data.network.model.tickets.SearchTickets" />
+        <action
+            android:id="@+id/action_searchResultFragment_to_konfirmasiTiketFragment"
+            app:destination="@id/confirmationTicketFragment" />
     </fragment>
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.binar.gosky.presentation.ui.auth.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        android:id="@+id/accountFragment"
+        android:name="com.binar.gosky.presentation.ui.account.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" >
         <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/loginFragment"/>
-        <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            android:id="@+id/action_accountFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.binar.gosky.presentation.ui.auth.register.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
+        android:id="@+id/editProfileFragment"
+        android:name="com.binar.gosky.presentation.ui.account.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="userData"
+            app:argType="com.binar.gosky.data.network.model.users.edit.EditUserRequestBody" />
+        <argument
+            android:name="accessToken"
+            app:argType="string" />
         <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            android:id="@+id/action_editProfileFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
             app:popUpToInclusive="true"
-            app:popUpTo="@id/loginFragment"/>
-        <action
-            android:id="@+id/action_registerFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/registerFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpTo="@id/editProfileFragment"/>
+        <argument
+            android:name="email"
+            app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/confirmationTicketFragment"
+        android:name="com.binar.gosky.presentation.ui.booking.ConfirmationTicketFragment"
+        android:label="fragment_confirmation_ticket"
+        tools:layout="@layout/fragment_confirmation_ticket" >
+        <argument
+            android:name="ticketsItem"
+            app:argType="com.binar.gosky.data.network.model.tickets.TicketsItem" />
+        <action
+            android:id="@+id/action_confirmationTicketFragment_to_detailTicketFragment"
+            app:destination="@id/detailTicketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailTicketFragment"
+        android:name="com.binar.gosky.presentation.ui.booking.DetailTicketFragment"
+        android:label="fragment_detail_ticket"
+        tools:layout="@layout/fragment_detail_ticket" >
+        <argument
+            android:name="ticketDetail"
+            app:argType="com.binar.gosky.data.network.model.tickets.TicketsItem" />
+        <argument
+            android:name="newTransactionData"
+            app:argType="com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionData" />
+        <action
+            android:id="@+id/action_detailTicketFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="totalPrice"
+            app:argType="integer" />
+        <argument
+            android:name="userByIdData"
+            app:argType="com.binar.gosky.data.network.model.users.data.UserByIdData" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyTicketFragment"
+        android:name="com.binar.gosky.presentation.ui.history.HistoryTicketFragment"
+        android:label="fragment_history_ticket"
+        tools:layout="@layout/fragment_history_ticket" />
 </navigation>

@@ -1,5 +1,6 @@
 package com.binar.gosky.presentation.ui.auth.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -7,15 +8,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.databinding.FragmentLoginBinding
+import com.binar.gosky.presentation.ui.account.AccountViewModel
+import com.binar.gosky.presentation.ui.home.HomeActivity
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -23,7 +31,8 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
+    private val accountViewModel: AccountViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +51,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.postLoginUserResponse.observe(viewLifecycleOwner) {
+        loginViewModel.postLoginUserResponse.observe(viewLifecycleOwner) {
             binding.pbLogin.isVisible = false
             binding.etEmail.isEnabled = true
             binding.etPassword.isEnabled = true
@@ -51,6 +60,8 @@ class LoginFragment : Fragment() {
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), "${it.data?.status}: ${it.data?.message}", Toast.LENGTH_LONG).show()
                     Log.d("loginResponse", it.data.toString())
+                    it.data?.data?.accessToken?.let { accessToken -> loginViewModel.setUserAccessToken(accessToken) }
+                    //it.data?.data?.accessToken?.let { accessToken -> accountViewModel.getCurrentUser("Bearer $accessToken") }
                     navigateToHome()
                 }
                 is Resource.Error -> {
@@ -58,8 +69,7 @@ class LoginFragment : Fragment() {
                 else -> {}
             }
         }
-        viewModel.getUserLoginStatus().observe(viewLifecycleOwner) {
-            Log.d("getlogin", it.toString())
+        loginViewModel.loginStatus.observe(viewLifecycleOwner) {
             if (it) {
                 navigateToHome()
             }
@@ -67,8 +77,13 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToHome() {
-        viewModel.setUserLogin(true)
-        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        loginViewModel.setUserLogin(true)
+
+        val intent = Intent(requireContext(), HomeActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        startActivity(intent)
+        activity?.finish()
     }
 
 
@@ -89,7 +104,7 @@ class LoginFragment : Fragment() {
             binding.etEmail.isEnabled = false
             binding.etPassword.isEnabled = false
             binding.pbLogin.isVisible = true
-            viewModel.postLoginUser(parseFormIntoEntity(email, password))
+            loginViewModel.postLoginUser(parseFormIntoEntity(email, password))
         }
     }
 

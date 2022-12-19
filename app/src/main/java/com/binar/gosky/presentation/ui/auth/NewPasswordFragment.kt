@@ -1,4 +1,4 @@
-package com.binar.gosky.presentation.ui.home
+package com.binar.gosky.presentation.ui.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater

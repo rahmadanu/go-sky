@@ -6,8 +6,10 @@ import javax.inject.Inject
 
 interface UserLocalDataSource {
     suspend fun setUserLogin(isLogin: Boolean)
-
     fun getUserLoginStatus(): Flow<Boolean>
+
+    suspend fun setUserAccessToken(accessToken: String)
+    fun getUserAccessToken(): Flow<String>
 }
 
 class UserLocalDataSourceImpl @Inject constructor(
@@ -20,5 +22,13 @@ class UserLocalDataSourceImpl @Inject constructor(
 
     override fun getUserLoginStatus(): Flow<Boolean> {
         return userDataStore.getUserLoginStatus()
+    }
+
+    override suspend fun setUserAccessToken(accessToken: String) {
+        userDataStore.setUserAccessToken(accessToken)
+    }
+
+    override fun getUserAccessToken(): Flow<String> {
+        return userDataStore.getUserAccessToken()
     }
 }

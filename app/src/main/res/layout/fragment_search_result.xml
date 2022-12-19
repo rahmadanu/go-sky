@@ -32,7 +32,7 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/ic_back"
+                        android:id="@+id/iv_back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_back"
@@ -48,9 +48,9 @@
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@id/ic_back"
-                        app:layout_constraintTop_toTopOf="@id/ic_back"
-                        app:layout_constraintBottom_toBottomOf="@id/ic_back"
+                        app:layout_constraintStart_toEndOf="@id/iv_back"
+                        app:layout_constraintTop_toTopOf="@id/iv_back"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_back"
                         tools:text="Jakarta ke Batam" />
 <!--
                     <TextView

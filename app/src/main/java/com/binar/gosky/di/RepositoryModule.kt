@@ -1,6 +1,10 @@
 package com.binar.gosky.di
 
 import com.binar.gosky.data.repository.*
+import com.binar.gosky.data.repository.TicketsRepository
+import com.binar.gosky.data.repository.TicketsRepositoryImpl
+import com.binar.gosky.data.repository.TransactionsRepository
+import com.binar.gosky.data.repository.TransactionsRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -18,4 +22,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
+
+    @Binds
+    abstract fun provideTransactionsRepository(transactionsRepositoryImpl: TransactionsRepositoryImpl): TransactionsRepository
 }

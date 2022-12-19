@@ -32,7 +32,8 @@ class HomeActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.homeFragment,
             R.id.wishlistFragment,
-            R.id.profileFragment
+            R.id.historyTicketFragment,
+            R.id.accountFragment
         ).build()
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -44,6 +45,9 @@ class HomeActivity : AppCompatActivity() {
                 R.id.searchResultFragment -> hideBottomNav(true)
                 R.id.loginFragment -> hideBottomNav(true)
                 R.id.registerFragment -> hideBottomNav(true)
+                R.id.editProfileFragment -> hideBottomNav(true)
+                R.id.confirmationTicketFragment -> hideBottomNav(true)
+                R.id.detailTicketFragment -> hideBottomNav(true)
                 else -> hideBottomNav(false)
             }
         }

@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.tickets.SearchTickets
 import com.binar.gosky.databinding.FragmentHomeBinding
+import com.binar.gosky.presentation.ui.auth.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,6 +24,8 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: LoginViewModel by viewModels()
 
     var category: String = ONE_WAY
     var from: String = ""
@@ -71,6 +75,7 @@ class HomeFragment : Fragment() {
         binding.etTo.setAdapter(arrayAdapter)
         departureTime = getTimeStamp(year, month, day)
         returnTime = getTimeStamp(year, month, day)
+
     }
 
     private fun setOnClickListener() {

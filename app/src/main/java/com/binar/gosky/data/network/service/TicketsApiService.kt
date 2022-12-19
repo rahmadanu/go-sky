@@ -2,6 +2,8 @@ package com.binar.gosky.data.network.service
 
 import com.binar.gosky.data.network.model.tickets.Tickets
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TicketsApiService {
@@ -13,6 +15,12 @@ interface TicketsApiService {
         @Query("to") to: String,
         @Query("departureTime") departureTime: String = DEPARTURE_TIME,
         @Query("returnTime") returnTime: String = RETURN_TIME,
+    ): Tickets
+
+    @GET(ApiEndPoints.GET_TICKETS_BY_ID_ENDPOINT)
+    suspend fun getTicketById(
+        @Header("Authorization") accessToken: String,
+        @Path("id") id: Int
     ): Tickets
 
     companion object {

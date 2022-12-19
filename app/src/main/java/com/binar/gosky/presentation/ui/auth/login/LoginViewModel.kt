@@ -5,10 +5,12 @@ import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestRespons
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.data.repository.AuthRepository
 import com.binar.gosky.data.repository.UserRepository
+import com.binar.gosky.util.SingleLiveEvent
 import com.binar.gosky.wrapper.Resource
+import com.bumptech.glide.Glide.init
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,6 +19,12 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
 
     private var _postLoginUserResponse = MutableLiveData<Resource<LoginRegisterRequestResponse>>()
     val postLoginUserResponse: LiveData<Resource<LoginRegisterRequestResponse>> get() = _postLoginUserResponse
+
+    val loginStatus = SingleLiveEvent<Boolean>()
+
+    init {
+        getUserLoginStatus()
+    }
 
     fun postLoginUser(loginRequestBody: LoginRequestBody) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -33,7 +41,17 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
         }
     }
 
-    fun getUserLoginStatus(): LiveData<Boolean> {
-        return userRepository.getUserLoginStatus().asLiveData()
+    private fun getUserLoginStatus(){
+        viewModelScope.launch {
+            userRepository.getUserLoginStatus().collectLatest {
+                loginStatus.value = it
+            }
+        }
+    }
+
+    fun setUserAccessToken(accessToken: String) {
+        viewModelScope.launch {
+            userRepository.setUserAccessToken(accessToken)
+        }
     }
 }

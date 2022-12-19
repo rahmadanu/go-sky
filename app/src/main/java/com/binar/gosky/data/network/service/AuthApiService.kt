@@ -4,8 +4,10 @@ import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestRespons
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.data.network.model.auth.otp.OtpResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
+import com.binar.gosky.data.network.model.auth.user.CurrentUserResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -16,6 +18,11 @@ interface AuthApiService {
         @Query("email") email: String
     ): OtpResponse
 
+    @GET(ApiEndPoints.GET_WHO_AM_I)
+    suspend fun getCurrentUser(
+        @Header("Authorization") accessToken: String,
+    ): CurrentUserResponse
+
     @POST(ApiEndPoints.POST_REGISTER)
     suspend fun postRegisterUser(
         @Body registerRequestBody: RegisterRequestBody
@@ -25,4 +32,5 @@ interface AuthApiService {
     suspend fun postLoginUser(
         @Body loginRequestBody: LoginRequestBody
     ): LoginRegisterRequestResponse
+
 }

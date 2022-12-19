@@ -5,12 +5,15 @@ import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestRespons
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.data.network.model.auth.otp.OtpResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
+import com.binar.gosky.data.network.model.auth.user.CurrentUserResponse
 import com.binar.gosky.wrapper.Resource
 import retrofit2.HttpException
 import javax.inject.Inject
 
 interface AuthRepository {
     suspend fun getOtp(email: String): Resource<OtpResponse>
+    suspend fun getCurrentUser(accessToken: String): Resource<CurrentUserResponse>
+
     suspend fun postRegisterUser(registerRequestBody: RegisterRequestBody): Resource<LoginRegisterRequestResponse>
     suspend fun postLoginUser(loginRequestBody: LoginRequestBody): Resource<LoginRegisterRequestResponse>
 }
@@ -20,6 +23,12 @@ class AuthRepositoryImpl @Inject constructor(private val dataSource: AuthRemoteD
     override suspend fun getOtp(email: String): Resource<OtpResponse> {
         return proceed {
             dataSource.getOtp(email)
+        }
+    }
+
+    override suspend fun getCurrentUser(accessToken: String): Resource<CurrentUserResponse> {
+        return proceed {
+            dataSource.getCurrentUser(accessToken)
         }
     }
 

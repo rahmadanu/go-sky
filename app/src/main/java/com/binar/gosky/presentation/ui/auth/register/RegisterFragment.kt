@@ -42,7 +42,10 @@ class RegisterFragment : Fragment() {
             registerUser()
         }
         binding.ivBack.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            findNavController().navigateUp()
+        }
+        binding.tvLogin.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 
