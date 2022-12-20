@@ -1,23 +1,16 @@
 package com.binar.gosky.presentation.ui.notification.adapter
 
-import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.binar.gosky.R
 import com.binar.gosky.data.network.model.notification.NotificationData
-import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.databinding.ItemNotificationBinding
-import com.binar.gosky.databinding.ItemTripBinding
 import com.binar.gosky.util.ConvertUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-class NotificationAdapter(private val itemClick: () -> Unit) :
+class NotificationAdapter(private val itemClick: (Int) -> Unit) :
     RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>() {
     private val diffCallback = object : DiffUtil.ItemCallback<NotificationData>() {
         override fun areItemsTheSame(oldItem: NotificationData, newItem: NotificationData): Boolean {
@@ -48,7 +41,7 @@ class NotificationAdapter(private val itemClick: () -> Unit) :
 
     inner class NotificationViewHolder(
         private val binding: ItemNotificationBinding,
-        private val itemClick: () -> Unit
+        private val itemClick: (Int) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: NotificationData) {
@@ -56,6 +49,19 @@ class NotificationAdapter(private val itemClick: () -> Unit) :
                 with(item) {
                     tvNotificationDate.text = ConvertUtil.convertISOtoDay(createdAt)
                     tvNotificationMessage.text = message
+
+                    isRead?.let {
+                        if (it) {
+                            clNotificationItem.setBackgroundResource(R.color.tropical_blue)
+                        }
+                    }
+
+                    itemView.setOnClickListener {
+                        id?.let {
+                            clNotificationItem.setBackgroundResource(R.color.tropical_blue)
+                            itemClick(it)
+                        }
+                    }
                 }
             }
         }

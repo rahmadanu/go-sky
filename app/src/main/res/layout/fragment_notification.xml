@@ -48,40 +48,6 @@
                     app:layout_constraintTop_toTopOf="@id/iv_back"
                     android:text="Notification" />
 
-
-                <FrameLayout
-                    style="?attr/actionButtonStyle"
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:focusable="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/iv_back"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_back">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_notifications"/>
-
-                    <TextView
-                        android:id="@+id/tv_cart_badge_count"
-                        android:layout_width="17dp"
-                        android:layout_height="17dp"
-                        android:layout_gravity="right|end|top"
-                        android:layout_marginEnd="-5dp"
-                        android:layout_marginRight="-5dp"
-                        android:layout_marginTop="3dp"
-                        android:background="@drawable/badge_background"
-                        android:gravity="center"
-                        android:textColor="@android:color/white"
-                        tools:text="1"
-                        android:textSize="10sp"/>
-
-                </FrameLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -97,7 +63,7 @@
         tools:listitem="@layout/item_notification"/>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_go_sky_logo"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="180dp"
@@ -108,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_empty_notification_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -116,12 +82,12 @@
         android:textColor="#1E1E1E"
         android:textSize="16sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_go_sky_logo"
+        app:layout_constraintStart_toStartOf="@+id/iv_go_sky_logo"
+        app:layout_constraintTop_toBottomOf="@+id/iv_go_sky_logo" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_empty_notification_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -133,7 +99,16 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_empty_notification_title" />
 
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

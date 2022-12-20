@@ -20,11 +20,18 @@ class NotificationViewModel @Inject constructor(
     val notificationResponse: LiveData<Resource<NotificationResponse>> get() = _notificationResponse
 
     fun getNotification(accessToken: String) {
+        _notificationResponse.postValue(Resource.Loading())
         viewModelScope.launch(Dispatchers.IO) {
             val response = notificationRepository.getNotification(accessToken)
             viewModelScope.launch(Dispatchers.Main) {
                 _notificationResponse.postValue(response)
             }
+        }
+    }
+
+    fun putNotificationRead(accessToken: String, notificationId: Int) {
+        viewModelScope.launch {
+            notificationRepository.putNotificationRead(accessToken, notificationId)
         }
     }
 

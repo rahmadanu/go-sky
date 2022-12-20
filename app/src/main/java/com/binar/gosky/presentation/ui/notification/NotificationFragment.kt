@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -29,8 +30,12 @@ class NotificationFragment : Fragment() {
     private val viewModel: NotificationViewModel by viewModels()
 
     private val adapter: NotificationAdapter by lazy {
-        NotificationAdapter{}
+        NotificationAdapter{ notificationId ->
+            viewModel.putNotificationRead(getString(R.string.bearer_token, accessToken), notificationId)
+        }
     }
+
+    private lateinit var accessToken: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +49,8 @@ class NotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initList()
         observeData()
+        initList()
         setOnClickListener()
     }
 
@@ -57,22 +62,47 @@ class NotificationFragment : Fragment() {
 
     private fun observeData() {
         viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+            accessToken = it
             viewModel.getNotification(getString(R.string.bearer_token, it))
         }
         viewModel.notificationResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
+                    setLoading(false)
                     adapter.submitList(it.payload?.data)
-                    it.payload?.meta?.count?.let { count -> setBadgeNumber(count) }
                     Log.d("notification", it.payload?.data.toString())
+                    if (it.payload?.data.isNullOrEmpty()) {
+                        setNotificationEmpty(true)
+                    } else {
+                        setNotificationEmpty(false)
+                    }
+                }
+                is Resource.Loading -> {
+                    setLoading(true)
                 }
                 else -> {}
             }
         }
     }
 
-    private fun setBadgeNumber(count: Int) {
-        binding.tvCartBadgeCount.text = count.toString()
+    private fun setLoading(isVisible: Boolean) {
+        binding.pbLoading.isVisible = isVisible
+    }
+
+    private fun setNotificationEmpty(setTrue: Boolean) {
+        binding.apply {
+            if (setTrue) {
+                rvNotification.isVisible = false
+                ivGoSkyLogo.isVisible = true
+                tvEmptyNotificationTitle.isVisible = true
+                tvEmptyNotificationMessage.isVisible = true
+            } else {
+                rvNotification.isVisible = true
+                ivGoSkyLogo.isVisible = false
+                tvEmptyNotificationTitle.isVisible = false
+                tvEmptyNotificationMessage.isVisible = false
+            }
+        }
     }
 
     private fun initList() {
