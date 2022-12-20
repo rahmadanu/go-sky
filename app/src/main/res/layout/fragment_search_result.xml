@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/tropical_blue"
     tools:context=".presentation.ui.search.SearchResultFragment">
 
@@ -48,20 +48,20 @@
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/ic_back"
                         app:layout_constraintStart_toEndOf="@id/ic_back"
                         app:layout_constraintTop_toTopOf="@id/ic_back"
-                        app:layout_constraintBottom_toBottomOf="@id/ic_back"
-                        tools:text="Jakarta ke Batam" />
-<!--
-                    <TextView
-                        android:id="@+id/txt_departure"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="@color/white"
-                        app:layout_constraintTop_toBottomOf="@id/txt_flight"
-                        app:layout_constraintStart_toStartOf="@id/txt_flight"
-                        tools:text="01 Desember 2022"/>-->
+                        tools:text="Jakarta to Batam" />
+                    <!--
+                                        <TextView
+                                            android:id="@+id/txt_departure"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="12sp"
+                                            android:textColor="@color/white"
+                                            app:layout_constraintTop_toBottomOf="@id/txt_flight"
+                                            app:layout_constraintStart_toStartOf="@id/txt_flight"
+                                            tools:text="01 Desember 2022"/>-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.appbar.MaterialToolbar>
@@ -74,17 +74,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_bar"
-            tools:listitem="@layout/item_trip"/>
+            tools:listitem="@layout/item_trip" />
 
         <ProgressBar
             android:id="@+id/pb_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_no_flights"
@@ -94,10 +94,10 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
