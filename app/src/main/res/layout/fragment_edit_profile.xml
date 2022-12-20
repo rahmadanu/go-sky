@@ -48,7 +48,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/iv_back"
                     app:layout_constraintStart_toEndOf="@id/iv_back"
                     app:layout_constraintTop_toTopOf="@id/iv_back"
-                    android:text="Detail Akun" />
+                    android:text="Account Details" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.MaterialToolbar>
@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="18dp"
                         android:layout_marginTop="20dp"
-                        android:text="Info Pemilik Akun"
+                        android:text="Account Owner Info"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -177,7 +177,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="18dp"
                         android:layout_marginTop="20dp"
-                        android:text="Email &amp; Nomor Ponsel "
+                        android:text="Email &amp; Phone Number "
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -219,7 +219,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="40dp"
-                        android:hint="No Telp"
+                        android:hint="Phone Number"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -263,7 +263,7 @@
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="20dp"
                         android:backgroundTint="@color/cerulean_blue"
-                        android:text="Simpan"
+                        android:text="Save"
                         android:textAllCaps="false"
                         android:textSize="14sp"
                         android:textStyle="bold"
