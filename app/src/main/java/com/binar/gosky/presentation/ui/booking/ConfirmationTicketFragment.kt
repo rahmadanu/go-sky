@@ -155,6 +155,7 @@ class ConfirmationTicketFragment : Fragment() {
                 tvToDeparture.text = to
                 tvDepartureTimeDepartureDateDay.text = convertISOtoDay(departureTime)
                 tvDepartureTimeDeparture.text = convertISOtoHour(departureTime)
+                tvArrivalTimeDeparture.text = duration?.let { convertISOtoHour(departureTime, it) }
                 Glide.with(requireContext())
                     .load(imageUrl)
                     .into(ivImageDeparture)
@@ -179,6 +180,7 @@ class ConfirmationTicketFragment : Fragment() {
                     tvFromReturn.text = to
                     tvToReturn.text = from
                     tvDepartureTimeReturn.text = convertISOtoHour(returnTime)
+                    tvArrivalTimeReturn.text = duration?.let { convertISOtoHour(returnTime, it) }
                     Glide.with(requireContext())
                         .load(imageUrl)
                         .into(ivImageReturn)

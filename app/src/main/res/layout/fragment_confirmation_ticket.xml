@@ -321,6 +321,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         tools:text="15:50"
+                                        android:textAlignment="textEnd"
                                         android:textColor="@color/black"
                                         android:textSize="12sp" />
 
@@ -521,6 +522,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         tools:text="15:50"
+                                        android:textAlignment="textEnd"
                                         android:textColor="@color/black"
                                         android:textSize="12sp" />
 

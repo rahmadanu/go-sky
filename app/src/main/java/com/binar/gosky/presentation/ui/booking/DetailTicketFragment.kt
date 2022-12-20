@@ -74,6 +74,8 @@ class DetailTicketFragment : Fragment() {
                 tvToDeparture.text = to
                 tvDepartureTimeDepartureDateDay.text = ConvertUtil.convertISOtoDay(departureTime)
                 tvDepartureTimeDeparture.text = ConvertUtil.convertISOtoHour(departureTime)
+                tvArrivalTimeDeparture.text =
+                    duration?.let { ConvertUtil.convertISOtoHour(departureTime, it) }
                 Glide.with(requireContext())
                     .load(imageUrl)
                     .into(ivImageDeparture)
@@ -102,6 +104,8 @@ class DetailTicketFragment : Fragment() {
                     tvFromReturn.text = to
                     tvToReturn.text = from
                     tvDepartureTimeReturn.text = ConvertUtil.convertISOtoHour(returnTime)
+                    tvArrivalTimeReturn.text =
+                        duration?.let { ConvertUtil.convertISOtoHour(returnTime, it) }
                     Glide.with(requireContext())
                         .load(imageUrl)
                         .into(ivImageReturn)
