@@ -1,6 +1,7 @@
 package com.binar.gosky.data.network.model.tickets
 
 
+import com.binar.gosky.data.network.model.Meta
 import com.google.gson.annotations.SerializedName
 
 data class Tickets(

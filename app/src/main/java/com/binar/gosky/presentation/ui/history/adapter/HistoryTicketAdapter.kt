@@ -1,7 +1,10 @@
 package com.binar.gosky.presentation.ui.history.adapter
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +36,7 @@ class HistoryTicketAdapter(private val itemClick: (TransactionListData) -> Unit)
         return HistoryTicketViewHolder(binding, itemClick)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: HistoryTicketAdapter.HistoryTicketViewHolder, position: Int) {
         holder.bind(differ.currentList[position])
     }
@@ -43,9 +47,10 @@ class HistoryTicketAdapter(private val itemClick: (TransactionListData) -> Unit)
         private val binding: ItemHistoryTicketBinding,
         private val itemClick: (TransactionListData) -> Unit
     ): RecyclerView.ViewHolder(binding.root) {
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(item: TransactionListData) {
             with(binding) {
-                with(item) {
+                item.ticket?.apply {
                     Glide.with(itemView)
                         .load(imageUrl)
                         .into(ivImage)
@@ -53,9 +58,26 @@ class HistoryTicketAdapter(private val itemClick: (TransactionListData) -> Unit)
                     tvTo.text = to
                     tvCategory.text = category
                     tvFlightNumber.text = flightNumber
-                    tvDepartureTimeDeparture.text = ConvertUtil.convertISOtoHour(departureTime)
-                    tvDepartureTimeReturn.text = ConvertUtil.convertISOtoHour(returnTime)
-                    tvTicketPrice.text = ConvertUtil.convertRupiah(price)
+                    tvDepartureTimeDeparture.text = ConvertUtil.convertISOtoDate(departureTime)
+                    tvArrivalTimeDeparture.text = duration?.let { ConvertUtil.convertISOtoDate(departureTime, duration) }
+                    tvDurationDeparture.text = duration?.let {
+                        ConvertUtil.convertMinutesToHourAndMinutes(
+                            it
+                        )
+                    }
+                    tvTicketPrice.text = ConvertUtil.convertRupiah((price?.times(item.amount!!)))
+                    if (returnTime.isNullOrEmpty()) {
+                        tvDepartureTimeReturn.isVisible = false
+                        tvArrivalTimeReturn.isVisible = false
+                        tvReturnLabel.isVisible = false
+                    } else {
+                        tvDepartureTimeReturn.text = ConvertUtil.convertISOtoHour(returnTime)
+                        tvArrivalTimeReturn.text = duration?.let {
+                            ConvertUtil.convertISOtoDate(
+                                returnTime
+                            )
+                        }
+                    }
                 }
             }
         }

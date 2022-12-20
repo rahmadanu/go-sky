@@ -169,14 +169,6 @@
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="06 Mar"
-                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                        android:textColor="@color/black"
-                        android:textSize="10sp" />
-
                 </LinearLayout>
 
                 <View
@@ -210,14 +202,6 @@
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="06 Mar"
-                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                        android:textColor="@color/black"
-                        android:textSize="10sp" />
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -230,6 +214,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_return_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Return"
@@ -259,14 +244,6 @@
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="06 Mar"
-                        android:textColor="@color/black"
-                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                        android:textSize="10sp" />
 
                 </LinearLayout>
 
@@ -300,14 +277,6 @@
                         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="06 Mar"
-                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                        android:textColor="@color/black"
-                        android:textSize="10sp" />
 
                 </LinearLayout>
 

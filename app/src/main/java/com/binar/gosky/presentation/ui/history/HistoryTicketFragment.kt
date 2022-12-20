@@ -59,7 +59,7 @@ class HistoryTicketFragment : Fragment() {
     }
 
     private fun observeData() {
-/*        viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+        viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
             getTransactionList(getString(R.string.bearer_token, it))
         }
         viewModel.transactionListResponse.observe(viewLifecycleOwner) {
@@ -70,7 +70,7 @@ class HistoryTicketFragment : Fragment() {
                 }
                 else -> {}
             }
-        }*/
+        }
     }
 
     override fun onDestroyView() {

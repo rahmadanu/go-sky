@@ -1,4 +1,4 @@
-package com.binar.gosky.data.network.model.tickets
+package com.binar.gosky.data.network.model
 
 
 import com.google.gson.annotations.SerializedName
