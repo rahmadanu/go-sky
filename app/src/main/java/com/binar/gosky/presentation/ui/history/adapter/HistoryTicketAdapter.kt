@@ -71,7 +71,7 @@ class HistoryTicketAdapter(private val itemClick: (TransactionListData) -> Unit)
                         tvArrivalTimeReturn.isVisible = false
                         tvReturnLabel.isVisible = false
                     } else {
-                        tvDepartureTimeReturn.text = ConvertUtil.convertISOtoHour(returnTime)
+                        tvDepartureTimeReturn.text = ConvertUtil.convertISOtoDate(returnTime)
                         tvArrivalTimeReturn.text = duration?.let {
                             ConvertUtil.convertISOtoDate(
                                 returnTime
