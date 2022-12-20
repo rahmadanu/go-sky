@@ -8,18 +8,18 @@ import retrofit2.http.Path
 import javax.inject.Inject
 
 interface NotificationRemoteDataSource {
-    suspend fun getNotification(): NotificationResponse
-    suspend fun putNotificationRead(notificationId: Int)
+    suspend fun getNotification(accessToken: String): NotificationResponse
+    suspend fun putNotificationRead(accessToken: String, notificationId: Int)
 }
 
 class NotificationRemoteDataSourceImpl @Inject constructor(private val apiService: NotificationApiService) :
     NotificationRemoteDataSource {
-    override suspend fun getNotification(): NotificationResponse {
-        return apiService.getNotification()
+    override suspend fun getNotification(accessToken: String): NotificationResponse {
+        return apiService.getNotification(accessToken)
     }
 
-    override suspend fun putNotificationRead(notificationId: Int) {
-        apiService.putNotificationRead(notificationId)
+    override suspend fun putNotificationRead(accessToken: String, notificationId: Int) {
+        apiService.putNotificationRead(accessToken, notificationId)
     }
 
 }

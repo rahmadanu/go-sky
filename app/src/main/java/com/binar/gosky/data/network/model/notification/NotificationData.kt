@@ -12,8 +12,8 @@ data class NotificationData(
     val id: Int? = null,
     @SerializedName("isRead")
     val isRead: Any? = null,
-    @SerializedName("messaage")
-    val messaage: String? = null,
+    @SerializedName("message")
+    val message: String? = null,
     @SerializedName("updatedAt")
     val updatedAt: String? = null,
     @SerializedName("userId")

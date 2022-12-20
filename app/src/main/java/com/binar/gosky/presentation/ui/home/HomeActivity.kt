@@ -48,6 +48,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.editProfileFragment -> hideBottomNav(true)
                 R.id.confirmationTicketFragment -> hideBottomNav(true)
                 R.id.detailTicketFragment -> hideBottomNav(true)
+                R.id.notificationFragment -> hideBottomNav(true)
                 else -> hideBottomNav(false)
             }
         }

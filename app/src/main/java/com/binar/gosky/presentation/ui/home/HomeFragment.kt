@@ -105,6 +105,9 @@ class HomeFragment : Fragment() {
                 parseFormIntoEntity(category, from, to, departureTime, returnTime, roundTrip)
             navigateToSearchResult(searchTickets)
         }
+        binding.ivNotification.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
+        }
     }
 
     private fun showDatePickerDialog(id: Int) {

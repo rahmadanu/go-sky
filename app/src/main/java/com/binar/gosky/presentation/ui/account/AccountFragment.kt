@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.user.CurrentUserData
 import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
 import com.binar.gosky.databinding.FragmentAccountBinding
@@ -54,7 +55,14 @@ class AccountFragment : Fragment() {
                 //viewModel.setUserAccessToken("")
                 navigateToLogin()
             }
+            ivNotification.setOnClickListener {
+                navigateToNotification()
+            }
         }
+    }
+
+    private fun navigateToNotification() {
+        findNavController().navigate(R.id.action_accountFragment_to_notificationFragment)
     }
 
     private fun navigateToEditProfile() {

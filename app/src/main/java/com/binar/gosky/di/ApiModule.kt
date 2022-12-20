@@ -1,7 +1,9 @@
 package com.binar.gosky.di
 
 import android.content.Context
+import androidx.lifecycle.asLiveData
 import com.binar.gosky.BuildConfig
+import com.binar.gosky.data.local.preference.UserDataStoreManager
 import com.binar.gosky.data.network.service.*
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
@@ -34,6 +36,14 @@ object ApiModule {
             .addInterceptor(chuckerInterceptor)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+/*            .followRedirects(true)
+            .followSslRedirects(true)
+            .addInterceptor { chain ->
+                val newRequest = chain.request().newBuilder()
+                    .addHeader("Authorization", "Bearer $accessToken")
+                    .build()
+                chain.proceed(newRequest)
+            }*/
             .build()
     }
 

@@ -30,5 +30,5 @@ abstract class DataSourceModule {
     abstract fun provideUserRemoteDataSource(userRemoteDataSourceImpl: UserRemoteDataSourceImpl): UserRemoteDataSource
 
     @Binds
-    abstract fun provideNotificationRemoteDataSource(notificationRepositoryImpl: NotificationRepositoryImpl): NotificationRepository
+    abstract fun provideNotificationRemoteDataSource(notificationRemoteDataSourceImpl: NotificationRemoteDataSourceImpl): NotificationRemoteDataSource
 }

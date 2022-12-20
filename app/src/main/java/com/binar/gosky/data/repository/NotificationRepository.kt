@@ -7,20 +7,20 @@ import com.binar.gosky.wrapper.Resource
 import javax.inject.Inject
 
 interface NotificationRepository {
-    suspend fun getNotification(): Resource<NotificationResponse>
-    suspend fun putNotificationRead(notificationId: Int)
+    suspend fun getNotification(accessToken: String): Resource<NotificationResponse>
+    suspend fun putNotificationRead(accessToken: String, notificationId: Int)
 }
 
 class NotificationRepositoryImpl @Inject constructor(private val dataSource: NotificationRemoteDataSource) :
     NotificationRepository {
-    override suspend fun getNotification(): Resource<NotificationResponse> {
+    override suspend fun getNotification(accessToken: String): Resource<NotificationResponse> {
         return proceed {
-            dataSource.getNotification()
+            dataSource.getNotification(accessToken)
         }
     }
 
-    override suspend fun putNotificationRead(notificationId: Int) {
-        dataSource.putNotificationRead(notificationId)
+    override suspend fun putNotificationRead(accessToken: String, notificationId: Int) {
+        dataSource.putNotificationRead(accessToken, notificationId)
     }
 
 }
