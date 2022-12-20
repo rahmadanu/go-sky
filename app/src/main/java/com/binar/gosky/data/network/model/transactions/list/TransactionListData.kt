@@ -4,38 +4,22 @@ package com.binar.gosky.data.network.model.transactions.list
 import com.google.gson.annotations.SerializedName
 
 data class TransactionListData(
-    @SerializedName("category")
-    val category: String? = null,
+    @SerializedName("amount")
+    val amount: Int? = null,
+    @SerializedName("bookingCode")
+    val bookingCode: String? = null,
     @SerializedName("createdAt")
     val createdAt: String? = null,
-    @SerializedName("createdBy")
-    val createdBy: Int? = null,
     @SerializedName("deletedAt")
-    val deletedAt: String? = null,
-    @SerializedName("departureTime")
-    val departureTime: String? = null,
-    @SerializedName("description")
-    val description: String? = null,
-    @SerializedName("flightNumber")
-    val flightNumber: String? = null,
-    @SerializedName("from")
-    val from: String? = null,
+    val deletedAt: Any? = null,
     @SerializedName("id")
     val id: Int? = null,
-    @SerializedName("imageId")
-    val imageId: String? = null,
-    @SerializedName("imageUrl")
-    val imageUrl: String? = null,
-    @SerializedName("price")
-    val price: Int? = null,
-    @SerializedName("returnTime")
-    val returnTime: String? = null,
-    @SerializedName("to")
-    val to: String? = null,
+    @SerializedName("ticket")
+    val ticket: TransactionTicketItem? = null,
+    @SerializedName("ticketId")
+    val ticketId: Int? = null,
     @SerializedName("updatedAt")
     val updatedAt: String? = null,
-    @SerializedName("updatedBy")
-    val updatedBy: Int? = null,
-    @SerializedName("wishlisted")
-    val wishlisted: Boolean? = null
+    @SerializedName("userId")
+    val userId: Int? = null
 )
