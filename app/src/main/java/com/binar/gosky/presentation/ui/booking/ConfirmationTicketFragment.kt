@@ -16,7 +16,6 @@ import com.binar.gosky.R
 import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionData
 import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionRequestBody
 import com.binar.gosky.data.network.model.users.data.UserByIdData
-import com.binar.gosky.data.network.model.users.data.UserByIdResponse
 import com.binar.gosky.databinding.FragmentConfirmationTicketBinding
 import com.binar.gosky.util.ConvertUtil.convertISOtoDay
 import com.binar.gosky.util.ConvertUtil.convertISOtoHour
@@ -155,6 +154,7 @@ class ConfirmationTicketFragment : Fragment() {
                 tvToDeparture.text = to
                 tvDepartureTimeDepartureDateDay.text = convertISOtoDay(departureTime)
                 tvDepartureTimeDeparture.text = convertISOtoHour(departureTime)
+                tvArrivalTimeDeparture.text = duration?.let { convertISOtoHour(departureTime, it) }
                 Glide.with(requireContext())
                     .load(imageUrl)
                     .into(ivImageDeparture)
@@ -179,6 +179,7 @@ class ConfirmationTicketFragment : Fragment() {
                     tvFromReturn.text = to
                     tvToReturn.text = from
                     tvDepartureTimeReturn.text = convertISOtoHour(returnTime)
+                    tvArrivalTimeReturn.text = duration?.let { convertISOtoHour(returnTime, it) }
                     Glide.with(requireContext())
                         .load(imageUrl)
                         .into(ivImageReturn)

@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_homeFragment_to_historyTicketFragment"
             app:destination="@id/historyTicketFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
@@ -45,6 +48,9 @@
         <action
             android:id="@+id/action_accountFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -91,7 +97,7 @@
             app:argType="com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionData" />
         <action
             android:id="@+id/action_detailTicketFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:popUpTo="@id/homeFragment" />
         <argument
             android:name="totalPrice"
             app:argType="integer" />
@@ -104,4 +110,9 @@
         android:name="com.binar.gosky.presentation.ui.history.HistoryTicketFragment"
         android:label="fragment_history_ticket"
         tools:layout="@layout/fragment_history_ticket" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.binar.gosky.presentation.ui.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>

@@ -24,13 +24,14 @@ object ConvertUtil {
         return formatter.format(intPrice)
     }
 
-    fun convertISOtoDate(isoString: String?): String {
+    fun convertISOtoDate(isoString: String?, duration: Long = 0L): String {
         val localeID = Locale("in", "ID")
         var formattedDate = ""
         val cal = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", localeID)
         try {
             cal.time = dateFormat.parse(isoString)
+            cal.add(Calendar.MINUTE, duration.toInt())
             val c = cal.time
             val dformat = SimpleDateFormat("dd MMM yyyy\nHH:mm", localeID)
             formattedDate = dformat.format(c)
@@ -56,13 +57,14 @@ object ConvertUtil {
         return formattedDate
     }
 
-    fun convertISOtoHour(isoString: String?): String {
+    fun convertISOtoHour(isoString: String?, duration: Long = 0L): String {
         val localeID = Locale("in", "ID")
         var formattedDate = ""
         val cal = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", localeID)
         try {
             cal.time = dateFormat.parse(isoString)
+            cal.add(Calendar.MINUTE, duration.toInt())
             val c = cal.time
             val dformat = SimpleDateFormat("HH:mm", localeID)
             formattedDate = dformat.format(c)

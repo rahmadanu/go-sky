@@ -64,6 +64,7 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
                     tvTo.text = to
                     tvTicketPrice.text = convertRupiah(price)
                     tvDepartureTime.text = convertISOtoDate(departureTime)
+                    tvArrivalTime.text = duration?.let { convertISOtoDate(departureTime, it) }
                     tvDurationDeparture.text = duration?.let { convertMinutesToHourAndMinutes(it) }
                     tvDurationReturn.text = duration?.let { convertMinutesToHourAndMinutes(it) }
                     Log.d("duration", duration.toString())
@@ -75,6 +76,11 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
                         tvDurationReturn.isVisible = false
                     } else {
                         tvReturnTime.text = convertISOtoDate(returnTime)
+                        tvArrivalTimeReturn.text = duration?.let {
+                            convertISOtoDate(returnTime,
+                                it
+                            )
+                        }
                         tvFromReturn.text = to
                         tvToReturn.text = from
                     }

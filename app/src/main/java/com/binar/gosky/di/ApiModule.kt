@@ -1,11 +1,10 @@
 package com.binar.gosky.di
 
 import android.content.Context
+import androidx.lifecycle.asLiveData
 import com.binar.gosky.BuildConfig
-import com.binar.gosky.data.network.service.AuthApiService
-import com.binar.gosky.data.network.service.TicketsApiService
-import com.binar.gosky.data.network.service.UserApiService
-import com.binar.gosky.data.network.service.TransactionsApiService
+import com.binar.gosky.data.local.preference.UserDataStoreManager
+import com.binar.gosky.data.network.service.*
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
 import dagger.Provides
@@ -37,6 +36,14 @@ object ApiModule {
             .addInterceptor(chuckerInterceptor)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+/*            .followRedirects(true)
+            .followSslRedirects(true)
+            .addInterceptor { chain ->
+                val newRequest = chain.request().newBuilder()
+                    .addHeader("Authorization", "Bearer $accessToken")
+                    .build()
+                chain.proceed(newRequest)
+            }*/
             .build()
     }
 
@@ -72,5 +79,11 @@ object ApiModule {
     @Singleton
     fun provideUserApiService(retrofit: Retrofit): UserApiService {
         return retrofit.create(UserApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNotificationApiService(retrofit: Retrofit): NotificationApiService {
+        return retrofit.create(NotificationApiService::class.java)
     }
 }

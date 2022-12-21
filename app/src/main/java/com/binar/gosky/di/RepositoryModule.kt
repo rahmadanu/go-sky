@@ -25,4 +25,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideTransactionsRepository(transactionsRepositoryImpl: TransactionsRepositoryImpl): TransactionsRepository
+
+    @Binds
+    abstract fun provideNotificationRepository(notificationRepositoryImpl: NotificationRepositoryImpl): NotificationRepository
 }

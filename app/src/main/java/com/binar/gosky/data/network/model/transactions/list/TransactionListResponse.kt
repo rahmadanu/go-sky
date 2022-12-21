@@ -1,7 +1,7 @@
 package com.binar.gosky.data.network.model.transactions.list
 
 
-import com.binar.gosky.data.network.model.transactions.Meta
+import com.binar.gosky.data.network.model.Meta
 import com.google.gson.annotations.SerializedName
 
 data class TransactionListResponse(

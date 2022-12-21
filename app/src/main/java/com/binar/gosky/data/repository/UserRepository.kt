@@ -6,6 +6,7 @@ import com.binar.gosky.data.network.model.users.data.UserByIdResponse
 import com.binar.gosky.data.network.model.users.edit.EditEmailUserRequestBody
 import com.binar.gosky.data.network.model.users.edit.EditEmailUserResponse
 import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
+import com.binar.gosky.util.proceed
 import com.binar.gosky.wrapper.Resource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -59,14 +60,6 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun getUserById(userId: Int): Resource<UserByIdResponse> {
         return proceed {
             userRemoteDataSource.getUserById(userId)
-        }
-    }
-
-    private suspend fun <T> proceed(coroutines: suspend () -> T): Resource<T> {
-        return try {
-            Resource.Success(coroutines.invoke())
-        } catch (e: Exception) {
-            Resource.Error(e, e.message)
         }
     }
 }
