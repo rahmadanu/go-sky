@@ -97,7 +97,7 @@
             app:argType="com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionData" />
         <action
             android:id="@+id/action_detailTicketFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:popUpTo="@id/homeFragment" />
         <argument
             android:name="totalPrice"
             app:argType="integer" />

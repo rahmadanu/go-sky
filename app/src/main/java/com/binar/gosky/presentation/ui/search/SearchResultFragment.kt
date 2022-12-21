@@ -32,6 +32,11 @@ class SearchResultFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        getTickets()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,17 +49,22 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getArgumentsFromHome()
+        initView()
         initList()
         observeData()
         setOnClickListener()
     }
 
-    private fun getArgumentsFromHome() {
-        args.searchTickets.let {
-            binding.apply {
+    private fun initView() {
+        binding.apply {
+            args.searchTickets.let {
                 txtFlight.text = getString(R.string.from_to_to, it.from, it.to)
             }
+        }
+    }
+
+    private fun getTickets() {
+        args.searchTickets.let {
             viewModel.getTickets(
                 it.category,
                 it.from,
@@ -89,9 +99,9 @@ class SearchResultFragment : Fragment() {
                     binding.rcvTrip.visibility = View.VISIBLE
                 }
                 is Resource.Loading -> {
-                    binding.pbLoading.visibility = View.VISIBLE
                     binding.tvNoFlights.visibility = View.GONE
                     binding.rcvTrip.visibility = View.GONE
+                    binding.pbLoading.visibility = View.VISIBLE
                 }
                 is Resource.Error -> {}
                 is Resource.Empty -> {
