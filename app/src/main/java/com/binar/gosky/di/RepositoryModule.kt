@@ -18,4 +18,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
+
+    @Binds
+    abstract fun provideImageRepository(imageRepositoryImpl: ImageRepositoryImpl): ImageRepository
 }

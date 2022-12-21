@@ -13,4 +13,8 @@ object ApiEndPoints {
     // Users
     const val PUT_USER_DATA = "users"
     const val PUT_USER_EMAIL = "users/email"
+
+    // Image
+    const val POST_IMAGE = "images"
+    const val DELETE_IMAGE = "images"
 }

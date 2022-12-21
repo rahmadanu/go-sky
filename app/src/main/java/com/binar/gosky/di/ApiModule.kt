@@ -3,6 +3,7 @@ package com.binar.gosky.di
 import android.content.Context
 import com.binar.gosky.BuildConfig
 import com.binar.gosky.data.network.service.AuthApiService
+import com.binar.gosky.data.network.service.ImageApiService
 import com.binar.gosky.data.network.service.TicketsApiService
 import com.binar.gosky.data.network.service.UserApiService
 import com.chuckerteam.chucker.api.ChuckerInterceptor
@@ -65,5 +66,11 @@ object ApiModule {
     @Singleton
     fun provideUserApiService(retrofit: Retrofit): UserApiService {
         return retrofit.create(UserApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideImageApiService(retrofit: Retrofit): ImageApiService {
+        return retrofit.create(ImageApiService::class.java)
     }
 }
