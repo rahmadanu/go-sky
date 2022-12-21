@@ -123,9 +123,9 @@
                 android:id="@+id/tv_duration_departure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/iv_arrow_departure"
-                app:layout_constraintStart_toStartOf="@id/iv_arrow_departure"
                 app:layout_constraintEnd_toEndOf="@id/iv_arrow_departure"
+                app:layout_constraintStart_toStartOf="@id/iv_arrow_departure"
+                app:layout_constraintTop_toBottomOf="@id/iv_arrow_departure"
                 tools:text="1j 12m" />
             <!--return section-->
 
@@ -196,10 +196,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
-                app:layout_constraintTop_toBottomOf="@id/iv_arrow_return"
-                app:layout_constraintStart_toStartOf="@id/iv_arrow_return"
                 app:layout_constraintEnd_toEndOf="@id/iv_arrow_return"
+                app:layout_constraintStart_toStartOf="@id/iv_arrow_return"
+                app:layout_constraintTop_toBottomOf="@id/iv_arrow_return"
                 tools:text="1j 12m" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Update"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_from_return" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="Delete"
+                android:textAllCaps="false"
+                android:textColor="#F44336"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_to_return" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
