@@ -19,6 +19,7 @@ import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.databinding.FragmentLoginBinding
 import com.binar.gosky.presentation.ui.account.AccountViewModel
+import com.binar.gosky.presentation.ui.auth.register.RegisterViewModel
 import com.binar.gosky.presentation.ui.home.HomeActivity
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val loginViewModel: LoginViewModel by viewModels()
+    private val registerViewModel: RegisterViewModel by viewModels()
     private val accountViewModel: AccountViewModel by viewModels()
 
     override fun onCreateView(
@@ -60,7 +62,7 @@ class LoginFragment : Fragment() {
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), "${it.data?.status}: ${it.data?.message}", Toast.LENGTH_LONG).show()
                     Log.d("loginResponse", it.data.toString())
-                    it.data?.data?.accessToken?.let { accessToken -> loginViewModel.setUserAccessToken(accessToken) }
+                    it.data?.data?.accessToken?.let { accessToken -> registerViewModel.setUserAccessToken(accessToken) }
                     //it.data?.data?.accessToken?.let { accessToken -> accountViewModel.getCurrentUser("Bearer $accessToken") }
                     navigateToHome()
                 }

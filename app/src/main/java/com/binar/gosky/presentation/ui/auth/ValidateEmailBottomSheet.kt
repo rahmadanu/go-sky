@@ -20,6 +20,7 @@ import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.data.network.model.users.EditEmailUserRequestBody
 import com.binar.gosky.databinding.FragmentValidateEmailBottomSheetBinding
 import com.binar.gosky.presentation.ui.account.AccountViewModel
+import com.binar.gosky.presentation.ui.account.EditProfileViewModel
 import com.binar.gosky.presentation.ui.auth.login.LoginViewModel
 import com.binar.gosky.presentation.ui.auth.register.RegisterViewModel
 import com.binar.gosky.presentation.ui.home.HomeActivity
@@ -40,7 +41,7 @@ class ValidateEmailBottomSheet(
 
     private val registerViewModel: RegisterViewModel by viewModels()
     private val loginViewModel: LoginViewModel by viewModels()
-    private val accountViewModel: AccountViewModel by viewModels()
+    private val editProfileViewModel: EditProfileViewModel by viewModels()
 
     private var otp = ""
     private var otpToken = ""
@@ -83,22 +84,22 @@ class ValidateEmailBottomSheet(
                         dismiss()
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                         loginViewModel.setUserLogin(true)
+                        it.data?.data?.accessToken?.let { accessToken -> loginViewModel.setUserAccessToken(accessToken) }
+
                         navigateToHome()
                     }/* else if (it.data?.status.equals("error")) {
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                     }*/
-                    it.data?.data?.accessToken?.let { accessToken ->
-                        loginViewModel.setUserAccessToken(
-                            accessToken
-                        )
-                    }
                     //it.data?.data?.accessToken?.let { accessToken -> accountViewModel.getCurrentUser("Bearer $accessToken") }
                     Log.d("registerresponse", it.data?.data?.accessToken.toString())
                 }
                 else -> {}
             }
         }
-        accountViewModel.editEmailUserResponse.observe(viewLifecycleOwner) {
+        registerViewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+            Log.d("accessTokenValidate", it)
+        }
+        editProfileViewModel.editEmailUserResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     dismiss()
@@ -148,7 +149,7 @@ class ValidateEmailBottomSheet(
     }
 
     private fun updateEmailUser(accessToken: String, otp: String, otpToken: String) {
-        accountViewModel.putUserEmail(accessToken, EditEmailUserRequestBody(otp, otpToken))
+        editProfileViewModel.putUserEmail(accessToken, EditEmailUserRequestBody(otp, otpToken))
         Log.d("updateEmail", EditEmailUserRequestBody(otp, otpToken).toString())
     }
 

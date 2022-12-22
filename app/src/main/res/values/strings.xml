@@ -9,6 +9,8 @@
 
     <string name="from_to_to">%1$s to %2$s</string>
     <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="add_image"><u>Add image</u></string>
+    <string name="delete_image"><u>Delete image</u></string>
 
     <string-array name="province">
         <item>JAKARTA</item>

@@ -9,11 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import coil.load
+import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.user.CurrentUserData
 import com.binar.gosky.data.network.model.users.EditUserRequestBody
 import com.binar.gosky.databinding.FragmentAccountBinding
 import com.binar.gosky.presentation.ui.auth.login.LoginActivity
 import com.binar.gosky.wrapper.Resource
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,7 +54,7 @@ class AccountFragment : Fragment() {
             }
             tvLogOut.setOnClickListener {
                 viewModel.setUserLogin(false)
-                //viewModel.setUserAccessToken("")
+                viewModel.setUserAccessToken("")
                 navigateToLogin()
             }
         }
@@ -96,8 +99,15 @@ class AccountFragment : Fragment() {
 
     private fun bindDataIntoForm(currentUserData: CurrentUserData) {
         binding.apply {
-            tvProfileName.text = currentUserData.name
-            tvEmail.text = currentUserData.email
+            currentUserData.apply {
+                tvProfileName.text = name
+                tvEmail.text = email
+                Glide.with(requireContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.ic_placeholder_image)
+                    .into(ivProfileImage)
+                Log.d("imageUrl", imageUrl.toString())
+            }
         }
     }
 

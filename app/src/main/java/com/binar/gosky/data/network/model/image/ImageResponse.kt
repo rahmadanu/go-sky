@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ImageResponse(
     @SerializedName("data")
-    val `data`: Data? = null,
+    val `data`: ImageData? = null,
     @SerializedName("message")
     val message: String? = null,
     @SerializedName("status")

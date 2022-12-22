@@ -34,7 +34,7 @@ class UserDataStoreManager @Inject constructor(@ApplicationContext private val c
 
     fun getUserAccessToken(): Flow<String> {
         return context.userDataStore.data.map { preferences ->
-            preferences[USER_ACCESS_TOKEN_KEY] ?: "null"
+            preferences[USER_ACCESS_TOKEN_KEY] ?: "kosong"
         }
     }
 
