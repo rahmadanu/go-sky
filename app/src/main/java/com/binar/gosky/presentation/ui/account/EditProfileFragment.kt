@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -30,9 +31,6 @@ class EditProfileFragment : Fragment() {
     private val editProfileArgs: EditProfileFragmentArgs by navArgs()
 
     private val viewModel: EditProfileViewModel by viewModels()
-
-    private var imageId: String? = ""
-    private var imageUrl: String? = ""
 
     private val galleryResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
@@ -64,8 +62,9 @@ class EditProfileFragment : Fragment() {
         viewModel.imageResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
-                    imageId = it.payload?.data?.imageId
-                    imageUrl = it.payload?.data?.imageUrl
+                    Log.d("imageIdSuccess", it.payload?.data?.imageId.toString())
+                    editProfileArgs.userData.imageId = it.payload?.data?.imageId
+                    editProfileArgs.userData.imageUrl = it.payload?.data?.imageUrl
                     setProfileImage(it.payload?.data)
                 }
                 else -> {}
@@ -82,12 +81,13 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun parseFormIntoEntity(): EditUserRequestBody {
+        Log.d("imageIdAfterSave", editProfileArgs.userData.imageId.toString())
         return EditUserRequestBody(
             name = binding.etName.text.toString(),
             address = binding.etAddress.text.toString(),
             phone = binding.etPhoneNo.text.toString(),
-            imageId = imageId,
-            imageUrl = imageUrl
+            imageId = editProfileArgs.userData.imageId,
+            imageUrl = editProfileArgs.userData.imageUrl
         )
     }
 
@@ -102,10 +102,12 @@ class EditProfileFragment : Fragment() {
                     .load(imageUrl)
                     .placeholder(R.drawable.ic_placeholder_image)
                     .into(ivImage)
-                if (imageId != null) {
-                    tvAddDeleteImage.text = getString(R.string.delete_image)
+                if (editProfileArgs.userData.imageId != null) {
+                    tvAddImage.isVisible = false
+                    tvDeleteImage.isVisible = true
                 } else {
-                    tvAddDeleteImage.text = getString(R.string.add_image)
+                    tvAddImage.isVisible = true
+                    tvDeleteImage.isVisible = false
                 }
             }
         }
@@ -118,17 +120,18 @@ class EditProfileFragment : Fragment() {
         binding.ivImage.setOnClickListener {
             getImageFromGallery()
         }
-        binding.tvAddDeleteImage.setOnClickListener {
-            if (imageUrl != null) {
-                binding.tvAddDeleteImage.text = getString(R.string.delete_image)
-                imageId?.let { it1 ->
-                    viewModel.deleteImage("Bearer ${editProfileArgs.accessToken}",
-                        it1
-                    )
-                }
-            } else {
-                binding.tvAddDeleteImage.text = getString(R.string.add_image)
-                getImageFromGallery()
+        binding.tvAddImage.setOnClickListener {
+            getImageFromGallery()
+        }
+        binding.tvDeleteImage.setOnClickListener {
+            editProfileArgs.userData.imageId?.let { it1 ->
+                viewModel.deleteImage("Bearer ${editProfileArgs.accessToken}",
+                    ImageUtil.IMAGE_TYPE_PROFILE,
+                    it1
+                )
+                editProfileArgs.userData.imageId = ""
+                editProfileArgs.userData.imageUrl = ""
+                Log.d("imageIdAfterDelete", editProfileArgs.userData.imageId.toString())
             }
         }
         binding.btnSave.setOnClickListener {

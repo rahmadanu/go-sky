@@ -158,14 +158,27 @@
                         tools:src="@tools:sample/avatars"/>
 
                     <TextView
-                        android:id="@+id/tv_add_delete_image"
+                        android:id="@+id/tv_add_image"
                         style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginBottom="12dp"
-                        tools:text="@string/add_image"
+                        android:text="@string/add_image"
                         android:textAllCaps="false"
+                        app:layout_constraintStart_toEndOf="@id/iv_image"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_image" />
+
+                    <TextView
+                        android:id="@+id/tv_delete_image"
+                        style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:text="@string/delete_image"
+                        android:textAllCaps="false"
+                        android:visibility="gone"
                         app:layout_constraintStart_toEndOf="@id/iv_image"
                         app:layout_constraintBottom_toBottomOf="@id/iv_image" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

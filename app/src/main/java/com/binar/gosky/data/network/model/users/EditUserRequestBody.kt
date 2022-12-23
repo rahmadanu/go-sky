@@ -10,9 +10,9 @@ data class EditUserRequestBody(
     @SerializedName("address")
     val address: String? = null,
     @SerializedName("imageId")
-    val imageId: String? = null,
+    var imageId: String? = null,
     @SerializedName("imageUrl")
-    val imageUrl: String? = null,
+    var imageUrl: String? = null,
     @SerializedName("name")
     val name: String? = null,
     @SerializedName("phone")

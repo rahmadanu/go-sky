@@ -1,5 +1,6 @@
 package com.binar.gosky.presentation.ui.account
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -53,9 +54,10 @@ class EditProfileViewModel @Inject constructor(
         }
     }
 
-    fun deleteImage(accessToken: String, imageId: String) {
+    fun deleteImage(accessToken: String, imageType: String, imageId: String) {
         viewModelScope.launch {
-            imageRepository.deleteImage(accessToken, imageId)
+            Log.d("imageId", imageId)
+            imageRepository.deleteImage(accessToken, imageType, imageId)
         }
     }
 

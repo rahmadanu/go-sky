@@ -62,7 +62,7 @@ class LoginFragment : Fragment() {
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), "${it.data?.status}: ${it.data?.message}", Toast.LENGTH_LONG).show()
                     Log.d("loginResponse", it.data.toString())
-                    it.data?.data?.accessToken?.let { accessToken -> registerViewModel.setUserAccessToken(accessToken) }
+                    it.data?.data?.accessToken?.let { accessToken -> loginViewModel.setUserAccessToken(accessToken) }
                     //it.data?.data?.accessToken?.let { accessToken -> accountViewModel.getCurrentUser("Bearer $accessToken") }
                     navigateToHome()
                 }
