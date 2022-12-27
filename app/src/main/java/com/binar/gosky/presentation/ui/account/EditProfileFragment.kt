@@ -94,20 +94,20 @@ class EditProfileFragment : Fragment() {
     private fun initView() {
         binding.apply {
             with(editProfileArgs.userData) {
+                Log.d("initDataEdit", editProfileArgs.userData.toString())
                 etName.setText(name)
                 etAddress.setText(address)
                 etPhoneNo.setText(phone)
                 etEmail.setText(editProfileArgs.email)
-                Glide.with(requireContext())
-                    .load(imageUrl)
-                    .placeholder(R.drawable.ic_placeholder_image)
-                    .into(ivImage)
-                if (editProfileArgs.userData.imageId.isNullOrEmpty().not() || editProfileArgs.userData.imageId != "-") {
-                    tvAddImage.isVisible = false
-                    tvDeleteImage.isVisible = true
-                } else {
+                if (editProfileArgs.userData.imageId.isNullOrEmpty() || editProfileArgs.userData.imageId.equals("-") ) {
                     tvAddImage.isVisible = true
                     tvDeleteImage.isVisible = false
+                } else {
+                    Glide.with(requireContext())
+                        .load(imageUrl)
+                        .into(ivImage)
+                    tvAddImage.isVisible = false
+                    tvDeleteImage.isVisible = true
                 }
             }
         }
