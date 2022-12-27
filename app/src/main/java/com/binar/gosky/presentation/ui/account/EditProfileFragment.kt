@@ -102,7 +102,7 @@ class EditProfileFragment : Fragment() {
                     .load(imageUrl)
                     .placeholder(R.drawable.ic_placeholder_image)
                     .into(ivImage)
-                if (editProfileArgs.userData.imageId != null) {
+                if (editProfileArgs.userData.imageId.isNullOrEmpty().not() || editProfileArgs.userData.imageId != "-") {
                     tvAddImage.isVisible = false
                     tvDeleteImage.isVisible = true
                 } else {
@@ -129,8 +129,8 @@ class EditProfileFragment : Fragment() {
                     ImageUtil.IMAGE_TYPE_PROFILE,
                     it1
                 )
-                editProfileArgs.userData.imageId = ""
-                editProfileArgs.userData.imageUrl = ""
+                editProfileArgs.userData.imageId = "-"
+                editProfileArgs.userData.imageUrl = "-"
                 Log.d("imageIdAfterDelete", editProfileArgs.userData.imageId.toString())
             }
         }

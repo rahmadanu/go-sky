@@ -102,11 +102,13 @@ class AccountFragment : Fragment() {
             currentUserData.apply {
                 tvProfileName.text = name
                 tvEmail.text = email
-                Glide.with(requireContext())
-                    .load(imageUrl)
-                    .placeholder(R.drawable.ic_placeholder_image)
-                    .into(ivProfileImage)
-                Log.d("imageUrl", imageUrl.toString())
+                if (currentUserData.imageId != null || currentUserData.imageId != "-") {
+                    Glide.with(requireContext())
+                        .load(imageUrl)
+                        .placeholder(R.drawable.ic_placeholder_image)
+                        .into(ivProfileImage)
+                    Log.d("imageUrl", imageUrl.toString())
+                }
             }
         }
     }
