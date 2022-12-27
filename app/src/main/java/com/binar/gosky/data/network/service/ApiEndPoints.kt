@@ -4,6 +4,9 @@ object ApiEndPoints {
     //Tickets
     const val GET_TICKETS_ENDPOINT = "tickets"
     const val GET_TICKETS_BY_ID_ENDPOINT = "tickets/{id}"
+    const val POST_TICKET = "tickets"
+    const val PUT_TICKETS_BY_ID = "tickets/{id}"
+    const val DELETE_TICKETS_BY_ID = "tickets/{id}"
 
     //Transactions
     const val GET_TRANSACTION_LIST_ENDPOINT = "transactions"
