@@ -1,68 +1,60 @@
 package com.binar.gosky.presentation.ui.auth.register
 
-import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.core.app.ApplicationProvider
-import com.binar.gosky.MainDispatcherRule
-import com.binar.gosky.data.network.datasource.AuthRemoteDataSourceImpl
+import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
-import com.binar.gosky.data.network.service.AuthApiService
 import com.binar.gosky.data.repository.AuthRepository
-import com.binar.gosky.data.repository.AuthRepositoryImpl
-import com.binar.gosky.data.repository.UserRepository
+import com.binar.gosky.getOrAwaitValue
+import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.advanceUntilIdle
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.rules.TestRule
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.kotlin.given
 import org.mockito.kotlin.mock
-import retrofit2.Response
 
-@OptIn(ExperimentalCoroutinesApi::class)
+@ExperimentalCoroutinesApi
 class RegisterViewModelTest {
 
     private lateinit var viewModel: RegisterViewModel
-    private lateinit var repository: AuthRepositoryImpl
+    private lateinit var repository: AuthRepository
+    private val dispatcher = TestCoroutineDispatcher()
 
-    @Mock
-    private lateinit var authRepository: AuthRepository
-
-
-    @ExperimentalCoroutinesApi
-    @get:Rule
-    var mainCoroutineRule = MainDispatcherRule()
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {
-        repository = mock()
+        Dispatchers.setMain(dispatcher)
+        repository = mockk()
         viewModel = RegisterViewModel(repository)
     }
 
     @Test
-    fun postRegister() = runTest {
-        val postRegisterResponse = mock<Response<RegisterRequestBody>>()
+    fun postRegister() {
+        val postRegisterResource =
+            mock<com.binar.gosky.wrapper.Resource<LoginRegisterRequestResponse>>()
 
-        val request = RegisterRequestBody("muhammad farros", "", "", "000000")
+        val request = RegisterRequestBody("muhammad farros", "123456", "123456", "000000")
 
-        //given(repository.postRegisterUser(request))
+        every {
+            runBlocking {
+                repository.postRegisterUser(request)
+            }
+        } returns postRegisterResource
 
         viewModel.postRegisterUser(request)
-        advanceUntilIdle()
 
-        Mockito.verify(repository).postRegisterUser(request)
         assertNotNull(viewModel.postRegisterUserResponse)
-        assertEquals(viewModel.postRegisterUserResponse.value?.payload, postRegisterResponse)
-
+        assertEquals(postRegisterResource, viewModel.postRegisterUserResponse.getOrAwaitValue())
     }
 
 }
