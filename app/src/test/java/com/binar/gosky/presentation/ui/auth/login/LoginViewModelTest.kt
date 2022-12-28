@@ -47,12 +47,12 @@ class LoginViewModelTest {
     @Before
     fun setUp() {
 
-        //val context = ApplicationProvider.getApplicationContext<Context>()
+        val context = ApplicationProvider.getApplicationContext<Context>()
 
         apiService = mock()
         remoteDataSource = AuthRemoteDataSourceImpl(apiService)
         repository = AuthRepositoryImpl(remoteDataSource)
-        //userDataStoreManager = UserDataStoreManager(context)
+        userDataStoreManager = UserDataStoreManager(context)
         userLocalDataSource = UserLocalDataSourceImpl(userDataStoreManager)
         userRepository = UserRepositoryImpl(userLocalDataSource)
         viewModel = LoginViewModel(repository, userRepository)
@@ -64,7 +64,9 @@ class LoginViewModelTest {
 
         val request = LoginRequestBody("admin@mail", "admin")
 
-        //given(repository.postLoginUser(request)).willReturn(postLoginResponse)
+        // given(repository.postLoginUser(request)).willReturn(postLoginResponse)
+
+        viewModel.postLoginUser(request)
 
         verify(repository, Mockito.times(1)).postLoginUser(request)
         assertNotNull(viewModel.postLoginUserResponse)
