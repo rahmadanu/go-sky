@@ -2,14 +2,12 @@ package com.binar.gosky.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.binar.gosky.DummyData
-import com.binar.gosky.MainDispatcherRule
+import com.binar.gosky.rule.MainDispatcherRule
 import com.binar.gosky.data.network.datasource.TicketsRemoteDataSource
-import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.data.network.service.TicketsApiService
 import com.binar.gosky.wrapper.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
