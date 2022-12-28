@@ -99,8 +99,15 @@ class ConfirmationTicketFragment : Fragment() {
     private fun setOnClickListener() {
         binding.apply {
             ivBack.setOnClickListener { findNavController().navigateUp() }
-            ibMinus.setOnClickListener { minAmount() }
-            ibPlus.setOnClickListener { plusAmount() }
+            btnWishlist.setOnClickListener {
+                confirmationTicketArgs.ticketsItem.id?.let { ticketId ->
+                    viewModel.postTicketToWishlist(getString(R.string.bearer_token, accessToken),
+                        ticketId
+                    )
+                }
+            }
+            btnMinus.setOnClickListener { minAmount() }
+            btnPlus.setOnClickListener { plusAmount() }
             btnOrder.setOnClickListener {
                 postNewTransaction(getString(R.string.bearer_token, accessToken))
             }

@@ -50,5 +50,11 @@ class BookingViewModel @Inject constructor(
         }
     }
 
+    fun postTicketToWishlist(accessToken: String, id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            ticketsRepository.postTicketToWishlist(accessToken, id)
+        }
+    }
+
 }
 

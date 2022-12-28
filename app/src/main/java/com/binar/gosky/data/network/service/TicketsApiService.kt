@@ -28,7 +28,7 @@ interface TicketsApiService {
     @GET(ApiEndPoints.GET_WISHLIST)
     suspend fun getWishlist(
         @Header("Authorization") accessToken: String
-    )
+    ): Tickets
 
     @POST(ApiEndPoints.POST_TICKET_TO_WISHLIST)
     suspend fun postTicketToWishlist(

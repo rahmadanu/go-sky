@@ -125,7 +125,7 @@
                                     android:layout_weight="1" />
 
                                 <ImageView
-                                    android:id="@+id/orderState"
+                                    android:id="@+id/btn_wishlist"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     android:src="@drawable/ic_favorite" />
@@ -634,7 +634,7 @@
                                 android:orientation="horizontal">
 
                                 <ImageButton
-                                    android:id="@+id/ib_minus"
+                                    android:id="@+id/btn_minus"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
                                     android:layout_marginRight="10dp"
@@ -651,7 +651,7 @@
                                     android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>
 
                                 <ImageButton
-                                    android:id="@+id/ib_plus"
+                                    android:id="@+id/btn_plus"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
                                     android:layout_marginLeft="10dp"
