@@ -1,10 +1,10 @@
 package com.binar.gosky.di
 
+import com.binar.gosky.data.local.datasource.TicketsLocalDataSource
+import com.binar.gosky.data.local.datasource.TicketsLocalDataSourceImpl
 import com.binar.gosky.data.local.datasource.UserLocalDataSource
 import com.binar.gosky.data.local.datasource.UserLocalDataSourceImpl
 import com.binar.gosky.data.network.datasource.*
-import com.binar.gosky.data.repository.NotificationRepository
-import com.binar.gosky.data.repository.NotificationRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,6 +16,9 @@ abstract class DataSourceModule {
 
     @Binds
     abstract fun provideTicketsRemoteDataSource(ticketsRemoteDataSourceImpl: TicketsRemoteDataSourceImpl): TicketsRemoteDataSource
+
+    @Binds
+    abstract fun provideTicketsLocalDataSource(ticketsLocalDataSourceImpl: TicketsLocalDataSourceImpl): TicketsLocalDataSource
 
     @Binds
     abstract fun provideTransactionsRemoteDataSource(transactionsRemoteDataSourceImpl: TransactionsRemoteDataSourceImpl): TransactionsRemoteDataSource
