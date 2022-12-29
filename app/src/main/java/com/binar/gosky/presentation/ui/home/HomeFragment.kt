@@ -12,9 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
+import com.binar.gosky.data.network.model.auth.user.CurrentUserData
 import com.binar.gosky.data.network.model.tickets.SearchTickets
 import com.binar.gosky.databinding.FragmentHomeBinding
-import com.binar.gosky.presentation.ui.auth.login.LoginViewModel
+import com.binar.gosky.presentation.ui.account.AccountViewModel
+import com.binar.gosky.wrapper.Resource
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,7 +28,8 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: LoginViewModel by viewModels()
+    //use AccountViewModel to get current user
+    private val viewModel: AccountViewModel by viewModels()
 
     var category: String = ONE_WAY
     var from: String = ""
@@ -50,7 +54,45 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+        observeData()
         setOnClickListener()
+    }
+
+    private fun observeData() {
+        viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+            viewModel.getCurrentUser(getString(R.string.bearer_token, it))
+        }
+        viewModel.currentUserResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    setWelcomeMessage(it.data?.data)
+                    it.data?.data?.role?.let { role -> viewModel.setUserRole(role)
+                        Log.d("checkadmin", role)
+                    }
+                }
+                else -> {}
+            }
+        }
+        viewModel.checkIfUserIsAdmin().observe(viewLifecycleOwner) {
+            showFabIfUserIsAdmin(it.equals("ADMIN"))
+        }
+        Log.d("checkadmin", viewModel.checkIfUserIsAdmin().toString())
+    }
+
+    private fun showFabIfUserIsAdmin(isAdmin: Boolean) {
+        binding.fabAddTicket.isVisible = isAdmin
+    }
+
+    private fun setWelcomeMessage(currentUserData: CurrentUserData?) {
+        binding.apply {
+            currentUserData?.let {
+                tvWelcomeMessage.text = getString(R.string.welcome_message, it.name)
+                Glide.with(requireContext())
+                    .load(it.imageUrl)
+                    .placeholder(R.drawable.ic_placeholder_image)
+                    .into(ivUserImage)
+            }
+        }
     }
 
     private fun initView() {
