@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.account.AccountFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,9 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="154dp"
             android:background="@color/cerulean_blue"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_account_title"
@@ -25,10 +25,10 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="30dp"
             android:paddingVertical="12dp"
-            android:text="Account"
+            android:text="@string/account"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,6 +36,7 @@
             android:id="@+id/iv_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/icon_notification"
             android:padding="20dp"
             android:src="@drawable/ic_notifications"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,6 +63,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="14dp"
+                    android:contentDescription="@string/profile_image"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -72,22 +74,22 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:textSize="16sp"
                     android:textColor="@color/black"
-                    tools:text="Rahma Danu Sadewa"
-                    app:layout_constraintTop_toTopOf="@id/iv_profile_image"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_profile_image"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_profile_image"
+                    tools:text="Rahma Danu Sadewa" />
 
                 <TextView
                     android:id="@+id/tv_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    tools:text="testing@gmail.com"
                     android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_profile_image"
                     app:layout_constraintStart_toStartOf="@id/tv_profile_name"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_profile_image" />
+                    tools:text="testing@gmail.com" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -96,77 +98,77 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/cv_profile"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/cv_profile">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Account settings" />
+                android:text="@string/account_settings" />
 
             <TextView
                 android:id="@+id/tv_edit_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="12dp"
+                android:layout_marginTop="20dp"
                 android:drawablePadding="20dp"
-                android:text="Edit Profile"
+                android:text="@string/edit_profile"
                 android:textSize="16sp"
-                app:drawableStartCompat="@drawable/ic_edit"
-                app:drawableEndCompat="@drawable/ic_arrow_forward" />
+                app:drawableEndCompat="@drawable/ic_arrow_forward"
+                app:drawableStartCompat="@drawable/ic_edit" />
 
             <TextView
                 android:id="@+id/tv_reset_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:textSize="16sp"
                 android:layout_marginTop="20dp"
                 android:drawablePadding="20dp"
-                android:text="Reset Password"
-                app:drawableStartCompat="@drawable/ic_for_reset"
-                app:drawableEndCompat="@drawable/ic_arrow_forward" />
+                android:text="@string/reset_password"
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/ic_arrow_forward"
+                app:drawableStartCompat="@drawable/ic_for_reset" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="Preferences" />
+                android:text="@string/preferences" />
 
             <TextView
                 android:id="@+id/tv_notification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:textSize="16sp"
                 android:layout_marginTop="20dp"
                 android:drawablePadding="20dp"
-                android:text="Notification"
-                app:drawableStartCompat="@drawable/ic_notification"
-                app:drawableEndCompat="@drawable/ic_arrow_forward" />
+                android:text="@string/notification"
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/ic_arrow_forward"
+                app:drawableStartCompat="@drawable/ic_notification" />
 
             <TextView
                 android:id="@+id/tv_language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="12dp"
-                android:textSize="16sp"
+                android:layout_marginTop="20dp"
                 android:drawablePadding="20dp"
-                android:text="Language"
-                app:drawableStartCompat="@drawable/ic_bahasa"
-                app:drawableEndCompat="@drawable/ic_arrow_forward" />
+                android:text="@string/language"
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/ic_arrow_forward"
+                app:drawableStartCompat="@drawable/ic_bahasa" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="Others" />
+                android:text="@string/others" />
 
             <TextView
                 android:id="@+id/tv_about_go_sky"
@@ -174,11 +176,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="20dp"
-                android:textSize="16sp"
                 android:drawablePadding="20dp"
-                android:text="About GoSky"
-                app:drawableStartCompat="@drawable/ic_about"
-                app:drawableEndCompat="@drawable/ic_arrow_forward" />
+                android:text="@string/about_gosky"
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/ic_arrow_forward"
+                app:drawableStartCompat="@drawable/ic_about" />
 
             <TextView
                 android:id="@+id/tv_terms_and_conditions"
@@ -186,23 +188,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="20dp"
-                android:textSize="16sp"
                 android:drawablePadding="20dp"
                 android:text="@string/terms_conditions"
-                app:drawableStartCompat="@drawable/ic_contents"
-                app:drawableEndCompat="@drawable/ic_arrow_forward" />
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/ic_arrow_forward"
+                app:drawableStartCompat="@drawable/ic_contents" />
 
             <TextView
                 android:id="@+id/tv_privacy_policy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="12dp"
-                android:textSize="16sp"
+                android:layout_marginTop="20dp"
                 android:drawablePadding="20dp"
-                android:text="Privacy Policy"
-                app:drawableStartCompat="@drawable/ic_privasi"
-                app:drawableEndCompat="@drawable/ic_arrow_forward" />
+                android:text="@string/privacy_policy"
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/ic_arrow_forward"
+                app:drawableStartCompat="@drawable/ic_privasi" />
 
 
             <TextView
@@ -211,11 +213,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="30dp"
-                android:textSize="16sp"
                 android:drawablePadding="20dp"
-                android:text="Log Out"
-                app:drawableStartCompat="@drawable/ic_logout"
-                app:drawableEndCompat="@drawable/ic_arrow_forward" />
+                android:text="@string/log_out"
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/ic_arrow_forward"
+                app:drawableStartCompat="@drawable/ic_logout" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

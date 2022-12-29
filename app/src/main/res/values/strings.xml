@@ -14,6 +14,40 @@
 
     <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
     <string name="title_history">History</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="account_settings">Account settings</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="preferences">Preferences</string>
+    <string name="notification">Notification</string>
+    <string name="language">Language</string>
+    <string name="others">Others</string>
+    <string name="about_gosky">About GoSky</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="log_out">Log Out</string>
+    <string name="account">Account</string>
+    <string name="departure">Departure</string>
+    <string name="detail">Detail</string>
+    <string name="city_1">Jakarta</string>
+    <string name="city_2">Batam</string>
+    <string name="operated_by">Operated By:</string>
+    <string name="lion_air">Lion Air</string>
+    <string name="flight_number">JT-531</string>
+    <string name="description">Description</string>
+    <string name="text_1">Luar biasanya, maskapai ini mematok harga yang relatif lebih murah daripada penerbangan maskapai lainnya.</string>
+    <string name="amount">Amount</string>
+    <string name="_1">1</string>
+    <string name="order">Order</string>
+    <string name="mon_6_mar_2022">Mon, 6 Mar 2022</string>
+    <string name="return_1">Return</string>
+    <string name="your_flight_choice">Your Flight Choice</string>
+    <string name="min">min</string>
+    <string name="plus">plus</string>
+    <string name="image_return">image_return</string>
+    <string name="image_departure">Image Departure</string>
+    <string name="image_favorite">Image Favorite</string>
+    <string name="icon_back">icon back</string>
+    <string name="icon_notification">icon notification</string>
 
     <string-array name="province">
         <item>JAKARTA</item>
