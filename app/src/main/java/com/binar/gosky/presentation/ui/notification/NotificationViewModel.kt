@@ -14,7 +14,7 @@ import javax.inject.Inject
 class NotificationViewModel @Inject constructor(
     private val notificationRepository: NotificationRepository,
     private val userRepository: UserRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _notificationResponse = MutableLiveData<Resource<NotificationResponse>>()
     val notificationResponse: LiveData<Resource<NotificationResponse>> get() = _notificationResponse
