@@ -1,6 +1,7 @@
 package com.binar.gosky.data.network.datasource
 
 import com.binar.gosky.data.network.model.tickets.Tickets
+import com.binar.gosky.data.network.model.tickets.WishlistResponse
 import com.binar.gosky.data.network.service.TicketsApiService
 import javax.inject.Inject
 
@@ -8,8 +9,8 @@ interface TicketsRemoteDataSource {
     suspend fun getTickets(category: String, from: String, to: String, departureTime: String, returnTime: String): Tickets
     suspend fun getTicketById(accessToken: String, id: Int): Tickets
     suspend fun getWishlist(accessToken: String): Tickets
-    suspend fun postTicketToWishlist(accessToken: String, id: Int)
-    suspend fun deleteTicketFromWishlist(accessToken: String, id: Int)
+    suspend fun postTicketToWishlist(accessToken: String, id: Int): WishlistResponse
+    suspend fun deleteTicketFromWishlist(accessToken: String, id: Int): WishlistResponse
 }
 
 class TicketsRemoteDataSourceImpl @Inject constructor(private val apiService: TicketsApiService) :
@@ -32,12 +33,12 @@ class TicketsRemoteDataSourceImpl @Inject constructor(private val apiService: Ti
         return apiService.getWishlist(accessToken)
     }
 
-    override suspend fun postTicketToWishlist(accessToken: String, id: Int) {
-        apiService.postTicketToWishlist(accessToken, id)
+    override suspend fun postTicketToWishlist(accessToken: String, id: Int): WishlistResponse {
+        return apiService.postTicketToWishlist(accessToken, id)
     }
 
-    override suspend fun deleteTicketFromWishlist(accessToken: String, id: Int) {
-        apiService.deleteTicketFromWishlist(accessToken, id)
+    override suspend fun deleteTicketFromWishlist(accessToken: String, id: Int): WishlistResponse {
+        return apiService.deleteTicketFromWishlist(accessToken, id)
     }
 
 }

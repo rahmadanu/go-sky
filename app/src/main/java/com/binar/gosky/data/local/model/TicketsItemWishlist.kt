@@ -16,15 +16,6 @@ data class TicketsItemWishlist(
     @ColumnInfo(name = "category")
     val category: String? = null,
 
-    @ColumnInfo(name = "createdAt")
-    val createdAt: String? = null,
-
-    @ColumnInfo(name = "createdBy")
-    val createdBy: Int? = null,
-
-    @ColumnInfo(name = "deletedAt")
-    val deletedAt: String? = null,
-
     @ColumnInfo(name = "departureTime")
     val departureTime: String? = null,
 
@@ -51,12 +42,6 @@ data class TicketsItemWishlist(
 
     @ColumnInfo(name = "to")
     val to: String? = null,
-
-    @ColumnInfo(name = "updatedAt")
-    val updatedAt: String? = null,
-
-    @ColumnInfo(name = "updatedBy")
-    val updatedBy: Int? = null,
 
     @ColumnInfo(name = "wishlisted")
     val wishlisted: Boolean? = null,

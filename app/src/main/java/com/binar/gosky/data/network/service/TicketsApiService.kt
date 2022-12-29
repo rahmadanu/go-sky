@@ -1,6 +1,7 @@
 package com.binar.gosky.data.network.service
 
 import com.binar.gosky.data.network.model.tickets.Tickets
+import com.binar.gosky.data.network.model.tickets.WishlistResponse
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -34,13 +35,13 @@ interface TicketsApiService {
     suspend fun postTicketToWishlist(
         @Header("Authorization") accessToken: String,
         @Path("id") id: Int
-    )
+    ): WishlistResponse
 
     @DELETE(ApiEndPoints.DELETE_TICKET_FROM_WISHLIST)
     suspend fun deleteTicketFromWishlist(
         @Header("Authorization") accessToken: String,
         @Path("id") id: Int
-    )
+    ): WishlistResponse
 
     companion object {
         private const val DEFAULT_CATEGORY = "ONE_WAY"

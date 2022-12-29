@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -23,6 +25,7 @@ import com.binar.gosky.util.ConvertUtil.convertMinutesToHourAndMinutes
 import com.binar.gosky.util.ConvertUtil.convertRupiah
 import com.binar.gosky.wrapper.Resource
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -66,6 +69,21 @@ class ConfirmationTicketFragment : Fragment() {
         viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
             accessToken = it
         }
+        viewModel.wishlistStatus.observe(viewLifecycleOwner) {
+            setIconWishlistState(it)
+        }
+        viewModel.wishlistResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    Snackbar.make(binding.root, "${it.data?.message}", Toast.LENGTH_SHORT).show()
+                    binding.pbOrder.isVisible = false
+                }
+                is Resource.Loading -> {
+                    binding.pbOrder.isVisible = true
+                }
+                else -> {}
+            }
+        }
         viewModel.newTransactionResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
@@ -96,15 +114,19 @@ class ConfirmationTicketFragment : Fragment() {
         }
     }
 
+    private fun setIconWishlistState(wishlisted: Boolean) {
+        if (wishlisted) {
+            binding.btnWishlist.setImageResource(R.drawable.ic_favorite_yes)
+        } else {
+            binding.btnWishlist.setImageResource(R.drawable.ic_favorite_no)
+        }
+    }
+
     private fun setOnClickListener() {
         binding.apply {
             ivBack.setOnClickListener { findNavController().navigateUp() }
             btnWishlist.setOnClickListener {
-                confirmationTicketArgs.ticketsItem.id?.let { ticketId ->
-                    viewModel.postTicketToWishlist(getString(R.string.bearer_token, accessToken),
-                        ticketId
-                    )
-                }
+                viewModel.changeWishlist(getString(R.string.bearer_token, accessToken), confirmationTicketArgs.ticketsItem)
             }
             btnMinus.setOnClickListener { minAmount() }
             btnPlus.setOnClickListener { plusAmount() }
@@ -154,6 +176,8 @@ class ConfirmationTicketFragment : Fragment() {
     private fun initView() {
         binding.apply {
             confirmationTicketArgs.ticketsItem.apply {
+                viewModel.setTicketItem(this)
+
                 id?.let { ticketId = it }
 
                 //Departure part

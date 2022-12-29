@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.binar.gosky.data.local.model.TicketsItemWishlist
 import com.binar.gosky.data.network.model.tickets.Tickets
 import com.binar.gosky.data.repository.TicketsRepository
 import com.binar.gosky.data.repository.UserRepository
@@ -23,6 +24,9 @@ class WishlistViewModel @Inject constructor(private val ticketsRepository: Ticke
     fun getWishlist(accessToken: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val response = ticketsRepository.getWishlist(accessToken)
+            response.payload?.data?.forEach {
+                ticketsRepository.addTicketToLocalWishlist(it)
+            }
             viewModelScope.launch(Dispatchers.Main) {
                 _getWishlistResponse.postValue(response)
             }
@@ -31,6 +35,10 @@ class WishlistViewModel @Inject constructor(private val ticketsRepository: Ticke
 
     fun getUserAccessToken(): LiveData<String> {
         return userRepository.getUserAccessToken().asLiveData()
+    }
+
+    fun getWishlistTickets(): LiveData<List<TicketsItemWishlist>> {
+        return ticketsRepository.getWishlistTickets()
     }
 
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.gosky.R
+import com.binar.gosky.data.local.mapper.toTicketsItem
 import com.binar.gosky.databinding.FragmentWishlistBinding
 import com.binar.gosky.presentation.ui.search.SearchResultFragmentDirections
 import com.binar.gosky.presentation.ui.search.adapter.SearchResultAdapter
@@ -50,13 +51,18 @@ class WishlistFragment : Fragment() {
         viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
             viewModel.getWishlist(getString(R.string.bearer_token, it))
         }
-        viewModel.getWishlistResponse.observe(viewLifecycleOwner) {
+/*        viewModel.getWishlistResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     adapter.submitList(it.data?.data)
                 }
                 else -> {}
             }
+        }*/
+        viewModel.getWishlistTickets().observe(viewLifecycleOwner) {
+            adapter.submitList(it.map { ticketsItemWishlist ->
+                ticketsItemWishlist.toTicketsItem()
+            })
         }
     }
 

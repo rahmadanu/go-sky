@@ -5,7 +5,10 @@ import com.binar.gosky.data.local.datasource.TicketsLocalDataSource
 import com.binar.gosky.data.local.model.TicketsItemWishlist
 import com.binar.gosky.data.network.datasource.TicketsRemoteDataSource
 import com.binar.gosky.data.network.model.tickets.Tickets
+import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.util.proceed
+import com.binar.gosky.data.local.mapper.toTicketsItemWishlist
+import com.binar.gosky.data.network.model.tickets.WishlistResponse
 import com.binar.gosky.wrapper.Resource
 import javax.inject.Inject
 
@@ -13,11 +16,11 @@ interface TicketsRepository {
     suspend fun getTickets(category: String, from: String, to: String, departureTime: String, returnTime: String): Resource<Tickets>
     suspend fun getTicketById(accessToken: String, id: Int): Resource<Tickets>
     suspend fun getWishlist(accessToken: String): Resource<Tickets>
-    suspend fun postTicketToWishlist(accessToken: String, id: Int)
-    suspend fun deleteTicketFromWishlist(accessToken: String, id: Int)
+    suspend fun postTicketToRemoteWishlist(accessToken: String, id: Int): Resource<WishlistResponse>
+    suspend fun deleteTicketFromRemoteWishlist(accessToken: String, id: Int): Resource<WishlistResponse>
 
-    suspend fun addTicketToWishlist(ticketsItemWishlist: TicketsItemWishlist): Resource<Number>
-    suspend fun deleteTicketFromWishlist(ticketsItemWishlist: TicketsItemWishlist): Resource<Number>
+    suspend fun addTicketToLocalWishlist(ticketsItem: TicketsItem): Resource<Number>
+    suspend fun deleteTicketFromLocalWishlist(ticketsItem: TicketsItem): Resource<Number>
     fun getWishlistTickets(): LiveData<List<TicketsItemWishlist>>
     fun isTicketWishlisted(id: Int): LiveData<Boolean>
 }
@@ -51,23 +54,27 @@ class TicketsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun postTicketToWishlist(accessToken: String, id: Int) {
-        remoteDataSource.postTicketToWishlist(accessToken, id)
-    }
-
-    override suspend fun deleteTicketFromWishlist(accessToken: String, id: Int) {
-        remoteDataSource.deleteTicketFromWishlist(accessToken, id)
-    }
-
-    override suspend fun deleteTicketFromWishlist(ticketsItemWishlist: TicketsItemWishlist): Resource<Number> {
+    override suspend fun postTicketToRemoteWishlist(accessToken: String, id: Int): Resource<WishlistResponse> {
         return proceed {
-            localDataSource.deleteTicketFromWishlist(ticketsItemWishlist)
+            remoteDataSource.postTicketToWishlist(accessToken, id)
         }
     }
 
-    override suspend fun addTicketToWishlist(ticketsItemWishlist: TicketsItemWishlist): Resource<Number> {
+    override suspend fun deleteTicketFromRemoteWishlist(accessToken: String, id: Int): Resource<WishlistResponse> {
         return proceed {
-            localDataSource.addTicketToWishlist(ticketsItemWishlist)
+            remoteDataSource.deleteTicketFromWishlist(accessToken, id)
+        }
+    }
+
+    override suspend fun deleteTicketFromLocalWishlist(ticketsItem: TicketsItem): Resource<Number> {
+        return proceed {
+            localDataSource.deleteTicketFromWishlist(ticketsItem.toTicketsItemWishlist())
+        }
+    }
+
+    override suspend fun addTicketToLocalWishlist(ticketsItem: TicketsItem): Resource<Number> {
+        return proceed {
+            localDataSource.addTicketToWishlist(ticketsItem.toTicketsItemWishlist())
         }
     }
 
