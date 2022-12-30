@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.databinding.ItemTripBinding
-import com.binar.gosky.util.ConvertUtil.convertISOtoDate
+import com.binar.gosky.util.ConvertUtil.convertISOtoDateHoursMinute
 import com.binar.gosky.util.ConvertUtil.convertMinutesToHourAndMinutes
 import com.binar.gosky.util.ConvertUtil.convertRupiah
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
+class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit, private val updateClick: (TicketsItem) -> Unit) :
     RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {
     private val diffCallback = object : DiffUtil.ItemCallback<TicketsItem>() {
         override fun areItemsTheSame(oldItem: TicketsItem, newItem: TicketsItem): Boolean {
@@ -43,7 +43,7 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder {
         val binding = ItemTripBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SearchResultViewHolder(binding, itemClick, isAdmin)
+        return SearchResultViewHolder(binding, itemClick, updateClick, isAdmin)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -56,6 +56,7 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
     inner class SearchResultViewHolder(
         private val binding: ItemTripBinding,
         private val itemClick: (TicketsItem) -> Unit,
+        private val updateClick: (TicketsItem) -> Unit,
         private val isAdmin: Boolean
     ) :
         RecyclerView.ViewHolder(binding.root) {
@@ -70,8 +71,8 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
                     tvFrom.text = from
                     tvTo.text = to
                     tvTicketPrice.text = convertRupiah(price)
-                    tvDepartureTime.text = convertISOtoDate(departureTime)
-                    tvArrivalTime.text = duration?.let { convertISOtoDate(departureTime, it) }
+                    tvDepartureTime.text = convertISOtoDateHoursMinute(departureTime)
+                    tvArrivalTime.text = duration?.let { convertISOtoDateHoursMinute(departureTime, it) }
                     tvDurationDeparture.text = duration?.let { convertMinutesToHourAndMinutes(it) }
                     tvDurationReturn.text = duration?.let { convertMinutesToHourAndMinutes(it) }
                     Log.d("duration", duration.toString())
@@ -82,9 +83,9 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
                         tvArrivalTimeReturn.isVisible = false
                         tvDurationReturn.isVisible = false
                     } else {
-                        tvReturnTime.text = convertISOtoDate(returnTime)
+                        tvReturnTime.text = convertISOtoDateHoursMinute(returnTime)
                         tvArrivalTimeReturn.text = duration?.let {
-                            convertISOtoDate(returnTime,
+                            convertISOtoDateHoursMinute(returnTime,
                                 it
                             )
                         }
@@ -93,6 +94,10 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
                     }
                     btnUpdate.isVisible = isAdmin
                     btnDelete.isVisible = isAdmin
+
+                    btnUpdate.setOnClickListener {
+                        updateClick(this)
+                    }
 
                     itemView.setOnClickListener {
                         itemClick(this)

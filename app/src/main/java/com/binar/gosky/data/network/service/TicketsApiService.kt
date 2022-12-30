@@ -1,6 +1,7 @@
 package com.binar.gosky.data.network.service
 
-import com.binar.gosky.data.network.model.tickets.AddUpdateRequestBody
+import com.binar.gosky.data.network.model.tickets.EditTicketRequestBody
+import com.binar.gosky.data.network.model.tickets.EditTicketResponse
 import com.binar.gosky.data.network.model.tickets.Tickets
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -31,15 +32,15 @@ interface TicketsApiService {
     @POST(ApiEndPoints.POST_TICKET)
     suspend fun postTicket(
         @Header("Authorization") accessToken: String,
-        @Body postTicketRequest: AddUpdateRequestBody
+        @Body postTicketRequest: EditTicketRequestBody
     )
 
     @PUT(ApiEndPoints.PUT_TICKETS_BY_ID)
     suspend fun putTicketById(
         @Header("Authorization") accessToken: String,
         @Path("id") id: Int,
-        @Body putTicketByIdRequest: AddUpdateRequestBody
-    )
+        @Body putTicketByIdRequest: EditTicketRequestBody
+    ): EditTicketResponse
 
     @DELETE(ApiEndPoints.DELETE_TICKETS_BY_ID)
     suspend fun deleteTicketById(

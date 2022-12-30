@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.gosky.R
 import com.binar.gosky.databinding.FragmentSearchResultBinding
 import com.binar.gosky.presentation.ui.account.AccountViewModel
+import com.binar.gosky.presentation.ui.admin.EditConfirmationTicketFragment
+import com.binar.gosky.presentation.ui.admin.OnTicketItemChangedListener
 import com.binar.gosky.presentation.ui.search.adapter.SearchResultAdapter
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchResultFragment : Fragment() {
+class SearchResultFragment : Fragment(), OnTicketItemChangedListener {
 
     private var _binding: FragmentSearchResultBinding? = null
     private val binding get() = _binding!!
@@ -28,10 +30,16 @@ class SearchResultFragment : Fragment() {
     private val args: SearchResultFragmentArgs by navArgs()
 
     private val adapter: SearchResultAdapter by lazy {
-        SearchResultAdapter {
-            val action = SearchResultFragmentDirections.actionSearchResultFragmentToKonfirmasiTiketFragment(it)
-            findNavController().navigate(action)
-        }
+        SearchResultAdapter (
+            itemClick = {
+                val action = SearchResultFragmentDirections.actionSearchResultFragmentToKonfirmasiTiketFragment(it)
+                findNavController().navigate(action)
+            },
+            updateClick = {
+                val action = SearchResultFragmentDirections.actionSearchResultFragmentToEditConfirmationTicketFragment(it)
+                findNavController().navigate(action)
+            }
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -124,6 +132,16 @@ class SearchResultFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getTickets()
+    }
+
+    //problem
+    override fun onTicketItemChanged() {
+        getTickets()
     }
 
 }

@@ -77,7 +77,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:animateLayoutChanges="true">
 
                     <TextView
                         android:id="@+id/txt_email_info"
@@ -92,7 +93,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/email"
+                        android:id="@+id/til_from"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -110,7 +111,7 @@
                         app:layout_constraintTop_toBottomOf="@id/txt_email_info">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_email"
+                            android:id="@+id/et_from"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawablePadding="16dp"
@@ -119,7 +120,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/phone_no"
+                        android:id="@+id/til_to"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -134,10 +135,10 @@
                         app:boxCornerRadiusTopStart="12dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/email">
+                        app:layout_constraintTop_toBottomOf="@id/til_from">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_phone_no"
+                            android:id="@+id/et_to"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawablePadding="16dp"
@@ -146,7 +147,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/catagory_no"
+                        android:id="@+id/til_flight_number"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -161,10 +162,10 @@
                         app:boxCornerRadiusTopStart="12dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/phone_no">
+                        app:layout_constraintTop_toBottomOf="@id/til_to">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_catagory"
+                            android:id="@+id/et_flight_number"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawablePadding="16dp"
@@ -183,7 +184,7 @@
 
                         app:layout_constraintEnd_toStartOf="@id/sw_round_trip"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/catagory_no" />
+                        app:layout_constraintTop_toBottomOf="@id/til_flight_number" />
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/sw_round_trip"
@@ -197,7 +198,7 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/departure_datep"
+                        android:id="@+id/til_departure_date"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -205,7 +206,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="40dp"
-                        android:hint="Depature Time"
+                        android:hint="Depature Date"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -215,11 +216,11 @@
                         app:layout_constraintTop_toBottomOf="@id/divider_date">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/departure_date"
+                            android:id="@+id/et_departure_date"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawablePadding="16dp"
-                            android:focusable="true"
+                            android:focusable="false"
                             android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -232,14 +233,15 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="40dp"
-                        android:hint="Return Time"
+                        android:hint="Return Date"
+                        android:visibility="gone"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusTopStart="12dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/departure_datep"
+                        app:layout_constraintTop_toBottomOf="@id/til_departure_date"
                         tools:visibility="visible">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -247,7 +249,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawablePadding="16dp"
-                            android:focusable="true"
+                            android:focusable="false"
                             android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -260,7 +262,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="40dp"
-                        android:hint="Price"
+                        android:hint="Price in Rupiah"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -348,7 +350,7 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_namex"
+                        android:id="@+id/til_description"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -356,7 +358,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="100dp"
-                        android:hint="Text"
+                        android:hint="Description"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -367,12 +369,13 @@
                         app:layout_constraintTop_toBottomOf="@id/txt_infox">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_namex"
+                            android:id="@+id/et_description"
                             android:layout_width="match_parent"
                             android:layout_height="186dp"
+                            android:gravity="top"
                             android:drawablePadding="16dp"
                             android:focusable="true"
-                            android:inputType="text" />
+                            android:inputType="textMultiLine" />
                     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -406,7 +409,7 @@
 
 
                 <Button
-                    android:id="@+id/btn_back_to_home"
+                    android:id="@+id/btn_update"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"

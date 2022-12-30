@@ -1,9 +1,12 @@
 package com.binar.gosky.data.network.model.tickets
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-data class AddUpdateRequestBody(
+@Parcelize
+data class EditTicketRequestBody(
     @SerializedName("category")
     val category: String? = null,
     @SerializedName("departureTime")
@@ -24,4 +27,4 @@ data class AddUpdateRequestBody(
     val returnTime: String? = null,
     @SerializedName("to")
     val to: String? = null
-)
+): Parcelable

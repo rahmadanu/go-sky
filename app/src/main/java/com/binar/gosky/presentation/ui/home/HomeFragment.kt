@@ -16,6 +16,11 @@ import com.binar.gosky.data.network.model.auth.user.CurrentUserData
 import com.binar.gosky.data.network.model.tickets.SearchTickets
 import com.binar.gosky.databinding.FragmentHomeBinding
 import com.binar.gosky.presentation.ui.account.AccountViewModel
+import com.binar.gosky.util.DateUtil.departureTime
+import com.binar.gosky.util.DateUtil.formattedMonth
+import com.binar.gosky.util.DateUtil.getTimeStamp
+import com.binar.gosky.util.DateUtil.returnTime
+import com.binar.gosky.util.DateUtil.showDatePickerDialog
 import com.binar.gosky.wrapper.Resource
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,12 +39,8 @@ class HomeFragment : Fragment() {
     var category: String = ONE_WAY
     var from: String = ""
     var to: String = ""
-    lateinit var departureTime: String
-    lateinit var returnTime: String
     var roundTrip: Boolean = false
 
-    private val formattedMonth =
-        listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Des")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -122,12 +123,12 @@ class HomeFragment : Fragment() {
 
     private fun setOnClickListener() {
         binding.etDepartureDate.setOnClickListener {
-            showDatePickerDialog(it.id)
+            showDatePickerDialog(it.id, requireContext(), homeBinding = binding)
             Log.d("id", "departure: ${it.id}")
         }
         binding.etReturnDate.setOnClickListener {
             Log.d("id", "return: ${it.id}")
-            showDatePickerDialog(it.id)
+            showDatePickerDialog(it.id, requireContext(), homeBinding = binding)
         }
         binding.swRoundTrip.setOnCheckedChangeListener { compoundButton, isChecked ->
             binding.tilReturnDate.isVisible = isChecked
@@ -142,7 +143,6 @@ class HomeFragment : Fragment() {
             to = binding.etTo.text.toString().trim().uppercase()
         }
         binding.btnSearch.setOnClickListener {
-            initView()
             val searchTickets =
                 parseFormIntoEntity(category, from, to, departureTime, returnTime, roundTrip)
             navigateToSearchResult(searchTickets)
@@ -150,53 +150,9 @@ class HomeFragment : Fragment() {
         binding.ivNotification.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
         }
-    }
-
-    private fun showDatePickerDialog(id: Int) {
-
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            { view, year, monthOfYear, dayOfMonth ->
-                day = dayOfMonth
-                when (id) {
-                    binding.etDepartureDate.id -> {
-                        binding.etDepartureDate.setText(
-                            "$dayOfMonth ${
-                                formattedMonth.get(
-                                    monthOfYear
-                                )
-                            }, $year"
-                        )
-                        departureTime = getTimeStamp(year, monthOfYear, dayOfMonth)
-                    }
-                    binding.etReturnDate.id -> {
-                        binding.etReturnDate.setText("$dayOfMonth ${formattedMonth.get(monthOfYear)}, $year")
-                        returnTime = getTimeStamp(year, monthOfYear, dayOfMonth)
-                    }
-                }
-            },
-            year,
-            month,
-            day
-        )
-        datePickerDialog.show()
-    }
-
-    private fun getTimeStamp(year: Int, monthOfYear: Int, dayOfMonth: Int): String {
-        val date = Calendar.getInstance().apply {
-            set(Calendar.YEAR, year)
-            set(Calendar.MONTH, monthOfYear)
-            set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            set(Calendar.HOUR_OF_DAY, 0)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
-        }.time
-        val localeID = Locale("in", "ID")
-        val formattedDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", localeID).format(date)
-        Log.d("timestamp", formattedDate.toString())
-
-        return formattedDate
+        binding.fabAddTicket.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_editConfirmationTicketFragment)
+        }
     }
 
     private fun parseFormIntoEntity(
@@ -233,9 +189,9 @@ class HomeFragment : Fragment() {
         private val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
-        private var day = calendar.get(Calendar.DAY_OF_MONTH)
+        var day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        private const val ONE_WAY = "ONE_WAY"
-        private const val ROUND_TRIP = "ROUND_TRIP"
+        const val ONE_WAY = "ONE_WAY"
+        const val ROUND_TRIP = "ROUND_TRIP"
     }
 }
