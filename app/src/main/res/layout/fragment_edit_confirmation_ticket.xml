@@ -169,7 +169,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawablePadding="16dp"
-                            android:focusable="true"
+                            android:focusable="false"
                             android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -277,7 +277,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawablePadding="16dp"
-                            android:focusable="true"
+                            android:focusable="false"
                             android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
