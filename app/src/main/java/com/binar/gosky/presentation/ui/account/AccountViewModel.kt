@@ -41,6 +41,16 @@ class AccountViewModel @Inject constructor(private val authRepository: AuthRepos
         }
     }
 
+    fun setUserRole(role: String) {
+        viewModelScope.launch {
+            userRepository.setUserRole(role)
+        }
+    }
+
+    fun checkIfUserIsAdmin(): LiveData<String> {
+        return userRepository.getUserRole().asLiveData()
+    }
+
     fun putUserData(accessToken: String, editUserRequestBody: EditUserRequestBody) {
         viewModelScope.launch {
             userRepository.putUserData(accessToken, editUserRequestBody)
