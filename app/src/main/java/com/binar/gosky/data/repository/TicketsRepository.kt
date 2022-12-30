@@ -13,7 +13,7 @@ interface TicketsRepository {
     suspend fun getTicketById(accessToken: String, id: Int): Resource<Tickets>
     suspend fun postTicket( accessToken: String, postTicketRequest: EditTicketRequestBody): Resource<EditTicketResponse>
     suspend fun putTicketById(accessToken: String, id: Int, putTicketByIdRequest: EditTicketRequestBody): Resource<EditTicketResponse>
-    suspend fun deleteTicketById(accessToken: String, id: Int)
+    suspend fun deleteTicketById(accessToken: String, id: Int): Resource<EditTicketResponse>
 }
 
 class TicketsRepositoryImpl @Inject constructor(private val dataSource: TicketsRemoteDataSource) :
@@ -53,8 +53,10 @@ class TicketsRepositoryImpl @Inject constructor(private val dataSource: TicketsR
         }
     }
 
-    override suspend fun deleteTicketById(accessToken: String, id: Int) {
-        dataSource.deleteTicketById(accessToken, id)
+    override suspend fun deleteTicketById(accessToken: String, id: Int): Resource<EditTicketResponse> {
+        return proceed {
+            dataSource.deleteTicketById(accessToken, id)
+        }
     }
 
 }

@@ -46,7 +46,7 @@ interface TicketsApiService {
     suspend fun deleteTicketById(
         @Header("Authorization") accessToken: String,
         @Path("id") id: Int
-    )
+    ): EditTicketResponse
 
     companion object {
         private const val DEFAULT_CATEGORY = "ONE_WAY"

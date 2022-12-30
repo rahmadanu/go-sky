@@ -17,7 +17,9 @@ import com.binar.gosky.util.ConvertUtil.convertRupiah
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit, private val updateClick: (TicketsItem) -> Unit) :
+class SearchResultAdapter(
+    private val listener: TicketItemClickListener
+) :
     RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {
     private val diffCallback = object : DiffUtil.ItemCallback<TicketsItem>() {
         override fun areItemsTheSame(oldItem: TicketsItem, newItem: TicketsItem): Boolean {
@@ -43,7 +45,7 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit, private 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder {
         val binding = ItemTripBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SearchResultViewHolder(binding, itemClick, updateClick, isAdmin)
+        return SearchResultViewHolder(binding, listener, isAdmin)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -55,8 +57,7 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit, private 
 
     inner class SearchResultViewHolder(
         private val binding: ItemTripBinding,
-        private val itemClick: (TicketsItem) -> Unit,
-        private val updateClick: (TicketsItem) -> Unit,
+        private val listener: TicketItemClickListener,
         private val isAdmin: Boolean
     ) :
         RecyclerView.ViewHolder(binding.root) {
@@ -96,14 +97,25 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit, private 
                     btnDelete.isVisible = isAdmin
 
                     btnUpdate.setOnClickListener {
-                        updateClick(this)
+                        listener.onUpdateMenuClicked(this)
+                    }
+                    btnDelete.setOnClickListener {
+                        if (id != null) {
+                            listener.onDeleteMenuClicked(id)
+                        }
                     }
 
                     itemView.setOnClickListener {
-                        itemClick(this)
+                        listener.onItemClicked(this)
                     }
                 }
             }
         }
     }
+}
+
+interface TicketItemClickListener {
+    fun onItemClicked(item: TicketsItem)
+    fun onUpdateMenuClicked(item: TicketsItem)
+    fun onDeleteMenuClicked(id: Int)
 }

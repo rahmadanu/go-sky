@@ -11,7 +11,7 @@ interface TicketsRemoteDataSource {
     suspend fun getTicketById(accessToken: String, id: Int): Tickets
     suspend fun postTicket( accessToken: String, postTicketRequest: EditTicketRequestBody): EditTicketResponse
     suspend fun putTicketById(accessToken: String, id: Int, putTicketByIdRequest: EditTicketRequestBody): EditTicketResponse
-    suspend fun deleteTicketById(accessToken: String, id: Int)
+    suspend fun deleteTicketById(accessToken: String, id: Int): EditTicketResponse
 }
 
 class TicketsRemoteDataSourceImpl @Inject constructor(private val apiService: TicketsApiService) :
@@ -42,8 +42,8 @@ class TicketsRemoteDataSourceImpl @Inject constructor(private val apiService: Ti
         return apiService.putTicketById(accessToken, id, putTicketByIdRequest)
     }
 
-    override suspend fun deleteTicketById(accessToken: String, id: Int) {
-        apiService.deleteTicketById(accessToken, id)
+    override suspend fun deleteTicketById(accessToken: String, id: Int): EditTicketResponse {
+        return apiService.deleteTicketById(accessToken, id)
     }
 
 }

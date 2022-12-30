@@ -44,8 +44,5 @@ class EditTicketViewModel @Inject constructor(private val ticketsRepository: Tic
         }
     }
 
-
-    //fun deleteTicketById(accessToken: String, id: Int)
-
     fun getUserAccessToken(): LiveData<String> = userRepository.getUserAccessToken().asLiveData()
 }
