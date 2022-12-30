@@ -21,6 +21,9 @@ class EditTicketViewModel @Inject constructor(private val ticketsRepository: Tic
     private val _editTicketResponse = MutableLiveData<Resource<EditTicketResponse>>()
     val editTicketResponse: LiveData<Resource<EditTicketResponse>> get() = _editTicketResponse
 
+    private val _addTicketResponse = MutableLiveData<Resource<EditTicketResponse>>()
+    val addTicketResponse: LiveData<Resource<EditTicketResponse>> get() = _addTicketResponse
+
     fun putTicketById(accessToken: String, id: Int, editTicket: EditTicketRequestBody) {
         _editTicketResponse.postValue(Resource.Loading())
         viewModelScope.launch(Dispatchers.IO) {
@@ -30,6 +33,17 @@ class EditTicketViewModel @Inject constructor(private val ticketsRepository: Tic
             }
         }
     }
+
+    fun postTicket(accessToken: String, postTicketRequest: EditTicketRequestBody) {
+        _addTicketResponse.postValue(Resource.Loading())
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = ticketsRepository.postTicket(accessToken, postTicketRequest)
+            viewModelScope.launch(Dispatchers.Main) {
+                _addTicketResponse.postValue(response)
+            }
+        }
+    }
+
 
     //fun deleteTicketById(accessToken: String, id: Int)
 

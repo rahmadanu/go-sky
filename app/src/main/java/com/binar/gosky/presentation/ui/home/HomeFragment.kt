@@ -165,8 +165,8 @@ class HomeFragment : Fragment() {
     ): SearchTickets {
         return SearchTickets(
             category,
-            from,
-            to,
+            from = binding.etFrom.text.toString(),
+            to = binding.etTo.text.toString(),
             departureTime,
             returnTime,
             roundTrip,

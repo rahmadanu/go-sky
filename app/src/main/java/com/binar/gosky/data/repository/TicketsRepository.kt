@@ -11,7 +11,7 @@ import javax.inject.Inject
 interface TicketsRepository {
     suspend fun getTickets(category: String, from: String, to: String, departureTime: String, returnTime: String): Resource<Tickets>
     suspend fun getTicketById(accessToken: String, id: Int): Resource<Tickets>
-    suspend fun postTicket( accessToken: String, postTicketRequest: EditTicketRequestBody)
+    suspend fun postTicket( accessToken: String, postTicketRequest: EditTicketRequestBody): Resource<EditTicketResponse>
     suspend fun putTicketById(accessToken: String, id: Int, putTicketByIdRequest: EditTicketRequestBody): Resource<EditTicketResponse>
     suspend fun deleteTicketById(accessToken: String, id: Int)
 }
@@ -37,8 +37,10 @@ class TicketsRepositoryImpl @Inject constructor(private val dataSource: TicketsR
         }
     }
 
-    override suspend fun postTicket(accessToken: String, postTicketRequest: EditTicketRequestBody) {
-        dataSource.postTicket(accessToken, postTicketRequest)
+    override suspend fun postTicket(accessToken: String, postTicketRequest: EditTicketRequestBody): Resource<EditTicketResponse> {
+        return proceed {
+            dataSource.postTicket(accessToken, postTicketRequest)
+        }
     }
 
     override suspend fun putTicketById(

@@ -36,7 +36,8 @@ class SearchResultFragment : Fragment(), OnTicketItemChangedListener {
                 findNavController().navigate(action)
             },
             updateClick = {
-                val action = SearchResultFragmentDirections.actionSearchResultFragmentToEditConfirmationTicketFragment(it)
+                val action = SearchResultFragmentDirections.actionSearchResultFragmentToEditConfirmationTicketFragment()
+                action.ticketsItem = it
                 findNavController().navigate(action)
             }
         )

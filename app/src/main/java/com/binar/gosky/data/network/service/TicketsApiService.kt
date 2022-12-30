@@ -33,7 +33,7 @@ interface TicketsApiService {
     suspend fun postTicket(
         @Header("Authorization") accessToken: String,
         @Body postTicketRequest: EditTicketRequestBody
-    )
+    ): EditTicketResponse
 
     @PUT(ApiEndPoints.PUT_TICKETS_BY_ID)
     suspend fun putTicketById(

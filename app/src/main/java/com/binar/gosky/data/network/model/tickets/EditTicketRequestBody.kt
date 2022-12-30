@@ -26,5 +26,9 @@ data class EditTicketRequestBody(
     @SerializedName("returnTime")
     val returnTime: String? = null,
     @SerializedName("to")
-    val to: String? = null
-): Parcelable
+    val to: String? = null,
+    @SerializedName("duration")
+    val duration: Long? = null,
+    @SerializedName("wishlisted")
+    val wishlisted: Boolean? = null,
+    ): Parcelable

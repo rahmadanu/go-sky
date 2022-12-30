@@ -79,6 +79,15 @@ class EditConfirmationTicketFragment : Fragment() {
                 else -> {}
             }
         }
+        viewModel.addTicketResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    findNavController().navigateUp()
+                }
+                is Resource.Loading -> {}
+                else -> {}
+            }
+        }
     }
 
     private fun parseFormIntoEntity(): EditTicketRequestBody {
@@ -90,29 +99,35 @@ class EditConfirmationTicketFragment : Fragment() {
             departureTime = departureTime,
             returnTime = returnTime,
             price = binding.etPrice.text.toString().toInt(),
-//            imageId = ,
-//            imageUrl = ,
-            description = binding.etDescription.text.toString()
+            imageId = "-",
+            imageUrl = "-",
+            description = binding.etDescription.text.toString(),
+            duration = 60,
+            wishlisted = false
         )
     }
 
+    private fun isEditAction(): Boolean {
+        return editTicketArgs.ticketsItem?.id != null
+    }
+
     private fun initView() {
-        editTicketArgs.ticketsItem.apply {
-            binding.apply {
-                etFrom.setText(from)
-                etTo.setText(to)
-                etFlightNumber.setText(flightNumber)
-                etDepartureDate.setText(ConvertUtil.convertIOStoDate(departureTime))
+        if (isEditAction()) {
+            editTicketArgs.ticketsItem?.apply {
+                binding.apply {
+                    etFrom.setText(from)
+                    etTo.setText(to)
+                    etFlightNumber.setText(flightNumber)
+                    etDepartureDate.setText(ConvertUtil.convertIOStoDate(departureTime))
 
-                etPrice.setText(price.toString())
-                etDescription.setText(description)
-
-                swRoundTrip.setOnCheckedChangeListener { compoundButton, isChecked ->
-                    binding.tilReturnDate.isVisible = isChecked
-                    //roundTrip = isChecked
-                    this@EditConfirmationTicketFragment.category = if (isChecked) HomeFragment.ROUND_TRIP else HomeFragment.ONE_WAY
+                    etPrice.setText(price.toString())
+                    etDescription.setText(description)
                 }
-
+            }
+        } else {
+            binding.apply {
+                tvPageTitle.text = getString(R.string.insert_ticket_data)
+                btnUpdate.text = getString(R.string.insert)
             }
         }
     }
@@ -125,16 +140,29 @@ class EditConfirmationTicketFragment : Fragment() {
             etReturnDate.setOnClickListener {
                 showDatePickerDialog(it.id, requireContext(), editTicketBinding = binding)
             }
+            swRoundTrip.setOnCheckedChangeListener { compoundButton, isChecked ->
+                binding.tilReturnDate.isVisible = isChecked
+                //roundTrip = isChecked
+                this@EditConfirmationTicketFragment.category = if (isChecked) HomeFragment.ROUND_TRIP else HomeFragment.ONE_WAY
+            }
             ivBack.setOnClickListener { findNavController().navigateUp() }
             btnUpdate.setOnClickListener {
-                editTicketArgs.ticketsItem.id?.let { ticketId ->
-                    viewModel.putTicketById(
-                        getString(R.string.bearer_token, accessToken),
-                        ticketId,
-                        parseFormIntoEntity()
-                    )
-                }
+                saveData()
             }
+        }
+    }
+
+    private fun saveData() {
+        if (isEditAction()) {
+            editTicketArgs.ticketsItem?.id?.let { ticketId ->
+                viewModel.putTicketById(
+                    getString(R.string.bearer_token, accessToken),
+                    ticketId,
+                    parseFormIntoEntity()
+                )
+            }
+        } else {
+            viewModel.postTicket(getString(R.string.bearer_token, accessToken), parseFormIntoEntity())
         }
     }
 

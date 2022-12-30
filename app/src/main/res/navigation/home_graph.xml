@@ -128,6 +128,8 @@
         tools:layout="@layout/fragment_edit_confirmation_ticket" >
         <argument
             android:name="ticketsItem"
-            app:argType="com.binar.gosky.data.network.model.tickets.TicketsItem" />
+            app:argType="com.binar.gosky.data.network.model.tickets.TicketsItem"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

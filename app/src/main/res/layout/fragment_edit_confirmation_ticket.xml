@@ -38,7 +38,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txt_flight"
+                    android:id="@+id/tv_page_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -167,7 +167,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:drawablePadding="16dp"
-                            android:focusable="false"
                             android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -371,7 +370,6 @@
                             android:layout_height="186dp"
                             android:gravity="top"
                             android:drawablePadding="16dp"
-                            android:focusable="true"
                             android:inputType="textMultiLine" />
                     </com.google.android.material.textfield.TextInputLayout>
 
