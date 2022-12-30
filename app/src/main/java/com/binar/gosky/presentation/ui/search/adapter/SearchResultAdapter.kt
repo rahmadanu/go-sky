@@ -31,13 +31,19 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
+    private var isAdmin = false
+
     fun submitList(list: List<TicketsItem>?) {
         differ.submitList(list)
     }
 
+    fun checkIfUserIsAdmin(isAdmin: Boolean) {
+         this.isAdmin =  isAdmin
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder {
         val binding = ItemTripBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SearchResultViewHolder(binding, itemClick)
+        return SearchResultViewHolder(binding, itemClick, isAdmin)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -49,7 +55,8 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
 
     inner class SearchResultViewHolder(
         private val binding: ItemTripBinding,
-        private val itemClick: (TicketsItem) -> Unit
+        private val itemClick: (TicketsItem) -> Unit,
+        private val isAdmin: Boolean
     ) :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
@@ -84,6 +91,8 @@ class SearchResultAdapter(private val itemClick: (TicketsItem) -> Unit) :
                         tvFromReturn.text = to
                         tvToReturn.text = from
                     }
+                    btnUpdate.isVisible = isAdmin
+                    btnDelete.isVisible = isAdmin
 
                     itemView.setOnClickListener {
                         itemClick(this)
