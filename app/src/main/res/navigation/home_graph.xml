@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_homeFragment_to_notificationFragment"
             app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_wishlistFragment"
+            app:destination="@id/wishlistFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
@@ -115,4 +118,13 @@
         android:name="com.binar.gosky.presentation.ui.notification.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.binar.gosky.presentation.ui.wishlist.WishlistFragment"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist" >
+        <action
+            android:id="@+id/action_wishlistFragment_to_confirmationTicketFragment"
+            app:destination="@id/confirmationTicketFragment" />
+    </fragment>
 </navigation>
