@@ -1,12 +1,10 @@
 package com.binar.gosky.presentation.ui.search
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.data.repository.TicketsRepository
+import com.binar.gosky.data.repository.UserRepository
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +12,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchResultViewModel @Inject constructor(private val ticketsRepository: TicketsRepository) :
+class SearchResultViewModel @Inject constructor(
+    private val ticketsRepository: TicketsRepository,
+    private val userRepository: UserRepository
+) :
     ViewModel() {
 
     private val _ticketsResult = MutableLiveData<Resource<List<TicketsItem>>>()
@@ -55,5 +56,9 @@ class SearchResultViewModel @Inject constructor(private val ticketsRepository: T
                 _ticketsResult.postValue(data)
             }
         }
+    }
+
+    fun checkIfUserAdmin(): LiveData<String> {
+        return userRepository.getUserRole().asLiveData()
     }
 }

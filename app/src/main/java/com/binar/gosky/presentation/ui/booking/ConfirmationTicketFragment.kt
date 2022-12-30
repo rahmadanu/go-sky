@@ -205,6 +205,9 @@ class ConfirmationTicketFragment : Fragment() {
                     tvReturnLabel.isVisible = false
                     tvAirlineReturn.isVisible = false
                     vLine.isVisible = false
+                    orderStatexb.isVisible = false
+                    orderStatexxyx.isVisible = false
+                    tvRetrunFix.isVisible = false
                 } else {
                     tvReturnTimeReturnDateDay.text = convertISOtoDay(returnTime)
                     tvFromReturn.text = to

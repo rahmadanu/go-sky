@@ -38,10 +38,23 @@ class UserDataStoreManager @Inject constructor(@ApplicationContext private val c
         }
     }
 
+    suspend fun setUserRole(role: String) {
+        context.userDataStore.edit { preferences ->
+            preferences[USER_ROLE_KEY] = role
+        }
+    }
+
+    fun getUserRole(): Flow<String> {
+        return context.userDataStore.data.map { preferences ->
+            preferences[USER_ROLE_KEY] ?: "null"
+        }
+    }
+
     companion object {
         private const val DATA_STORE_NAME = "user_preferences"
         private val LOGIN_STATUS_KEY = booleanPreferencesKey("login_status_key")
         private val USER_ACCESS_TOKEN_KEY = stringPreferencesKey("user_access_token_key")
+        private val USER_ROLE_KEY = stringPreferencesKey("user_role_key")
 
         val Context.userDataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
     }

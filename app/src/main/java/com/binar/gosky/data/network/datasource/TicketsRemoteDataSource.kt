@@ -1,16 +1,18 @@
 package com.binar.gosky.data.network.datasource
 
+import com.binar.gosky.data.network.model.tickets.AddUpdateRequestBody
 import com.binar.gosky.data.network.model.tickets.Tickets
-import com.binar.gosky.data.network.model.tickets.WishlistResponse
+import com.binar.gosky.data.network.service.ApiEndPoints
 import com.binar.gosky.data.network.service.TicketsApiService
+import retrofit2.http.*
 import javax.inject.Inject
 
 interface TicketsRemoteDataSource {
     suspend fun getTickets(category: String, from: String, to: String, departureTime: String, returnTime: String): Tickets
     suspend fun getTicketById(accessToken: String, id: Int): Tickets
-    suspend fun getWishlist(accessToken: String): Tickets
-    suspend fun postTicketToWishlist(accessToken: String, id: Int): WishlistResponse
-    suspend fun deleteTicketFromWishlist(accessToken: String, id: Int): WishlistResponse
+    suspend fun postTicket( accessToken: String, postTicketRequest: AddUpdateRequestBody)
+    suspend fun putTicketById(accessToken: String, id: Int, putTicketByIdRequest: AddUpdateRequestBody)
+    suspend fun deleteTicketById(accessToken: String, id: Int)
 }
 
 class TicketsRemoteDataSourceImpl @Inject constructor(private val apiService: TicketsApiService) :
@@ -29,16 +31,20 @@ class TicketsRemoteDataSourceImpl @Inject constructor(private val apiService: Ti
         return apiService.getTicketById(accessToken, id)
     }
 
-    override suspend fun getWishlist(accessToken: String): Tickets {
-        return apiService.getWishlist(accessToken)
+    override suspend fun postTicket(accessToken: String, postTicketRequest: AddUpdateRequestBody) {
+        apiService.postTicket(accessToken, postTicketRequest)
     }
 
-    override suspend fun postTicketToWishlist(accessToken: String, id: Int): WishlistResponse {
-        return apiService.postTicketToWishlist(accessToken, id)
+    override suspend fun putTicketById(
+        accessToken: String,
+        id: Int,
+        putTicketByIdRequest: AddUpdateRequestBody
+    ) {
+        putTicketById(accessToken, id, putTicketByIdRequest)
     }
 
-    override suspend fun deleteTicketFromWishlist(accessToken: String, id: Int): WishlistResponse {
-        return apiService.deleteTicketFromWishlist(accessToken, id)
+    override suspend fun deleteTicketById(accessToken: String, id: Int) {
+        deleteTicketById(accessToken, id)
     }
 
 }

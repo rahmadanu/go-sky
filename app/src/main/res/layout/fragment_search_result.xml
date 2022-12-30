@@ -70,11 +70,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_trip"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_bar"
-            tools:listitem="@layout/item_trip"/>
+            tools:listitem="@layout/item_trip"
+            android:overScrollMode="ifContentScrolls"/>
 
         <ProgressBar
             android:id="@+id/pb_loading"
