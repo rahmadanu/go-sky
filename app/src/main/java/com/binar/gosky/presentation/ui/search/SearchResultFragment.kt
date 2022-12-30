@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.gosky.R
 import com.binar.gosky.databinding.FragmentSearchResultBinding
+import com.binar.gosky.presentation.ui.account.AccountViewModel
 import com.binar.gosky.presentation.ui.search.adapter.SearchResultAdapter
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +23,8 @@ class SearchResultFragment : Fragment() {
     private var _binding: FragmentSearchResultBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SearchResultViewModel by viewModels()
+    private val searchResultViewModel: SearchResultViewModel by viewModels()
+
     private val args: SearchResultFragmentArgs by navArgs()
 
     private val adapter: SearchResultAdapter by lazy {
@@ -65,7 +67,7 @@ class SearchResultFragment : Fragment() {
 
     private fun getTickets() {
         args.searchTickets.let {
-            viewModel.getTickets(
+            searchResultViewModel.getTickets(
                 it.category,
                 it.from,
                 it.to,
@@ -90,7 +92,7 @@ class SearchResultFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.ticketsResult.observe(viewLifecycleOwner) {
+        searchResultViewModel.ticketsResult.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     adapter.submitList(it.payload)
@@ -110,6 +112,13 @@ class SearchResultFragment : Fragment() {
                 }
             }
         }
+        searchResultViewModel.checkIfUserAdmin().observe(viewLifecycleOwner) {
+            checkIfUserIsAdmin(it)
+        }
+    }
+
+    private fun checkIfUserIsAdmin(role: String) {
+        adapter.checkIfUserIsAdmin(role == "ADMIN")
     }
 
     override fun onDestroyView() {

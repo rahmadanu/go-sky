@@ -121,7 +121,7 @@ class LoginFragment : Fragment() {
             isValid = false
             binding.etEmail.error = "Email must not be empty"
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        /*if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             isValid = false
             binding.etEmail.error = "Invalid email"
         }
@@ -137,7 +137,7 @@ class LoginFragment : Fragment() {
                 "Password should be at least 6 characters",
                 Toast.LENGTH_SHORT
             ).show()
-        }
+        }*/
         return isValid
     }
 
