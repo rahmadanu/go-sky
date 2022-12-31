@@ -3,7 +3,7 @@ package com.binar.gosky.data.network.model.users
 
 import com.google.gson.annotations.SerializedName
 
-data class EditEmailUserResponse(
+data class EditUserResponse(
     @SerializedName("data")
     val `data`: Data? = null,
     @SerializedName("message")

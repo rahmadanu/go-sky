@@ -54,7 +54,6 @@
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -157,6 +156,18 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txt_info"
                         tools:src="@tools:sample/avatars"/>
+
+                    <ProgressBar
+                        android:id="@+id/pb_loading_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/iv_image"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_image"
+                        tools:visibility="visible"/>
 
                     <TextView
                         android:id="@+id/tv_add_image"

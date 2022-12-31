@@ -105,6 +105,7 @@ class AccountFragment : Fragment() {
                     Glide.with(requireContext())
                         .load(imageUrl)
                         .placeholder(R.drawable.ic_placeholder_image)
+                        .circleCrop()
                         .into(ivProfileImage)
                     Log.d("imageUrl", imageUrl.toString())
                 }

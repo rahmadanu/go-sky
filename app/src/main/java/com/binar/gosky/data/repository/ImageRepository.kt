@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 interface ImageRepository {
     suspend fun postImage(accessToken: String,imageType: String,imageBody: MultipartBody.Part): Resource<ImageResponse>
-    suspend fun deleteImage(accessToken: String, imageType: String, imageId: String)
+    suspend fun deleteImage(accessToken: String, imageType: String, imageId: String): Resource<ImageResponse>
 }
 
 class ImageRepositoryImpl @Inject constructor(private val dataSource: ImageRemoteDataSource): ImageRepository {
@@ -22,8 +22,10 @@ class ImageRepositoryImpl @Inject constructor(private val dataSource: ImageRemot
         }
     }
 
-    override suspend fun deleteImage(accessToken: String, imageType: String, imageId: String) {
-        dataSource.deleteImage(accessToken, imageType, imageId)
+    override suspend fun deleteImage(accessToken: String, imageType: String, imageId: String): Resource<ImageResponse> {
+        return proceed {
+            dataSource.deleteImage(accessToken, imageType, imageId)
+        }
     }
 
     private suspend fun <T> proceed(coroutines: suspend () -> T): Resource<T> {

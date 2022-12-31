@@ -19,7 +19,6 @@ import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.data.network.model.users.EditEmailUserRequestBody
 import com.binar.gosky.databinding.FragmentValidateEmailBottomSheetBinding
-import com.binar.gosky.presentation.ui.account.AccountViewModel
 import com.binar.gosky.presentation.ui.account.EditProfileViewModel
 import com.binar.gosky.presentation.ui.auth.login.LoginViewModel
 import com.binar.gosky.presentation.ui.auth.register.RegisterViewModel
@@ -99,7 +98,7 @@ class ValidateEmailBottomSheet(
         registerViewModel.getUserAccessToken().observe(viewLifecycleOwner) {
             Log.d("accessTokenValidate", it)
         }
-        editProfileViewModel.editEmailUserResponse.observe(viewLifecycleOwner) {
+        editProfileViewModel.editUserEmailResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     dismiss()

@@ -24,5 +24,5 @@ interface ImageApiService {
         @Header("Authorization") accessToken: String,
         @Query("type") imageType: String,
         @Query("imageId") imageId: String
-    )
+    ): ImageResponse
 }

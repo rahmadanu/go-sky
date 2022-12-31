@@ -3,7 +3,7 @@ package com.binar.gosky.data.repository
 import com.binar.gosky.data.local.datasource.UserLocalDataSource
 import com.binar.gosky.data.network.datasource.UserRemoteDataSource
 import com.binar.gosky.data.network.model.users.EditEmailUserRequestBody
-import com.binar.gosky.data.network.model.users.EditEmailUserResponse
+import com.binar.gosky.data.network.model.users.EditUserResponse
 import com.binar.gosky.data.network.model.users.EditUserRequestBody
 import com.binar.gosky.wrapper.Resource
 import kotlinx.coroutines.flow.Flow
@@ -16,8 +16,8 @@ interface UserRepository {
     suspend fun setUserAccessToken(accessToken: String)
     fun getUserAccessToken(): Flow<String>
 
-    suspend fun putUserData(accessToken: String, editUserRequestBody: EditUserRequestBody)
-    suspend fun putUserEmail(accessToken: String, editEmailUserRequestBody: EditEmailUserRequestBody): Resource<EditEmailUserResponse>
+    suspend fun putUserData(accessToken: String, editUserRequestBody: EditUserRequestBody): Resource<EditUserResponse>
+    suspend fun putUserEmail(accessToken: String, editEmailUserRequestBody: EditEmailUserRequestBody): Resource<EditUserResponse>
 }
 
 class UserRepositoryImpl @Inject constructor(
@@ -40,14 +40,16 @@ class UserRepositoryImpl @Inject constructor(
         return userLocalDataSource.getUserAccessToken()
     }
 
-    override suspend fun putUserData(accessToken: String, editUserRequestBody: EditUserRequestBody) {
-        userRemoteDataSource.putUserData(accessToken, editUserRequestBody)
+    override suspend fun putUserData(accessToken: String, editUserRequestBody: EditUserRequestBody): Resource<EditUserResponse> {
+        return proceed {
+            userRemoteDataSource.putUserData(accessToken, editUserRequestBody)
+        }
     }
 
     override suspend fun putUserEmail(
         accessToken: String,
         editEmailUserRequestBody: EditEmailUserRequestBody
-    ): Resource<EditEmailUserResponse> {
+    ): Resource<EditUserResponse> {
         return proceed {
             userRemoteDataSource.putUserEmail(accessToken, editEmailUserRequestBody)
         }

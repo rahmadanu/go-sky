@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 interface ImageRemoteDataSource {
     suspend fun postImage(accessToken: String,imageType: String,imageBody: MultipartBody.Part): ImageResponse
-    suspend fun deleteImage(accessToken: String, imageType: String, imageId: String)
+    suspend fun deleteImage(accessToken: String, imageType: String, imageId: String): ImageResponse
 }
 
 class ImageRemoteDataSourceImpl @Inject constructor(private val apiService: ImageApiService): ImageRemoteDataSource {
@@ -21,7 +21,7 @@ class ImageRemoteDataSourceImpl @Inject constructor(private val apiService: Imag
         return apiService.postImage(accessToken, imageType, imageBody)
     }
 
-    override suspend fun deleteImage(accessToken: String, imageType: String, imageId: String) {
-        apiService.deleteImage(accessToken, imageType, imageId)
+    override suspend fun deleteImage(accessToken: String, imageType: String, imageId: String): ImageResponse {
+        return apiService.deleteImage(accessToken, imageType, imageId)
     }
 }

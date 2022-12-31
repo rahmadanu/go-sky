@@ -5,7 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -53,9 +56,16 @@ class EditProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        handleBackButton()
         initView()
         setOnClickListener()
         observeData()
+    }
+
+    private fun handleBackButton() {
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            showDeleteDialog()
+        }
     }
 
     private fun observeData() {
@@ -66,10 +76,37 @@ class EditProfileFragment : Fragment() {
                     editProfileArgs.userData.imageId = it.payload?.data?.imageId
                     editProfileArgs.userData.imageUrl = it.payload?.data?.imageUrl
                     setProfileImage(it.payload?.data)
+                    binding.pbLoadingImage.isVisible = false
+                    binding.tvAddImage.isVisible = false
+                    binding.tvDeleteImage.isVisible = true
+                }
+                is Resource.Loading -> {
+                    binding.pbLoadingImage.isVisible = true
                 }
                 else -> {}
             }
             Log.d("imageresponse", it.payload?.data.toString())
+        }
+        viewModel.deleteImageResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    setProfileImage(null)
+                    binding.tvAddImage.isVisible = true
+                    binding.tvDeleteImage.isVisible = false
+                }
+                is Resource.Loading -> {}
+                else -> {}
+            }
+        }
+        viewModel.editUserResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_editProfileFragment_to_accountFragment)
+                }
+                is Resource.Loading -> {}
+                else -> {}
+            }
         }
     }
 
@@ -77,6 +114,7 @@ class EditProfileFragment : Fragment() {
         Glide.with(requireContext())
             .load(image?.imageUrl)
             .placeholder(R.drawable.ic_placeholder_image)
+            .circleCrop()
             .into(binding.ivImage)
     }
 
@@ -105,6 +143,7 @@ class EditProfileFragment : Fragment() {
                 } else {
                     Glide.with(requireContext())
                         .load(imageUrl)
+                        .circleCrop()
                         .into(ivImage)
                     tvAddImage.isVisible = false
                     tvDeleteImage.isVisible = true
@@ -115,7 +154,7 @@ class EditProfileFragment : Fragment() {
 
     private fun setOnClickListener() {
         binding.ivBack.setOnClickListener {
-            findNavController().navigateUp()
+            showDeleteDialog()
         }
         binding.ivImage.setOnClickListener {
             getImageFromGallery()
@@ -140,7 +179,6 @@ class EditProfileFragment : Fragment() {
                 viewModel.putUserData("Bearer ${editProfileArgs.accessToken}", parseFormIntoEntity())
             } else {
                 viewModel.putUserData("Bearer ${editProfileArgs.accessToken}", parseFormIntoEntity())
-                findNavController().navigate(R.id.action_editProfileFragment_to_accountFragment)
             }
         }
     }
@@ -169,6 +207,19 @@ class EditProfileFragment : Fragment() {
             return true
         }
         return false
+    }
+
+    private fun showDeleteDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Cancel editing")
+            .setMessage("Are you sure you want to cancel edit profile?")
+            .setPositiveButton("YES") { _, _ ->
+                findNavController().navigateUp()
+            }
+            .setNegativeButton("NO") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     override fun onDestroyView() {

@@ -1,14 +1,13 @@
 package com.binar.gosky.presentation.ui.account
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.binar.gosky.data.network.model.image.ImageResponse
 import com.binar.gosky.data.network.model.users.EditEmailUserRequestBody
-import com.binar.gosky.data.network.model.users.EditEmailUserResponse
 import com.binar.gosky.data.network.model.users.EditUserRequestBody
+import com.binar.gosky.data.network.model.users.EditUserResponse
 import com.binar.gosky.data.repository.ImageRepository
 import com.binar.gosky.data.repository.UserRepository
 import com.binar.gosky.wrapper.Resource
@@ -24,15 +23,25 @@ class EditProfileViewModel @Inject constructor(
     private val imageRepository: ImageRepository
 ): ViewModel() {
 
-    private val _editEmailUserResponse = MutableLiveData<Resource<EditEmailUserResponse>>()
-    val editEmailUserResponse: LiveData<Resource<EditEmailUserResponse>> get() = _editEmailUserResponse
+    private val _editUserEmailResponse = MutableLiveData<Resource<EditUserResponse>>()
+    val editUserEmailResponse: LiveData<Resource<EditUserResponse>> get() = _editUserEmailResponse
+
+    private val _editUserResponse = MutableLiveData<Resource<EditUserResponse>>()
+    val editUserResponse: LiveData<Resource<EditUserResponse>> get() = _editUserResponse
 
     private val _imageResponse = MutableLiveData<Resource<ImageResponse>>()
     val imageResponse: LiveData<Resource<ImageResponse>> get() = _imageResponse
 
+    private val _deleteImageResponse = MutableLiveData<Resource<ImageResponse>>()
+    val deleteImageResponse: LiveData<Resource<ImageResponse>> get() = _deleteImageResponse
+
     fun putUserData(accessToken: String, editUserRequestBody: EditUserRequestBody) {
-        viewModelScope.launch {
-            userRepository.putUserData(accessToken, editUserRequestBody)
+        _editUserResponse.postValue(Resource.Loading())
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = userRepository.putUserData(accessToken, editUserRequestBody)
+            viewModelScope.launch(Dispatchers.Main) {
+                _editUserResponse.postValue(response)
+            }
         }
     }
 
@@ -40,12 +49,13 @@ class EditProfileViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val editEmailUserResponse = userRepository.putUserEmail(accessToken, editEmailUserRequestBody)
             viewModelScope.launch(Dispatchers.Main) {
-                _editEmailUserResponse.postValue(editEmailUserResponse)
+                _editUserEmailResponse.postValue(editEmailUserResponse)
             }
         }
     }
 
     fun postImage(accessToken: String, imageType: String, imageBody: MultipartBody.Part) {
+        _imageResponse.postValue(Resource.Loading())
         viewModelScope.launch(Dispatchers.IO) {
             val response = imageRepository.postImage(accessToken, imageType, imageBody)
             viewModelScope.launch(Dispatchers.Main) {
@@ -55,9 +65,12 @@ class EditProfileViewModel @Inject constructor(
     }
 
     fun deleteImage(accessToken: String, imageType: String, imageId: String) {
-        viewModelScope.launch {
-            Log.d("imageId", imageId)
-            imageRepository.deleteImage(accessToken, imageType, imageId)
+        _deleteImageResponse.postValue(Resource.Loading())
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = imageRepository.deleteImage(accessToken, imageType, imageId)
+            viewModelScope.launch(Dispatchers.Main) {
+                _deleteImageResponse.postValue(response)
+            }
         }
     }
 
