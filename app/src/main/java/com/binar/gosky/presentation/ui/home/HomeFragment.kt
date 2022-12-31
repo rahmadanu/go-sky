@@ -16,11 +16,16 @@ import com.binar.gosky.data.network.model.auth.user.CurrentUserData
 import com.binar.gosky.data.network.model.tickets.SearchTickets
 import com.binar.gosky.databinding.FragmentHomeBinding
 import com.binar.gosky.presentation.ui.account.AccountViewModel
+import com.binar.gosky.util.DateUtil.day
 import com.binar.gosky.util.DateUtil.departureTime
 import com.binar.gosky.util.DateUtil.formattedMonth
 import com.binar.gosky.util.DateUtil.getTimeStamp
+import com.binar.gosky.util.DateUtil.hour
+import com.binar.gosky.util.DateUtil.minute
+import com.binar.gosky.util.DateUtil.month
 import com.binar.gosky.util.DateUtil.returnTime
 import com.binar.gosky.util.DateUtil.showDatePickerDialog
+import com.binar.gosky.util.DateUtil.year
 import com.binar.gosky.wrapper.Resource
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -116,8 +121,8 @@ class HomeFragment : Fragment() {
 
         binding.etFrom.setAdapter(arrayAdapter)
         binding.etTo.setAdapter(arrayAdapter)
-        departureTime = getTimeStamp(year, month, day)
-        returnTime = getTimeStamp(year, month, day)
+        departureTime = getTimeStamp(year, month, day, hour, minute)
+        returnTime = getTimeStamp(year, month, day, hour, minute)
 
     }
 
@@ -186,11 +191,6 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
-        private val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        var day = calendar.get(Calendar.DAY_OF_MONTH)
-
         const val ONE_WAY = "ONE_WAY"
         const val ROUND_TRIP = "ROUND_TRIP"
     }

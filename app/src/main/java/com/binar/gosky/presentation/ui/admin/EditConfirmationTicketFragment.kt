@@ -2,6 +2,8 @@ package com.binar.gosky.presentation.ui.admin
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +17,9 @@ import com.binar.gosky.R
 import com.binar.gosky.data.network.model.tickets.EditTicketRequestBody
 import com.binar.gosky.databinding.FragmentEditConfirmationTicketBinding
 import com.binar.gosky.presentation.ui.home.HomeFragment
+import com.binar.gosky.presentation.ui.search.SearchResultFragment
 import com.binar.gosky.util.ConvertUtil
+import com.binar.gosky.util.DateUtil
 import com.binar.gosky.util.DateUtil.departureTime
 import com.binar.gosky.util.DateUtil.returnTime
 import com.binar.gosky.util.DateUtil.showDatePickerDialog
@@ -32,7 +36,7 @@ class EditConfirmationTicketFragment : Fragment() {
 
     private val editTicketArgs: EditConfirmationTicketFragmentArgs by navArgs()
 
-    var category: String = HomeFragment.ONE_WAY
+    var category: String? = HomeFragment.ONE_WAY
     private lateinit var accessToken: String
 
     private var listener: OnTicketItemChangedListener? = null
@@ -104,7 +108,7 @@ class EditConfirmationTicketFragment : Fragment() {
             imageId = "-",
             imageUrl = "-",
             description = binding.etDescription.text.toString(),
-            duration = 60,
+            duration = binding.etDuration.text.toString().toLong(),
             wishlisted = false
         )
     }
@@ -116,15 +120,34 @@ class EditConfirmationTicketFragment : Fragment() {
     private fun initView() {
         if (isEditAction()) {
             editTicketArgs.ticketsItem?.apply {
+                Log.d("editTicketsArgs", this.toString())
                 binding.apply {
+                    this@EditConfirmationTicketFragment.category = category
                     etFrom.setText(from)
                     etTo.setText(to)
                     etFlightNumber.setText(flightNumber)
-                    etDepartureDate.setText(ConvertUtil.convertIOStoDate(departureTime))
+                    etDepartureDate.setText(ConvertUtil.convertISOtoDateHoursMinute(departureTime))
+                    if (departureTime != null) {
+                        DateUtil.departureTime = departureTime
+                    }
+                    etDuration.setText(duration.toString())
 
                     etPrice.setText(price.toString())
                     etDescription.setText(description)
+                    if (category == HomeFragment.ROUND_TRIP) {
+                        swRoundTrip.isChecked = true
+                        tilReturnDate.isVisible = true
+                        etReturnDate.setText(ConvertUtil.convertISOtoDateHoursMinute(returnTime))
+                        if (returnTime != null) {
+                            DateUtil.returnTime = returnTime
+                        }
+                    } else {
+                        DateUtil.returnTime = null
+                        swRoundTrip.isChecked = false
+                        tilReturnDate.isVisible = false
+                    }
                 }
+                Log.d("editTicketsArgsReturn", returnTime.toString())
             }
         } else {
             binding.apply {
@@ -155,17 +178,46 @@ class EditConfirmationTicketFragment : Fragment() {
     }
 
     private fun saveData() {
-        if (isEditAction()) {
-            editTicketArgs.ticketsItem?.id?.let { ticketId ->
-                viewModel.putTicketById(
-                    getString(R.string.bearer_token, accessToken),
-                    ticketId,
-                    parseFormIntoEntity()
-                )
+        if (validateInput()) {
+            if (isEditAction()) {
+                editTicketArgs.ticketsItem?.id?.let { ticketId ->
+                    viewModel.putTicketById(
+                        getString(R.string.bearer_token, accessToken),
+                        ticketId,
+                        parseFormIntoEntity()
+                    )
+                }
+            } else {
+                viewModel.postTicket(getString(R.string.bearer_token, accessToken), parseFormIntoEntity())
             }
-        } else {
-            viewModel.postTicket(getString(R.string.bearer_token, accessToken), parseFormIntoEntity())
         }
+        Log.d("edit", parseFormIntoEntity().toString())
+    }
+
+    private fun validateInput(): Boolean {
+        var isValid = true
+        val from = binding.etFrom.text.toString()
+        val to = binding.etTo.text.toString()
+        val flightNumber = binding.etFlightNumber.text.toString()
+        val price = binding.etPrice.text.toString()
+
+        if (from.isEmpty()) {
+            isValid = false
+            binding.etFrom.error = "From field must not be empty"
+        } else
+        if (to.isEmpty()) {
+            isValid = false
+            binding.etTo.error = "To field must not be empty"
+        } else
+        if (flightNumber.isEmpty()) {
+            isValid = false
+            binding.etFlightNumber.error = "Flight number field must not be empty"
+        } else
+        if (price.isEmpty()) {
+            isValid = false
+            binding.etPrice.error = "Price field must not be empty"
+        }
+        return isValid
     }
 
     override fun onDestroyView() {
