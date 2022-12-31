@@ -122,8 +122,9 @@ class HomeFragment : Fragment() {
         binding.etFrom.setAdapter(arrayAdapter)
         binding.etTo.setAdapter(arrayAdapter)
         departureTime = getTimeStamp(year, month, day, hour, minute)
-        returnTime = getTimeStamp(year, month, day, hour, minute)
-
+        if (binding.swRoundTrip.isChecked) {
+            returnTime = getTimeStamp(year, month, day, hour, minute)
+        }
     }
 
     private fun setOnClickListener() {
@@ -165,7 +166,7 @@ class HomeFragment : Fragment() {
         from: String,
         to: String,
         departureTime: String,
-        returnTime: String,
+        returnTime: String?,
         roundTrip: Boolean
     ): SearchTickets {
         return SearchTickets(

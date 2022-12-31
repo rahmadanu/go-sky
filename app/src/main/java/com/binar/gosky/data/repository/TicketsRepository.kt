@@ -9,7 +9,7 @@ import com.binar.gosky.wrapper.Resource
 import javax.inject.Inject
 
 interface TicketsRepository {
-    suspend fun getTickets(category: String, from: String, to: String, departureTime: String, returnTime: String): Resource<Tickets>
+    suspend fun getTickets(category: String, from: String, to: String, departureTime: String, returnTime: String?): Resource<Tickets>
     suspend fun getTicketById(accessToken: String, id: Int): Resource<Tickets>
     suspend fun postTicket( accessToken: String, postTicketRequest: EditTicketRequestBody): Resource<EditTicketResponse>
     suspend fun putTicketById(accessToken: String, id: Int, putTicketByIdRequest: EditTicketRequestBody): Resource<EditTicketResponse>
@@ -24,7 +24,7 @@ class TicketsRepositoryImpl @Inject constructor(private val dataSource: TicketsR
         from: String,
         to: String,
         departureTime: String,
-        returnTime: String
+        returnTime: String?
     ): Resource<Tickets> {
         return proceed {
             dataSource.getTickets(category, from, to, departureTime, returnTime)

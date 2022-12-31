@@ -20,7 +20,7 @@ interface TicketsApiService {
         @Query("from") from: String,
         @Query("to") to: String,
         @Query("departureTime") departureTime: String = DEPARTURE_TIME,
-        @Query("returnTime") returnTime: String = RETURN_TIME,
+        @Query("returnTime") returnTime: String? = RETURN_TIME,
     ): Tickets
 
     @GET(ApiEndPoints.GET_TICKETS_BY_ID_ENDPOINT)

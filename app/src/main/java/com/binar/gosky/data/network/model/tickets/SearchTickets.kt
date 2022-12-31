@@ -9,6 +9,6 @@ data class SearchTickets(
     var from: String = "",
     var to: String = "",
     var departureTime: String = "",
-    var returnTime: String = "",
+    var returnTime: String? = null,
     var roundTrip: Boolean = false
 ) : Parcelable

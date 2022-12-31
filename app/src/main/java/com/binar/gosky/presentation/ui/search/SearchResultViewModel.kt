@@ -30,7 +30,7 @@ class SearchResultViewModel @Inject constructor(
         from: String,
         to: String,
         departureTime: String,
-        returnTime: String
+        returnTime: String?
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             _ticketsResult.postValue(Resource.Loading())
