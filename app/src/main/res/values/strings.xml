@@ -12,6 +12,10 @@
 
     <string name="from_to_to">%1$s to %2$s</string>
     <string name="total_amount">Total: %1$s</string>
+    <plurals name="total_earnings">
+        <item quantity="one">Total earnings of %d transaction</item>
+        <item quantity="other">Total earnings of %d transactions</item>
+    </plurals>
 
     <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
     <string name="title_history">History</string>

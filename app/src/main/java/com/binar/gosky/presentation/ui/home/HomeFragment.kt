@@ -1,6 +1,5 @@
 package com.binar.gosky.presentation.ui.home
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,8 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.user.CurrentUserData
 import com.binar.gosky.data.network.model.tickets.SearchTickets
+import com.binar.gosky.data.network.model.transactions.earnings.EarningsData
 import com.binar.gosky.databinding.FragmentHomeBinding
 import com.binar.gosky.presentation.ui.account.AccountViewModel
+import com.binar.gosky.util.ConvertUtil
 import com.binar.gosky.util.DateUtil.day
 import com.binar.gosky.util.DateUtil.departureTime
 import com.binar.gosky.util.DateUtil.formattedMonth
@@ -29,7 +30,6 @@ import com.binar.gosky.util.DateUtil.year
 import com.binar.gosky.wrapper.Resource
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -39,13 +39,16 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     //use AccountViewModel to get current user
-    private val viewModel: AccountViewModel by viewModels()
+    private val accountViewModel: AccountViewModel by viewModels()
+
+    private val homeViewModel: HomeViewModel by viewModels()
 
     var category: String = ONE_WAY
     var from: String = ""
     var to: String = ""
     var roundTrip: Boolean = false
 
+    lateinit var accessToken: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,28 +68,48 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
-            viewModel.getCurrentUser(getString(R.string.bearer_token, it))
+        accountViewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+            accessToken = it
+            accountViewModel.getCurrentUser(getString(R.string.bearer_token, it))
         }
-        viewModel.currentUserResponse.observe(viewLifecycleOwner) {
+        accountViewModel.currentUserResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     setWelcomeMessage(it.data?.data)
-                    it.data?.data?.role?.let { role -> viewModel.setUserRole(role)
+                    it.data?.data?.role?.let { role -> accountViewModel.setUserRole(role)
                         Log.d("checkadmin", role)
                     }
                 }
                 else -> {}
             }
         }
-        viewModel.checkIfUserIsAdmin().observe(viewLifecycleOwner) {
-            showFabIfUserIsAdmin(it.equals("ADMIN"))
+        accountViewModel.checkIfUserIsAdmin().observe(viewLifecycleOwner) {
+            val isAdmin = it.equals("ADMIN")
+            showFabIfUserIsAdmin(isAdmin)
+            getEarnings()
+            showEarningsIfUserIsAdmin(isAdmin)
         }
-        Log.d("checkadmin", viewModel.checkIfUserIsAdmin().toString())
+        homeViewModel.earningsResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    bindEarningsDataToView(it.data?.data)
+                    binding.pbEarnings.isVisible = false
+                }
+                is Resource.Loading -> {
+                    binding.pbEarnings.isVisible = true
+                }
+                else -> {}
+            }
+        }
+        Log.d("checkadmin", accountViewModel.checkIfUserIsAdmin().toString())
     }
 
-    private fun showFabIfUserIsAdmin(isAdmin: Boolean) {
-        binding.fabAddTicket.isVisible = isAdmin
+    private fun showEarningsIfUserIsAdmin(isAdmin: Boolean) {
+        binding.apply {
+            cvEarnings.isVisible = isAdmin
+            tvWelcomeMessage.isVisible = !isAdmin
+            ivUserImage.isVisible = !isAdmin
+        }
     }
 
     private fun setWelcomeMessage(currentUserData: CurrentUserData?) {
@@ -99,6 +122,31 @@ class HomeFragment : Fragment() {
                     .into(ivUserImage)
             }
         }
+    }
+
+    private fun getEarnings() {
+        homeViewModel.getEarnings(getString(R.string.bearer_token,accessToken))
+    }
+
+    private fun bindEarningsDataToView(earnings: EarningsData?) {
+        earnings?.let {
+            binding.apply {
+                tvTotalEarnings.text = it.thisYear?.count?.let { count ->
+                    Log.d("earningscount", count.toString())
+                    resources.getQuantityString(R.plurals.total_earnings,
+                        count,
+                        count
+                    )
+                }
+                tvTodayEarnings.text = ConvertUtil.convertRupiah(it.today?.earnings)
+                tvThisMonthEarnings.text = ConvertUtil.convertRupiah(it.thisMonth?.earnings)
+                tvThisYearEarnings.text = ConvertUtil.convertRupiah(it.thisYear?.earnings)
+            }
+        }
+    }
+
+    private fun showFabIfUserIsAdmin(isAdmin: Boolean) {
+        binding.fabAddTicket.isVisible = isAdmin
     }
 
     private fun initView() {

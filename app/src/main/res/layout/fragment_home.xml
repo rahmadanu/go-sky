@@ -33,6 +33,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_welcome_message"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="30dp"
+            android:paddingVertical="8dp"
+            android:text="Let’s book your flight!"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_go_sky" />
+
+        <ImageView
+            android:id="@+id/iv_user_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_welcome_message"
+            app:layout_constraintEnd_toStartOf="@id/iv_notification"
+            app:layout_constraintTop_toTopOf="@id/tv_welcome_message"
+            tools:src="@tools:sample/avatars" />
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_earnings"
             android:layout_width="match_parent"
@@ -40,10 +62,12 @@
             android:layout_marginHorizontal="26dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
+            android:visibility="gone"
             app:cardCornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_go_sky">
+            app:layout_constraintTop_toBottomOf="@id/tv_welcome_message"
+            tools:visibility="visible">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -63,17 +87,6 @@
                     tools:text="Total earnings of 4 transactions"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="See details"
-                    android:textSize="12sp"
-                    android:paddingEnd="6dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:drawablePadding="4dp"
-                    app:drawableEndCompat="@drawable/ic_arrow_forward_small" />
-
-                <TextView
                     android:id="@+id/tv_today"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,6 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
                     tools:text="Rp1.000.000,-"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_today"
@@ -109,6 +123,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     tools:text="Rp1.000.000,-"
                     app:layout_constraintStart_toStartOf="@id/divider_today_thismonth"
                     app:layout_constraintTop_toBottomOf="@id/tv_this_month"
@@ -129,6 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
                     tools:text="Rp1.000.000,-"
                     app:layout_constraintStart_toEndOf="@id/divider_thismonth_thisyear"
                     app:layout_constraintTop_toBottomOf="@id/tv_today"
@@ -150,6 +167,13 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_total_earnings"
                     app:layout_constraintEnd_toStartOf="@id/tv_this_year"/>
 
+                <ProgressBar
+                    android:id="@+id/pb_earnings"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_total_earnings"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
