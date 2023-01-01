@@ -49,6 +49,8 @@ class HomeFragment : Fragment() {
     var category: String = ONE_WAY
     var from: String = ""
     var to: String = ""
+    lateinit var departureTime: String
+    lateinit var returnTime: String
     var roundTrip: Boolean = false
 
     lateinit var accessToken: String
@@ -207,7 +209,7 @@ class HomeFragment : Fragment() {
             Log.d("id", "return: ${it.id}")
             showDatePickerDialog(it.id, requireContext(), homeBinding = binding)
         }
-        binding.swRoundTrip.setOnCheckedChangeListener { compoundButton, isChecked ->
+        binding.swRoundTrip.setOnCheckedChangeListener { _, isChecked ->
             binding.tilReturnDate.isVisible = isChecked
             roundTrip = isChecked
             category = if (isChecked) ROUND_TRIP else ONE_WAY

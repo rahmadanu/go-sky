@@ -1,9 +1,11 @@
 package com.binar.gosky.presentation.ui.account
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -59,6 +61,9 @@ class ResetPasswordFragment : Fragment() {
                 is Resource.Success -> {
                     findNavController().navigateUp()
                 }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
                 else -> {}
             }
         }
@@ -66,7 +71,9 @@ class ResetPasswordFragment : Fragment() {
 
     private fun setOnClickListener() {
         binding.btnConfirm.setOnClickListener {
-            putNewPasswordReset("Bearer $accessToken", parseFormIntoEntity())
+            if (validateInput()) {
+                putNewPasswordReset("Bearer $accessToken", parseFormIntoEntity())
+            }
         }
     }
 
@@ -79,6 +86,32 @@ class ResetPasswordFragment : Fragment() {
             password = binding.etCurrentPassword.text.toString(),
             newPassword = binding.etNewPassword.text.toString(),
         )
+    }
+
+    private fun validateInput(): Boolean {
+        var isValid = true
+        val currentPassword = binding.etCurrentPassword.text.toString().trim()
+        val newPassword = binding.etNewPassword.text.toString().trim()
+
+        if (currentPassword.isEmpty()) {
+            isValid = false
+            Toast.makeText(requireContext(), "Current password must not be empty", Toast.LENGTH_SHORT)
+                .show()
+        }
+        if (newPassword.isEmpty()) {
+            isValid = false
+            Toast.makeText(requireContext(), "New password must not be empty", Toast.LENGTH_SHORT)
+                .show()
+        }
+        if (newPassword.length < 6) {
+            isValid = false
+            Toast.makeText(
+                requireContext(),
+                "New password should be at least 6 characters",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        return isValid
     }
 
     override fun onDestroyView() {
