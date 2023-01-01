@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +16,8 @@ import com.binar.gosky.R
 import com.binar.gosky.data.network.model.tickets.SearchTickets
 import com.binar.gosky.databinding.FragmentHomeBinding
 import com.binar.gosky.presentation.ui.auth.login.LoginViewModel
+import com.binar.gosky.presentation.ui.notification.NotificationViewModel
+import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,7 +28,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val notificationViewModel: NotificationViewModel by viewModels()
 
     var category: String = ONE_WAY
     var from: String = ""
@@ -33,6 +36,7 @@ class HomeFragment : Fragment() {
     lateinit var departureTime: String
     lateinit var returnTime: String
     var roundTrip: Boolean = false
+    lateinit var accessToken: String
 
     private val formattedMonth =
         listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Des")
@@ -51,6 +55,34 @@ class HomeFragment : Fragment() {
 
         initView()
         setOnClickListener()
+        observeData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getNotification(accessToken)
+    }
+
+    private fun observeData() {
+        notificationViewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+            Log.d("accessToken in home", it)
+            accessToken = it
+            getNotification(it)
+        }
+        notificationViewModel.unreadNotificationCount.observe(viewLifecycleOwner) {
+            it.let { unreadCount ->
+                if (unreadCount == 0) {
+                    binding.tvCartBadge.isVisible = false
+                } else {
+                    binding.tvCartBadge.isVisible = true
+                    binding.tvCartBadge.text = unreadCount.toString()
+                }
+            }
+        }
+    }
+
+    private fun getNotification(accessToken: String? = "") {
+        notificationViewModel.getNotification(getString(R.string.bearer_token, accessToken))
     }
 
     private fun initView() {
