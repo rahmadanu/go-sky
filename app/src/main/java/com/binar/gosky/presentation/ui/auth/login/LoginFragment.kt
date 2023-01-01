@@ -67,6 +67,7 @@ class LoginFragment : Fragment() {
                     navigateToHome()
                 }
                 is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
                 else -> {}
             }

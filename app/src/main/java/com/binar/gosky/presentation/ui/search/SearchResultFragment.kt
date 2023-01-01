@@ -127,7 +127,9 @@ class SearchResultFragment : Fragment(), OnTicketItemChangedListener {
                     binding.rcvTrip.visibility = View.GONE
                     binding.pbLoading.visibility = View.VISIBLE
                 }
-                is Resource.Error -> {}
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
                 is Resource.Empty -> {
                     binding.pbLoading.visibility = View.GONE
                     binding.tvNoFlights.visibility = View.VISIBLE
@@ -142,6 +144,9 @@ class SearchResultFragment : Fragment(), OnTicketItemChangedListener {
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_SHORT).show()
                     getTickets()
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
                 is Resource.Loading -> {}
                 else -> {}

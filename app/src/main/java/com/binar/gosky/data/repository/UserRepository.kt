@@ -96,20 +96,4 @@ class UserRepositoryImpl @Inject constructor(
             userRemoteDataSource.putNewPasswordInResetPassword(accessToken, newPassword)
         }
     }
-
-    private suspend fun <T> proceed(coroutines: suspend () -> T): Resource<T> {
-        return try {
-            Resource.Success(coroutines.invoke())
-        } catch (e: Exception) {
-            when (e) {
-                is HttpException -> {
-                    val errorMessageResponseType = object : TypeToken<ErrorResponse>() {}.type
-                    val error: ErrorResponse = Gson().fromJson(e.response()?.errorBody()?.charStream(), errorMessageResponseType)
-                    Resource.Error(e, "${error.status}: ${error.message}")
-                } else -> {
-                    Resource.Error(e, e.message)
-                }
-            }
-        }
-    }
 }

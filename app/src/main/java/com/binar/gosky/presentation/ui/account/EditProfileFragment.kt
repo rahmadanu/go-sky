@@ -79,6 +79,9 @@ class EditProfileFragment : Fragment() {
                     binding.tvAddImage.isVisible = false
                     binding.tvDeleteImage.isVisible = true
                 }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
                 is Resource.Loading -> {
                     binding.pbLoadingImage.isVisible = true
                 }
@@ -93,6 +96,9 @@ class EditProfileFragment : Fragment() {
                     binding.tvAddImage.isVisible = true
                     binding.tvDeleteImage.isVisible = false
                 }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
                 is Resource.Loading -> {}
                 else -> {}
             }
@@ -102,6 +108,9 @@ class EditProfileFragment : Fragment() {
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_editProfileFragment_to_accountFragment)
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
                 is Resource.Loading -> {}
                 else -> {}

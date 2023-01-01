@@ -77,6 +77,9 @@ class ValidateEmailBottomSheet(
                     Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                     it.data?.data?.otpToken?.let { token -> otpToken = token }
                 }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
                 else -> {}
             }
         }
@@ -91,6 +94,9 @@ class ValidateEmailBottomSheet(
                     }
                     Log.d("registerresponse", it.data?.data?.accessToken.toString())
                 }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
                 else -> {}
             }
         }
@@ -103,6 +109,8 @@ class ValidateEmailBottomSheet(
                     dismiss()
                     navigateToAccount()
                     Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
+                } is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
                 else -> {}
             }
