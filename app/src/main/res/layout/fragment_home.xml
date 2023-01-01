@@ -33,18 +33,126 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_welcome_message"
-            android:layout_width="200dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_earnings"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="30dp"
-            android:paddingVertical="8dp"
-            android:text="Let’s book your flight!"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:layout_marginHorizontal="26dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_go_sky" />
+            app:layout_constraintTop_toBottomOf="@id/title_go_sky">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tv_total_earnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="Total earnings"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Total earnings of 4 transactions"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See details"
+                    android:textSize="12sp"
+                    android:paddingEnd="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:drawablePadding="4dp"
+                    app:drawableEndCompat="@drawable/ic_arrow_forward_small" />
+
+                <TextView
+                    android:id="@+id/tv_today"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Today"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_total_earnings"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_this_month"/>
+
+                <TextView
+                    android:id="@+id/tv_today_earnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    tools:text="Rp1.000.000,-"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_today"
+                    app:layout_constraintEnd_toStartOf="@+id/divider_today_thismonth"/>
+
+                <TextView
+                    android:id="@+id/tv_this_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This month"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_today" />
+
+                <TextView
+                    android:id="@+id/tv_this_month_earnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    tools:text="Rp1.000.000,-"
+                    app:layout_constraintStart_toStartOf="@id/divider_today_thismonth"
+                    app:layout_constraintTop_toBottomOf="@id/tv_this_month"
+                    app:layout_constraintEnd_toStartOf="@+id/divider_thismonth_thisyear"/>
+
+                <TextView
+                    android:id="@+id/tv_this_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This year"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_today"
+                    app:layout_constraintStart_toEndOf="@id/tv_this_month" />
+
+                <TextView
+                    android:id="@+id/tv_this_year_earnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    tools:text="Rp1.000.000,-"
+                    app:layout_constraintStart_toEndOf="@id/divider_thismonth_thisyear"
+                    app:layout_constraintTop_toBottomOf="@id/tv_today"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/divider_today_thismonth"
+                    android:layout_width="2dp"
+                    android:layout_height="70dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_today"
+                    app:layout_constraintTop_toBottomOf="@id/tv_total_earnings"
+                    app:layout_constraintEnd_toStartOf="@id/tv_this_month"/>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/divider_thismonth_thisyear"
+                    android:layout_width="2dp"
+                    android:layout_height="70dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_this_month"
+                    app:layout_constraintTop_toBottomOf="@id/tv_total_earnings"
+                    app:layout_constraintEnd_toStartOf="@id/tv_this_year"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <ImageView
             android:id="@+id/iv_notification"
@@ -54,15 +162,6 @@
             android:src="@drawable/ic_notifications"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_user_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_welcome_message"
-            app:layout_constraintEnd_toStartOf="@id/iv_notification"
-            app:layout_constraintTop_toTopOf="@id/tv_welcome_message"
-            tools:src="@tools:sample/avatars" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -74,7 +173,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_welcome_message">
+            app:layout_constraintTop_toBottomOf="@id/cv_earnings">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
