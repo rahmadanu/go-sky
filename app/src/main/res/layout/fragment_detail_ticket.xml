@@ -304,22 +304,11 @@
                                 android:id="@+id/beginCity_oid"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
                                 android:text="@string/ticket_detail_departure"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1" />
-
-                            <ImageView
-                                android:id="@+id/orderState"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:contentDescription="@string/icon_favorite"
-                                android:src="@drawable/ic_favorite_no" />
-                        </LinearLayout>
+                            </LinearLayout>
 
 
                         <LinearLayout
@@ -571,22 +560,11 @@
                                 android:id="@+id/beginCity_oidx"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
                                 android:text="@string/ticket_detail_return"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1" />
-
-                            <ImageView
-                                android:id="@+id/orderStatexx"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:contentDescription="@string/icon_favorite"
-                                android:src="@drawable/ic_favorite_yes" />
-                        </LinearLayout>
+                            </LinearLayout>
 
 
                         <LinearLayout

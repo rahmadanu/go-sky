@@ -14,17 +14,21 @@ import javax.inject.Inject
 class NotificationViewModel @Inject constructor(
     private val notificationRepository: NotificationRepository,
     private val userRepository: UserRepository
-): ViewModel() {
-
+) : ViewModel() {
     private val _notificationResponse = MutableLiveData<Resource<NotificationResponse>>()
     val notificationResponse: LiveData<Resource<NotificationResponse>> get() = _notificationResponse
+
+    private val _unreadNotificationCount = MutableLiveData<Int?>()
+    val unreadNotificationCount: LiveData<Int?> get() = _unreadNotificationCount
 
     fun getNotification(accessToken: String) {
         _notificationResponse.postValue(Resource.Loading())
         viewModelScope.launch(Dispatchers.IO) {
-            val response = notificationRepository.getNotification(accessToken)
+            val notificationResponse = notificationRepository.getNotification(accessToken)
+            val unreadCount = notificationResponse.payload?.meta?.unreadCount
             viewModelScope.launch(Dispatchers.Main) {
-                _notificationResponse.postValue(response)
+                _notificationResponse.postValue(notificationResponse)
+                _unreadNotificationCount.postValue(unreadCount)
             }
         }
     }

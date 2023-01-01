@@ -157,11 +157,6 @@
                                 tools:ignore="SmallSp"
                                 tools:text="Mon, 6 Mar 2022" />
 
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1" />
-
 
                         </LinearLayout>
 
@@ -308,31 +303,12 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="70dp"
                                     android:layout_marginEnd="70dp"
+                                    android:layout_marginBottom="8dp"
                                     android:textColor="@color/black"
                                     android:textSize="11sp"
                                     tools:text="47 menit" />
 
                             </LinearLayout>
-
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/tv_arrival_time_departure"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textAlignment="textEnd"
-                                    android:textColor="@color/black"
-                                    android:textSize="11sp"
-                                    tools:text="15:50" />
 
                             </LinearLayout>
 

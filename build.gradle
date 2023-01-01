@@ -1,6 +1,6 @@
 buildscript {
     ext {
-/*      coroutine_version = '1.6.4'*/
+        coroutine_version = '1.6.4'
         navigationVersion = '2.5.3'
         room_version = '2.4.3'
     }

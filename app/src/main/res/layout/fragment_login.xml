@@ -102,17 +102,16 @@
             android:layout_height="match_parent"
             android:drawablePadding="16dp"
             android:focusable="true"
-
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/txt_forgot"
+        android:id="@+id/tv_forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:text="Lupa Kata Sandimu?"
+        android:text="Forgot Your Password?"
         android:textColor="@color/cerulean_blue"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +132,7 @@
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_forgot" />
+        app:layout_constraintTop_toBottomOf="@id/tv_forgot_password" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="50dp"
@@ -148,7 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Atau log in dengan"
+        android:text="Or log in with"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/btn_login"
         app:layout_constraintStart_toStartOf="@+id/btn_login"
@@ -199,7 +198,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:gravity="center"
-        android:text="Dengan membuat akun kamu menyetujui Syarat \n&amp; Ketentuan dan Kebijakan Privasi goSky"
+        android:text="By creating an account you agree to the Terms \n&amp; goSky Terms and Privacy Policy"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -218,7 +217,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Belum Punya Akun?"
+            android:text="Don't have an account yet?"
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -229,7 +228,7 @@
             android:id="@+id/tv_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Buat Akun Yuk!"
+            android:text=" Create an account"
             android:textColor="@color/cerulean_blue"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView"

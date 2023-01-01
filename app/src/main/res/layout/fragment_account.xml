@@ -64,6 +64,7 @@
                     android:layout_height="60dp"
                     android:layout_marginStart="14dp"
                     android:contentDescription="@string/profile_image"
+                    android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

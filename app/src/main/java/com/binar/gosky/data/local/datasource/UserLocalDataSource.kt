@@ -1,10 +1,7 @@
 package com.binar.gosky.data.local.datasource
 
-import androidx.datastore.preferences.core.edit
 import com.binar.gosky.data.local.preference.UserDataStoreManager
-import com.binar.gosky.data.local.preference.UserDataStoreManager.Companion.userDataStore
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 interface UserLocalDataSource {

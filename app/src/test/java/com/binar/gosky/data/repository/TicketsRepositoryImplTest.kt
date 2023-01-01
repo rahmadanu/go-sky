@@ -2,7 +2,10 @@ package com.binar.gosky.data.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.binar.gosky.DummyData
-import com.binar.gosky.MainDispatcherRule
+import com.binar.gosky.data.local.database.tickets.TicketsDao
+import com.binar.gosky.data.local.datasource.TicketsLocalDataSource
+import com.binar.gosky.data.local.datasource.TicketsLocalDataSourceImpl
+import com.binar.gosky.rule.MainDispatcherRule
 import com.binar.gosky.data.network.datasource.TicketsRemoteDataSource
 import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.data.network.service.TicketsApiService
@@ -25,14 +28,18 @@ class TicketsRepositoryImplTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     private lateinit var apiService: TicketsApiService
-    private lateinit var dataSource: TicketsRemoteDataSource
+    private lateinit var ticketsDao: TicketsDao
+    private lateinit var remoteDataSource: TicketsRemoteDataSource
+    private lateinit var localDataSource: TicketsLocalDataSource
     private lateinit var repository: TicketsRepository
 
     @Before
     fun setUp() {
         apiService = FakeApiService()
-        dataSource = FakeTicketsRemoteDataSource(apiService)
-        repository = TicketsRepositoryImpl(dataSource)
+        ticketsDao = FakeDao()
+        remoteDataSource = FakeTicketsRemoteDataSource(apiService)
+        localDataSource = TicketsLocalDataSourceImpl(ticketsDao)
+        repository = TicketsRepositoryImpl(remoteDataSource, localDataSource)
     }
 
     @Test
@@ -53,17 +60,19 @@ class TicketsRepositoryImplTest {
             (actualResult as Resource.Success).data?.data?.size)
     }
 
-/*    @Test
+/*
+    @Test
     fun `when search query is empty`() = runTest {
         //given
+        val query = ""
 
         //when
         repository.getTickets(
             category = "",
             from = "",
             to = "",
-            departureTime = "2022-12-02T00:00:00.000Z",
-            returnTime = "2022-12-02T00:00:00.000Z"
+            departureTime = "",
+            returnTime = ""
         )
 
         //then
@@ -71,22 +80,25 @@ class TicketsRepositoryImplTest {
             category = "",
             from = "",
             to = "",
-            departureTime = "2022-12-28T00:00:00.000Z",
-            returnTime = "2022-12-28T00:00:00.000Z"
+            departureTime = "",
+            returnTime = ""
         )
-        assertTrue(actual.payload?.data.isNullOrEmpty())
-    }*/
+        Assert.assertTrue(actual.payload?.data.isNullOrEmpty())
+    }
+*/
 
-    /*@Test
+    @Test
     fun `when tickets item should exist in tickets list`() = runTest {
         val sampleTicketsList: List<TicketsItem> = DummyData.getDummyTickets().data?.map {
-            TicketsItem(from = it.from)
+            TicketsItem(from = it.from, to = it.to)
         }!!
         val sample = TicketsItem(
-            from = "JAKARTA"
+            from = "JAKARTA",
+            to = "MEDAN"
         )
         val sample2 = TicketsItem(
-            from = "BANDUNG"
+            from = "BANDUNG",
+            to = "MEDAN"
         )
         val actualResult = repository.getTickets(
             category = "ONE_WAY",
@@ -98,6 +110,6 @@ class TicketsRepositoryImplTest {
         actualResult.data?.data?.contains(sampleTicketsList[0])?.let { assertTrue(it) }
         actualResult.data?.data?.contains(sample)?.let { assertTrue(it) }
         actualResult.data?.data?.contains(sample2)?.let { assertFalse(it) }
-    }*/
+    }
 
 }

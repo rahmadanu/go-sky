@@ -19,6 +19,7 @@ import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.databinding.FragmentLoginBinding
 import com.binar.gosky.presentation.ui.account.AccountViewModel
+import com.binar.gosky.presentation.ui.auth.register.RegisterViewModel
 import com.binar.gosky.presentation.ui.home.HomeActivity
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val loginViewModel: LoginViewModel by viewModels()
+    private val registerViewModel: RegisterViewModel by viewModels()
     private val accountViewModel: AccountViewModel by viewModels()
 
     override fun onCreateView(
@@ -94,6 +96,9 @@ class LoginFragment : Fragment() {
         binding.btnLogin.setOnClickListener {
             loginUser()
         }
+        binding.tvForgotPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+        }
     }
 
     private fun loginUser() {
@@ -120,24 +125,24 @@ class LoginFragment : Fragment() {
         if (email.isEmpty()) {
             isValid = false
             binding.etEmail.error = "Email must not be empty"
-        }
-        /*if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        } else
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             isValid = false
             binding.etEmail.error = "Invalid email"
-        }
+        } else
         if (password.isEmpty()) {
             isValid = false
             Toast.makeText(requireContext(), "Password must not be empty", Toast.LENGTH_SHORT)
                 .show()
-        }
-        if (password.length < 6) {
+        } else
+        if (password.length < 5) {
             isValid = false
             Toast.makeText(
                 requireContext(),
-                "Password should be at least 6 characters",
+                "Password should be at least 5 characters",
                 Toast.LENGTH_SHORT
             ).show()
-        }*/
+        }
         return isValid
     }
 

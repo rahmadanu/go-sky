@@ -1,13 +1,14 @@
 package com.binar.gosky.data.repository
 
-import androidx.lifecycle.asLiveData
 import com.binar.gosky.data.local.datasource.UserLocalDataSource
 import com.binar.gosky.data.network.datasource.UserRemoteDataSource
 import com.binar.gosky.data.network.model.users.data.UserByIdResponse
 import com.binar.gosky.data.network.model.users.edit.EditEmailUserRequestBody
-import com.binar.gosky.data.network.model.users.edit.EditEmailUserResponse
 import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
 import com.binar.gosky.util.proceed
+import com.binar.gosky.data.network.model.users.edit.EditUserResponse
+import com.binar.gosky.data.network.model.users.password.NewPasswordResetRequestBody
+import com.binar.gosky.data.network.model.users.password.NewPasswordResetResponse
 import com.binar.gosky.wrapper.Resource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -19,13 +20,13 @@ interface UserRepository {
     suspend fun setUserAccessToken(accessToken: String)
     fun getUserAccessToken(): Flow<String>
 
+    suspend fun putUserData(accessToken: String, editUserRequestBody: EditUserRequestBody): Resource<EditUserResponse>
+    suspend fun putUserEmail(accessToken: String, editEmailUserRequestBody: EditEmailUserRequestBody): Resource<EditUserResponse>
+    suspend fun putNewPasswordInResetPassword(accessToken: String,newPassword: NewPasswordResetRequestBody): Resource<NewPasswordResetResponse>
     suspend fun setUserRole(role: String)
-    fun getUserRole(): Flow<String>
+
     //fun checkIfUserIsAdmin(): Boolean
-
-    suspend fun putUserData(accessToken: String, editUserRequestBody: EditUserRequestBody)
-    suspend fun putUserEmail(accessToken: String, editEmailUserRequestBody: EditEmailUserRequestBody): Resource<EditEmailUserResponse>
-
+    fun getUserRole(): Flow<String>
     suspend fun getUserById( userId: Int): Resource<UserByIdResponse>
 }
 
@@ -49,6 +50,12 @@ class UserRepositoryImpl @Inject constructor(
         return userLocalDataSource.getUserAccessToken()
     }
 
+    override suspend fun putUserData(accessToken: String, editUserRequestBody: EditUserRequestBody): Resource<EditUserResponse> {
+        return proceed {
+            userRemoteDataSource.putUserData(accessToken, editUserRequestBody)
+        }
+    }
+
     override suspend fun setUserRole(role: String) {
         userLocalDataSource.setUserRole(role)
     }
@@ -57,19 +64,15 @@ class UserRepositoryImpl @Inject constructor(
         return userLocalDataSource.getUserRole()
     }
 
-/*    override fun checkIfUserIsAdmin(): Boolean {
-        val role = userLocalDataSource.getUserRole().asLiveData().value
-        return role.equals("ADMIN")
-    }*/
-
-    override suspend fun putUserData(accessToken: String, editUserRequestBody: EditUserRequestBody) {
-        userRemoteDataSource.putUserData(accessToken, editUserRequestBody)
-    }
+    /*    override fun checkIfUserIsAdmin(): Boolean {
+            val role = userLocalDataSource.getUserRole().asLiveData().value
+            return role.equals("ADMIN")
+        }*/
 
     override suspend fun putUserEmail(
         accessToken: String,
         editEmailUserRequestBody: EditEmailUserRequestBody
-    ): Resource<EditEmailUserResponse> {
+    ): Resource<EditUserResponse> {
         return proceed {
             userRemoteDataSource.putUserEmail(accessToken, editEmailUserRequestBody)
         }
@@ -78,6 +81,15 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun getUserById(userId: Int): Resource<UserByIdResponse> {
         return proceed {
             userRemoteDataSource.getUserById(userId)
+        }
+    }
+
+    override suspend fun putNewPasswordInResetPassword(
+        accessToken: String,
+        newPassword: NewPasswordResetRequestBody
+    ): Resource<NewPasswordResetResponse> {
+        return proceed {
+            userRemoteDataSource.putNewPasswordInResetPassword(accessToken, newPassword)
         }
     }
 }
