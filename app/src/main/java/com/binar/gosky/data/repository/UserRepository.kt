@@ -2,13 +2,17 @@ package com.binar.gosky.data.repository
 
 import com.binar.gosky.data.local.datasource.UserLocalDataSource
 import com.binar.gosky.data.network.datasource.UserRemoteDataSource
+import com.binar.gosky.data.network.model.error.ErrorResponse
 import com.binar.gosky.data.network.model.users.data.EditEmailUserRequestBody
 import com.binar.gosky.data.network.model.users.data.EditUserResponse
 import com.binar.gosky.data.network.model.users.data.EditUserRequestBody
 import com.binar.gosky.data.network.model.users.password.NewPasswordResetRequestBody
 import com.binar.gosky.data.network.model.users.password.NewPasswordResetResponse
 import com.binar.gosky.wrapper.Resource
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.Flow
+import retrofit2.HttpException
 import javax.inject.Inject
 
 interface UserRepository {
@@ -71,7 +75,15 @@ class UserRepositoryImpl @Inject constructor(
         return try {
             Resource.Success(coroutines.invoke())
         } catch (e: Exception) {
-            Resource.Error(e, e.message)
+            when (e) {
+                is HttpException -> {
+                    val errorMessageResponseType = object : TypeToken<ErrorResponse>() {}.type
+                    val error: ErrorResponse = Gson().fromJson(e.response()?.errorBody()?.charStream(), errorMessageResponseType)
+                    Resource.Error(e, "${error.status}: ${error.message}")
+                } else -> {
+                    Resource.Error(e, e.message)
+                }
+            }
         }
     }
 }
