@@ -1,8 +1,6 @@
 package com.binar.gosky.data.local.datasource
 
 import androidx.lifecycle.LiveData
-import androidx.room.Delete
-import androidx.room.Query
 import com.binar.gosky.data.local.database.tickets.TicketsDao
 import com.binar.gosky.data.local.model.TicketsItemWishlist
 import javax.inject.Inject

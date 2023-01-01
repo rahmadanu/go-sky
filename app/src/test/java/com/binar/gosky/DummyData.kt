@@ -8,11 +8,8 @@ object DummyData {
         val dummyList = ArrayList<TicketsItem>()
         repeat(10) {
             val item = TicketsItem(
-                category = "ONE_WAY",
                 from = "JAKARTA",
-                to = "MEDAN",
-                departureTime = "timestamp",
-                returnTime = "timestamp"
+                to = "MEDAN"
             )
             dummyList.add(item)
         }

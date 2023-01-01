@@ -1,14 +1,9 @@
 package com.binar.gosky.di
 
 import android.content.Context
-import androidx.lifecycle.asLiveData
 import com.binar.gosky.BuildConfig
-import com.binar.gosky.data.network.service.AuthApiService
-import com.binar.gosky.data.network.service.ImageApiService
-import com.binar.gosky.data.network.service.TicketsApiService
-import com.binar.gosky.data.network.service.UserApiService
-import com.binar.gosky.data.local.preference.UserDataStoreManager
 import com.binar.gosky.data.network.service.*
+import com.binar.gosky.data.network.service.TicketsApiService
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
 import dagger.Provides

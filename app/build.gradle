@@ -110,11 +110,6 @@ dependencies {
     testImplementation "org.mockito:mockito-inline:4.5.1"
     testImplementation "io.mockk:mockk:1.12.4"
 
-/*
-
-
-/*
-
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.binar.gosky.data.local.model.TicketsItemWishlist
+import com.binar.gosky.data.network.model.tickets.EditTicketResponse
 import com.binar.gosky.data.network.model.tickets.Tickets
 import com.binar.gosky.data.repository.TicketsRepository
 import com.binar.gosky.data.repository.UserRepository
@@ -20,6 +21,9 @@ class WishlistViewModel @Inject constructor(private val ticketsRepository: Ticke
 
     private val _getWishlistResponse = MutableLiveData<Resource<Tickets>>()
     val getWishlistResponse: LiveData<Resource<Tickets>> get() = _getWishlistResponse
+
+    private val _deleteTicketResponse = MutableLiveData<Resource<EditTicketResponse>>()
+    val deleteTicketResponse: LiveData<Resource<EditTicketResponse>> get() = _deleteTicketResponse
 
     fun getWishlist(accessToken: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -39,6 +43,13 @@ class WishlistViewModel @Inject constructor(private val ticketsRepository: Ticke
 
     fun getWishlistTickets(): LiveData<List<TicketsItemWishlist>> {
         return ticketsRepository.getWishlistTickets()
+    }
+
+    fun deleteTicketById(accessToken: String, id: Int) {
+        _deleteTicketResponse.postValue(Resource.Loading())
+        viewModelScope.launch {
+            _deleteTicketResponse.postValue(ticketsRepository.deleteTicketById(accessToken, id))
+        }
     }
 
 }

@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.binar.gosky.data.network.model.image.ImageResponse
-import com.binar.gosky.data.network.model.users.data.EditEmailUserRequestBody
-import com.binar.gosky.data.network.model.users.data.EditUserRequestBody
-import com.binar.gosky.data.network.model.users.data.EditUserResponse
+import com.binar.gosky.data.network.model.users.edit.EditEmailUserRequestBody
+import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
+import com.binar.gosky.data.network.model.users.edit.EditUserResponse
 import com.binar.gosky.data.repository.ImageRepository
 import com.binar.gosky.data.repository.UserRepository
 import com.binar.gosky.wrapper.Resource

@@ -2,19 +2,11 @@ package com.binar.gosky.data.network.datasource
 
 import com.binar.gosky.data.network.model.users.data.UserByIdResponse
 import com.binar.gosky.data.network.model.users.edit.EditEmailUserRequestBody
-import com.binar.gosky.data.network.model.users.edit.EditEmailUserResponse
 import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
-import com.binar.gosky.data.network.model.users.data.EditEmailUserRequestBody
-import com.binar.gosky.data.network.model.users.data.EditUserResponse
-import com.binar.gosky.data.network.model.users.data.EditUserRequestBody
+import com.binar.gosky.data.network.model.users.edit.EditUserResponse
 import com.binar.gosky.data.network.model.users.password.NewPasswordResetRequestBody
 import com.binar.gosky.data.network.model.users.password.NewPasswordResetResponse
-import com.binar.gosky.data.network.service.ApiEndPoints
 import com.binar.gosky.data.network.service.UserApiService
-import retrofit2.http.Body
-import retrofit2.http.Header
-import retrofit2.http.PUT
-import retrofit2.http.Path
 import javax.inject.Inject
 
 interface UserRemoteDataSource {

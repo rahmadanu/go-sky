@@ -1,6 +1,7 @@
-package com.binar.gosky.data.network.model.users.data
+package com.binar.gosky.data.network.model.users.edit
 
 
+import com.binar.gosky.data.network.model.users.data.Data
 import com.google.gson.annotations.SerializedName
 
 data class EditUserResponse(

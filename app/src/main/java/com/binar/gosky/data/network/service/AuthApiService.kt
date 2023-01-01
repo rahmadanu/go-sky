@@ -7,12 +7,7 @@ import com.binar.gosky.data.network.model.auth.password.NewPasswordRequestBody
 import com.binar.gosky.data.network.model.auth.password.NewPasswordResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.data.network.model.auth.user.CurrentUserResponse
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.PUT
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface AuthApiService {
 

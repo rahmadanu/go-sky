@@ -1,11 +1,7 @@
 package com.binar.gosky.data.local.database.tickets
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.binar.gosky.data.local.model.TicketsItemWishlist
 
 @Dao

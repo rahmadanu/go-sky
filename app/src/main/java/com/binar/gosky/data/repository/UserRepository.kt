@@ -1,16 +1,12 @@
 package com.binar.gosky.data.repository
 
-import androidx.lifecycle.asLiveData
 import com.binar.gosky.data.local.datasource.UserLocalDataSource
 import com.binar.gosky.data.network.datasource.UserRemoteDataSource
 import com.binar.gosky.data.network.model.users.data.UserByIdResponse
 import com.binar.gosky.data.network.model.users.edit.EditEmailUserRequestBody
-import com.binar.gosky.data.network.model.users.edit.EditEmailUserResponse
 import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
 import com.binar.gosky.util.proceed
-import com.binar.gosky.data.network.model.users.data.EditEmailUserRequestBody
-import com.binar.gosky.data.network.model.users.data.EditUserResponse
-import com.binar.gosky.data.network.model.users.data.EditUserRequestBody
+import com.binar.gosky.data.network.model.users.edit.EditUserResponse
 import com.binar.gosky.data.network.model.users.password.NewPasswordResetRequestBody
 import com.binar.gosky.data.network.model.users.password.NewPasswordResetResponse
 import com.binar.gosky.wrapper.Resource

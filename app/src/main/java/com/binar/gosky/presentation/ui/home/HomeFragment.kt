@@ -49,8 +49,6 @@ class HomeFragment : Fragment() {
     var category: String = ONE_WAY
     var from: String = ""
     var to: String = ""
-    lateinit var departureTime: String
-    lateinit var returnTime: String
     var roundTrip: Boolean = false
 
     lateinit var accessToken: String
@@ -68,13 +66,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-        setOnClickListener()
         observeData()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getNotification(accessToken)
+        setOnClickListener()
     }
 
     private fun observeData() {
@@ -131,6 +124,52 @@ class HomeFragment : Fragment() {
 
     private fun getNotification(accessToken: String? = "") {
         notificationViewModel.getNotification(getString(R.string.bearer_token, accessToken))
+    }
+
+    private fun showEarningsIfUserIsAdmin(isAdmin: Boolean) {
+        binding.apply {
+            cvEarnings.isVisible = isAdmin
+            tvWelcomeMessage.isVisible = !isAdmin
+            ivUserImage.isVisible = !isAdmin
+        }
+    }
+
+    private fun setWelcomeMessage(currentUserData: CurrentUserData?) {
+        binding.apply {
+            currentUserData?.let {
+                tvWelcomeMessage.text = getString(R.string.welcome_message, it.name)
+                Glide.with(requireContext())
+                    .load(it.imageUrl)
+                    .placeholder(R.drawable.ic_placeholder_image)
+                    .circleCrop()
+                    .into(ivUserImage)
+            }
+        }
+    }
+
+    private fun getEarnings() {
+        homeViewModel.getEarnings(getString(R.string.bearer_token,accessToken))
+    }
+
+    private fun bindEarningsDataToView(earnings: EarningsData?) {
+        earnings?.let {
+            binding.apply {
+                tvTotalEarnings.text = it.thisYear?.count?.let { count ->
+                    Log.d("earningscount", count.toString())
+                    resources.getQuantityString(R.plurals.total_earnings,
+                        count,
+                        count
+                    )
+                }
+                tvTodayEarnings.text = ConvertUtil.convertRupiah(it.today?.earnings)
+                tvThisMonthEarnings.text = ConvertUtil.convertRupiah(it.thisMonth?.earnings)
+                tvThisYearEarnings.text = ConvertUtil.convertRupiah(it.thisYear?.earnings)
+            }
+        }
+    }
+
+    private fun showFabIfUserIsAdmin(isAdmin: Boolean) {
+        binding.fabAddTicket.isVisible = isAdmin
     }
 
     private fun initView() {

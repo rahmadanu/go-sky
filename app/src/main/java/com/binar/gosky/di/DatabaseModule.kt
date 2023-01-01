@@ -3,7 +3,6 @@ package com.binar.gosky.di
 import android.content.Context
 import com.binar.gosky.data.local.database.AppDatabase
 import com.binar.gosky.data.local.database.tickets.TicketsDao
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -4,14 +4,7 @@ import com.binar.gosky.data.network.model.tickets.EditTicketRequestBody
 import com.binar.gosky.data.network.model.tickets.EditTicketResponse
 import com.binar.gosky.data.network.model.tickets.Tickets
 import com.binar.gosky.data.network.model.tickets.WishlistResponse
-import retrofit2.http.DELETE
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.PUT
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface TicketsApiService {
 

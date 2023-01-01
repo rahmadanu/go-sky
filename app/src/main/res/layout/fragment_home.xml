@@ -35,7 +35,7 @@
 
         <TextView
             android:id="@+id/tv_welcome_message"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingHorizontal="30dp"
             android:paddingVertical="8dp"
@@ -44,6 +44,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_user_image"
             app:layout_constraintTop_toBottomOf="@id/title_go_sky" />
 
         <ImageView
@@ -187,7 +188,8 @@
             android:focusable="true"
             android:animateLayoutChanges="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toBottomOf="@id/title_go_sky"
+            app:layout_constraintTop_toTopOf="@id/title_go_sky">
 
             <ImageView
                 android:id="@+id/iv_notification"

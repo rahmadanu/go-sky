@@ -57,19 +57,4 @@ class AccountViewModel @Inject constructor(
         return userRepository.getUserRole().asLiveData()
     }
 
-    fun putUserData(accessToken: String, editUserRequestBody: EditUserRequestBody) {
-        viewModelScope.launch {
-            userRepository.putUserData(accessToken, editUserRequestBody)
-        }
-    }
-
-    fun putUserEmail(accessToken: String, editEmailUserRequestBody: EditEmailUserRequestBody) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val editEmailUserResponse = userRepository.putUserEmail(accessToken, editEmailUserRequestBody)
-            viewModelScope.launch(Dispatchers.Main) {
-                _editEmailUserResponse.postValue(editEmailUserResponse)
-            }
-        }
-    }
-
 }
