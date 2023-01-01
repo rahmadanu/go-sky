@@ -87,7 +87,7 @@ class HomeFragment : Fragment() {
             Log.d("id", "return: ${it.id}")
             showDatePickerDialog(it.id)
         }
-        binding.swRoundTrip.setOnCheckedChangeListener { compoundButton, isChecked ->
+        binding.swRoundTrip.setOnCheckedChangeListener { _, isChecked ->
             binding.tilReturnDate.isVisible = isChecked
             roundTrip = isChecked
             category = if (isChecked) ROUND_TRIP else ONE_WAY
@@ -111,7 +111,7 @@ class HomeFragment : Fragment() {
 
         val datePickerDialog = DatePickerDialog(
             requireContext(),
-            { view, year, monthOfYear, dayOfMonth ->
+            { _, year, monthOfYear, dayOfMonth ->
                 day = dayOfMonth
                 when (id) {
                     binding.etDepartureDate.id -> {

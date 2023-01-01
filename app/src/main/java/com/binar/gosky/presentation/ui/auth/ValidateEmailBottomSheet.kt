@@ -46,6 +46,12 @@ class ValidateEmailBottomSheet(
     private var otp = ""
     private var otpToken = ""
 
+    private lateinit var listener: OnRegisterSuccessListener
+
+    fun setListener(listener: OnRegisterSuccessListener) {
+        this.listener = listener
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -71,9 +77,6 @@ class ValidateEmailBottomSheet(
                     Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                     it.data?.data?.otpToken?.let { token -> otpToken = token }
                 }
-/*          fc      is Resource.Error -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-                }*/
                 else -> {}
             }
         }
@@ -84,13 +87,8 @@ class ValidateEmailBottomSheet(
                         dismiss()
                         Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
                         loginViewModel.setUserLogin(true)
-                        it.data?.data?.accessToken?.let { accessToken -> loginViewModel.setUserAccessToken(accessToken) }
-
-                        navigateToHome()
-                    }/* else if (it.data?.status.equals("error")) {
-                        Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_LONG).show()
-                    }*/
-                    //it.data?.data?.accessToken?.let { accessToken -> accountViewModel.getCurrentUser("Bearer $accessToken") }
+                        it.data?.data?.accessToken?.let { accessToken -> listener.onRegisterSuccess(accessToken) }
+                    }
                     Log.d("registerresponse", it.data?.data?.accessToken.toString())
                 }
                 else -> {}
@@ -171,12 +169,6 @@ class ValidateEmailBottomSheet(
         setUpTimer()
     }
 
-    private fun navigateToHome() {
-        val intent = Intent(requireContext(), HomeActivity::class.java)
-        startActivity(intent)
-        activity?.finish()
-    }
-
     private fun setUpTimer() {
         val timer = object : CountDownTimer(60000, 1000) {
             override fun onTick(millis: Long) {
@@ -221,6 +213,10 @@ class ValidateEmailBottomSheet(
         const val VALIDATE_REGISTER = "validate_register"
         const val VALIDATE_FORGOT_PASSWORD = "validate_forgot_password"
     }
+}
+
+interface OnRegisterSuccessListener {
+    fun onRegisterSuccess(accessToken: String)
 }
 
 class GenericKeyEvent internal constructor(
