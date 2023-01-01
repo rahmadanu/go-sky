@@ -4,6 +4,8 @@ import com.binar.gosky.data.network.datasource.AuthRemoteDataSource
 import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestResponse
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.data.network.model.auth.otp.OtpResponse
+import com.binar.gosky.data.network.model.auth.password.NewPasswordRequestBody
+import com.binar.gosky.data.network.model.auth.password.NewPasswordResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.data.network.model.auth.user.CurrentUserResponse
 import com.binar.gosky.wrapper.Resource
@@ -16,6 +18,7 @@ interface AuthRepository {
 
     suspend fun postRegisterUser(registerRequestBody: RegisterRequestBody): Resource<LoginRegisterRequestResponse>
     suspend fun postLoginUser(loginRequestBody: LoginRequestBody): Resource<LoginRegisterRequestResponse>
+    suspend fun putNewPassword(newPassword: NewPasswordRequestBody): Resource<NewPasswordResponse>
 }
 
 class AuthRepositoryImpl @Inject constructor(private val dataSource: AuthRemoteDataSource) :
@@ -41,6 +44,12 @@ class AuthRepositoryImpl @Inject constructor(private val dataSource: AuthRemoteD
     override suspend fun postLoginUser(loginRequestBody: LoginRequestBody): Resource<LoginRegisterRequestResponse> {
         return proceed {
             dataSource.postLoginUser(loginRequestBody)
+        }
+    }
+
+    override suspend fun putNewPassword(newPassword: NewPasswordRequestBody): Resource<NewPasswordResponse> {
+        return proceed {
+            dataSource.putNewPassword(newPassword)
         }
     }
 

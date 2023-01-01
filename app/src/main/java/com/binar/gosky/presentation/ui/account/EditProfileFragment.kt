@@ -195,7 +195,7 @@ class EditProfileFragment : Fragment() {
         val currentDialog = parentFragmentManager.findFragmentByTag(ValidateEmailBottomSheet::class.java.simpleName)
         if (currentDialog == null) {
             val email = binding.etEmail.text.toString().trim()
-            ValidateEmailBottomSheet(email = email, isRegistered = true, accessToken = editProfileArgs.accessToken).apply {
+            ValidateEmailBottomSheet(email = email, validateState = ValidateEmailBottomSheet.VALIDATE_UPDATE_EMAIL, accessToken = editProfileArgs.accessToken).apply {
 
                 this.isCancelable = isCancelable
             }.show(parentFragmentManager, ValidateEmailBottomSheet::class.java.simpleName)

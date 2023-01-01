@@ -9,6 +9,7 @@ object ApiEndPoints {
     const val GET_WHO_AM_I = "auth/whoami"
     const val POST_REGISTER = "auth/register"
     const val POST_LOGIN = "auth/login"
+    const val PUT_PASSWORD = "auth/password"
 
     // Users
     const val PUT_USER_DATA = "users"

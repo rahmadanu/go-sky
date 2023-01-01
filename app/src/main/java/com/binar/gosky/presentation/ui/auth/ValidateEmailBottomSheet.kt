@@ -21,6 +21,7 @@ import com.binar.gosky.data.network.model.users.EditEmailUserRequestBody
 import com.binar.gosky.databinding.FragmentValidateEmailBottomSheetBinding
 import com.binar.gosky.presentation.ui.account.EditProfileViewModel
 import com.binar.gosky.presentation.ui.auth.login.LoginViewModel
+import com.binar.gosky.presentation.ui.auth.password.ForgotPasswordFragmentDirections
 import com.binar.gosky.presentation.ui.auth.register.RegisterViewModel
 import com.binar.gosky.presentation.ui.home.HomeActivity
 import com.binar.gosky.wrapper.Resource
@@ -32,7 +33,7 @@ class ValidateEmailBottomSheet(
     private val name: String = "",
     private val password: String = "",
     private val email: String = "",
-    private val isRegistered: Boolean = false,
+    private val validateState: String,
     private val accessToken: String = ""
 ) : BottomSheetDialogFragment() {
 
@@ -133,13 +134,25 @@ class ValidateEmailBottomSheet(
                 otp = "$otp1$otp2$otp3$otp4$otp5$otp6"
                 Log.d("otp", otp)
 
-                if (isRegistered) {
-                    updateEmailUser("Bearer $accessToken", otp, otpToken)
-                } else {
-                    registerUser(name, otp, otpToken, password)
+                when (validateState) {
+                    VALIDATE_REGISTER -> {
+                        registerUser(name, otp, otpToken, password)
+                    }
+                    VALIDATE_FORGOT_PASSWORD -> {
+                        navigateToNewPassword(otp, otpToken)
+                    }
+                    VALIDATE_UPDATE_EMAIL -> {
+                        updateEmailUser("Bearer $accessToken", otp, otpToken)
+                    }
                 }
             }
         }
+    }
+
+    private fun navigateToNewPassword(otp: String, otpToken: String) {
+        val action = ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToNewPasswordFragment(otp, otpToken)
+        findNavController().navigate(action)
+        dismiss()
     }
 
     private fun registerUser(name: String, otp: String, otpToken: String, password: String) {
@@ -201,6 +214,12 @@ class ValidateEmailBottomSheet(
             etOtp5.setOnKeyListener(GenericKeyEvent(etOtp5, etOtp4))
             etOtp6.setOnKeyListener(GenericKeyEvent(etOtp6, etOtp5))
         }
+    }
+
+    companion object {
+        const val VALIDATE_UPDATE_EMAIL = "validate_update_email"
+        const val VALIDATE_REGISTER = "validate_register"
+        const val VALIDATE_FORGOT_PASSWORD = "validate_forgot_password"
     }
 }
 
