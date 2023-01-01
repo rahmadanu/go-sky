@@ -103,32 +103,32 @@
             android:focusable="true"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
-<!--
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/no_telp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="No Telp"
-        app:boxCornerRadiusBottomEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusTopStart="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_phone_number"
+    <!--
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/no_telp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:drawablePadding="16dp"
-            android:focusable="true"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>-->
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="No Telp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawablePadding="16dp"
+                android:focusable="true"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password"
@@ -165,7 +165,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/cerulean_blue"
-        android:text="Buat Akun"
+        android:text="Create Account"
         android:textAllCaps="false"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -187,7 +187,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Atau gunakan akun"
+        android:text="Or use an account"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/btn_register"
         app:layout_constraintStart_toStartOf="@+id/btn_register"
@@ -238,7 +238,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:gravity="center"
-        android:text="Dengan membuat akun kamu menyetujui Syarat \n&amp; Ketentuan dan Kebijakan Privasi goSky"
+        android:text="By creating an account you agree to the Terms \n&amp; goSky Terms and Privacy Policy"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -257,7 +257,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Udah Punya Akun?"
+            android:text="Already Have an Account?"
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -268,7 +268,7 @@
             android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Log in aja!"
+            android:text=" Log in"
             android:textColor="@color/cerulean_blue"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView"

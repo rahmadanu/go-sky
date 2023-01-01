@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
-        android:text="Verifikasi Emailmu"
+        android:text="Verify Your Email"
         android:textColor="@color/bright_sky_blue"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -34,8 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Isi dengan kode OTP yang dikirimkan ke:"
-        android:textSize="12sp"
+        android:text="Fill in the OTP code sent to:"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -166,7 +166,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kirimkan Kode OTP Baru "
+            android:text="Send New OTP Code "
             android:textSize="12sp" />
 
         <TextView
@@ -183,7 +183,7 @@
             android:id="@+id/tv_resend_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kirimkan Ulang"
+            android:text="Resend"
             android:textColor="#F44336"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -195,6 +195,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/cerulean_blue"
         android:text="Verify"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_otp"

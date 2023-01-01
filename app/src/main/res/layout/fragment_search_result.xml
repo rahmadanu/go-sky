@@ -48,20 +48,20 @@
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_back"
                         app:layout_constraintStart_toEndOf="@id/iv_back"
                         app:layout_constraintTop_toTopOf="@id/iv_back"
-                        app:layout_constraintBottom_toBottomOf="@id/iv_back"
-                        tools:text="Jakarta ke Batam" />
-<!--
-                    <TextView
-                        android:id="@+id/txt_departure"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="@color/white"
-                        app:layout_constraintTop_toBottomOf="@id/txt_flight"
-                        app:layout_constraintStart_toStartOf="@id/txt_flight"
-                        tools:text="01 Desember 2022"/>-->
+                        tools:text="Jakarta to Batam" />
+                    <!--
+                                        <TextView
+                                            android:id="@+id/txt_departure"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="12sp"
+                                            android:textColor="@color/white"
+                                            app:layout_constraintTop_toBottomOf="@id/txt_flight"
+                                            app:layout_constraintStart_toStartOf="@id/txt_flight"
+                                            tools:text="01 Desember 2022"/>-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.appbar.MaterialToolbar>
