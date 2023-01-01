@@ -49,6 +49,16 @@
     <string name="image_favorite">Image Favorite</string>
     <string name="icon_back">icon back</string>
     <string name="icon_notification">icon notification</string>
+    <string name="your_order_detail">Your Order Detail</string>
+    <string name="order_detail">Order Detail</string>
+    <string name="order_by">Order by</string>
+    <string name="order_date">Order date</string>
+    <string name="booking_code">Booking code</string>
+    <string name="total_price">Total price</string>
+    <string name="ticket_detail_departure">Ticket Detail Departure</string>
+    <string name="icon_favorite">Icon Favorite</string>
+    <string name="ticket_detail_return">Ticket Detail Return</string>
+    <string name="back_to_home">Back to home</string>
 
     <string-array name="province">
         <item>JAKARTA</item>
