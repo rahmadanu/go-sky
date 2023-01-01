@@ -14,7 +14,9 @@ import com.binar.gosky.data.network.model.auth.user.CurrentUserData
 import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
 import com.binar.gosky.databinding.FragmentAccountBinding
 import com.binar.gosky.presentation.ui.auth.login.LoginActivity
+import com.binar.gosky.presentation.ui.auth.password.PasswordViewModel
 import com.binar.gosky.wrapper.Resource
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +25,8 @@ class AccountFragment : Fragment() {
     private var _binding: FragmentAccountBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: AccountViewModel by viewModels()
+    private val accountViewModel: AccountViewModel by viewModels()
+    private val passwordViewModel: PasswordViewModel by viewModels()
 
     lateinit var userData: EditUserRequestBody
     lateinit var accessToken: String
@@ -51,18 +54,25 @@ class AccountFragment : Fragment() {
                 navigateToEditProfile()
             }
             tvLogOut.setOnClickListener {
-                viewModel.setUserLogin(false)
-                //viewModel.setUserAccessToken("")
+                accountViewModel.setUserLogin(false)
+                accountViewModel.setUserAccessToken("")
                 navigateToLogin()
             }
             ivNotification.setOnClickListener {
                 navigateToNotification()
+            }
+            tvResetPassword.setOnClickListener {
+                navigateToNewPassword()
             }
         }
     }
 
     private fun navigateToNotification() {
         findNavController().navigate(R.id.action_accountFragment_to_notificationFragment)
+    }
+
+    private fun navigateToNewPassword() {
+        findNavController().navigate(R.id.action_accountFragment_to_resetPasswordFragment)
     }
 
     private fun navigateToEditProfile() {
@@ -77,12 +87,12 @@ class AccountFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
-            viewModel.getCurrentUser("Bearer $it")
+        accountViewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+            accountViewModel.getCurrentUser("Bearer $it")
             accessToken = it
             Log.d("accessToken", it)
         }
-        viewModel.currentUserResponse.observe(viewLifecycleOwner) {
+        accountViewModel.currentUserResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     it.payload?.data?.let { currentUserData -> bindDataIntoForm(currentUserData)
@@ -104,8 +114,18 @@ class AccountFragment : Fragment() {
 
     private fun bindDataIntoForm(currentUserData: CurrentUserData) {
         binding.apply {
-            tvProfileName.text = currentUserData.name
-            tvEmail.text = currentUserData.email
+            currentUserData.apply {
+                tvProfileName.text = name
+                tvEmail.text = email
+                if (!imageId.isNullOrEmpty() || !imageId.equals("-")) {
+                    Glide.with(requireContext())
+                        .load(imageUrl)
+                        .placeholder(R.drawable.ic_placeholder_image)
+                        .circleCrop()
+                        .into(ivProfileImage)
+                    Log.d("imageUrl", imageUrl.toString())
+                }
+            }
         }
     }
 

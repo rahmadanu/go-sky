@@ -14,13 +14,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AccountViewModel @Inject constructor(private val authRepository: AuthRepository, private val userRepository: UserRepository): ViewModel() {
+class AccountViewModel @Inject constructor(
+    private val authRepository: AuthRepository,
+    private val userRepository: UserRepository,
+): ViewModel() {
 
     private val _currentUserResponse = MutableLiveData<Resource<CurrentUserResponse>>()
     val currentUserResponse: LiveData<Resource<CurrentUserResponse>> get() = _currentUserResponse
-
-    private val _editEmailUserResponse = MutableLiveData<Resource<EditEmailUserResponse>>()
-    val editEmailUserResponse: LiveData<Resource<EditEmailUserResponse>> get() = _editEmailUserResponse
 
     fun getCurrentUser(accessToken: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -33,6 +33,12 @@ class AccountViewModel @Inject constructor(private val authRepository: AuthRepos
 
     fun getUserAccessToken(): LiveData<String> {
         return userRepository.getUserAccessToken().asLiveData()
+    }
+
+    fun setUserAccessToken(accessToken: String) {
+        viewModelScope.launch {
+            userRepository.setUserAccessToken(accessToken)
+        }
     }
 
     fun setUserLogin(isLogin: Boolean) {

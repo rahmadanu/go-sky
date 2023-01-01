@@ -18,6 +18,8 @@
     </plurals>
 
     <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="add_image"><u>Add image</u></string>
+    <string name="delete_image"><u>Delete image</u></string>
     <string name="title_history">History</string>
 
     <string name="insert_ticket_data">Insert Ticket Data</string>

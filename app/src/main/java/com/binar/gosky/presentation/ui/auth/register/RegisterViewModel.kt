@@ -1,9 +1,7 @@
 package com.binar.gosky.presentation.ui.auth.register
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.util.Log
+import androidx.lifecycle.*
 import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestResponse
 import com.binar.gosky.data.network.model.auth.otp.OtpResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
@@ -40,5 +38,16 @@ class RegisterViewModel @Inject constructor(private val authRepository: AuthRepo
                 _postRegisterUserResponse.postValue(registerResponse)
             }
         }
+    }
+
+    fun setUserAccessToken(accessToken: String) {
+        viewModelScope.launch {
+            Log.d("setuseraccesstoken", accessToken)
+            userRepository.setUserAccessToken(accessToken)
+        }
+    }
+
+    fun getUserAccessToken(): LiveData<String> {
+        return userRepository.getUserAccessToken().asLiveData()
     }
 }

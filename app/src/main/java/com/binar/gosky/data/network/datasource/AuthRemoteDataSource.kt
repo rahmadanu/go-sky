@@ -3,13 +3,11 @@ package com.binar.gosky.data.network.datasource
 import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestResponse
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.data.network.model.auth.otp.OtpResponse
+import com.binar.gosky.data.network.model.auth.password.NewPasswordRequestBody
+import com.binar.gosky.data.network.model.auth.password.NewPasswordResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.data.network.model.auth.user.CurrentUserResponse
-import com.binar.gosky.data.network.service.ApiEndPoints
 import com.binar.gosky.data.network.service.AuthApiService
-import retrofit2.http.Body
-import retrofit2.http.Header
-import retrofit2.http.POST
 import javax.inject.Inject
 
 interface AuthRemoteDataSource {
@@ -18,6 +16,7 @@ interface AuthRemoteDataSource {
 
     suspend fun postRegisterUser(registerRequestBody: RegisterRequestBody): LoginRegisterRequestResponse
     suspend fun postLoginUser(loginRequestBody: LoginRequestBody): LoginRegisterRequestResponse
+    suspend fun putNewPasswordInForgotPassword(newPassword: NewPasswordRequestBody): NewPasswordResponse
 }
 
 class AuthRemoteDataSourceImpl @Inject constructor(private val apiService: AuthApiService) :
@@ -36,5 +35,9 @@ class AuthRemoteDataSourceImpl @Inject constructor(private val apiService: AuthA
 
     override suspend fun postLoginUser(loginRequestBody: LoginRequestBody): LoginRegisterRequestResponse {
         return apiService.postLoginUser(loginRequestBody)
+    }
+
+    override suspend fun putNewPasswordInForgotPassword(newPassword: NewPasswordRequestBody): NewPasswordResponse {
+        return apiService.putNewPasswordInForgotPassword(newPassword)
     }
 }

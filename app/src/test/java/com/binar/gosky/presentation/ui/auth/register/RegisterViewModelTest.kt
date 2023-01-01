@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.data.repository.AuthRepository
+import com.binar.gosky.data.repository.UserRepository
 import com.binar.gosky.getOrAwaitValue
 import io.mockk.every
 import io.mockk.mockk
@@ -24,7 +25,8 @@ import org.mockito.kotlin.mock
 class RegisterViewModelTest {
 
     private lateinit var viewModel: RegisterViewModel
-    private lateinit var repository: AuthRepository
+    private lateinit var authRepository: AuthRepository
+    private lateinit var userRepository: UserRepository
     private val dispatcher = TestCoroutineDispatcher()
 
 
@@ -34,8 +36,9 @@ class RegisterViewModelTest {
     @Before
     fun setUp() {
         Dispatchers.setMain(dispatcher)
-        repository = mockk()
-        viewModel = RegisterViewModel(repository)
+        authRepository = mockk()
+        userRepository = mockk()
+        viewModel = RegisterViewModel(authRepository, userRepository)
     }
 
     @Test
@@ -47,7 +50,7 @@ class RegisterViewModelTest {
 
         every {
             runBlocking {
-                repository.postRegisterUser(request)
+                authRepository.postRegisterUser(request)
             }
         } returns postRegisterResource
 

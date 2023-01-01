@@ -120,7 +120,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
 
     // Coil image loader
-    implementation 'io.coil-kt:coil:2.2.1'*/
+    implementation 'io.coil-kt:coil:2.2.1'
 
     // Default dependencies
     implementation 'androidx.core:core-ktx:1.7.0'

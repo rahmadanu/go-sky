@@ -4,10 +4,13 @@ import com.binar.gosky.data.network.datasource.AuthRemoteDataSource
 import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestResponse
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.data.network.model.auth.otp.OtpResponse
+import com.binar.gosky.data.network.model.auth.password.NewPasswordRequestBody
+import com.binar.gosky.data.network.model.auth.password.NewPasswordResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.data.network.model.auth.user.CurrentUserResponse
 import com.binar.gosky.util.proceed
 import com.binar.gosky.wrapper.Resource
+import retrofit2.HttpException
 import javax.inject.Inject
 
 interface AuthRepository {
@@ -16,6 +19,7 @@ interface AuthRepository {
 
     suspend fun postRegisterUser(registerRequestBody: RegisterRequestBody): Resource<LoginRegisterRequestResponse>
     suspend fun postLoginUser(loginRequestBody: LoginRequestBody): Resource<LoginRegisterRequestResponse>
+    suspend fun putNewPasswordInForgotPassword(newPassword: NewPasswordRequestBody): Resource<NewPasswordResponse>
 }
 
 class AuthRepositoryImpl @Inject constructor(private val dataSource: AuthRemoteDataSource) :
@@ -42,5 +46,22 @@ class AuthRepositoryImpl @Inject constructor(private val dataSource: AuthRemoteD
         return proceed {
             dataSource.postLoginUser(loginRequestBody)
         }
+    }
+
+    override suspend fun putNewPasswordInForgotPassword(newPassword: NewPasswordRequestBody): Resource<NewPasswordResponse> {
+        return proceed {
+            dataSource.putNewPasswordInForgotPassword(newPassword)
+        }
+    }
+
+    private suspend fun <T> proceed(coroutines: suspend () -> T): Resource<T> {
+        return try {
+            Resource.Success(coroutines.invoke())
+        } catch (e: Exception) {
+            Resource.Error(e, e.message)
+        }/* catch (httpE: HttpException) {
+            val response = httpE.response()?.errorBody()?.string()
+            Resource.Error(httpE, httpE.response()?.message())
+        }*/
     }
 }

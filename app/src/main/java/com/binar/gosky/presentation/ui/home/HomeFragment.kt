@@ -17,6 +17,7 @@ import com.binar.gosky.data.network.model.tickets.SearchTickets
 import com.binar.gosky.data.network.model.transactions.earnings.EarningsData
 import com.binar.gosky.databinding.FragmentHomeBinding
 import com.binar.gosky.presentation.ui.account.AccountViewModel
+import com.binar.gosky.presentation.ui.notification.NotificationViewModel
 import com.binar.gosky.util.ConvertUtil
 import com.binar.gosky.util.DateUtil.day
 import com.binar.gosky.util.DateUtil.departureTime

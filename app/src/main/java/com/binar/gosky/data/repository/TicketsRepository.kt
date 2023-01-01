@@ -94,7 +94,7 @@ class TicketsRepositoryImpl @Inject constructor(
 
     override suspend fun postTicket(accessToken: String, postTicketRequest: EditTicketRequestBody): Resource<EditTicketResponse> {
         return proceed {
-            dataSource.postTicket(accessToken, postTicketRequest)
+            remoteDataSource.postTicket(accessToken, postTicketRequest)
         }
     }
 
@@ -104,13 +104,13 @@ class TicketsRepositoryImpl @Inject constructor(
         putTicketByIdRequest: EditTicketRequestBody
     ): Resource<EditTicketResponse> {
         return proceed {
-            dataSource.putTicketById(accessToken, id, putTicketByIdRequest)
+            remoteDataSource.putTicketById(accessToken, id, putTicketByIdRequest)
         }
     }
 
     override suspend fun deleteTicketById(accessToken: String, id: Int): Resource<EditTicketResponse> {
         return proceed {
-            dataSource.deleteTicketById(accessToken, id)
+            remoteDataSource.deleteTicketById(accessToken, id)
         }
     }
 

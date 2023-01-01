@@ -1,7 +1,7 @@
 package com.binar.gosky.data.network.service
 
 object ApiEndPoints {
-    //Tickets
+    // Tickets
     const val GET_TICKETS_ENDPOINT = "tickets"
     const val GET_TICKETS_BY_ID_ENDPOINT = "tickets/{id}"
     const val POST_TICKET = "tickets"
@@ -22,6 +22,8 @@ object ApiEndPoints {
     const val GET_WHO_AM_I = "auth/whoami"
     const val POST_REGISTER = "auth/register"
     const val POST_LOGIN = "auth/login"
+    const val PUT_PASSWORD_FORGOT = "auth/password"
+    const val PUT_PASSWORD_RESET = "users/password"
 
     // Users
     const val PUT_USER_DATA = "users"
@@ -31,4 +33,8 @@ object ApiEndPoints {
     // Notification
     const val GET_NOTIFICATION = "notifications"
     const val PUT_NOTIFICATION_READ = "notifications/{id}/read"
+
+    // Image
+    const val POST_IMAGE = "images"
+    const val DELETE_IMAGE = "images"
 }

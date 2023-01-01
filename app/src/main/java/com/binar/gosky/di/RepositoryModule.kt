@@ -28,4 +28,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideNotificationRepository(notificationRepositoryImpl: NotificationRepositoryImpl): NotificationRepository
+
+    @Binds
+    abstract fun provideImageRepository(imageRepositoryImpl: ImageRepositoryImpl): ImageRepository
 }
