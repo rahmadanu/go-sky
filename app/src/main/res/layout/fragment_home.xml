@@ -46,20 +46,46 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_go_sky" />
 
-        <ImageView
-            android:id="@+id/iv_notification"
+        <FrameLayout
+            android:id="@+id/fl_notification"
+            style="?attr/actionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:src="@drawable/ic_notifications"
+            android:clipToPadding="false"
+            android:focusable="true"
+            android:animateLayoutChanges="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_notifications" />
+
+            <TextView
+                android:id="@+id/tv_cart_badge"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="end|top"
+                android:layout_marginEnd="-5dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/badge_background"
+                android:visibility="gone"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"
+                tools:text="0"
+                tools:visibility="visible"/>
+
+        </FrameLayout>
 
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             app:layout_constraintBottom_toBottomOf="@id/welcome_message"
-            app:layout_constraintEnd_toStartOf="@id/iv_notification"
+            app:layout_constraintEnd_toStartOf="@id/fl_notification"
             app:layout_constraintTop_toTopOf="@id/welcome_message"
             tools:src="@tools:sample/avatars" />
 
