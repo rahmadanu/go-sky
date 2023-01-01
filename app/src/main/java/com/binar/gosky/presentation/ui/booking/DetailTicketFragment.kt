@@ -26,8 +26,6 @@ class DetailTicketFragment : Fragment() {
     private var _binding: FragmentDetailTicketBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: BookingViewModel by viewModels()
-
     private val detailTicketArgs: DetailTicketFragmentArgs by navArgs()
 
     override fun onCreateView(

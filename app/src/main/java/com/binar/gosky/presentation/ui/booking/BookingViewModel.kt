@@ -16,7 +16,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookingViewModel @Inject constructor(
-    private val ticketsRepository: TicketsRepository,
     private val transactionsRepository: TransactionsRepository,
     private val userRepository: UserRepository
 ): ViewModel() {
@@ -51,4 +50,3 @@ class BookingViewModel @Inject constructor(
     }
 
 }
-
