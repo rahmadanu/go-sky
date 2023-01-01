@@ -17,7 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
-import com.binar.gosky.data.network.model.users.EditEmailUserRequestBody
+import com.binar.gosky.data.network.model.users.data.EditEmailUserRequestBody
 import com.binar.gosky.databinding.FragmentValidateEmailBottomSheetBinding
 import com.binar.gosky.presentation.ui.account.EditProfileViewModel
 import com.binar.gosky.presentation.ui.auth.login.LoginViewModel

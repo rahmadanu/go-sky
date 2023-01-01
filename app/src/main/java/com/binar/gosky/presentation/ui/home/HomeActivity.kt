@@ -45,6 +45,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.loginFragment -> hideBottomNav(true)
                 R.id.registerFragment -> hideBottomNav(true)
                 R.id.editProfileFragment -> hideBottomNav(true)
+                R.id.resetPasswordFragment -> hideBottomNav(true)
                 else -> hideBottomNav(false)
             }
         }

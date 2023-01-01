@@ -1,29 +1,31 @@
-package com.binar.gosky.presentation.ui.auth.password
+package com.binar.gosky.presentation.ui.account
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.password.NewPasswordRequestBody
+import com.binar.gosky.data.network.model.users.password.NewPasswordResetRequestBody
 import com.binar.gosky.databinding.FragmentNewPasswordBinding
+import com.binar.gosky.presentation.ui.auth.password.PasswordViewModel
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NewPasswordFragment : Fragment() {
+class ResetPasswordFragment : Fragment() {
 
     private var _binding: FragmentNewPasswordBinding? = null
     private val binding get() = _binding!!
 
+    private val accountViewModel: AccountViewModel by viewModels()
     private val passwordViewModel: PasswordViewModel by viewModels()
 
-    private val args: NewPasswordFragmentArgs by navArgs()
+    lateinit var accessToken: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,15 +39,25 @@ class NewPasswordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initView()
         setOnClickListener()
         observeData()
     }
 
+    private fun initView() {
+        binding.apply {
+            tilCurrentPassword.isVisible = true
+        }
+    }
+
     private fun observeData() {
-        passwordViewModel.newPasswordResponse.observe(viewLifecycleOwner) {
+        accountViewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+            accessToken = it
+        }
+        passwordViewModel.newPasswordResetResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
-                    findNavController().navigate(R.id.action_newPasswordFragment_to_loginFragment)
+                    findNavController().navigateUp()
                 }
                 else -> {}
             }
@@ -54,19 +66,18 @@ class NewPasswordFragment : Fragment() {
 
     private fun setOnClickListener() {
         binding.btnConfirm.setOnClickListener {
-            putNewPassword(parseFormIntoEntity())
+            putNewPasswordReset("Bearer $accessToken", parseFormIntoEntity())
         }
     }
 
-    private fun putNewPassword(requestBody: NewPasswordRequestBody) {
-        passwordViewModel.putNewPasswordInForgotPassword(requestBody)
+    private fun putNewPasswordReset(accessToken: String, requestBody: NewPasswordResetRequestBody) {
+        passwordViewModel.putNewPasswordInResetPassword(accessToken, requestBody)
     }
 
-    private fun parseFormIntoEntity(): NewPasswordRequestBody {
-        return NewPasswordRequestBody(
+    private fun parseFormIntoEntity(): NewPasswordResetRequestBody {
+        return NewPasswordResetRequestBody(
+            password = binding.etCurrentPassword.text.toString(),
             newPassword = binding.etNewPassword.text.toString(),
-            otp = args.otp,
-            otpToken = args.otpToken
         )
     }
 

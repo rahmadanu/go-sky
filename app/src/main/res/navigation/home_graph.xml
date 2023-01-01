@@ -41,6 +41,12 @@
             app:destination="@id/editProfileFragment"
             app:popUpTo="@id/accountFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_accountFragment_to_newPasswordFragment"
+            app:destination="@id/newPasswordFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -49,7 +55,7 @@
         tools:layout="@layout/fragment_edit_profile" >
         <argument
             android:name="userData"
-            app:argType="com.binar.gosky.data.network.model.users.EditUserRequestBody" />
+            app:argType="com.binar.gosky.data.network.model.users.data.EditUserRequestBody" />
         <argument
             android:name="accessToken"
             app:argType="string" />
@@ -62,4 +68,9 @@
             android:name="email"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.binar.gosky.presentation.ui.account.ResetPasswordFragment"
+        android:label="ResetPasswordFragment"
+        tools:layout="@layout/fragment_new_password"/>
 </navigation>

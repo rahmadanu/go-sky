@@ -78,5 +78,4 @@ class ForgotPasswordFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

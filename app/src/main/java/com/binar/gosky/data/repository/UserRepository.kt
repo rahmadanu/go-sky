@@ -2,9 +2,11 @@ package com.binar.gosky.data.repository
 
 import com.binar.gosky.data.local.datasource.UserLocalDataSource
 import com.binar.gosky.data.network.datasource.UserRemoteDataSource
-import com.binar.gosky.data.network.model.users.EditEmailUserRequestBody
-import com.binar.gosky.data.network.model.users.EditUserResponse
-import com.binar.gosky.data.network.model.users.EditUserRequestBody
+import com.binar.gosky.data.network.model.users.data.EditEmailUserRequestBody
+import com.binar.gosky.data.network.model.users.data.EditUserResponse
+import com.binar.gosky.data.network.model.users.data.EditUserRequestBody
+import com.binar.gosky.data.network.model.users.password.NewPasswordResetRequestBody
+import com.binar.gosky.data.network.model.users.password.NewPasswordResetResponse
 import com.binar.gosky.wrapper.Resource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -18,6 +20,7 @@ interface UserRepository {
 
     suspend fun putUserData(accessToken: String, editUserRequestBody: EditUserRequestBody): Resource<EditUserResponse>
     suspend fun putUserEmail(accessToken: String, editEmailUserRequestBody: EditEmailUserRequestBody): Resource<EditUserResponse>
+    suspend fun putNewPasswordInResetPassword(accessToken: String,newPassword: NewPasswordResetRequestBody): Resource<NewPasswordResetResponse>
 }
 
 class UserRepositoryImpl @Inject constructor(
@@ -52,6 +55,15 @@ class UserRepositoryImpl @Inject constructor(
     ): Resource<EditUserResponse> {
         return proceed {
             userRemoteDataSource.putUserEmail(accessToken, editEmailUserRequestBody)
+        }
+    }
+
+    override suspend fun putNewPasswordInResetPassword(
+        accessToken: String,
+        newPassword: NewPasswordResetRequestBody
+    ): Resource<NewPasswordResetResponse> {
+        return proceed {
+            userRemoteDataSource.putNewPasswordInResetPassword(accessToken, newPassword)
         }
     }
 

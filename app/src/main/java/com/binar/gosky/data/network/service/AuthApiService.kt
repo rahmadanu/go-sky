@@ -36,8 +36,8 @@ interface AuthApiService {
         @Body loginRequestBody: LoginRequestBody
     ): LoginRegisterRequestResponse
 
-    @PUT(ApiEndPoints.PUT_PASSWORD)
-    suspend fun putNewPassword(
+    @PUT(ApiEndPoints.PUT_PASSWORD_FORGOT)
+    suspend fun putNewPasswordInForgotPassword(
         @Body newPassword: NewPasswordRequestBody
     ): NewPasswordResponse
 }

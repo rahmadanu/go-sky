@@ -9,7 +9,6 @@ import com.binar.gosky.data.network.model.auth.password.NewPasswordResponse
 import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.data.network.model.auth.user.CurrentUserResponse
 import com.binar.gosky.wrapper.Resource
-import retrofit2.HttpException
 import javax.inject.Inject
 
 interface AuthRepository {
@@ -18,7 +17,7 @@ interface AuthRepository {
 
     suspend fun postRegisterUser(registerRequestBody: RegisterRequestBody): Resource<LoginRegisterRequestResponse>
     suspend fun postLoginUser(loginRequestBody: LoginRequestBody): Resource<LoginRegisterRequestResponse>
-    suspend fun putNewPassword(newPassword: NewPasswordRequestBody): Resource<NewPasswordResponse>
+    suspend fun putNewPasswordInForgotPassword(newPassword: NewPasswordRequestBody): Resource<NewPasswordResponse>
 }
 
 class AuthRepositoryImpl @Inject constructor(private val dataSource: AuthRemoteDataSource) :
@@ -47,9 +46,9 @@ class AuthRepositoryImpl @Inject constructor(private val dataSource: AuthRemoteD
         }
     }
 
-    override suspend fun putNewPassword(newPassword: NewPasswordRequestBody): Resource<NewPasswordResponse> {
+    override suspend fun putNewPasswordInForgotPassword(newPassword: NewPasswordRequestBody): Resource<NewPasswordResponse> {
         return proceed {
-            dataSource.putNewPassword(newPassword)
+            dataSource.putNewPasswordInForgotPassword(newPassword)
         }
     }
 
