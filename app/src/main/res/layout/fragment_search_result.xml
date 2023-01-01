@@ -74,7 +74,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_bar"
-            tools:listitem="@layout/item_trip"/>
+            tools:listitem="@layout/item_trip"
+            android:overScrollMode="ifContentScrolls"/>
 
         <ProgressBar
             android:id="@+id/pb_loading"

@@ -1,7 +1,10 @@
 package com.binar.gosky.data.local.datasource
 
+import androidx.datastore.preferences.core.edit
 import com.binar.gosky.data.local.preference.UserDataStoreManager
+import com.binar.gosky.data.local.preference.UserDataStoreManager.Companion.userDataStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 interface UserLocalDataSource {
@@ -10,6 +13,9 @@ interface UserLocalDataSource {
 
     suspend fun setUserAccessToken(accessToken: String)
     fun getUserAccessToken(): Flow<String>
+
+    suspend fun setUserRole(role: String)
+    fun getUserRole(): Flow<String>
 }
 
 class UserLocalDataSourceImpl @Inject constructor(
@@ -30,5 +36,13 @@ class UserLocalDataSourceImpl @Inject constructor(
 
     override fun getUserAccessToken(): Flow<String> {
         return userDataStore.getUserAccessToken()
+    }
+
+    override suspend fun setUserRole(role: String) {
+        userDataStore.setUserRole(role)
+    }
+
+    override fun getUserRole(): Flow<String> {
+        return userDataStore.getUserRole()
     }
 }
