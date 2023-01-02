@@ -7,10 +7,13 @@ buildscript {
 
     repositories {
         google()
+        mavenCentral()  // Maven Central repository
     }
 
     dependencies {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion")
+        classpath 'com.google.gms:google-services:4.3.14'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.2'
     }
 }
 

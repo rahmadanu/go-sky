@@ -139,6 +139,7 @@
     <string name="send_new_otp_code">Send New OTP Code </string>
     <string name="resend">Resend</string>
     <string name="verify">Verify</string>
+    <string name="testing_crash">Testing Crash</string>
 
     <string-array name="province">
         <item>JAKARTA</item>

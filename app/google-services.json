@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "400768874153",
+    "project_id": "go-sky-b7c61",
+    "storage_bucket": "go-sky-b7c61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400768874153:android:fab23d76a50c24448fdbb8",
+        "android_client_info": {
+          "package_name": "com.binar.gosky"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400768874153-flp2uj143n47k5g4njaec2prggfbcn3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiqhYAwuORhmdKDLmfEdoA0MnAiU7fYns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400768874153-flp2uj143n47k5g4njaec2prggfbcn3n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
