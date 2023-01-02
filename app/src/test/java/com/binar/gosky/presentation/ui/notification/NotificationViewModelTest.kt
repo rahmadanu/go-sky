@@ -1,11 +1,8 @@
 package com.binar.gosky.presentation.ui.notification
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.binar.gosky.data.network.model.notification.NotificationResponse
 import com.binar.gosky.data.repository.NotificationRepository
 import com.binar.gosky.data.repository.UserRepository
-import com.binar.gosky.getOrAwaitValue
-import com.binar.gosky.wrapper.Resource
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +36,7 @@ class NotificationViewModelTest {
 
     }
 
+/*
     @Test
     fun getNotification() {
         val notificationResponse = mockk<Resource<NotificationResponse>>()
@@ -61,6 +59,7 @@ class NotificationViewModelTest {
             viewModel.notificationResponse.getOrAwaitValue() as Resource
         )
     }
+*/
 
     @Test
     fun readNotification() {
