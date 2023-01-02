@@ -124,7 +124,7 @@
     <string name="history_booking">History Booking</string>
     <string name="empty_history">Empty History</string>
     <string name="forgot_password">Forgot password?</string>
-    <string name="enter_your_email_to_create_a_new_password">Enter your email to create a new password</string>
+    <string name="enter_your_email_to_create_a_new_password">Enter your email to validate and create a new password</string>
     <string name="account_details">Account Details</string>
     <string name="account_owner_info">Account Owner Info</string>
     <string name="address">Address</string>
