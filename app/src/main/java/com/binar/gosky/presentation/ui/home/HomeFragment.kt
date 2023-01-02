@@ -85,7 +85,6 @@ class HomeFragment : Fragment() {
         }
         accountViewModel.checkIfUserIsAdmin().observe(viewLifecycleOwner) {
             val isAdmin = it.equals("ADMIN")
-            showFabIfUserIsAdmin(isAdmin)
             getEarnings()
             showEarningsIfUserIsAdmin(isAdmin)
         }
@@ -145,10 +144,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun showFabIfUserIsAdmin(isAdmin: Boolean) {
-        binding.fabAddTicket.isVisible = isAdmin
-    }
-
     private fun initView() {
         val province = resources.getStringArray(R.array.province)
         val arrayAdapter =
@@ -204,9 +199,9 @@ class HomeFragment : Fragment() {
         binding.ivNotification.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
         }
-        binding.fabAddTicket.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_editConfirmationTicketFragment)
-        }
+//        binding.fab.setOnClickListener {
+//            findNavController().navigate(R.id.action_homeFragment_to_editConfirmationTicketFragment)
+//        }
     }
 
     private fun parseFormIntoEntity(
