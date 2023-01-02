@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@color/white" />
+
+    <item
+        android:bottom="150dp">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/go_sky_logo_splash"/>
+    </item>
+    <item
+        android:top="120dp">
+        <bitmap
+            android:gravity="center"
+            android:tint="@color/cerulean_blue"
+            android:src="@drawable/gosky_text" />
+    </item>
+</layer-list>

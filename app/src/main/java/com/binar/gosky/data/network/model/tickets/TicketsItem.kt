@@ -26,9 +26,9 @@ data class TicketsItem(
     @SerializedName("id")
     val id: Int? = null,
     @SerializedName("imageId")
-    val imageId: String? = null,
+    var imageId: String? = null,
     @SerializedName("imageUrl")
-    val imageUrl: String? = null,
+    var imageUrl: String? = null,
     @SerializedName("price")
     var price: Int? = null,
     @SerializedName("returnTime")

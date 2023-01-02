@@ -7,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.text.isDigitsOnly
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.binar.gosky.R
+import com.binar.gosky.data.network.model.image.ImageData
 import com.binar.gosky.data.network.model.tickets.EditTicketRequestBody
 import com.binar.gosky.databinding.FragmentEditConfirmationTicketBinding
 import com.binar.gosky.presentation.ui.home.HomeFragment
@@ -21,7 +24,9 @@ import com.binar.gosky.util.DateUtil
 import com.binar.gosky.util.DateUtil.departureTime
 import com.binar.gosky.util.DateUtil.returnTime
 import com.binar.gosky.util.DateUtil.showDatePickerDialog
+import com.binar.gosky.util.ImageUtil
 import com.binar.gosky.wrapper.Resource
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,7 +40,17 @@ class EditConfirmationTicketFragment : Fragment() {
     private val editTicketArgs: EditConfirmationTicketFragmentArgs by navArgs()
 
     var category: String? = HomeFragment.ONE_WAY
+    private var imageId: String? = ""
     private lateinit var accessToken: String
+
+    private val galleryResult =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
+            val imageFile = ImageUtil.getImageMultipartBody(requireContext(), result)
+            if (imageFile != null) {
+                viewModel.postImage("Bearer ${editTicketArgs.accessToken}",
+                    ImageUtil.IMAGE_TYPE_TICKET, imageFile)
+            }
+        }
 
     private var listener: OnTicketItemChangedListener? = null
 
@@ -98,6 +113,52 @@ class EditConfirmationTicketFragment : Fragment() {
                 else -> {}
             }
         }
+        viewModel.imageResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    Log.d("imageIdSuccess", it.payload?.data?.imageId.toString())
+                    editTicketArgs.ticketsItem?.imageId = it.payload?.data?.imageId
+                    editTicketArgs.ticketsItem?.imageUrl = it.payload?.data?.imageUrl
+                    imageId = it.payload?.data?.imageId
+                    setProfileImage(it.payload?.data)
+                    binding.pbLoadingImage.isVisible = false
+                    binding.tvAddImage.isVisible = false
+                    binding.tvDeleteImage.isVisible = true
+                    binding.ivImage.isVisible = true
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
+                is Resource.Loading -> {
+                    binding.pbLoadingImage.isVisible = true
+                    binding.ivImage.visibility = View.INVISIBLE
+                }
+                else -> {}
+            }
+            Log.d("imageresponse", it.payload?.data.toString())
+        }
+        viewModel.deleteImageResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    setProfileImage(null)
+                    binding.tvAddImage.isVisible = true
+                    binding.tvDeleteImage.isVisible = false
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
+                is Resource.Loading -> {}
+                else -> {}
+            }
+        }
+    }
+
+    private fun setProfileImage(image: ImageData?) {
+        Glide.with(requireContext())
+            .load(image?.imageUrl)
+            .placeholder(R.drawable.ic_placeholder_image)
+            .circleCrop()
+            .into(binding.ivImage)
     }
 
     private fun parseFormIntoEntity(): EditTicketRequestBody {
@@ -109,8 +170,8 @@ class EditConfirmationTicketFragment : Fragment() {
             departureTime = departureTime,
             returnTime = returnTime,
             price = binding.etPrice.text.toString().toInt(),
-            imageId = "-",
-            imageUrl = "-",
+            imageId = editTicketArgs.ticketsItem?.imageId,
+            imageUrl = editTicketArgs.ticketsItem?.imageUrl,
             description = binding.etDescription.text.toString(),
             duration = binding.etDuration.text.toString().toLong(),
             wishlisted = false
@@ -150,6 +211,18 @@ class EditConfirmationTicketFragment : Fragment() {
                         swRoundTrip.isChecked = false
                         tilReturnDate.isVisible = false
                     }
+
+                    if (editTicketArgs.ticketsItem?.imageId.isNullOrEmpty() || editTicketArgs.ticketsItem?.imageId.equals("-") ) {
+                        tvAddImage.isVisible = true
+                        tvDeleteImage.isVisible = false
+                    } else {
+                        Glide.with(requireContext())
+                            .load(editTicketArgs.ticketsItem?.imageUrl)
+                            .circleCrop()
+                            .into(ivImage)
+                        tvAddImage.isVisible = false
+                        tvDeleteImage.isVisible = true
+                    }
                 }
                 Log.d("editTicketsArgsReturn", returnTime.toString())
             }
@@ -157,6 +230,20 @@ class EditConfirmationTicketFragment : Fragment() {
             binding.apply {
                 tvPageTitle.text = getString(R.string.insert_ticket_data)
                 btnUpdate.text = getString(R.string.insert)
+
+                editTicketArgs.ticketsItem?.let {
+                    if (editTicketArgs.ticketsItem?.imageId.isNullOrEmpty() || editTicketArgs.ticketsItem?.imageId.equals("-") ) {
+                        tvAddImage.isVisible = true
+                        tvDeleteImage.isVisible = false
+                    } else {
+                        Glide.with(requireContext())
+                            .load(editTicketArgs.ticketsItem?.imageUrl)
+                            .circleCrop()
+                            .into(ivImage)
+                        tvAddImage.isVisible = false
+                        tvDeleteImage.isVisible = true
+                    }
+                }
             }
         }
     }
@@ -175,10 +262,44 @@ class EditConfirmationTicketFragment : Fragment() {
                 this@EditConfirmationTicketFragment.category = if (isChecked) HomeFragment.ROUND_TRIP else HomeFragment.ONE_WAY
             }
             ivBack.setOnClickListener { findNavController().navigateUp() }
+            ivImage.setOnClickListener {
+                getImageFromGallery()
+            }
+            tvAddImage.setOnClickListener {
+                getImageFromGallery()
+            }
+            tvDeleteImage.setOnClickListener {
+                if (isEditAction()) {
+                    editTicketArgs.ticketsItem?.imageId?.let { it1 ->
+                        viewModel.deleteImage("Bearer ${editTicketArgs.accessToken}",
+                            ImageUtil.IMAGE_TYPE_TICKET,
+                            it1
+                        )
+                        editTicketArgs.ticketsItem?.imageId = "-"
+                        editTicketArgs.ticketsItem?.imageUrl = "-"
+                        Log.d("imageIdAfterDelete", editTicketArgs.ticketsItem?.imageId.toString())
+                    }
+                } else {
+                    imageId?.let {
+                        viewModel.deleteImage("Bearer ${editTicketArgs.accessToken}",
+                            ImageUtil.IMAGE_TYPE_TICKET,
+                            it
+                        )
+                        editTicketArgs.ticketsItem?.imageId = "-"
+                        editTicketArgs.ticketsItem?.imageUrl = "-"
+                        Log.d("imageIdAfterDelete", editTicketArgs.ticketsItem?.imageId.toString())
+                    }
+                }
+            }
             btnUpdate.setOnClickListener {
                 saveData()
             }
         }
+    }
+
+    private fun getImageFromGallery() {
+        activity?.intent?.type = "image/*"
+        galleryResult.launch("image/*")
     }
 
     private fun saveData() {
@@ -203,7 +324,7 @@ class EditConfirmationTicketFragment : Fragment() {
         val from = binding.etFrom.text.toString()
         val to = binding.etTo.text.toString()
         val flightNumber = binding.etFlightNumber.text.toString()
-        val price = binding.etPrice.text.toString()
+        var price = binding.etPrice.text.toString()
 
         if (from.isEmpty()) {
             isValid = false
@@ -217,7 +338,7 @@ class EditConfirmationTicketFragment : Fragment() {
             isValid = false
             binding.etFlightNumber.error = "Flight number field must not be empty"
         } else
-        if (price.isEmpty()) {
+        if (price.equals("")) {
             isValid = false
             binding.etPrice.error = "Price field must not be empty"
         }

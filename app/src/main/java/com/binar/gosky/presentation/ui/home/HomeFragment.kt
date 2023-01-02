@@ -244,7 +244,9 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
         }
         binding.fabAddTicket.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_editConfirmationTicketFragment)
+            val action = HomeFragmentDirections.actionHomeFragmentToEditConfirmationTicketFragment(accessToken)
+            //action.accessToken = accessToken
+            findNavController().navigate(action)
         }
     }
 

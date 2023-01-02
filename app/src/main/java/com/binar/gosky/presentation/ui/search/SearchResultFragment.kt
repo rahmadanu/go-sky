@@ -40,8 +40,9 @@ class SearchResultFragment : Fragment(), OnTicketItemChangedListener {
             }
 
             override fun onUpdateMenuClicked(item: TicketsItem) {
-                val action = SearchResultFragmentDirections.actionSearchResultFragmentToEditConfirmationTicketFragment()
+                val action = SearchResultFragmentDirections.actionSearchResultFragmentToEditConfirmationTicketFragment(accessToken)
                 action.ticketsItem = item
+                //action.accessToken = accessToken
                 findNavController().navigate(action)
             }
 

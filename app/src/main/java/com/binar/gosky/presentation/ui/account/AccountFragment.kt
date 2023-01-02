@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,6 +16,8 @@ import com.binar.gosky.data.network.model.auth.user.CurrentUserData
 import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
 import com.binar.gosky.databinding.FragmentAccountBinding
 import com.binar.gosky.presentation.ui.auth.login.LoginActivity
+import com.binar.gosky.presentation.ui.auth.password.PasswordViewModel
+import com.binar.gosky.presentation.ui.notification.NotificationViewModel
 import com.binar.gosky.wrapper.Resource
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +29,7 @@ class AccountFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val accountViewModel: AccountViewModel by viewModels()
-    //private val passwordViewModel: PasswordViewModel by viewModels()
+    private val notificationViewModel: NotificationViewModel by viewModels()
 
     lateinit var userData: EditUserRequestBody
     lateinit var accessToken: String
@@ -63,6 +67,9 @@ class AccountFragment : Fragment() {
             tvResetPassword.setOnClickListener {
                 navigateToNewPassword()
             }
+            tvNotification.setOnClickListener {
+                navigateToNotification()
+            }
         }
     }
 
@@ -75,11 +82,7 @@ class AccountFragment : Fragment() {
     }
 
     private fun navigateToEditProfile() {
-        val action = AccountFragmentDirections.actionAccountFragmentToEditProfileFragment(
-            userData,
-            accessToken,
-            email
-        )
+        val action = AccountFragmentDirections.actionAccountFragmentToEditProfileFragment(userData, accessToken, email)
         findNavController().navigate(action)
     }
 
@@ -91,15 +94,15 @@ class AccountFragment : Fragment() {
 
     private fun observeData() {
         accountViewModel.getUserAccessToken().observe(viewLifecycleOwner) {
-            accountViewModel.getCurrentUser("Bearer $it")
+            accountViewModel.getCurrentUser(getString(R.string.bearer_token, it))
+            notificationViewModel.getNotification(getString(R.string.bearer_token, it))
             accessToken = it
             Log.d("accessToken", it)
         }
         accountViewModel.currentUserResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
-                    it.payload?.data?.let { currentUserData ->
-                        bindDataIntoForm(currentUserData)
+                    it.payload?.data?.let { currentUserData -> bindDataIntoForm(currentUserData)
                         Log.d("currentUserData", currentUserData.toString())
                         userData = EditUserRequestBody(
                             address = currentUserData.address,
@@ -114,6 +117,20 @@ class AccountFragment : Fragment() {
                 else -> {}
             }
         }
+        notificationViewModel.unreadNotificationCount.observe(viewLifecycleOwner) {
+            it.let { unreadCount ->
+                if (unreadCount == 0) {
+                    binding.tvCartBadge.isVisible = false
+                } else {
+                    binding.tvCartBadge.isVisible = true
+                    binding.tvCartBadge.text = unreadCount.toString()
+                }
+            }
+        }
+    }
+
+    private fun getNotification(accessToken: String? = "") {
+        notificationViewModel.getNotification(getString(R.string.bearer_token, accessToken))
     }
 
     private fun bindDataIntoForm(currentUserData: CurrentUserData) {
