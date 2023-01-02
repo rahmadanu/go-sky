@@ -73,6 +73,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:scrollbars="none"
             app:layout_constraintBottom_toTopOf="@id/cv_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,10 +87,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    app:cardCornerRadius="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -113,9 +111,8 @@
                                 android:id="@+id/beginCity_oid"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/detail"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
+                                android:text="@string/detail_departure"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textStyle="bold" />
 
                             <View
@@ -127,14 +124,13 @@
                                 android:id="@+id/btn_wishlist"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:contentDescription="@string/image_favorite"
+                                android:contentDescription="@string/icon_favorite"
                                 android:src="@drawable/ic_favorite_no" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -144,8 +140,7 @@
                                 android:backgroundTint="#00ff00"
                                 android:text="@string/departure"
                                 android:textColor="@color/black"
-                                android:textSize="8sp"
-                                tools:ignore="SmallSp" />
+                                android:textSize="11sp" />
 
                             <TextView
                                 android:id="@+id/tv_departure_time_departure_date_day"
@@ -153,15 +148,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:textColor="@color/black"
-                                android:textSize="8sp"
-                                tools:ignore="SmallSp"
+                                android:textSize="11sp"
                                 tools:text="Mon, 6 Mar 2022" />
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1" />
-
 
                         </LinearLayout>
 
@@ -170,78 +158,129 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_departure_time_departure"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                tools:text="14:10" />
+
+                            <ImageView
+                                android:id="@+id/orderStatex"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginTop="2dp"
+                                android:contentDescription="@string/icon_from"
+                                android:src="@drawable/ic_ball" />
 
                             <TextView
                                 android:id="@+id/tv_from_departure"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/city_1"
+                                android:layout_marginStart="5dp"
                                 android:textColor="@color/black"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                tools:text="Jakarta" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:id="@+id/v_linev"
+                                android:layout_width="3dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="48dp"
+                                android:background="#e8e8e8" />
 
                             <View
                                 android:layout_width="0dp"
                                 android:layout_height="1dp"
                                 android:layout_weight="1" />
 
+                            <ImageView
+                                android:id="@+id/iv_image_departure"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:contentDescription="@string/image_plane"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:src="@tools:sample/avatars" />
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:orientation="vertical">
 
+                                <TextView
 
-                                <ImageView
-                                    android:id="@+id/iv_image_departure"
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:contentDescription="@string/image_departure"
-                                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="TooDeepLayout"
-                                    tools:src="@tools:sample/avatars" />
-
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:text="@string/operated_by"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical">
+                                    android:orientation="horizontal">
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="10dp"
-                                        android:text="@string/operated_by"
-                                        android:textColor="@color/black"
-                                        android:textSize="8sp"
-                                        tools:ignore="SmallSp,TooDeepLayout" />
+                                        android:text="@string/lion_air"
+                                        android:textColor="#FF0000"
+                                        android:textSize="12sp"
+                                        tools:ignore="TooDeepLayout" />
 
-                                    <LinearLayout
+                                    <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
+                                        android:layout_marginStart="5dp"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        tools:text="." />
 
-                                        <TextView
+                                    <TextView
+                                        android:id="@+id/tv_flight_number_departure"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginStart="5dp"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        tools:text="JT-531" />
 
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginStart="10dp"
-                                            android:text="@string/lion_air"
-                                            android:textColor="#FF0000"
-                                            android:textSize="8sp"
-                                            tools:ignore="SmallSp" />
 
-                                        <TextView
-                                            android:id="@+id/tv_flight_number_departure"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="match_parent"
-                                            android:layout_marginStart="5dp"
-                                            android:textColor="@color/black"
-                                            android:textSize="8sp"
-                                            tools:ignore="SmallSp"
-                                            tools:text="@string/flight_number" />
-                                    </LinearLayout>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        tools:text="." />
+
+                                    <TextView
+                                        android:id="@+id/tv_duration_departure"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        tools:text="47 menit" />
                                 </LinearLayout>
 
                             </LinearLayout>
@@ -250,316 +289,51 @@
                                 android:layout_width="0dp"
                                 android:layout_height="1dp"
                                 android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_arrival_time_departure"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                tools:text="14:10" />
+
+                            <ImageView
+                                android:id="@+id/orderStatexxx"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:contentDescription="@string/icon_to"
+                                android:src="@drawable/ic_ball" />
 
                             <TextView
                                 android:id="@+id/tv_to_departure"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/city_2"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="10dp"
                                 android:textColor="@color/black"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/tv_departure_time_departure"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:textColor="@color/black"
-                                    android:textSize="11sp"
-                                    tools:text="14:10" />
-
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1" />
-
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <View
-                                    android:layout_width="match_parent"
-                                    android:layout_height="3dp"
-                                    android:background="#e8e8e8" />
-
-
-                                <TextView
-                                    android:id="@+id/tv_duration_departure"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="70dp"
-                                    android:layout_marginEnd="70dp"
-                                    android:textColor="@color/black"
-                                    android:textSize="11sp"
-                                    tools:text="47 menit" />
-
-                            </LinearLayout>
-
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/tv_arrival_time_departure"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textAlignment="textEnd"
-                                    android:textColor="@color/black"
-                                    android:textSize="11sp"
-                                    tools:text="15:50" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_return_label"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/textview_corner"
-                                android:backgroundTint="#00ff00"
-                                android:text="@string/return_1"
-                                android:textColor="@color/black"
-                                android:textSize="8sp"
-                                tools:ignore="SmallSp" />
-
-                            <TextView
-                                android:id="@+id/tv_return_time_return_date_day"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/mon_6_mar_2022"
-                                android:textColor="@color/black"
-                                android:textSize="8sp"
-                                tools:ignore="SmallSp" />
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_from_return"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:textSize="12sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold"
-                                tools:text="@string/city_1" />
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <ImageView
-                                    android:id="@+id/iv_image_return"
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:contentDescription="@string/image_return"
-                                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:src="@tools:sample/avatars" />
-
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/tv_operated_by_return"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="10dp"
-                                        android:text="@string/operated_by"
-                                        android:textColor="@color/black"
-                                        android:textSize="8sp"
-                                        tools:ignore="SmallSp" />
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
-
-                                        <TextView
-                                            android:id="@+id/tv_airline_return"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginStart="10dp"
-                                            android:text="@string/lion_air"
-                                            android:textColor="#FF0000"
-                                            android:textSize="8sp"
-                                            tools:ignore="SmallSp" />
-
-                                        <TextView
-                                            android:id="@+id/tv_flight_number_return"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginStart="5dp"
-                                            android:textColor="@color/black"
-                                            android:textSize="8sp"
-                                            tools:ignore="SmallSp"
-                                            tools:text="JT-531" />
-                                    </LinearLayout>
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1" />
-
-                            <TextView
-                                android:id="@+id/tv_to_return"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:textSize="12sp"
-                                android:textStyle="bold"
-                                tools:text="@string/city_2" />
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/tv_departure_time_return"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/black"
-                                    android:textSize="11sp"
-                                    tools:text="14:10" />
-
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1" />
-
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <View
-                                    android:id="@+id/v_line"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="3dp"
-                                    android:background="#e8e8e8" />
-
-
-                                <TextView
-                                    android:id="@+id/tv_duration_return"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="70dp"
-                                    android:layout_marginEnd="70dp"
-                                    android:textColor="@color/black"
-                                    android:textSize="11sp"
-                                    tools:text="47 menit" />
-
-                            </LinearLayout>
-
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/tv_arrival_time_return"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textAlignment="textEnd"
-                                    android:textColor="@color/black"
-                                    android:textSize="11sp"
-                                    tools:text="15:50" />
-
-                            </LinearLayout>
+                                tools:text="Batam" />
 
                         </LinearLayout>
 
                     </LinearLayout>
 
-
                 </androidx.cardview.widget.CardView>
 
-
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/tv_retrun_fix"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    app:cardCornerRadius="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -579,14 +353,40 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
-
                             <TextView
+                                android:id="@+id/beginCity_oidx"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/description"
-                                android:textColor="@color/black"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/detail_return"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                                 android:textStyle="bold" />
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_return_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/textview_corner"
+                                android:backgroundTint="#00ff00"
+                                android:text="@string/return_1"
+                                android:textColor="@color/black"
+                                android:textSize="11sp" />
+
+                            <TextView
+                                android:id="@+id/tv_return_time_return_date_day"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="11sp"
+                                tools:text="Mon, 6 Mar 2022" />
 
                             <View
                                 android:layout_width="0dp"
@@ -595,6 +395,219 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_departure_time_return"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                tools:text="14:10" />
+
+                            <ImageView
+                                android:id="@+id/orderStatexb"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginTop="2dp"
+                                android:contentDescription="@string/icon_from"
+                                android:src="@drawable/ic_ball" />
+
+                            <TextView
+                                android:id="@+id/tv_from_return"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                tools:text="Jakarta" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:id="@+id/v_line"
+                                android:layout_width="3dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="48dp"
+                                android:background="#e8e8e8" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:id="@+id/iv_image_return"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:contentDescription="@string/image_plane"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:src="@tools:sample/avatars" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_operated_by_return"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:text="@string/operated_by"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/tv_airline_return"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:text="@string/lion_air"
+                                        android:textColor="#FF0000"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        tools:text="." />
+
+                                    <TextView
+                                        android:id="@+id/tv_flight_number_return"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginStart="5dp"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        tools:text="JT-531" />
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        tools:text="." />
+
+                                    <TextView
+                                        android:id="@+id/tv_duration_return"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        tools:text="47 menit" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_arrival_time_return"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                tools:text="15:50" />
+
+
+                            <ImageView
+                                android:id="@+id/orderStatexxyx"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:contentDescription="@string/icon_to"
+                                android:src="@drawable/ic_ball" />
+
+                            <TextView
+                                android:id="@+id/tv_to_return"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginBottom="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                tools:text="Batam" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/description"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/tv_description"
@@ -602,25 +615,18 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:justificationMode="inter_word"
-                            android:text="@string/text_1"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            android:textStyle="normal" />
-
+                            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                            tools:text="Luar biasanya, maskapai ini mematok harga yang relatif lebih murah daripada penerbangan maskapai lainnya." />
 
                     </LinearLayout>
-
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="15dp"
-                    app:cardCornerRadius="12dp"
+                    android:layout_marginBottom="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -639,14 +645,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/amount"
-                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
-
+                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                            android:textStyle="bold" />
 
                         <View
                             android:layout_width="0dp"
                             android:layout_height="1dp"
                             android:layout_weight="1" />
-
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -683,17 +688,13 @@
 
                         </LinearLayout>
 
-
                     </LinearLayout>
 
-
                 </androidx.cardview.widget.CardView>
-
 
             </LinearLayout>
 
         </ScrollView>
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_button"
@@ -742,5 +743,6 @@
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

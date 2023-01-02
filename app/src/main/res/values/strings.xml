@@ -141,6 +141,11 @@
     <string name="testing_crash">Testing Crash</string>
     <string name="title_gosky">GoSky</string>
     <string name="title_gosky_admin">GoSky Admin</string>
+    <string name="_0">0</string>
+    <string name="edit_airline_image">Edit Airline Image</string>
+    <string name="detail_departure">Detail Departure</string>
+    <string name="icon_from">Icon From</string>
+    <string name="detail_return">Detail Return</string>
 
     <string-array name="province">
         <item>JAKARTA</item>
