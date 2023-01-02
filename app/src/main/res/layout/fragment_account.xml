@@ -216,6 +216,17 @@
                 android:text="Log Out"
                 app:drawableStartCompat="@drawable/ic_logout"
                 app:drawableEndCompat="@drawable/ic_arrow_forward" />
+
+
+            <View
+                android:id="@+id/blue_backgroundx"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
