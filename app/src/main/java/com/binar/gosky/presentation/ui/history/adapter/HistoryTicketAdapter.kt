@@ -50,6 +50,9 @@ class HistoryTicketAdapter(private val itemClick: (TransactionListData) -> Unit)
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(item: TransactionListData) {
             with(binding) {
+                itemView.setOnClickListener {
+                    itemClick(item)
+                }
                 item.ticket?.apply {
                     Glide.with(itemView)
                         .load(imageUrl)

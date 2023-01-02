@@ -13,10 +13,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.binar.gosky.R
-import com.binar.gosky.data.network.model.tickets.TicketsItem
-import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionData
+import com.binar.gosky.data.network.model.transactions.byid.TransactionByIdData
 import com.binar.gosky.databinding.FragmentDetailTicketBinding
 import com.binar.gosky.util.ConvertUtil
+import com.binar.gosky.wrapper.Resource
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,7 +44,6 @@ class DetailTicketFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observeData()
-        bindDataToForm(detailTicketArgs.userByIdData.name, detailTicketArgs.newTransactionData, detailTicketArgs.ticketDetail, detailTicketArgs.totalPrice)
         setOnClickListener()
     }
 
@@ -54,58 +53,71 @@ class DetailTicketFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun observeData() {
+        viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+            viewModel.getTransactionById(getString(R.string.bearer_token, it), detailTicketArgs.transactionId)
+        }
+        viewModel.transactionByIdResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    it.payload?.data?.let { data -> bindDataToForm(data) }
+                    binding.pbLoading.isVisible = false
+                }
+                is Resource.Loading -> {
+                    binding.pbLoading.isVisible = true
+                }
+                else -> {}
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun bindDataToForm(orderBy: String?, newTransaction: NewTransactionData?, ticketDetail: TicketsItem, totalPrice: Int) {
+    private fun bindDataToForm(item: TransactionByIdData) {
         binding.apply {
-            Log.d("orderBy", orderBy.toString())
-            tvOrderBy.text = orderBy
+            tvOrderBy.text = item.user?.name
+            val totalPrice = (item.amount?.times(item.ticket?.price!!))
             tvTotalPrice.text = ConvertUtil.convertRupiah(totalPrice)
-            newTransaction?.apply {
-                tvOrderDate.text = ConvertUtil.convertISOtoDay(createdAt)
-                tvBookingCode.text = bookingCode
-                tvAmount.text = amount.toString()
+            tvOrderDate.text = ConvertUtil.convertISOtoDay(item.createdAt)
+            tvBookingCode.text = item.bookingCode
+            tvAmount.text = item.amount.toString()
+            //Departure part
+            tvFromDeparture.text = item.ticket?.from
+            tvToDeparture.text = item.ticket?.to
+            tvDepartureTimeDepartureDateDay.text = ConvertUtil.convertISOtoDay(item.ticket?.departureTime)
+            tvDepartureTimeDeparture.text = ConvertUtil.convertISOtoHour(item.ticket?.departureTime)
+            tvArrivalTimeDeparture.text =
+                item.ticket?.duration?.let { ConvertUtil.convertISOtoHour(item.ticket.departureTime, it.toLong()) }
+            Log.d("arrival", "${item.ticket?.departureTime} ${item.ticket?.duration?.toLong()}")
+            Glide.with(requireContext())
+                .load(item.ticket?.imageUrl)
+                .into(ivImageDeparture)
+            tvFlightNumberDeparture.text = item.ticket?.flightNumber
+            tvDurationDeparture.text = item.ticket?.duration?.let {
+                ConvertUtil.convertMinutesToHourAndMinutes(
+                    it.toLong()
+                )
             }
-            ticketDetail.apply {
-                //Departure part
-                tvFromDeparture.text = from
-                tvToDeparture.text = to
-                tvDepartureTimeDepartureDateDay.text = ConvertUtil.convertISOtoDay(departureTime)
-                tvDepartureTimeDeparture.text = ConvertUtil.convertISOtoHour(departureTime)
-                tvArrivalTimeDeparture.text =
-                    duration?.let { ConvertUtil.convertISOtoHour(departureTime, it) }
-                Glide.with(requireContext())
-                    .load(imageUrl)
-                    .into(ivImageDeparture)
-                tvFlightNumberDeparture.text = flightNumber
-                tvDurationDeparture.text = duration?.let {
-                    ConvertUtil.convertMinutesToHourAndMinutes(
-                        it
-                    )
-                }
 
-                //Return part
-                if (returnTime.isNullOrEmpty()) {
-                    cvTicketDetailReturn.isVisible = false
-                } else {
-                    cvTicketDetailReturn.isVisible = true
-                    tvReturnTimeReturnDateDay.text = ConvertUtil.convertISOtoDay(returnTime)
-                    tvFromReturn.text = to
-                    tvToReturn.text = from
-                    tvDepartureTimeReturn.text = ConvertUtil.convertISOtoHour(returnTime)
-                    tvArrivalTimeReturn.text =
-                        duration?.let { ConvertUtil.convertISOtoHour(returnTime, it) }
-                    Glide.with(requireContext())
-                        .load(imageUrl)
-                        .into(ivImageReturn)
-                    tvFlightNumberReturn.text = flightNumber
-                    tvDurationReturn.text = duration?.let {
-                        ConvertUtil.convertMinutesToHourAndMinutes(
-                            it
-                        )
-                    }
+            //Return part
+            if (item.ticket?.returnTime.isNullOrEmpty()) {
+                cvTicketDetailReturn.isVisible = false
+            } else {
+                cvTicketDetailReturn.isVisible = true
+                tvReturnTimeReturnDateDay.text = ConvertUtil.convertISOtoDay(item.ticket?.returnTime)
+                tvFromReturn.text = item.ticket?.to
+                tvToReturn.text = item.ticket?.from
+                tvDepartureTimeReturn.text = ConvertUtil.convertISOtoHour(item.ticket?.returnTime)
+                tvArrivalTimeReturn.text =
+                    item.ticket?.duration?.let { ConvertUtil.convertISOtoHour(item.ticket.returnTime, it.toLong()) }
+                Glide.with(requireContext())
+                    .load(item.ticketId)
+                    .into(ivImageReturn)
+                tvFlightNumberReturn.text = item.ticket?.flightNumber
+                tvDurationReturn.text = item.ticket?.duration?.let {
+                    ConvertUtil.convertMinutesToHourAndMinutes(
+                        it.toLong()
+                    )
                 }
             }
         }

@@ -17,7 +17,7 @@ interface TransactionsApiService {
     @GET(ApiEndPoints.GET_TRANSACTION_BY_ID_ENDPOINT)
     suspend fun getTransactionById(
         @Header("Authorization") accessToken: String,
-        @Path("id") transactionId: String
+        @Path("id") transactionId: Int?
     ): TransactionByIdResponse
 
     @POST(ApiEndPoints.POST_NEW_TRANSACTION)

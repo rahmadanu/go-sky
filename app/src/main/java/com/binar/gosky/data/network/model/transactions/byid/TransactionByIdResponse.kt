@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class TransactionByIdResponse(
     @SerializedName("data")
-    val `data`: TransactionByIdData? = TransactionByIdData(),
+    val `data`: TransactionByIdData? = null,
     @SerializedName("message")
-    val message: String? = "",
+    val message: String? = null,
     @SerializedName("status")
-    val status: String? = ""
+    val status: String? = null
 )

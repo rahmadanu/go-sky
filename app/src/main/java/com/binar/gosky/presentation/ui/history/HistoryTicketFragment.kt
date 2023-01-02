@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.gosky.R
 import com.binar.gosky.databinding.FragmentHistoryTicketBinding
 import com.binar.gosky.presentation.ui.history.adapter.HistoryTicketAdapter
-import com.binar.gosky.presentation.ui.search.SearchResultFragmentDirections
-import com.binar.gosky.presentation.ui.search.adapter.SearchResultAdapter
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,11 +23,20 @@ class HistoryTicketFragment : Fragment() {
     private var _binding: FragmentHistoryTicketBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: HistoryViewModel by viewModels()
+    private val historyViewModel: HistoryViewModel by viewModels()
+
+    lateinit var accessToken: String
 
     private val adapter: HistoryTicketAdapter by lazy {
         HistoryTicketAdapter {
-
+            val action = it.id?.let { transactionId ->
+                HistoryTicketFragmentDirections.actionHistoryTicketFragmentToDetailTicketFragment(
+                    transactionId
+                )
+            }
+            if (action != null) {
+                findNavController().navigate(action)
+            }
         }
     }
 
@@ -50,7 +57,7 @@ class HistoryTicketFragment : Fragment() {
     }
 
     private fun getTransactionList(accessToken: String) {
-        viewModel.getTransactionList(accessToken)
+        historyViewModel.getTransactionList(accessToken)
     }
 
     private fun initList() {
@@ -61,10 +68,11 @@ class HistoryTicketFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+        historyViewModel.getUserAccessToken().observe(viewLifecycleOwner) {
             getTransactionList(getString(R.string.bearer_token, it))
+            accessToken = it
         }
-        viewModel.transactionListResponse.observe(viewLifecycleOwner) {
+        historyViewModel.transactionListResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     adapter.submitList(it.data?.data)

@@ -106,21 +106,12 @@
         android:name="com.binar.gosky.presentation.ui.booking.DetailTicketFragment"
         android:label="fragment_detail_ticket"
         tools:layout="@layout/fragment_detail_ticket" >
-        <argument
-            android:name="ticketDetail"
-            app:argType="com.binar.gosky.data.network.model.tickets.TicketsItem" />
-        <argument
-            android:name="newTransactionData"
-            app:argType="com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionData" />
         <action
             android:id="@+id/action_detailTicketFragment_to_homeFragment"
             app:popUpTo="@id/homeFragment" />
         <argument
-            android:name="totalPrice"
+            android:name="transactionId"
             app:argType="integer" />
-        <argument
-            android:name="userByIdData"
-            app:argType="com.binar.gosky.data.network.model.users.data.UserByIdData" />
     </fragment>
     <fragment
         android:id="@+id/historyTicketFragment"

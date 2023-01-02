@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Toast.makeText
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -92,31 +91,16 @@ class ConfirmationTicketFragment : Fragment() {
                 is Resource.Success -> {
                     it.data?.data?.let { data ->
                         newTransactionData = data
-                        data.userId?.let { id -> viewModel.getUserById(id) }
                     }
                     Log.d("newTransaction", it.data?.data.toString())
                     binding.pbOrder.isVisible = false
+                    it.data?.data?.id?.let { id -> navigateToOrderDetail(id) }
                 }
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
                 is Resource.Loading -> {
                     binding.pbOrder.isVisible = true
-                }
-                else -> {}
-            }
-        }
-        viewModel.userByIdResponse.observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Success -> {
-                    it.data?.data?.let { data ->
-                        userByIdData = data
-                        Log.d("userByIdData", data.toString())
-                    }
-                    navigateToOrderDetail()
-                }
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
                 else -> {}
             }
@@ -145,13 +129,8 @@ class ConfirmationTicketFragment : Fragment() {
         }
     }
 
-    private fun navigateToOrderDetail() {
-        val action = ConfirmationTicketFragmentDirections.actionConfirmationTicketFragmentToDetailTicketFragment(
-            confirmationTicketArgs.ticketsItem,
-            newTransactionData,
-            sumPrice,
-            userByIdData
-        )
+    private fun navigateToOrderDetail(id: Int) {
+        val action = ConfirmationTicketFragmentDirections.actionConfirmationTicketFragmentToDetailTicketFragment(id)
         findNavController().navigate(action)
     }
 

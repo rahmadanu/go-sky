@@ -3,6 +3,7 @@ package com.binar.gosky.presentation.ui.booking
 import androidx.lifecycle.*
 import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.data.network.model.tickets.WishlistResponse
+import com.binar.gosky.data.network.model.transactions.byid.TransactionByIdResponse
 import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionRequestBody
 import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionResponse
 import com.binar.gosky.data.network.model.users.data.UserByIdResponse
@@ -25,6 +26,9 @@ class BookingViewModel @Inject constructor(
     private val _newTransactionResponse = MutableLiveData<Resource<NewTransactionResponse>>()
     val newTransactionResponse: LiveData<Resource<NewTransactionResponse>> = _newTransactionResponse
 
+    private var _transactionByIdResponse = MutableLiveData<Resource<TransactionByIdResponse>>()
+    val transactionByIdResponse: LiveData<Resource<TransactionByIdResponse>> get() = _transactionByIdResponse
+
     private val _userByIdResponse = MutableLiveData<Resource<UserByIdResponse>>()
     val userByIdResponse: LiveData<Resource<UserByIdResponse>> get() = _userByIdResponse
 
@@ -39,6 +43,16 @@ class BookingViewModel @Inject constructor(
             val response = transactionsRepository.postNewTransaction(accessToken, newTransactionRequestBody)
             viewModelScope.launch(Dispatchers.Main) {
                 _newTransactionResponse.postValue(response)
+            }
+        }
+    }
+
+    fun getTransactionById(accessToken: String, transactionId: Int?) {
+        _transactionByIdResponse.postValue(Resource.Loading())
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = transactionsRepository.getTransactionById(accessToken, transactionId)
+            viewModelScope.launch(Dispatchers.Main) {
+                _transactionByIdResponse.postValue(response)
             }
         }
     }
