@@ -140,6 +140,9 @@
         <action
             android:id="@+id/action_wishlistFragment_to_confirmationTicketFragment"
             app:destination="@id/confirmationTicketFragment" />
+        <action
+            android:id="@+id/action_wishlistFragment_to_editConfirmationTicketFragment"
+            app:destination="@id/editConfirmationTicketFragment" />
     </fragment>
     <fragment
         android:id="@+id/editConfirmationTicketFragment"

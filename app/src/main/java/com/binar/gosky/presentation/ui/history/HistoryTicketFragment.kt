@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -67,6 +68,17 @@ class HistoryTicketFragment : Fragment() {
             when (it) {
                 is Resource.Success -> {
                     adapter.submitList(it.data?.data)
+                    it.data?.data?.let {
+                        if (it.isEmpty()) {
+                            binding.ivGoSkyLogo.isVisible = true
+                            binding.tvEmptyHistoryTitle.isVisible = true
+                            binding.rvHistory.isVisible = false
+                        } else {
+                            binding.ivGoSkyLogo.isVisible = false
+                            binding.tvEmptyHistoryTitle.isVisible = false
+                            binding.rvHistory.isVisible = true
+                        }
+                    }
                     Log.d("transactionList", it.data?.data.toString())
                 }
                 is Resource.Error -> {
