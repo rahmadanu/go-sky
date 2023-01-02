@@ -120,24 +120,24 @@ class LoginFragment : Fragment() {
         if (email.isEmpty()) {
             isValid = false
             binding.etEmail.error = "Email must not be empty"
-        }
-        /*if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        } else
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             isValid = false
             binding.etEmail.error = "Invalid email"
-        }
+        } else
         if (password.isEmpty()) {
             isValid = false
             Toast.makeText(requireContext(), "Password must not be empty", Toast.LENGTH_SHORT)
                 .show()
-        }
-        if (password.length < 6) {
+        } else
+        if (password.length < 5) {
             isValid = false
             Toast.makeText(
                 requireContext(),
-                "Password should be at least 6 characters",
+                "Password should be at least 5 characters",
                 Toast.LENGTH_SHORT
             ).show()
-        }*/
+        }
         return isValid
     }
 

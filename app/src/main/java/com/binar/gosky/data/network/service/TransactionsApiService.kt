@@ -3,6 +3,7 @@ package com.binar.gosky.data.network.service
 import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionRequestBody
 import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionResponse
 import com.binar.gosky.data.network.model.transactions.byid.TransactionByIdResponse
+import com.binar.gosky.data.network.model.transactions.earnings.EarningsResponse
 import com.binar.gosky.data.network.model.transactions.list.TransactionListResponse
 import retrofit2.http.*
 
@@ -24,4 +25,9 @@ interface TransactionsApiService {
         @Header("Authorization") accessToken: String,
         @Body newTransactionRequestBody: NewTransactionRequestBody
     ): NewTransactionResponse
+
+    @GET(ApiEndPoints.GET_EARNINGS)
+    suspend fun getEarnings(
+        @Header("Authorization") accessToken: String
+    ): EarningsResponse
 }

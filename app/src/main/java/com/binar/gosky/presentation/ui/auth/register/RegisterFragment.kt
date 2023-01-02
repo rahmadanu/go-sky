@@ -15,7 +15,8 @@ import com.binar.gosky.presentation.ui.auth.ValidateEmailBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterFragment : Fragment() {
+class
+RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
@@ -80,20 +81,20 @@ class RegisterFragment : Fragment() {
         if (name.isEmpty()) {
             isValid = false
             binding.etName.error = "Username or password must not be empty"
-        }
+        } else
         if (email.isEmpty()) {
             isValid = false
             binding.etEmail.error = "Email must not be empty"
-        }
+        } else
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             isValid = false
             binding.etEmail.error = "Invalid email"
-        }
+        } else
         if (password.isEmpty()) {
             isValid = false
             Toast.makeText(requireContext(), "Password must not be empty", Toast.LENGTH_SHORT)
                 .show()
-        }
+        } else
         if (password.length < 6) {
             isValid = false
             Toast.makeText(

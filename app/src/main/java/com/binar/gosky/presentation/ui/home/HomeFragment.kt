@@ -1,6 +1,5 @@
 package com.binar.gosky.presentation.ui.home
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,12 +13,23 @@ import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.auth.user.CurrentUserData
 import com.binar.gosky.data.network.model.tickets.SearchTickets
+import com.binar.gosky.data.network.model.transactions.earnings.EarningsData
 import com.binar.gosky.databinding.FragmentHomeBinding
 import com.binar.gosky.presentation.ui.account.AccountViewModel
+import com.binar.gosky.util.ConvertUtil
+import com.binar.gosky.util.DateUtil.day
+import com.binar.gosky.util.DateUtil.departureTime
+import com.binar.gosky.util.DateUtil.formattedMonth
+import com.binar.gosky.util.DateUtil.getTimeStamp
+import com.binar.gosky.util.DateUtil.hour
+import com.binar.gosky.util.DateUtil.minute
+import com.binar.gosky.util.DateUtil.month
+import com.binar.gosky.util.DateUtil.returnTime
+import com.binar.gosky.util.DateUtil.showDatePickerDialog
+import com.binar.gosky.util.DateUtil.year
 import com.binar.gosky.wrapper.Resource
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -29,17 +39,16 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     //use AccountViewModel to get current user
-    private val viewModel: AccountViewModel by viewModels()
+    private val accountViewModel: AccountViewModel by viewModels()
+
+    private val homeViewModel: HomeViewModel by viewModels()
 
     var category: String = ONE_WAY
     var from: String = ""
     var to: String = ""
-    lateinit var departureTime: String
-    lateinit var returnTime: String
     var roundTrip: Boolean = false
 
-    private val formattedMonth =
-        listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Des")
+    lateinit var accessToken: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,28 +68,48 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.getUserAccessToken().observe(viewLifecycleOwner) {
-            viewModel.getCurrentUser(getString(R.string.bearer_token, it))
+        accountViewModel.getUserAccessToken().observe(viewLifecycleOwner) {
+            accessToken = it
+            accountViewModel.getCurrentUser(getString(R.string.bearer_token, it))
         }
-        viewModel.currentUserResponse.observe(viewLifecycleOwner) {
+        accountViewModel.currentUserResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     setWelcomeMessage(it.data?.data)
-                    it.data?.data?.role?.let { role -> viewModel.setUserRole(role)
+                    it.data?.data?.role?.let { role -> accountViewModel.setUserRole(role)
                         Log.d("checkadmin", role)
                     }
                 }
                 else -> {}
             }
         }
-        viewModel.checkIfUserIsAdmin().observe(viewLifecycleOwner) {
-            showFabIfUserIsAdmin(it.equals("ADMIN"))
+        accountViewModel.checkIfUserIsAdmin().observe(viewLifecycleOwner) {
+            val isAdmin = it.equals("ADMIN")
+            showFabIfUserIsAdmin(isAdmin)
+            getEarnings()
+            showEarningsIfUserIsAdmin(isAdmin)
         }
-        Log.d("checkadmin", viewModel.checkIfUserIsAdmin().toString())
+        homeViewModel.earningsResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    bindEarningsDataToView(it.data?.data)
+                    binding.pbEarnings.isVisible = false
+                }
+                is Resource.Loading -> {
+                    binding.pbEarnings.isVisible = true
+                }
+                else -> {}
+            }
+        }
+        Log.d("checkadmin", accountViewModel.checkIfUserIsAdmin().toString())
     }
 
-    private fun showFabIfUserIsAdmin(isAdmin: Boolean) {
-        binding.fabAddTicket.isVisible = isAdmin
+    private fun showEarningsIfUserIsAdmin(isAdmin: Boolean) {
+        binding.apply {
+            cvEarnings.isVisible = isAdmin
+            tvWelcomeMessage.isVisible = !isAdmin
+            ivUserImage.isVisible = !isAdmin
+        }
     }
 
     private fun setWelcomeMessage(currentUserData: CurrentUserData?) {
@@ -93,6 +122,31 @@ class HomeFragment : Fragment() {
                     .into(ivUserImage)
             }
         }
+    }
+
+    private fun getEarnings() {
+        homeViewModel.getEarnings(getString(R.string.bearer_token,accessToken))
+    }
+
+    private fun bindEarningsDataToView(earnings: EarningsData?) {
+        earnings?.let {
+            binding.apply {
+                tvTotalEarnings.text = it.thisYear?.count?.let { count ->
+                    Log.d("earningscount", count.toString())
+                    resources.getQuantityString(R.plurals.total_earnings,
+                        count,
+                        count
+                    )
+                }
+                tvTodayEarnings.text = ConvertUtil.convertRupiah(it.today?.earnings)
+                tvThisMonthEarnings.text = ConvertUtil.convertRupiah(it.thisMonth?.earnings)
+                tvThisYearEarnings.text = ConvertUtil.convertRupiah(it.thisYear?.earnings)
+            }
+        }
+    }
+
+    private fun showFabIfUserIsAdmin(isAdmin: Boolean) {
+        binding.fabAddTicket.isVisible = isAdmin
     }
 
     private fun initView() {
@@ -115,19 +169,20 @@ class HomeFragment : Fragment() {
 
         binding.etFrom.setAdapter(arrayAdapter)
         binding.etTo.setAdapter(arrayAdapter)
-        departureTime = getTimeStamp(year, month, day)
-        returnTime = getTimeStamp(year, month, day)
-
+        departureTime = getTimeStamp(year, month, day, hour, minute)
+        if (binding.swRoundTrip.isChecked) {
+            returnTime = getTimeStamp(year, month, day, hour, minute)
+        }
     }
 
     private fun setOnClickListener() {
         binding.etDepartureDate.setOnClickListener {
-            showDatePickerDialog(it.id)
+            showDatePickerDialog(it.id, requireContext(), homeBinding = binding)
             Log.d("id", "departure: ${it.id}")
         }
         binding.etReturnDate.setOnClickListener {
             Log.d("id", "return: ${it.id}")
-            showDatePickerDialog(it.id)
+            showDatePickerDialog(it.id, requireContext(), homeBinding = binding)
         }
         binding.swRoundTrip.setOnCheckedChangeListener { compoundButton, isChecked ->
             binding.tilReturnDate.isVisible = isChecked
@@ -142,7 +197,6 @@ class HomeFragment : Fragment() {
             to = binding.etTo.text.toString().trim().uppercase()
         }
         binding.btnSearch.setOnClickListener {
-            initView()
             val searchTickets =
                 parseFormIntoEntity(category, from, to, departureTime, returnTime, roundTrip)
             navigateToSearchResult(searchTickets)
@@ -150,53 +204,9 @@ class HomeFragment : Fragment() {
         binding.ivNotification.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
         }
-    }
-
-    private fun showDatePickerDialog(id: Int) {
-
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            { view, year, monthOfYear, dayOfMonth ->
-                day = dayOfMonth
-                when (id) {
-                    binding.etDepartureDate.id -> {
-                        binding.etDepartureDate.setText(
-                            "$dayOfMonth ${
-                                formattedMonth.get(
-                                    monthOfYear
-                                )
-                            }, $year"
-                        )
-                        departureTime = getTimeStamp(year, monthOfYear, dayOfMonth)
-                    }
-                    binding.etReturnDate.id -> {
-                        binding.etReturnDate.setText("$dayOfMonth ${formattedMonth.get(monthOfYear)}, $year")
-                        returnTime = getTimeStamp(year, monthOfYear, dayOfMonth)
-                    }
-                }
-            },
-            year,
-            month,
-            day
-        )
-        datePickerDialog.show()
-    }
-
-    private fun getTimeStamp(year: Int, monthOfYear: Int, dayOfMonth: Int): String {
-        val date = Calendar.getInstance().apply {
-            set(Calendar.YEAR, year)
-            set(Calendar.MONTH, monthOfYear)
-            set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            set(Calendar.HOUR_OF_DAY, 0)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
-        }.time
-        val localeID = Locale("in", "ID")
-        val formattedDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", localeID).format(date)
-        Log.d("timestamp", formattedDate.toString())
-
-        return formattedDate
+        binding.fabAddTicket.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_editConfirmationTicketFragment)
+        }
     }
 
     private fun parseFormIntoEntity(
@@ -204,13 +214,13 @@ class HomeFragment : Fragment() {
         from: String,
         to: String,
         departureTime: String,
-        returnTime: String,
+        returnTime: String?,
         roundTrip: Boolean
     ): SearchTickets {
         return SearchTickets(
             category,
-            from,
-            to,
+            from = binding.etFrom.text.toString(),
+            to = binding.etTo.text.toString(),
             departureTime,
             returnTime,
             roundTrip,
@@ -230,12 +240,7 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
-        private val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        private var day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        private const val ONE_WAY = "ONE_WAY"
-        private const val ROUND_TRIP = "ROUND_TRIP"
+        const val ONE_WAY = "ONE_WAY"
+        const val ROUND_TRIP = "ROUND_TRIP"
     }
 }

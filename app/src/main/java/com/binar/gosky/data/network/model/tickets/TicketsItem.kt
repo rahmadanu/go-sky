@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class TicketsItem(
     @SerializedName("category")
-    val category: String? = null,
+    var category: String? = null,
     @SerializedName("createdAt")
     val createdAt: String? = null,
     @SerializedName("createdBy")

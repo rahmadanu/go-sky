@@ -1,6 +1,7 @@
 package com.binar.gosky.data.repository
 
 import com.binar.gosky.data.network.datasource.TransactionsRemoteDataSource
+import com.binar.gosky.data.network.model.transactions.earnings.EarningsResponse
 import com.binar.gosky.data.network.model.transactions.list.TransactionListResponse
 import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionRequestBody
 import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionResponse
@@ -12,6 +13,7 @@ interface TransactionsRepository {
     suspend fun postNewTransaction(accessToken: String, newTransactionRequestBody: NewTransactionRequestBody
     ): Resource<NewTransactionResponse>
     suspend fun getTransactionList(accessToken: String): Resource<TransactionListResponse>
+    suspend fun getEarnings(accessToken: String): Resource<EarningsResponse>
 }
 
 class TransactionsRepositoryImpl @Inject constructor(private val dataSource: TransactionsRemoteDataSource): TransactionsRepository {
@@ -27,6 +29,12 @@ class TransactionsRepositoryImpl @Inject constructor(private val dataSource: Tra
     override suspend fun getTransactionList(accessToken: String): Resource<TransactionListResponse> {
         return proceed {
             dataSource.getTransactionList(accessToken)
+        }
+    }
+
+    override suspend fun getEarnings(accessToken: String): Resource<EarningsResponse> {
+        return proceed {
+            dataSource.getEarnings(accessToken)
         }
     }
 }

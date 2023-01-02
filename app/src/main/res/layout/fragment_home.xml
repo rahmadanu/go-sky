@@ -47,15 +47,6 @@
             app:layout_constraintTop_toBottomOf="@id/title_go_sky" />
 
         <ImageView
-            android:id="@+id/iv_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:src="@drawable/ic_notifications"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
             android:id="@+id/iv_user_image"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -63,6 +54,138 @@
             app:layout_constraintEnd_toStartOf="@id/iv_notification"
             app:layout_constraintTop_toTopOf="@id/tv_welcome_message"
             tools:src="@tools:sample/avatars" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_earnings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_welcome_message"
+            tools:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tv_total_earnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="Total earnings"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Total earnings of 4 transactions"/>
+
+                <TextView
+                    android:id="@+id/tv_today"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Today"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_total_earnings"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_this_month"/>
+
+                <TextView
+                    android:id="@+id/tv_today_earnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    tools:text="Rp1.000.000,-"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_today"
+                    app:layout_constraintEnd_toStartOf="@+id/divider_today_thismonth"/>
+
+                <TextView
+                    android:id="@+id/tv_this_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This month"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_today" />
+
+                <TextView
+                    android:id="@+id/tv_this_month_earnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    tools:text="Rp1.000.000,-"
+                    app:layout_constraintStart_toStartOf="@id/divider_today_thismonth"
+                    app:layout_constraintTop_toBottomOf="@id/tv_this_month"
+                    app:layout_constraintEnd_toStartOf="@+id/divider_thismonth_thisyear"/>
+
+                <TextView
+                    android:id="@+id/tv_this_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This year"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_today"
+                    app:layout_constraintStart_toEndOf="@id/tv_this_month" />
+
+                <TextView
+                    android:id="@+id/tv_this_year_earnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    tools:text="Rp1.000.000,-"
+                    app:layout_constraintStart_toEndOf="@id/divider_thismonth_thisyear"
+                    app:layout_constraintTop_toBottomOf="@id/tv_today"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/divider_today_thismonth"
+                    android:layout_width="2dp"
+                    android:layout_height="70dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_today"
+                    app:layout_constraintTop_toBottomOf="@id/tv_total_earnings"
+                    app:layout_constraintEnd_toStartOf="@id/tv_this_month"/>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/divider_thismonth_thisyear"
+                    android:layout_width="2dp"
+                    android:layout_height="70dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_this_month"
+                    app:layout_constraintTop_toBottomOf="@id/tv_total_earnings"
+                    app:layout_constraintEnd_toStartOf="@id/tv_this_year"/>
+
+                <ProgressBar
+                    android:id="@+id/pb_earnings"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_total_earnings"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <ImageView
+            android:id="@+id/iv_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:src="@drawable/ic_notifications"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -74,7 +197,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_welcome_message">
+            app:layout_constraintTop_toBottomOf="@id/cv_earnings">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

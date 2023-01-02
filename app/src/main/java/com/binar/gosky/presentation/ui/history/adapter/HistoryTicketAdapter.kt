@@ -58,8 +58,8 @@ class HistoryTicketAdapter(private val itemClick: (TransactionListData) -> Unit)
                     tvTo.text = to
                     tvCategory.text = category
                     tvFlightNumber.text = flightNumber
-                    tvDepartureTimeDeparture.text = ConvertUtil.convertISOtoDate(departureTime)
-                    tvArrivalTimeDeparture.text = duration?.let { ConvertUtil.convertISOtoDate(departureTime, duration) }
+                    tvDepartureTimeDeparture.text = ConvertUtil.convertISOtoDateHoursMinute(departureTime)
+                    tvArrivalTimeDeparture.text = duration?.let { ConvertUtil.convertISOtoDateHoursMinute(departureTime, duration) }
                     tvDurationDeparture.text = duration?.let {
                         ConvertUtil.convertMinutesToHourAndMinutes(
                             it
@@ -71,9 +71,9 @@ class HistoryTicketAdapter(private val itemClick: (TransactionListData) -> Unit)
                         tvArrivalTimeReturn.isVisible = false
                         tvReturnLabel.isVisible = false
                     } else {
-                        tvDepartureTimeReturn.text = ConvertUtil.convertISOtoDate(returnTime)
+                        tvDepartureTimeReturn.text = ConvertUtil.convertISOtoDateHoursMinute(returnTime)
                         tvArrivalTimeReturn.text = duration?.let {
-                            ConvertUtil.convertISOtoDate(
+                            ConvertUtil.convertISOtoDateHoursMinute(
                                 returnTime
                             )
                         }

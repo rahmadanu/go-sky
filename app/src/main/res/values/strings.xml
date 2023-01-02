@@ -12,9 +12,16 @@
 
     <string name="from_to_to">%1$s to %2$s</string>
     <string name="total_amount">Total: %1$s</string>
+    <plurals name="total_earnings">
+        <item quantity="one">Total earnings of %d transaction</item>
+        <item quantity="other">Total earnings of %d transactions</item>
+    </plurals>
 
     <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
     <string name="title_history">History</string>
+
+    <string name="insert_ticket_data">Insert Ticket Data</string>
+    <string name="insert">Insert</string>
 
     <string-array name="province">
         <item>JAKARTA</item>

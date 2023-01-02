@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_homeFragment_to_notificationFragment"
             app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_editConfirmationTicketFragment"
+            app:destination="@id/editConfirmationTicketFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
@@ -39,6 +42,9 @@
         <action
             android:id="@+id/action_searchResultFragment_to_konfirmasiTiketFragment"
             app:destination="@id/confirmationTicketFragment" />
+        <action
+            android:id="@+id/action_searchResultFragment_to_editConfirmationTicketFragment"
+            app:destination="@id/editConfirmationTicketFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -115,4 +121,15 @@
         android:name="com.binar.gosky.presentation.ui.notification.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/editConfirmationTicketFragment"
+        android:name="com.binar.gosky.presentation.ui.admin.EditConfirmationTicketFragment"
+        android:label="EditConfirmationTicketFragment"
+        tools:layout="@layout/fragment_edit_confirmation_ticket" >
+        <argument
+            android:name="ticketsItem"
+            app:argType="com.binar.gosky.data.network.model.tickets.TicketsItem"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>
