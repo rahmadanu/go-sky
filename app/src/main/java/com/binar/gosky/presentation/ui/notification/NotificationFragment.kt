@@ -78,9 +78,6 @@ class NotificationFragment : Fragment() {
                         setNotificationEmpty(false)
                     }
                 }
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-                }
                 is Resource.Loading -> {
                     setLoading(true)
                 }

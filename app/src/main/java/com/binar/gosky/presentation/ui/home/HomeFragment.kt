@@ -84,9 +84,6 @@ class HomeFragment : Fragment() {
                         Log.d("checkadmin", role)
                     }
                 }
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-                }
                 else -> {}
             }
         }
