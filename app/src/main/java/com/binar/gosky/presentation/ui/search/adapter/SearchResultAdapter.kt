@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.binar.gosky.R
 import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.databinding.ItemTripBinding
 import com.binar.gosky.util.ConvertUtil.convertISOtoDateHoursMinute
@@ -68,6 +69,8 @@ class SearchResultAdapter(
                     Glide.with(itemView)
                         .load(imageUrl)
                         .transition(DrawableTransitionOptions.withCrossFade())
+                        .placeholder(R.drawable.ic_placeholder_image)
+                        .circleCrop()
                         .into(ivAirlineLogo)
                     tvFrom.text = from
                     tvTo.text = to
