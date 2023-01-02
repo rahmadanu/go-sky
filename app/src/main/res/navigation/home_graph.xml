@@ -126,7 +126,11 @@
         android:id="@+id/historyTicketFragment"
         android:name="com.binar.gosky.presentation.ui.history.HistoryTicketFragment"
         android:label="fragment_history_ticket"
-        tools:layout="@layout/fragment_history_ticket" />
+        tools:layout="@layout/fragment_history_ticket" >
+        <action
+            android:id="@+id/action_historyTicketFragment_to_detailTicketFragment"
+            app:destination="@id/detailTicketFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.binar.gosky.presentation.ui.notification.NotificationFragment"
