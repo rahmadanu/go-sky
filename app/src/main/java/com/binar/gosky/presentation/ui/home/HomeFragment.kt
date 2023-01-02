@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import android.widget.Button
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
@@ -89,6 +90,9 @@ class HomeFragment : Fragment() {
                         Log.d("checkadmin", role)
                     }
                 }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
                 else -> {}
             }
         }
@@ -97,6 +101,7 @@ class HomeFragment : Fragment() {
             showFabIfUserIsAdmin(isAdmin)
             getEarnings()
             showEarningsIfUserIsAdmin(isAdmin)
+            showHomeTitleAsAdmin(isAdmin)
         }
         homeViewModel.earningsResponse.observe(viewLifecycleOwner) {
             when (it) {
@@ -125,6 +130,14 @@ class HomeFragment : Fragment() {
                     binding.tvCartBadge.text = unreadCount.toString()
                 }
             }
+        }
+    }
+
+    private fun showHomeTitleAsAdmin(admin: Boolean) {
+        if (admin) {
+            binding.tvTitleGoSky.text = getString(R.string.title_gosky_admin)
+        } else {
+            binding.tvTitleGoSky.text = getString(R.string.title_gosky)
         }
     }
 
@@ -213,7 +226,7 @@ class HomeFragment : Fragment() {
             Log.d("id", "return: ${it.id}")
             showDatePickerDialog(it.id, requireContext(), homeBinding = binding)
         }
-        binding.swRoundTrip.setOnCheckedChangeListener { compoundButton, isChecked ->
+        binding.swRoundTrip.setOnCheckedChangeListener { _, isChecked ->
             binding.tilReturnDate.isVisible = isChecked
             roundTrip = isChecked
             category = if (isChecked) ROUND_TRIP else ONE_WAY

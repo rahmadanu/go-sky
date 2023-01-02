@@ -88,18 +88,9 @@ class DetailTicketFragment : Fragment() {
 
                 //Return part
                 if (returnTime.isNullOrEmpty()) {
-                    tvReturnTimeReturnDateDay.isVisible = false
-                    tvFromReturn.isVisible = false
-                    tvToReturn.isVisible = false
-                    tvDepartureTimeReturn.isVisible = false
-                    ivImageReturn.isVisible = false
-                    tvFlightNumberReturn.isVisible = false
-                    tvDurationReturn.isVisible = false
-                    tvOperatedByReturn.isVisible = false
-                    tvReturnLabel.isVisible = false
-                    tvAirlineReturn.isVisible = false
-                    vLine.isVisible = false
+                    cvTicketDetailReturn.isVisible = false
                 } else {
+                    cvTicketDetailReturn.isVisible = true
                     tvReturnTimeReturnDateDay.text = ConvertUtil.convertISOtoDay(returnTime)
                     tvFromReturn.text = to
                     tvToReturn.text = from

@@ -140,6 +140,8 @@
     <string name="resend">Resend</string>
     <string name="verify">Verify</string>
     <string name="testing_crash">Testing Crash</string>
+    <string name="title_gosky">GoSky</string>
+    <string name="title_gosky_admin">GoSky Admin</string>
 
     <string-array name="province">
         <item>JAKARTA</item>

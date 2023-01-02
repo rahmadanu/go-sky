@@ -74,6 +74,9 @@ class ConfirmationTicketFragment : Fragment() {
                     Snackbar.make(binding.root, "${it.data?.message}", Toast.LENGTH_SHORT).show()
                     binding.pbOrder.isVisible = false
                 }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
                 is Resource.Loading -> {
                     binding.pbOrder.isVisible = true
                 }
@@ -90,6 +93,9 @@ class ConfirmationTicketFragment : Fragment() {
                     Log.d("newTransaction", it.data?.data.toString())
                     binding.pbOrder.isVisible = false
                 }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
                 is Resource.Loading -> {
                     binding.pbOrder.isVisible = true
                 }
@@ -104,6 +110,9 @@ class ConfirmationTicketFragment : Fragment() {
                         Log.d("userByIdData", data.toString())
                     }
                     navigateToOrderDetail()
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
                 else -> {}
             }

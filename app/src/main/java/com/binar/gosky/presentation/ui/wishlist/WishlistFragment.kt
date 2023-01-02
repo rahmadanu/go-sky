@@ -68,14 +68,6 @@ class WishlistFragment : Fragment() {
             viewModel.getWishlist(getString(R.string.bearer_token, it))
             accessToken = it
         }
-/*        viewModel.getWishlistResponse.observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Success -> {
-                    adapter.submitList(it.data?.data)
-                }
-                else -> {}
-            }
-        }*/
         viewModel.getWishlistTickets().observe(viewLifecycleOwner) {
             adapter.submitList(it.map { ticketsItemWishlist ->
                 ticketsItemWishlist.toTicketsItem()

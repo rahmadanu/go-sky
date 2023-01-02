@@ -1,5 +1,6 @@
 package com.binar.gosky.presentation.ui.auth.register
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -11,7 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.binar.gosky.R
 import com.binar.gosky.databinding.FragmentRegisterBinding
+import com.binar.gosky.presentation.ui.auth.OnRegisterSuccessListener
 import com.binar.gosky.presentation.ui.auth.ValidateEmailBottomSheet
+import com.binar.gosky.presentation.ui.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -66,10 +69,21 @@ RegisterFragment : Fragment() {
             val password = binding.etPassword.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
             ValidateEmailBottomSheet(name, password, email, ValidateEmailBottomSheet.VALIDATE_REGISTER).apply {
-
+                setListener(object : OnRegisterSuccessListener {
+                    override fun onRegisterSuccess(accessToken: String) {
+                        viewModel.setUserAccessToken(accessToken)
+                        navigateToHome()
+                    }
+                })
                 this.isCancelable = isCancelable
             }.show(parentFragmentManager, ValidateEmailBottomSheet::class.java.simpleName)
         }
+    }
+
+    private fun navigateToHome() {
+        val intent = Intent(requireContext(), HomeActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
     }
 
     private fun validateInput(): Boolean {

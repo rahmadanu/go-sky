@@ -80,6 +80,9 @@ class EditConfirmationTicketFragment : Fragment() {
                     listener?.onTicketItemChanged()
                     findNavController().navigateUp()
                 }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
                 is Resource.Loading -> {}
                 else -> {}
             }
@@ -89,6 +92,9 @@ class EditConfirmationTicketFragment : Fragment() {
                 is Resource.Success -> {
                     Toast.makeText(requireContext(), it.data?.message, Toast.LENGTH_SHORT).show()
                     findNavController().navigateUp()
+                }
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
                 is Resource.Loading -> {}
                 else -> {}
