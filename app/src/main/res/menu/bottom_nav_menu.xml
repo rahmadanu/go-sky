@@ -8,6 +8,11 @@
         android:id="@+id/wishlistFragment"
         android:icon="@drawable/ic_wishlist"
         android:title="@string/title_wishlist" />
+
+    <item
+        android:id="@+id/placeholder"
+        android:title="" />
+
     <item
         android:id="@+id/historyTicketFragment"
         android:icon="@drawable/ic_history_event_note"
