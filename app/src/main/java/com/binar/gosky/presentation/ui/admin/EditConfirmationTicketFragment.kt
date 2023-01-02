@@ -3,13 +3,11 @@ package com.binar.gosky.presentation.ui.admin
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.text.isDigitsOnly
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,7 +18,6 @@ import com.binar.gosky.data.network.model.image.ImageData
 import com.binar.gosky.data.network.model.tickets.EditTicketRequestBody
 import com.binar.gosky.databinding.FragmentEditConfirmationTicketBinding
 import com.binar.gosky.presentation.ui.home.HomeFragment
-import com.binar.gosky.presentation.ui.search.SearchResultFragment
 import com.binar.gosky.util.ConvertUtil
 import com.binar.gosky.util.DateUtil
 import com.binar.gosky.util.DateUtil.departureTime
@@ -42,7 +39,8 @@ class EditConfirmationTicketFragment : Fragment() {
     private val editTicketArgs: EditConfirmationTicketFragmentArgs by navArgs()
 
     var category: String? = HomeFragment.ONE_WAY
-    private var imageId: String? = ""
+    private var imageIdInsert: String? = ""
+    private var imageUrlInsert: String? = ""
     private lateinit var accessToken: String
 
     private val galleryResult =
@@ -121,7 +119,8 @@ class EditConfirmationTicketFragment : Fragment() {
                     Log.d("imageIdSuccess", it.payload?.data?.imageId.toString())
                     editTicketArgs.ticketsItem?.imageId = it.payload?.data?.imageId
                     editTicketArgs.ticketsItem?.imageUrl = it.payload?.data?.imageUrl
-                    imageId = it.payload?.data?.imageId
+                    imageIdInsert = it.payload?.data?.imageId
+                    imageUrlInsert = it.payload?.data?.imageUrl
                     setProfileImage(it.payload?.data)
                     binding.pbLoadingImage.isVisible = false
                     binding.tvAddImage.isVisible = false
@@ -172,8 +171,8 @@ class EditConfirmationTicketFragment : Fragment() {
             departureTime = departureTime,
             returnTime = returnTime,
             price = binding.etPrice.text.toString().toInt(),
-            imageId = editTicketArgs.ticketsItem?.imageId,
-            imageUrl = editTicketArgs.ticketsItem?.imageUrl,
+            imageId = editTicketArgs.ticketsItem?.imageId ?: imageIdInsert,
+            imageUrl = editTicketArgs.ticketsItem?.imageUrl ?: imageUrlInsert,
             description = binding.etDescription.text.toString(),
             duration = binding.etDuration.text.toString().toLong(),
             wishlisted = false
@@ -282,7 +281,7 @@ class EditConfirmationTicketFragment : Fragment() {
                         Log.d("imageIdAfterDelete", editTicketArgs.ticketsItem?.imageId.toString())
                     }
                 } else {
-                    imageId?.let {
+                    imageIdInsert?.let {
                         viewModel.deleteImage("Bearer ${editTicketArgs.accessToken}",
                             ImageUtil.IMAGE_TYPE_TICKET,
                             it
@@ -316,6 +315,7 @@ class EditConfirmationTicketFragment : Fragment() {
                 }
             } else {
                 viewModel.postTicket(getString(R.string.bearer_token, accessToken), parseFormIntoEntity())
+                Log.d("insertTicket", parseFormIntoEntity().toString())
             }
         }
         Log.d("edit", parseFormIntoEntity().toString())
