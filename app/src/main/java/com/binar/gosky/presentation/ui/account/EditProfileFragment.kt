@@ -78,14 +78,14 @@ class EditProfileFragment : Fragment() {
                     binding.pbLoadingImage.isVisible = false
                     binding.tvAddImage.isVisible = false
                     binding.tvDeleteImage.isVisible = true
-                    binding.ivImage.visibility = View.INVISIBLE
+                    binding.ivImage.isVisible = true
                 }
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
                 is Resource.Loading -> {
                     binding.pbLoadingImage.isVisible = true
-                    binding.ivImage.isVisible = false
+                    binding.ivImage.visibility = View.INVISIBLE
                 }
                 else -> {}
             }
