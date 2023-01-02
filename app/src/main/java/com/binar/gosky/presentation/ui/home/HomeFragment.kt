@@ -50,8 +50,6 @@ class HomeFragment : Fragment() {
     var category: String = ONE_WAY
     var from: String = ""
     var to: String = ""
-    lateinit var departureTime: String
-    lateinit var returnTime: String
     var roundTrip: Boolean = false
 
     lateinit var accessToken: String
@@ -97,15 +95,13 @@ class HomeFragment : Fragment() {
             showFabIfUserIsAdmin(isAdmin)
             getEarnings()
             showEarningsIfUserIsAdmin(isAdmin)
+            showHomeTitleAsAdmin(isAdmin)
         }
         homeViewModel.earningsResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     bindEarningsDataToView(it.data?.data)
                     binding.pbEarnings.isVisible = false
-                }
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
                 is Resource.Loading -> {
                     binding.pbEarnings.isVisible = true
@@ -128,6 +124,14 @@ class HomeFragment : Fragment() {
                     binding.tvCartBadge.text = unreadCount.toString()
                 }
             }
+        }
+    }
+
+    private fun showHomeTitleAsAdmin(admin: Boolean) {
+        if (admin) {
+            binding.tvTitleGoSky.text = getString(R.string.title_gosky_admin)
+        } else {
+            binding.tvTitleGoSky.text = getString(R.string.title_gosky)
         }
     }
 

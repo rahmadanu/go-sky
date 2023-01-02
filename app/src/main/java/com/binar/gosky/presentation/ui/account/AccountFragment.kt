@@ -108,9 +108,6 @@ class AccountFragment : Fragment() {
                         email = currentUserData.email.toString()
                     }
                 }
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-                }
                 else -> {}
             }
         }

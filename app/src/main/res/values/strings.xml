@@ -24,6 +24,8 @@
 
     <string name="insert_ticket_data">Insert Ticket Data</string>
     <string name="insert">Insert</string>
+    <string name="title_gosky">GoSky</string>
+    <string name="title_gosky_admin">GoSky Admin</string>
 
     <string-array name="province">
         <item>JAKARTA</item>
