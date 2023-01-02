@@ -67,6 +67,9 @@ class AccountFragment : Fragment() {
             tvResetPassword.setOnClickListener {
                 navigateToNewPassword()
             }
+            tvNotification.setOnClickListener {
+                navigateToNotification()
+            }
         }
     }
 
