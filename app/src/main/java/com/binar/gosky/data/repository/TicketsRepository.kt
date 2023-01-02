@@ -2,15 +2,11 @@ package com.binar.gosky.data.repository
 
 import androidx.lifecycle.LiveData
 import com.binar.gosky.data.local.datasource.TicketsLocalDataSource
+import com.binar.gosky.data.local.mapper.toTicketsItemWishlist
 import com.binar.gosky.data.local.model.TicketsItemWishlist
 import com.binar.gosky.data.network.datasource.TicketsRemoteDataSource
-import com.binar.gosky.data.network.model.tickets.EditTicketRequestBody
-import com.binar.gosky.data.network.model.tickets.EditTicketResponse
-import com.binar.gosky.data.network.model.tickets.Tickets
-import com.binar.gosky.data.network.model.tickets.TicketsItem
+import com.binar.gosky.data.network.model.tickets.*
 import com.binar.gosky.util.proceed
-import com.binar.gosky.data.local.mapper.toTicketsItemWishlist
-import com.binar.gosky.data.network.model.tickets.WishlistResponse
 import com.binar.gosky.wrapper.Resource
 import javax.inject.Inject
 

@@ -5,10 +5,8 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.binar.gosky.R
 import com.binar.gosky.databinding.FragmentForgotPasswordBinding
 import com.binar.gosky.presentation.ui.auth.ValidateEmailBottomSheet
 

@@ -1,15 +1,12 @@
 package com.binar.gosky.presentation.ui.booking
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.binar.gosky.R
@@ -26,20 +23,19 @@ class DetailTicketFragment : Fragment() {
     private var _binding: FragmentDetailTicketBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: BookingViewModel by viewModels()
+    //private val viewModel: BookingViewModel by viewModels()
 
     private val detailTicketArgs: DetailTicketFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentDetailTicketBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -57,7 +53,6 @@ class DetailTicketFragment : Fragment() {
     private fun observeData() {
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun bindDataToForm(orderBy: String?, newTransaction: NewTransactionData?, ticketDetail: TicketsItem, totalPrice: Int) {
         binding.apply {
             Log.d("orderBy", orderBy.toString())

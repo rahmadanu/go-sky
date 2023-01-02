@@ -1,6 +1,5 @@
 package com.binar.gosky.presentation.ui.auth
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
@@ -23,7 +22,6 @@ import com.binar.gosky.presentation.ui.account.EditProfileViewModel
 import com.binar.gosky.presentation.ui.auth.login.LoginViewModel
 import com.binar.gosky.presentation.ui.auth.password.ForgotPasswordFragmentDirections
 import com.binar.gosky.presentation.ui.auth.register.RegisterViewModel
-import com.binar.gosky.presentation.ui.home.HomeActivity
 import com.binar.gosky.wrapper.Resource
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint

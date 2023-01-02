@@ -1,10 +1,7 @@
 package com.binar.gosky.data.network.datasource
 
 import com.binar.gosky.data.network.model.notification.NotificationResponse
-import com.binar.gosky.data.network.service.ApiEndPoints
 import com.binar.gosky.data.network.service.NotificationApiService
-import retrofit2.http.PUT
-import retrofit2.http.Path
 import javax.inject.Inject
 
 interface NotificationRemoteDataSource {

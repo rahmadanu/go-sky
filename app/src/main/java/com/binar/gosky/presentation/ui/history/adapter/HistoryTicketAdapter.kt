@@ -1,9 +1,7 @@
 package com.binar.gosky.presentation.ui.history.adapter
 
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -36,7 +34,6 @@ class HistoryTicketAdapter(private val itemClick: (TransactionListData) -> Unit)
         return HistoryTicketViewHolder(binding, itemClick)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: HistoryTicketAdapter.HistoryTicketViewHolder, position: Int) {
         holder.bind(differ.currentList[position])
     }
@@ -47,7 +44,6 @@ class HistoryTicketAdapter(private val itemClick: (TransactionListData) -> Unit)
         private val binding: ItemHistoryTicketBinding,
         private val itemClick: (TransactionListData) -> Unit
     ): RecyclerView.ViewHolder(binding.root) {
-        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(item: TransactionListData) {
             with(binding) {
                 item.ticket?.apply {

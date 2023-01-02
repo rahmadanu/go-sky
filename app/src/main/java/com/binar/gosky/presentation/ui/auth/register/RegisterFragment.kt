@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.binar.gosky.R
 import com.binar.gosky.databinding.FragmentRegisterBinding
 import com.binar.gosky.presentation.ui.auth.OnRegisterSuccessListener
 import com.binar.gosky.presentation.ui.auth.ValidateEmailBottomSheet

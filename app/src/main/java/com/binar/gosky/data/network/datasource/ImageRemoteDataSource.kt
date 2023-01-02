@@ -1,10 +1,8 @@
 package com.binar.gosky.data.network.datasource
 
 import com.binar.gosky.data.network.model.image.ImageResponse
-import com.binar.gosky.data.network.service.ApiEndPoints
 import com.binar.gosky.data.network.service.ImageApiService
 import okhttp3.MultipartBody
-import retrofit2.http.*
 import javax.inject.Inject
 
 interface ImageRemoteDataSource {

@@ -5,16 +5,12 @@ import com.binar.gosky.data.network.datasource.UserRemoteDataSource
 import com.binar.gosky.data.network.model.users.data.UserByIdResponse
 import com.binar.gosky.data.network.model.users.edit.EditEmailUserRequestBody
 import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
-import com.binar.gosky.util.proceed
 import com.binar.gosky.data.network.model.users.edit.EditUserResponse
-import com.binar.gosky.data.network.model.error.ErrorResponse
 import com.binar.gosky.data.network.model.users.password.NewPasswordResetRequestBody
 import com.binar.gosky.data.network.model.users.password.NewPasswordResetResponse
+import com.binar.gosky.util.proceed
 import com.binar.gosky.wrapper.Resource
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.Flow
-import retrofit2.HttpException
 import javax.inject.Inject
 
 interface UserRepository {

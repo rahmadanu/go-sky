@@ -3,7 +3,6 @@ package com.binar.gosky.presentation.ui.admin
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import com.binar.gosky.R
 import com.binar.gosky.data.network.model.tickets.EditTicketRequestBody
 import com.binar.gosky.databinding.FragmentEditConfirmationTicketBinding
 import com.binar.gosky.presentation.ui.home.HomeFragment
-import com.binar.gosky.presentation.ui.search.SearchResultFragment
 import com.binar.gosky.util.ConvertUtil
 import com.binar.gosky.util.DateUtil
 import com.binar.gosky.util.DateUtil.departureTime

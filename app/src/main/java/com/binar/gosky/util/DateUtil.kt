@@ -4,13 +4,10 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.util.Log
-import android.widget.TimePicker
 import com.binar.gosky.databinding.FragmentEditConfirmationTicketBinding
 import com.binar.gosky.databinding.FragmentHomeBinding
-import com.binar.gosky.presentation.ui.home.HomeFragment
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.min
 
 object DateUtil {
     lateinit var departureTime: String

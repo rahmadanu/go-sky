@@ -5,8 +5,6 @@ import com.binar.gosky.data.network.model.transactions.list.TransactionListRespo
 import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionRequestBody
 import com.binar.gosky.data.network.model.transactions.new_transaction.NewTransactionResponse
 import com.binar.gosky.data.network.service.TransactionsApiService
-import retrofit2.http.Body
-import retrofit2.http.Header
 import javax.inject.Inject
 
 interface TransactionsRemoteDataSource {

@@ -8,13 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.gosky.R
 import com.binar.gosky.databinding.FragmentHistoryTicketBinding
 import com.binar.gosky.presentation.ui.history.adapter.HistoryTicketAdapter
-import com.binar.gosky.presentation.ui.search.SearchResultFragmentDirections
-import com.binar.gosky.presentation.ui.search.adapter.SearchResultAdapter
 import com.binar.gosky.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 

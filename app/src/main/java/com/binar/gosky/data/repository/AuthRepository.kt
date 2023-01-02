@@ -10,7 +10,6 @@ import com.binar.gosky.data.network.model.auth.register.RegisterRequestBody
 import com.binar.gosky.data.network.model.auth.user.CurrentUserResponse
 import com.binar.gosky.util.proceed
 import com.binar.gosky.wrapper.Resource
-import retrofit2.HttpException
 import javax.inject.Inject
 
 interface AuthRepository {

@@ -1,7 +1,5 @@
 package com.binar.gosky.util
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.text.NumberFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -9,7 +7,6 @@ import java.time.Duration
 import java.util.*
 
 object ConvertUtil {
-    @RequiresApi(Build.VERSION_CODES.O)
     fun convertMinutesToHourAndMinutes(duration: Long): String {
         val durationTime = Duration.ofMinutes(duration)
         val hours = durationTime.toHours()
