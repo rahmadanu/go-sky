@@ -7,397 +7,416 @@
     android:background="@color/tropical_blue"
     tools:context=".presentation.ui.home.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <View
-            android:id="@+id/blue_background"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="275dp"
-            android:background="@color/cerulean_blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/title_go_sky"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="30dp"
-            android:paddingVertical="12dp"
-            android:text="GoSky"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_welcome_message"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="30dp"
-            android:paddingVertical="8dp"
-            android:text="Let’s book your flight!"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/iv_user_image"
-            app:layout_constraintTop_toBottomOf="@id/title_go_sky" />
-
-        <ImageView
-            android:id="@+id/iv_user_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_welcome_message"
-            app:layout_constraintEnd_toStartOf="@id/fl_notification"
-            app:layout_constraintTop_toTopOf="@id/tv_welcome_message"
-            tools:src="@tools:sample/avatars" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_earnings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="26dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:visibility="gone"
-            app:cardCornerRadius="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_welcome_message"
-            tools:visibility="visible">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <View
+                android:id="@+id/blue_background"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
-                android:padding="10dp">
-
-                <TextView
-                    android:id="@+id/tv_total_earnings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:text="Total earnings"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Total earnings of 4 transactions"/>
-
-                <TextView
-                    android:id="@+id/tv_today"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Today"
-                    android:textStyle="italic"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_total_earnings"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_this_month"/>
-
-                <TextView
-                    android:id="@+id/tv_today_earnings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    tools:text="Rp1.000.000,-"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_today"
-                    app:layout_constraintEnd_toStartOf="@+id/divider_today_thismonth"/>
-
-                <TextView
-                    android:id="@+id/tv_this_month"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="This month"
-                    android:textStyle="italic"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_today" />
-
-                <TextView
-                    android:id="@+id/tv_this_month_earnings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    tools:text="Rp1.000.000,-"
-                    app:layout_constraintStart_toStartOf="@id/divider_today_thismonth"
-                    app:layout_constraintTop_toBottomOf="@id/tv_this_month"
-                    app:layout_constraintEnd_toStartOf="@+id/divider_thismonth_thisyear"/>
-
-                <TextView
-                    android:id="@+id/tv_this_year"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="This year"
-                    android:textStyle="italic"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_today"
-                    app:layout_constraintStart_toEndOf="@id/tv_this_month" />
-
-                <TextView
-                    android:id="@+id/tv_this_year_earnings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="5dp"
-                    tools:text="Rp1.000.000,-"
-                    app:layout_constraintStart_toEndOf="@id/divider_thismonth_thisyear"
-                    app:layout_constraintTop_toBottomOf="@id/tv_today"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-                <com.google.android.material.divider.MaterialDivider
-                    android:id="@+id/divider_today_thismonth"
-                    android:layout_width="2dp"
-                    android:layout_height="70dp"
-                    app:layout_constraintStart_toEndOf="@id/tv_today"
-                    app:layout_constraintTop_toBottomOf="@id/tv_total_earnings"
-                    app:layout_constraintEnd_toStartOf="@id/tv_this_month"/>
-
-                <com.google.android.material.divider.MaterialDivider
-                    android:id="@+id/divider_thismonth_thisyear"
-                    android:layout_width="2dp"
-                    android:layout_height="70dp"
-                    app:layout_constraintStart_toEndOf="@id/tv_this_month"
-                    app:layout_constraintTop_toBottomOf="@id/tv_total_earnings"
-                    app:layout_constraintEnd_toStartOf="@id/tv_this_year"/>
-
-                <ProgressBar
-                    android:id="@+id/pb_earnings"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginStart="10dp"
-                    app:layout_constraintStart_toEndOf="@id/tv_total_earnings"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <FrameLayout
-            android:id="@+id/fl_notification"
-            style="?attr/actionButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:focusable="true"
-            android:animateLayoutChanges="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/title_go_sky"
-            app:layout_constraintTop_toTopOf="@id/title_go_sky">
-
-            <ImageView
-                android:id="@+id/iv_notification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_notifications" />
+                android:layout_height="275dp"
+                android:background="@color/cerulean_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_cart_badge"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="end|top"
-                android:layout_marginEnd="-5dp"
-                android:layout_marginTop="3dp"
-                android:background="@drawable/badge_background"
-                android:visibility="gone"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="11sp"
-                tools:text="0"
-                tools:visibility="visible"/>
+                android:id="@+id/title_go_sky"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="12dp"
+                android:text="@string/gosky"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </FrameLayout>
+            <TextView
+                android:id="@+id/tv_welcome_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="8dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/iv_user_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_go_sky"
+                tools:text="Let’s book your flight!" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="26dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            app:cardCornerRadius="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cv_earnings">
+            <ImageView
+                android:id="@+id/iv_user_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:contentDescription="@string/image_profile"
+                app:layout_constraintBottom_toBottomOf="@id/tv_welcome_message"
+                app:layout_constraintEnd_toStartOf="@id/fl_notification"
+                app:layout_constraintTop_toTopOf="@id/tv_welcome_message"
+                tools:src="@tools:sample/avatars" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_earnings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="26dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_welcome_message"
+                tools:visibility="visible">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_total_earnings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="10dp"
+                        android:text="@string/total_earnings"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="RtlSymmetry"
+                        tools:text="Total earnings of 4 transactions" />
+
+                    <TextView
+                        android:id="@+id/tv_today"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/today"
+                        android:textColor="@color/black"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_this_month"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_total_earnings" />
+
+                    <TextView
+                        android:id="@+id/tv_today_earnings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toStartOf="@+id/divider_today_thismonth"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_today"
+                        tools:text="Rp1.000.000,-" />
+
+                    <TextView
+                        android:id="@+id/tv_this_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/this_month"
+                        android:textColor="@color/black"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_today" />
+
+                    <TextView
+                        android:id="@+id/tv_this_month_earnings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toStartOf="@+id/divider_thismonth_thisyear"
+                        app:layout_constraintStart_toStartOf="@id/divider_today_thismonth"
+                        app:layout_constraintTop_toBottomOf="@id/tv_this_month"
+                        tools:text="Rp1.000.000,-" />
+
+                    <TextView
+                        android:id="@+id/tv_this_year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/this_year"
+                        android:textColor="@color/black"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_this_month"
+                        app:layout_constraintTop_toTopOf="@id/tv_today" />
+
+                    <TextView
+                        android:id="@+id/tv_this_year_earnings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/divider_thismonth_thisyear"
+                        app:layout_constraintTop_toBottomOf="@id/tv_today"
+                        tools:text="Rp1.000.000,-" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider_today_thismonth"
+                        android:layout_width="2dp"
+                        android:layout_height="70dp"
+                        app:layout_constraintEnd_toStartOf="@id/tv_this_month"
+                        app:layout_constraintStart_toEndOf="@id/tv_today"
+                        app:layout_constraintTop_toBottomOf="@id/tv_total_earnings" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider_thismonth_thisyear"
+                        android:layout_width="2dp"
+                        android:layout_height="70dp"
+                        app:layout_constraintEnd_toStartOf="@id/tv_this_year"
+                        app:layout_constraintStart_toEndOf="@id/tv_this_month"
+                        app:layout_constraintTop_toBottomOf="@id/tv_total_earnings" />
+
+                    <ProgressBar
+                        android:id="@+id/pb_earnings"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintStart_toEndOf="@id/tv_total_earnings"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <FrameLayout
+                android:id="@+id/fl_notification"
+                style="?attr/actionButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:padding="20dp">
+                android:clipToPadding="false"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="@id/title_go_sky"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/title_go_sky">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_from"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="From"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusTopStart="12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                        android:id="@+id/et_from"
-                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableStart="@drawable/ic_flight_takeoff"
-                        android:drawablePadding="16dp"
-                        android:imeOptions="actionNext"
-                        android:text="JAKARTA" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageButton
-                    android:id="@+id/iv_swap"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/ic_swap_vertical_circle"
-                    app:layout_constraintBottom_toBottomOf="@id/til_to"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/til_from"
-                    app:tint="@color/teal_blue" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_to"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:hint="To"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusTopStart="12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/til_from">
-
-                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                        android:id="@+id/et_to"
-                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableStart="@drawable/ic_flight_land"
-                        android:drawablePadding="16dp"
-                        android:imeOptions="actionNext"
-                        android:inputType="text"
-                        android:text="SURABAYA" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.divider.MaterialDivider
-                    android:id="@+id/divider_date"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
-                    app:layout_constraintEnd_toStartOf="@id/sw_round_trip"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/til_to" />
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sw_round_trip"
+                <ImageView
+                    android:id="@+id/iv_notification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Round-trip?"
-                    app:layout_constraintBottom_toBottomOf="@id/divider_date"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/divider_date" />
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/icon_notification"
+                    android:src="@drawable/ic_notifications" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_departure_date"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:hint="Departure Date"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusTopStart="12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/divider_date">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_departure_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableStart="@drawable/ic_date_range"
-                        android:drawablePadding="16dp"
-                        android:focusable="false"
-                        android:inputType="text"
-                        tools:text="24 Nov, 2022" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_return_date"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:hint="Return Date"
+                <TextView
+                    android:id="@+id/tv_cart_badge"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|top"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="-5dp"
+                    android:background="@drawable/badge_background"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp"
                     android:visibility="gone"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusTopStart="12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/til_departure_date"
-                    tools:visibility="visible">
+                    tools:text="0"
+                    tools:visibility="visible" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_return_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableStart="@drawable/ic_date_range"
-                        android:drawablePadding="16dp"
-                        android:focusable="false"
-                        android:inputType="text"
-                        tools:text="01 Des, 2022" />
-                </com.google.android.material.textfield.TextInputLayout>
+            </FrameLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_search"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="26dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="100dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_earnings">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Search"
-                    android:textAllCaps="false"
-                    app:cornerRadius="12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/til_return_date" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:padding="20dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_from"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/from"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/et_from"
+                            style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:drawableStart="@drawable/ic_flight_takeoff"
+                            android:drawablePadding="16dp"
+                            android:imeOptions="actionNext"
+                            android:text="@string/jakarta" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageButton
+                        android:id="@+id/iv_swap"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/white"
+                        android:contentDescription="@string/icon_swap"
+                        android:src="@drawable/ic_swap_vertical_circle"
+                        app:layout_constraintBottom_toBottomOf="@id/til_to"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/til_from"
+                        app:tint="@color/teal_blue" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_to"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:hint="@string/to"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/til_from">
+
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/et_to"
+                            style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:drawableStart="@drawable/ic_flight_land"
+                            android:drawablePadding="16dp"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:text="@string/surabaya" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/divider_date"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="10dp"
+                        app:layout_constraintEnd_toStartOf="@id/sw_round_trip"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/til_to" />
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/sw_round_trip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/round_trip"
+                        app:layout_constraintBottom_toBottomOf="@id/divider_date"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/divider_date" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_departure_date"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:hint="@string/departure_date"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider_date">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_departure_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:drawableStart="@drawable/ic_date_range"
+                            android:drawablePadding="16dp"
+                            android:focusable="false"
+                            android:inputType="text"
+                            tools:text="24 Nov, 2022" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_return_date"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:hint="@string/return_date"
+                        android:visibility="gone"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/til_departure_date"
+                        tools:visibility="visible">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_return_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:drawableStart="@drawable/ic_date_range"
+                            android:drawablePadding="16dp"
+                            android:focusable="false"
+                            android:inputType="text"
+                            tools:text="01 Des, 2022" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/search"
+                        android:textAllCaps="false"
+                        app:cornerRadius="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/til_return_date" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_add_ticket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:visibility="gone"
         android:backgroundTint="@color/cerulean_blue"
-        android:text="Add New Journey"
+        android:elevation="0dp"
+        android:text="@string/add_new_journey"
         android:textAllCaps="false"
+        android:visibility="gone"
         app:icon="@drawable/ic_round_add_26"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,21 +1,26 @@
 package com.binar.gosky.presentation.ui.auth.login
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.binar.gosky.data.network.model.auth.login.LoginRegisterRequestResponse
 import com.binar.gosky.data.network.model.auth.login.LoginRequestBody
 import com.binar.gosky.data.repository.AuthRepository
 import com.binar.gosky.data.repository.UserRepository
 import com.binar.gosky.util.SingleLiveEvent
 import com.binar.gosky.wrapper.Resource
-import com.bumptech.glide.Glide.init
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val authRepository: AuthRepository, private val userRepository: UserRepository): ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val authRepository: AuthRepository,
+    private val userRepository: UserRepository
+) : ViewModel() {
 
     private var _postLoginUserResponse = MutableLiveData<Resource<LoginRegisterRequestResponse>>()
     val postLoginUserResponse: LiveData<Resource<LoginRegisterRequestResponse>> get() = _postLoginUserResponse
@@ -41,7 +46,7 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
         }
     }
 
-    private fun getUserLoginStatus(){
+    private fun getUserLoginStatus() {
         viewModelScope.launch {
             userRepository.getUserLoginStatus().collectLatest {
                 loginStatus.value = it

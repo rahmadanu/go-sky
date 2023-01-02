@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.binar.gosky.R
 import com.binar.gosky.data.network.model.tickets.TicketsItem
 import com.binar.gosky.databinding.FragmentSearchResultBinding
-import com.binar.gosky.presentation.ui.account.AccountViewModel
-import com.binar.gosky.presentation.ui.admin.EditConfirmationTicketFragment
 import com.binar.gosky.presentation.ui.admin.OnTicketItemChangedListener
 import com.binar.gosky.presentation.ui.search.adapter.SearchResultAdapter
 import com.binar.gosky.presentation.ui.search.adapter.TicketItemClickListener

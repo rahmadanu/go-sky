@@ -31,27 +31,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/iv_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/icon_back"
-                        android:src="@drawable/ic_back"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
                     <TextView
                         android:id="@+id/txt_flight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
                         android:text="@string/your_order_detail"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/iv_back"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -78,10 +67,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -275,10 +261,8 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -308,7 +292,7 @@
                                 android:text="@string/ticket_detail_departure"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
-                            </LinearLayout>
+                        </LinearLayout>
 
 
                         <LinearLayout
@@ -530,11 +514,9 @@
                     android:id="@+id/tv_retrun_fix"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
                     android:layout_marginBottom="10dp"
-                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -564,7 +546,7 @@
                                 android:text="@string/ticket_detail_return"
                                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
 
-                            </LinearLayout>
+                        </LinearLayout>
 
 
                         <LinearLayout
@@ -791,6 +773,7 @@
             android:id="@+id/cv_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardElevation="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -801,7 +784,7 @@
                 android:orientation="vertical"
                 android:paddingBottom="10dp">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_back_to_home"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
@@ -814,7 +797,8 @@
                     android:backgroundTint="@color/cerulean_blue"
                     android:text="@string/back_to_home"
                     android:textAllCaps="false"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

@@ -14,7 +14,6 @@ import com.binar.gosky.data.network.model.auth.user.CurrentUserData
 import com.binar.gosky.data.network.model.users.edit.EditUserRequestBody
 import com.binar.gosky.databinding.FragmentAccountBinding
 import com.binar.gosky.presentation.ui.auth.login.LoginActivity
-import com.binar.gosky.presentation.ui.auth.password.PasswordViewModel
 import com.binar.gosky.wrapper.Resource
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +25,7 @@ class AccountFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val accountViewModel: AccountViewModel by viewModels()
-    private val passwordViewModel: PasswordViewModel by viewModels()
+    //private val passwordViewModel: PasswordViewModel by viewModels()
 
     lateinit var userData: EditUserRequestBody
     lateinit var accessToken: String
@@ -35,7 +34,7 @@ class AccountFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
         return binding.root
@@ -76,7 +75,11 @@ class AccountFragment : Fragment() {
     }
 
     private fun navigateToEditProfile() {
-        val action = AccountFragmentDirections.actionAccountFragmentToEditProfileFragment(userData, accessToken, email)
+        val action = AccountFragmentDirections.actionAccountFragmentToEditProfileFragment(
+            userData,
+            accessToken,
+            email
+        )
         findNavController().navigate(action)
     }
 
@@ -95,7 +98,8 @@ class AccountFragment : Fragment() {
         accountViewModel.currentUserResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
-                    it.payload?.data?.let { currentUserData -> bindDataIntoForm(currentUserData)
+                    it.payload?.data?.let { currentUserData ->
+                        bindDataIntoForm(currentUserData)
                         Log.d("currentUserData", currentUserData.toString())
                         userData = EditUserRequestBody(
                             address = currentUserData.address,

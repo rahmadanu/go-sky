@@ -36,7 +36,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="Riwayat Booking"
+                        android:text="@string/history_booking"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -69,6 +69,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="180dp"
+            android:contentDescription="@string/app_logo"
             android:src="@drawable/go_sky_logo"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Empty History"
+            android:text="@string/empty_history"
             android:textColor="#1E1E1E"
             android:textSize="16sp"
             android:visibility="gone"
@@ -93,10 +94,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -112,4 +112,5 @@ class WishlistFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

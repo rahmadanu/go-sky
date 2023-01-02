@@ -10,8 +10,9 @@
         android:id="@+id/iv_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="@string/icon_exit"
         android:src="@drawable/ic_exit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,9 +21,9 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
-        android:text="Verify Your Email"
+        android:layout_marginTop="15dp"
+        android:text="@string/verify_your_email"
         android:textColor="@color/bright_sky_blue"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -34,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Fill in the OTP code sent to:"
+        android:text="@string/fill_in_the_otp_code_sent_to"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,84 +72,96 @@
             android:id="@+id/et_otp_1"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/round_back"
+            android:gravity="center"
+            android:importantForAutofill="no"
             android:inputType="number"
             android:maxLength="1"
             android:maxLines="1"
             android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:ignore="LabelFor" />
 
         <EditText
             android:id="@+id/et_otp_2"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/round_back"
+            android:gravity="center"
+            android:importantForAutofill="no"
             android:inputType="number"
             android:maxLength="1"
             android:maxLines="1"
             android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:ignore="LabelFor" />
 
         <EditText
             android:id="@+id/et_otp_3"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/round_back"
+            android:gravity="center"
+            android:importantForAutofill="no"
             android:inputType="number"
             android:maxLength="1"
             android:maxLines="1"
             android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:ignore="LabelFor" />
 
         <EditText
             android:id="@+id/et_otp_4"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/round_back"
+            android:gravity="center"
+            android:importantForAutofill="no"
             android:inputType="number"
             android:maxLength="1"
             android:maxLines="1"
             android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:ignore="LabelFor" />
 
         <EditText
             android:id="@+id/et_otp_5"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:background="@drawable/round_back"
+            android:gravity="center"
+            android:importantForAutofill="no"
             android:inputType="number"
             android:maxLength="1"
             android:maxLines="1"
             android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:ignore="LabelFor" />
 
         <EditText
             android:id="@+id/et_otp_6"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:gravity="center"
             android:layout_weight="1"
             android:background="@drawable/round_back"
+            android:gravity="center"
+            android:importantForAutofill="no"
             android:inputType="number"
             android:maxLength="1"
             android:maxLines="1"
             android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:ignore="LabelFor" />
 
     </LinearLayout>
 
@@ -166,24 +179,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send New OTP Code "
+            android:text="@string/send_new_otp_code"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(48d)"
             android:textColor="@color/black"
             android:textSize="12sp"
+            android:textStyle="bold"
             android:visibility="visible"
-            android:textStyle="bold" />
+            tools:text="(48d)" />
 
         <TextView
             android:id="@+id/tv_resend_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Resend"
+            android:text="@string/resend"
             android:textColor="#F44336"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -193,13 +206,17 @@
     <Button
         android:id="@+id/btn_verify"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:textColor="@color/white"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/cerulean_blue"
-        android:text="Verify"
+        android:text="@string/verify"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_otp"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/ll_otp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,6 +29,7 @@
                     android:id="@+id/iv_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/icon_back"
                     android:src="@drawable/ic_back"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Register"
+                    android:text="@string/register"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -59,7 +60,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
-        android:hint="Name"
+        android:hint="@string/name"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -86,7 +87,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:hint="Email"
+        android:hint="@string/email"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -138,7 +139,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:hint="Password"
+        android:hint="@string/password"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -165,70 +166,69 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/cerulean_blue"
-        android:text="Create Account"
+        android:text="@string/create_account"
         android:textAllCaps="false"
-        android:textSize="14sp"
         android:textStyle="bold"
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password" />
-
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
-        app:layout_constraintBottom_toBottomOf="@id/txt_another"
-        app:layout_constraintEnd_toStartOf="@id/txt_another"
-        app:layout_constraintTop_toTopOf="@id/txt_another" />
-
-    <TextView
-        android:id="@+id/txt_another"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Or use an account"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/btn_register"
-        app:layout_constraintStart_toStartOf="@+id/btn_register"
-        app:layout_constraintTop_toBottomOf="@id/btn_register" />
-
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        app:layout_constraintBottom_toBottomOf="@id/txt_another"
-        app:layout_constraintStart_toEndOf="@id/txt_another"
-        app:layout_constraintTop_toTopOf="@id/txt_another" />
-
-    <LinearLayout
-        android:id="@+id/btn_login_with_google"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/button_outline"
-        android:gravity="center"
-        android:paddingStart="30dp"
-        android:paddingTop="15dp"
-        android:paddingEnd="30dp"
-        android:paddingBottom="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_another">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/icons_google" />
+    <!--
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            app:layout_constraintBottom_toBottomOf="@id/txt_another"
+            app:layout_constraintEnd_toStartOf="@id/txt_another"
+            app:layout_constraintTop_toTopOf="@id/txt_another" />
 
         <TextView
+            android:id="@+id/txt_another"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Google"
-            android:textSize="16sp" />
+            android:layout_marginTop="15dp"
+            android:text="Or use an account"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_register"
+            app:layout_constraintStart_toStartOf="@+id/btn_register"
+            app:layout_constraintTop_toBottomOf="@id/btn_register" />
 
-    </LinearLayout>
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            app:layout_constraintBottom_toBottomOf="@id/txt_another"
+            app:layout_constraintStart_toEndOf="@id/txt_another"
+            app:layout_constraintTop_toTopOf="@id/txt_another" />
+
+        <LinearLayout
+            android:id="@+id/btn_login_with_google"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_outline"
+            android:gravity="center"
+            android:paddingStart="30dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="30dp"
+            android:paddingBottom="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_another">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icons_google" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Google"
+                android:textSize="16sp" />
+
+        </LinearLayout>-->
 
     <TextView
         android:id="@+id/txt_syarat"
@@ -238,26 +238,26 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:gravity="center"
-        android:text="By creating an account you agree to the Terms \n&amp; goSky Terms and Privacy Policy"
+        android:text="@string/term"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_login_with_google" />
+        app:layout_constraintTop_toBottomOf="@id/btn_register" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_syarat">
+        app:layout_constraintStart_toStartOf="parent">
 
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already Have an Account?"
+            android:text="@string/already_have_an_account"
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -268,7 +268,7 @@
             android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Log in"
+            android:text="@string/log_in_1"
             android:textColor="@color/cerulean_blue"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView"

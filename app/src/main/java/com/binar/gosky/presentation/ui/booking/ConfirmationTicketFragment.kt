@@ -1,6 +1,5 @@
 package com.binar.gosky.presentation.ui.booking
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Toast.makeText
-import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -50,13 +47,12 @@ class ConfirmationTicketFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentConfirmationTicketBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -172,7 +168,6 @@ class ConfirmationTicketFragment : Fragment() {
         binding.tvTotalAmount.text = getString(R.string.total_amount, convertRupiah(sumPrice))
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun initView() {
         binding.apply {
             confirmationTicketArgs.ticketsItem.apply {
@@ -205,9 +200,6 @@ class ConfirmationTicketFragment : Fragment() {
                     tvReturnLabel.isVisible = false
                     tvAirlineReturn.isVisible = false
                     vLine.isVisible = false
-                    orderStatexb.isVisible = false
-                    orderStatexxyx.isVisible = false
-                    tvRetrunFix.isVisible = false
                 } else {
                     tvReturnTimeReturnDateDay.text = convertISOtoDay(returnTime)
                     tvFromReturn.text = to
